@@ -164,7 +164,6 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
-    <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -174,7 +173,6 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -245,6 +243,20 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Leaf.Auth\Leaf.Auth.csproj">
+      <Project>{5ddf6fc2-6034-4e7a-a34b-1e8c2fc93978}</Project>
+      <Name>Leaf.Auth</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Leaf.Data\Leaf.Data.csproj">
+      <Project>{04fba009-268d-4ecb-ab5f-3c76b197be9a}</Project>
+      <Name>Leaf.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Leaf.Models\Leaf.Models.csproj">
+      <Project>{9aa679c4-6bd2-4479-ba4f-1b9c88f8127b}</Project>
+      <Name>Leaf.Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
