@@ -255,6 +255,8 @@
     <Content Include="Views\Noit\Index.cshtml" />
     <Content Include="Views\Noit\_NoitLayout.cshtml" />
     <Content Include="Views\Noit\Training.cshtml" />
+    <Content Include="Views\Noit\FullTest.cshtml" />
+    <Content Include="Views\Noit\_ViewStart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -14,5 +14,10 @@ namespace Leaf.Web.Controllers
         {
             return View();
         }
+
+        public ActionResult FullTest()
+        {
+            return View();
+        }
     }
 }   
