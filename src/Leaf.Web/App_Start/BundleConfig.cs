@@ -25,6 +25,7 @@ namespace Leaf.Web
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
+                      "~/Content/bootstrap.superhero.min.css",
                       "~/Content/site.css"));
         }
     }
