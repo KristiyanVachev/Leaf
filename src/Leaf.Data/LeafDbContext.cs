@@ -8,9 +8,8 @@ namespace Leaf.Data
 {
     public class LeafDbContext : IdentityDbContext<User>, ILeafDbContext
     {
-        public LeafDbContext() : base("LeafDb", throwIfV1Schema: false)
+        public LeafDbContext() : this("LeafDb")
         {
-            this.Database.CreateIfNotExists();
         }
 
         public LeafDbContext(string nameOfConnectionString)
