@@ -253,7 +253,7 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Noit\Index.cshtml" />
-    <Content Include="Views\Shared\_NoitLayout.cshtml" />
+    <Content Include="Views\Noit\_NoitLayout.cshtml" />
     <Content Include="Views\Noit\Training.cshtml" />
   </ItemGroup>
   <ItemGroup>
