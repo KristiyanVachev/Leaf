@@ -182,6 +182,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\NinjectModules\AuthNinjectModule.cs" />
     <Compile Include="App_Start\NinjectModules\DataNinjectModule.cs" />
+    <Compile Include="App_Start\NinjectModules\ServiceNinjectModule.cs" />
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
@@ -281,6 +282,10 @@
     <ProjectReference Include="..\Leaf.Models\Leaf.Models.csproj">
       <Project>{9aa679c4-6bd2-4479-ba4f-1b9c88f8127b}</Project>
       <Name>Leaf.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Leaf.Services\Leaf.Services.csproj">
+      <Project>{19cfe96a-3e91-4ebe-aa73-6447cae2c9d4}</Project>
+      <Name>Leaf.Services</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
