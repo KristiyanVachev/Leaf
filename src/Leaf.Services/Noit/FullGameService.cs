@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using Bytes2you.Validation;
 using Leaf.Data.Contracts;
 using Leaf.Models;
 using Leaf.Services.Contracts;
@@ -13,7 +14,9 @@ namespace Leaf.Services.Noit
 
         public FullGameService(IRepository<Question> queRepository, IUnitOfWork unitOfWork)
         {
-            //TODO add guard clauses
+            Guard.WhenArgument(queRepository, "queRepository cannot be null").IsNull().Throw();
+            Guard.WhenArgument(unitOfWork, "unitOfWork cannot be null").IsNull().Throw();
+
             this.questionRepository = queRepository;
             this.unitOfWork = unitOfWork;
         }

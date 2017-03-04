@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using Bytes2you.Validation;
 using Leaf.Services.Contracts;
 using Leaf.Services.Noit;
 
@@ -10,7 +11,7 @@ namespace Leaf.Web.Controllers
 
         public NoitController(IFullGameService fullGameService)
         {
-            //TODO guard
+            Guard.WhenArgument(fullGameService, "FullGameService cannot be null").IsNull().Throw();
 
             this.fullGameService = fullGameService;
         }
