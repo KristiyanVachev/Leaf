@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Bytes2you.Validation;
 using Leaf.Data.Contracts;
 using Leaf.Models;
@@ -10,22 +12,46 @@ namespace Leaf.Services.Noit
     {
         //TODO: Extract IQuestion interface
         private readonly IRepository<Question> questionRepository;
+        private readonly IRepository<Category> categoryRepository;
         private readonly IUnitOfWork unitOfWork;
 
-        public FullGameService(IRepository<Question> queRepository, IUnitOfWork unitOfWork)
+        public FullGameService(IRepository<Question> questionRepository, IRepository<Category> categoryRepository, IUnitOfWork unitOfWork)
         {
-            Guard.WhenArgument(queRepository, "queRepository cannot be null").IsNull().Throw();
+            Guard.WhenArgument(questionRepository, "queRepository cannot be null").IsNull().Throw();
+            Guard.WhenArgument(categoryRepository, "categoryRepository cannot be null").IsNull().Throw();
             Guard.WhenArgument(unitOfWork, "unitOfWork cannot be null").IsNull().Throw();
 
-            this.questionRepository = queRepository;
+            this.questionRepository = questionRepository;
+            this.categoryRepository = categoryRepository;
             this.unitOfWork = unitOfWork;
         }
 
-        public Question GetQuestions()
+        public IEnumerable<Question> GetQuestions()
         {
-            var question = this.questionRepository.Entities.FirstOrDefault();
+            //Get all categories.
+            //Get 3 questions from each category
 
-            return question;
+            List<Question> questions = new List<Question>();
+
+            //TODO get only id's
+            var categories = this.categoryRepository.Entities;
+
+            foreach (var category in categories)
+            {
+                //TODO: Optimization: Avoid sorting all the questions by getting all the needed question's Id's and then getting 3 random Id's
+                var categoryQuestions = this.questionRepository
+                    .GetAll(x => x.CategoryId == category.Id)
+                    .OrderBy(x => Guid.NewGuid())
+                    .Take(3);
+
+                //TODO extract as a constant
+                foreach (var categoryQuestion in categoryQuestions)
+                {
+                    questions.Add(categoryQuestion);
+                }
+            }
+
+            return questions;
         }
     }
 }

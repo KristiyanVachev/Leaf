@@ -1,8 +1,8 @@
-﻿@model  Leaf.Models.Question
+﻿@model  IEnumerable<Leaf.Models.Question>
 @{
     ViewBag.Title = "FullTest";
 }
 
 <h2>FullTest</h2>
 
-<h3>@Model.Condition</h3>
+<h3>@Model.FirstOrDefault().Condition</h3>

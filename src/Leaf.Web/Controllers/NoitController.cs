@@ -33,9 +33,9 @@ namespace Leaf.Web.Controllers
             //create a fullTest
             //collect all questions
 
-            var question = this.fullGameService.GetQuestions();
+            var questions = this.fullGameService.GetQuestions();
 
-            return View(question);
+            return View(questions);
         }
     }
 }

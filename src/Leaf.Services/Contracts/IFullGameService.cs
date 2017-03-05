@@ -1,9 +1,10 @@
-﻿using Leaf.Models;
+﻿using System.Collections.Generic;
+using Leaf.Models;
 
 namespace Leaf.Services.Contracts
 {
     public interface IFullGameService
     {
-        Question GetQuestions();
+        IEnumerable<Question> GetQuestions();
     }
 }
