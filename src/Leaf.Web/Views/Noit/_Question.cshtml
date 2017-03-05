@@ -1,0 +1,15 @@
+﻿@model Leaf.Models.Question
+
+<link href="~/Content/questionBox.css" rel="stylesheet" />
+
+<div class="general-holder">
+    <div class="question-holder">@Model.Condition</div>
+
+    <div class="answer-holder">
+        @*Shuffle the order of the answers *@
+        <button class="btn btn-primary asnwer">@Model.CorrectAnswer</button>
+        <button class="btn btn-primary asnwer">@Model.FirstIncorrect</button>
+        <button class="btn btn-primary asnwer">@Model.SecondIncorrect</button>
+        <button class="btn btn-primary asnwer">@Model.ThirdIncorrect</button>
+    </div>
+</div>
