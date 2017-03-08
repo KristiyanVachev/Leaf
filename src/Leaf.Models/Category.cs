@@ -19,14 +19,8 @@ namespace Leaf.Models
 
         public virtual ICollection<Question> Questions
         {
-            get
-            {
-                return this.questions;
-            }
-            set
-            {
-                this.questions = value;
-            }
+            get { return this.questions; }
+            set { this.questions = value; }
         }
     }
 }

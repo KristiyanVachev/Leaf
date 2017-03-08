@@ -1,29 +1,36 @@
-﻿namespace Leaf.Models
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Leaf.Models
 {
     public class Question
     {
+        private ICollection<Answer> answers;
+
+        public Question()
+        {
+            this.answers = new HashSet<Answer>();
+        }
+
         public int Id { get; set; }
 
         //[StringLenght( 100, MinimumLength = 10)]
         public string Condition { get; set; }
 
-        public string CorrectAnswer { get; set; }
+        //statistics for every question
+        public int TimesAnswered { get; set; }
 
-        public string FirstIncorrect { get; set; }
-
-        public string SecondIncorrect { get; set; }
-
-        public string ThirdIncorrect { get; set; }
-
-        public string Description { get; set; }
+        public int CorrectlyAnsweredCount { get; set; }
 
         public int CategoryId { get; set; }
 
+        [ForeignKey("CategoryId")]
         public virtual Category Category { get; set; }
 
-        //statistics for every question
-        public int? CorrectsCount { get; set; }
-
-        public int? IncorrectsCount { get; set; }
+        public virtual ICollection<Answer> Answers
+        {
+            get { return this.answers; }
+            set { this.answers = value; }
+        }
     }
 }

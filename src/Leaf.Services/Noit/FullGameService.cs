@@ -15,7 +15,9 @@ namespace Leaf.Services.Noit
         private readonly IRepository<Category> categoryRepository;
         private readonly IUnitOfWork unitOfWork;
 
-        public FullGameService(IRepository<Question> questionRepository, IRepository<Category> categoryRepository, IUnitOfWork unitOfWork)
+        public FullGameService(IRepository<Question> questionRepository,
+            IRepository<Category> categoryRepository, 
+            IUnitOfWork unitOfWork)
         {
             Guard.WhenArgument(questionRepository, "queRepository cannot be null").IsNull().Throw();
             Guard.WhenArgument(categoryRepository, "categoryRepository cannot be null").IsNull().Throw();
@@ -52,6 +54,11 @@ namespace Leaf.Services.Noit
             }
 
             return questions;
+        }
+
+        public void CreateTest()
+        {
+            
         }
     }
 }

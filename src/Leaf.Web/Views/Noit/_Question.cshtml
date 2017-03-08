@@ -7,9 +7,10 @@
 
     <div class="answer-holder">
         @*Shuffle the order of the answers *@
-        <button class="btn btn-primary asnwer">@Model.CorrectAnswer</button>
-        <button class="btn btn-primary asnwer">@Model.FirstIncorrect</button>
-        <button class="btn btn-primary asnwer">@Model.SecondIncorrect</button>
-        <button class="btn btn-primary asnwer">@Model.ThirdIncorrect</button>
+
+        @foreach (var answer in Model.Answers)
+        {
+            <button class="btn btn-primary answer">@answer.Content</button>
+        }
     </div>
 </div>

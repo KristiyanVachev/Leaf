@@ -1,10 +1,33 @@
-﻿@model  IEnumerable<Leaf.Models.Question>
+﻿@using Leaf.Models
+@model  Leaf.Models.Question
 @{
     ViewBag.Title = "FullTest";
 }
 
 <h2>FullTest</h2>
 
-<h3>@Model.FirstOrDefault().Condition</h3>
+<h3>@Model.Condition</h3>
 
-@Html.Partial("_Question", Model.FirstOrDefault())
+@Html.Partial("_Question", Model)
+
+@*@Html.ActionLink("Next question", "FullTest", @Model.FirstOrDefault().CorrectAnswer)*@
+@*@Url.Action("FullTest", "Noit", @Model.FirstOrDefault().CorrectAnswer)*@
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+
+<script>
+    $(document).on('click', '.answer', function () {
+
+        nextQuestion();
+    });
+
+    function nextQuestion() {
+        $.ajax({
+            url: '@Url.Action("FullTest", "Noit")',
+            data: { answer: "@Model.Answers.FirstOrDefault()"},
+            success: function (data) {
+                console.log(data);
+            }
+        });
+    }
+</script>

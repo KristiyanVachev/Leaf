@@ -16,13 +16,18 @@ namespace Leaf.Data
             : base(nameOfConnectionString)
         {
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<LeafDbContext, Configuration>());
+            //Database.SetInitializer(new DropCreateDatabaseAlways<LeafDbContext>());
         }
+
+        public virtual IDbSet<Test> Tests { get; set; }
 
         public virtual IDbSet<Category> Categories { get; set; }
 
         public virtual IDbSet<Question> Questions { get; set; }
 
-        public virtual IDbSet<FullTest> FullTests { get; set; }
+        public virtual IDbSet<Answer> Answers { get; set; }
+
+        public virtual IDbSet<AnsweredQuestion> AnsweredQuestions { get; set; }
 
         public static LeafDbContext Create()
         {
