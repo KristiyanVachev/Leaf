@@ -5,6 +5,7 @@ using Bytes2you.Validation;
 using Leaf.Data.Contracts;
 using Leaf.Models;
 using Leaf.Services.Contracts;
+using Leaf.Factories;
 
 namespace Leaf.Services.Noit
 {
@@ -13,18 +14,31 @@ namespace Leaf.Services.Noit
         //TODO: Extract IQuestion interface
         private readonly IRepository<Question> questionRepository;
         private readonly IRepository<Category> categoryRepository;
+        private readonly IRepository<Test> testRepository;
+        private readonly IRepository<AnsweredQuestion> answeredQuestionRepository;
+        private readonly ITestFactory testFactory;
         private readonly IUnitOfWork unitOfWork;
 
         public FullGameService(IRepository<Question> questionRepository,
-            IRepository<Category> categoryRepository, 
+            IRepository<Category> categoryRepository,
+            IRepository<Test> testRepository,
+            IRepository<AnsweredQuestion> answeredQuestionRepository,
+            ITestFactory testFactory,
             IUnitOfWork unitOfWork)
         {
-            Guard.WhenArgument(questionRepository, "queRepository cannot be null").IsNull().Throw();
+            //TODO: Extract "cannot be null" message to costant
+            Guard.WhenArgument(questionRepository, "questionRepository cannot be null").IsNull().Throw();
             Guard.WhenArgument(categoryRepository, "categoryRepository cannot be null").IsNull().Throw();
+            Guard.WhenArgument(testRepository, "testRepository cannot be null").IsNull().Throw();
+            Guard.WhenArgument(answeredQuestionRepository, "answeredQuestionRepository cannot be null").IsNull().Throw();
+            Guard.WhenArgument(testFactory, "testFactory cannot be null").IsNull().Throw();
             Guard.WhenArgument(unitOfWork, "unitOfWork cannot be null").IsNull().Throw();
 
             this.questionRepository = questionRepository;
             this.categoryRepository = categoryRepository;
+            this.testRepository = testRepository;
+            this.answeredQuestionRepository = answeredQuestionRepository;
+            this.testFactory = testFactory;
             this.unitOfWork = unitOfWork;
         }
 
@@ -56,9 +70,48 @@ namespace Leaf.Services.Noit
             return questions;
         }
 
-        public void CreateTest()
+        public Test CreateTest(string userId)
         {
-            
+            //var retrievedTest = this.testRepository.Entities.Where(x => x.UserId == userId).FirstOrDefault();
+
+            //var newAQ = new AnsweredQuestion
+            //{
+            //    QuestionId = retrievedTest.Questions.FirstOrDefault().Id,
+            //    AnswerId = retrievedTest.Questions.FirstOrDefault().Answers.FirstOrDefault().Id,
+            //    TestId = retrievedTest.Id
+            //};
+
+            //this.answeredQuestionRepository.Add(newAQ);
+            //this.unitOfWork.Commit();
+
+
+            //Fix for the double creation. Works.
+            var userTest = this.testRepository.Entities.LastOrDefault(x => x.UserId == userId);
+            if (!(userTest == null || userTest.IsFinished))
+            {
+                return userTest;
+            }
+
+            var questions = GetQuestions();
+
+            var test = this.testFactory.CreateTest(userId, questions);
+
+            this.testRepository.Add(test);
+            this.unitOfWork.Commit();
+
+            return test;
+        }
+
+        public Test GetUserTest(string userId)
+        {
+            var userTest = this.testRepository.Entities.LastOrDefault(x => x.UserId == userId);
+
+            if (userTest == null || userTest.IsFinished)
+            {
+                userTest = CreateTest(userId);
+            }
+
+            return userTest;
         }
     }
 }

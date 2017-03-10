@@ -69,26 +69,26 @@ namespace Leaf.Data.Migrations
                 }
             );
 
-            context.Tests.AddOrUpdate(
-                    t => t.Id,
-                    new Test
-                    {
-                        AnsweredQuestions =
-                        {
-                            new AnsweredQuestion
-                            {
-                                QuestionId = 0,
-                                AnswerId = 1
-                            },
-                            new AnsweredQuestion
-                            {
-                                QuestionId = 2,
-                                AnswerId = 11
-                            }
-                        },
-                        IsFinished = false
-                    }
-                );
+            //context.Tests.AddOrUpdate(
+            //        t => t.Id,
+            //        new Test
+            //        {
+            //            AnsweredQuestions =
+            //            {
+            //                new AnsweredQuestion
+            //                {
+            //                    QuestionId = 0,
+            //                    AnswerId = 1
+            //                },
+            //                new AnsweredQuestion
+            //                {
+            //                    QuestionId = 2,
+            //                    AnswerId = 11
+            //                }
+            //            },
+            //            IsFinished = false
+            //        }
+            //    );
 
             context.SaveChanges();
         }

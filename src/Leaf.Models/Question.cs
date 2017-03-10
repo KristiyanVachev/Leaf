@@ -6,10 +6,12 @@ namespace Leaf.Models
     public class Question
     {
         private ICollection<Answer> answers;
+        private ICollection<Test> tests;
 
         public Question()
         {
             this.answers = new HashSet<Answer>();
+            this.tests = new HashSet<Test>();
         }
 
         public int Id { get; set; }
@@ -31,6 +33,12 @@ namespace Leaf.Models
         {
             get { return this.answers; }
             set { this.answers = value; }
+        }
+
+        public virtual ICollection<Test> Tests
+        {
+            get { return this.tests; }
+            set { this.tests = value; }
         }
     }
 }

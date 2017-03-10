@@ -48,6 +48,10 @@
       <HintPath>..\packages\Bytes2you.Validation.2.0.0.0\lib\portable-win+net40+sl40+wp+Xbox40\Bytes2you.Validation.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Castle.Core, Version=3.2.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <HintPath>..\packages\Castle.Core.3.2.0\lib\net45\Castle.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
       <Private>True</Private>
@@ -55,6 +59,14 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Ninject, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
       <HintPath>..\packages\Ninject.3.2.0.0\lib\net45-full\Ninject.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Ninject.Extensions.Conventions, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.Extensions.Conventions.3.2.0.0\lib\net45-full\Ninject.Extensions.Conventions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Ninject.Extensions.Factory, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.Extensions.Factory.3.2.1.0\lib\net45-full\Ninject.Extensions.Factory.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Ninject.Web.Common, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
@@ -186,6 +198,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\NinjectModules\AuthNinjectModule.cs" />
     <Compile Include="App_Start\NinjectModules\DataNinjectModule.cs" />
+    <Compile Include="App_Start\NinjectModules\FactoryNinjectModule.cs" />
     <Compile Include="App_Start\NinjectModules\ServiceNinjectModule.cs" />
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -284,6 +297,10 @@
     <ProjectReference Include="..\Leaf.Data\Leaf.Data.csproj">
       <Project>{04fba009-268d-4ecb-ab5f-3c76b197be9a}</Project>
       <Name>Leaf.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Leaf.Factories\Leaf.Factories.csproj">
+      <Project>{f11987c8-e19a-4502-8535-c0c857dc2b2f}</Project>
+      <Name>Leaf.Factories</Name>
     </ProjectReference>
     <ProjectReference Include="..\Leaf.Models\Leaf.Models.csproj">
       <Project>{9aa679c4-6bd2-4479-ba4f-1b9c88f8127b}</Project>

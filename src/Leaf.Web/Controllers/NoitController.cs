@@ -5,14 +5,14 @@ using Bytes2you.Validation;
 using Leaf.Models;
 using Leaf.Services.Contracts;
 using Microsoft.Ajax.Utilities;
+using Microsoft.AspNet.Identity;
 
 namespace Leaf.Web.Controllers
 {
     public class NoitController : Controller
     {
         private readonly IFullGameService fullGameService;
-        private IEnumerable<Question> questions = new List<Question>();
-
+        
         public NoitController(IFullGameService fullGameService)
         {
             Guard.WhenArgument(fullGameService, "FullGameService cannot be null").IsNull().Throw();
@@ -33,24 +33,25 @@ namespace Leaf.Web.Controllers
 
         //private List<Question> questions; 
         //Takes an optional object of an answered question. If not is passed then begin a new test
-        public ActionResult FullTest(string answer)
+        public ActionResult FullTest(int questionId = -1, string answer = "")
         {
-            this.questions = Session["Questions"] as List<Question>;
-
-            if (this.questions == null || !this.questions.Any())
+            //create new test
+            if (questionId == -1)
             {
-                this.questions = this.fullGameService.GetQuestions();
-                Session["Questions"] = this.questions;
+                //this.service.create test
+                //pass first question to view
             }
 
-            if (!answer.IsNullOrWhiteSpace())
-            {
-                //Return next question
-                return View(questions.LastOrDefault());
-            }
+            var userId = this.User.Identity.GetUserId();
+            var userTest = this.fullGameService.GetUserTest(userId);
 
             //Return first question
-            return View(questions.FirstOrDefault());
+            return View(userTest.Questions.FirstOrDefault());
+        }
+
+        public void Test(int questionId = -1, string answer = "")
+        {
+
         }
 
         //Something to be called with AJAX and containing the given answer and preferbly the question ID,

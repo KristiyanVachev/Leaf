@@ -66,6 +66,7 @@ namespace Leaf.Web.App_Start
             kernel.Load(new AuthNinjectModule());
             kernel.Load(new DataNinjectModule());
             kernel.Load(new ServiceNinjectModule());
+            kernel.Load(new FactoryNinjectModule());
         }
     }
 }

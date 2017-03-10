@@ -4,6 +4,11 @@ namespace Leaf.Models
 {
     public class AnsweredQuestion
     {
+        public AnsweredQuestion()
+        {
+            
+        }
+
         public int Id { get; set; }
 
         public int? QuestionId { get; set; }
