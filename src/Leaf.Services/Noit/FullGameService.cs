@@ -89,6 +89,18 @@ namespace Leaf.Services.Noit
             return test;
         }
 
+        public bool HasUnfinishedTest(string userId)
+        {
+            var userTest = this.testRepository.Entities.LastOrDefault(x => x.UserId == userId);
+
+            if (userTest == null || userTest.IsFinished)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
         public Test GetUserTest(string userId)
         {
             var userTest = this.testRepository.Entities.LastOrDefault(x => x.UserId == userId);
@@ -97,7 +109,7 @@ namespace Leaf.Services.Noit
             {
                 userTest = CreateTest(userId);
             }
-            
+
             return userTest;
         }
 
@@ -108,12 +120,12 @@ namespace Leaf.Services.Noit
             //Add answer
             var newAnsweredQuestion = this.testFactory.CreateAnsweredQuestion(testId, questionId, answerId);
             this.answeredQuestionRepository.Add(newAnsweredQuestion);
-            
+
             //TODO? add AQ to test?
 
             //Remove the question
             test.Questions.Remove(test.Questions.FirstOrDefault(x => x.Id == questionId));
-            
+
             //Finished the test if no more questions
             if (!test.Questions.Any())
             {
@@ -127,7 +139,7 @@ namespace Leaf.Services.Noit
         public Question GetNextQuestion(int testId)
         {
             var test = testRepository.GetById(testId);
-            
+
             return test.Questions.FirstOrDefault();
         }
     }

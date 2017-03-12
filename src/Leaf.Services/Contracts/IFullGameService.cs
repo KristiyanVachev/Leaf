@@ -9,6 +9,8 @@ namespace Leaf.Services.Contracts
 
         Test CreateTest(string userId);
 
+        bool HasUnfinishedTest(string userId);
+
         Test GetUserTest(string userId);
 
         void SendAnswer(int testId, int questionId, int answerId);

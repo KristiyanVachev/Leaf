@@ -1,0 +1,11 @@
+﻿@using Leaf.Models
+@model  Leaf.Models.Question
+@{
+    ViewBag.Title = "Test";
+}
+
+<h2>Test</h2>
+
+<h3>@Model.Condition</h3>
+
+@Html.Partial("_Question", Model)

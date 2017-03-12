@@ -1,37 +1,10 @@
 ﻿@using Leaf.Models
-@model  Leaf.Models.Question
+@model  bool  
 @{
     ViewBag.Title = "FullTest";
+    ViewBag.ButtonText = Model ? "Continue test" : "Start new test";
 }
 
 <h2>FullTest</h2>
 
-<h3>@Model.Condition</h3>
-
-@Html.Partial("_Question", Model)
-
-@*@Html.ActionLink("Next question", "FullTest", @Model.FirstOrDefault().CorrectAnswer)*@
-@*@Url.Action("FullTest", "Noit", @Model.FirstOrDefault().CorrectAnswer)*@
-
-
-@*<script src="~/Scripts/jquery-1.10.2.min.js"></script>
-
-<script>
-    $(document).on('click', '.answer', function (ev) {
-        nextQuestion(ev);
-    });
-
-    function nextQuestion(ev) {
-        $.ajax({
-            url: '@Url.Action("FullTest", "Noit")',
-            data: {
-                questionId: @Model.Id,
-                answer: "@Model.Answers.FirstOrDefault()",
-                answerName: ev.innerHTML
-    },
-            success: function (data) {
-                console.log(data);
-            }
-        });
-    }
-</script>*@
+@Html.ActionLink((string)ViewBag.ButtonText, "StartTest", "Noit", null, null)

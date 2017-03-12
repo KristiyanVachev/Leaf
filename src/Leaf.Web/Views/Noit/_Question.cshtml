@@ -10,7 +10,7 @@
 
         @foreach (var answer in Model.Answers)
         {
-            @Html.ActionLink(answer.Content, "FullTest", "Noit", new { questionId = this.Model.Id, answerId = answer.Id}, null)
+            @Html.ActionLink(answer.Content, "ReceiveAnswer", "Noit", new { questionId = this.Model.Id, answerId = answer.Id}, null)
             @*<button class="btn btn-primary answer">@answer.Content</button>*@
         }
     </div>
