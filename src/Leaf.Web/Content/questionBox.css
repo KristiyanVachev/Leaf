@@ -1,7 +1,6 @@
 ﻿.general-holder {
     margin-bottom: 5px;
     width: 620px;
-   
 }
 
 .question-holder {
@@ -19,6 +18,11 @@
     width: 300px;
 }
 
-#result{
+#result {
     border: 1px solid black;
+}
+
+.questionText {
+    text-decoration: none;
+    color: white;
 }
