@@ -72,19 +72,6 @@ namespace Leaf.Services.Noit
 
         public Test CreateTest(string userId)
         {
-            //var retrievedTest = this.testRepository.Entities.Where(x => x.UserId == userId).FirstOrDefault();
-
-            //var newAQ = new AnsweredQuestion
-            //{
-            //    QuestionId = retrievedTest.Questions.FirstOrDefault().Id,
-            //    AnswerId = retrievedTest.Questions.FirstOrDefault().Answers.FirstOrDefault().Id,
-            //    TestId = retrievedTest.Id
-            //};
-
-            //this.answeredQuestionRepository.Add(newAQ);
-            //this.unitOfWork.Commit();
-
-
             //Fix for the double creation. Works.
             var userTest = this.testRepository.Entities.LastOrDefault(x => x.UserId == userId);
             if (!(userTest == null || userTest.IsFinished))
@@ -110,8 +97,38 @@ namespace Leaf.Services.Noit
             {
                 userTest = CreateTest(userId);
             }
-
+            
             return userTest;
+        }
+
+        public void SendAnswer(int testId, int questionId, int answerId)
+        {
+            var test = this.testRepository.GetById(testId);
+
+            //Add answer
+            var newAnsweredQuestion = this.testFactory.CreateAnsweredQuestion(testId, questionId, answerId);
+            this.answeredQuestionRepository.Add(newAnsweredQuestion);
+            
+            //TODO? add AQ to test?
+
+            //Remove the question
+            test.Questions.Remove(test.Questions.FirstOrDefault(x => x.Id == questionId));
+            
+            //Finished the test if no more questions
+            if (!test.Questions.Any())
+            {
+                test.IsFinished = true;
+            }
+
+            this.unitOfWork.Commit();
+
+        }
+
+        public Question GetNextQuestion(int testId)
+        {
+            var test = testRepository.GetById(testId);
+            
+            return test.Questions.FirstOrDefault();
         }
     }
 }

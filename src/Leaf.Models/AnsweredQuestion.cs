@@ -9,7 +9,20 @@ namespace Leaf.Models
             
         }
 
+        public AnsweredQuestion(int testId, int questionId, int answerId)
+        {
+            //ASK better to assign question ID or question
+            this.TestId = testId;
+            this.QuestionId = questionId;
+            this.AnswerId = answerId;
+        }
+
         public int Id { get; set; }
+
+        public int TestId { get; set; }
+
+        [ForeignKey("TestId")]
+        public virtual Test Test { get; set; }
 
         public int? QuestionId { get; set; }
 
@@ -20,11 +33,5 @@ namespace Leaf.Models
 
         [ForeignKey("AnswerId")]
         public virtual Answer Answer { get; set; }
-
-        public int TestId { get; set; } 
-
-        [ForeignKey("TestId")]
-        public virtual Test Test { get; set; }
-
     }
 }

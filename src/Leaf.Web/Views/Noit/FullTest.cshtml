@@ -13,24 +13,25 @@
 @*@Html.ActionLink("Next question", "FullTest", @Model.FirstOrDefault().CorrectAnswer)*@
 @*@Url.Action("FullTest", "Noit", @Model.FirstOrDefault().CorrectAnswer)*@
 
-<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+
+@*<script src="~/Scripts/jquery-1.10.2.min.js"></script>
 
 <script>
-    $(document).on('click', '.answer', function () {
-
-        nextQuestion();
+    $(document).on('click', '.answer', function (ev) {
+        nextQuestion(ev);
     });
 
-    function nextQuestion() {
+    function nextQuestion(ev) {
         $.ajax({
             url: '@Url.Action("FullTest", "Noit")',
             data: {
-                questionId : @Model.Id,
-                answer: "@Model.Answers.FirstOrDefault()"
-            },
+                questionId: @Model.Id,
+                answer: "@Model.Answers.FirstOrDefault()",
+                answerName: ev.innerHTML
+    },
             success: function (data) {
                 console.log(data);
             }
         });
     }
-</script>
+</script>*@
