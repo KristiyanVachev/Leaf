@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Leaf.Services", "Leaf.Servi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Leaf.Factories", "Leaf.Factories\Leaf.Factories.csproj", "{F11987C8-E19A-4502-8535-C0C857DC2B2F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Leaf.Tests", "Leaf.Tests\Leaf.Tests.csproj", "{FEF0FDFB-E877-4C51-AA80-DC5D7CF15A11}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{F11987C8-E19A-4502-8535-C0C857DC2B2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F11987C8-E19A-4502-8535-C0C857DC2B2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F11987C8-E19A-4502-8535-C0C857DC2B2F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FEF0FDFB-E877-4C51-AA80-DC5D7CF15A11}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FEF0FDFB-E877-4C51-AA80-DC5D7CF15A11}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FEF0FDFB-E877-4C51-AA80-DC5D7CF15A11}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FEF0FDFB-E877-4C51-AA80-DC5D7CF15A11}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
