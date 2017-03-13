@@ -4,31 +4,21 @@ using Leaf.Models;
 using Leaf.Services.Contracts;
 using Microsoft.AspNet.Identity;
 
-namespace Leaf.Web.Controllers
+namespace Leaf.Web.Areas.Noit.Controllers
 {
-    public class NoitController : Controller
+    public class FullTestController : Controller
     {
         private readonly IFullGameService fullGameService;
 
-        public NoitController(IFullGameService fullGameService)
+        public FullTestController(IFullGameService fullGameService)
         {
             Guard.WhenArgument(fullGameService, "FullGameService cannot be null").IsNull().Throw();
 
             this.fullGameService = fullGameService;
         }
 
-        // GET: Noit
+        // GET: Noit/FullTest
         public ActionResult Index()
-        {
-            return View();
-        }
-
-        public ActionResult Training()
-        {
-            return View();
-        }
-
-        public ActionResult FullTest()
         {
             //TODO: Show begin or continue button
             //TODO: List previous tests with their results
@@ -37,16 +27,16 @@ namespace Leaf.Web.Controllers
             var hasUnfinishedTest = this.fullGameService.HasUnfinishedTest(userId);
 
             //Return test result
-            return View(hasUnfinishedTest);
+            return View("FullTest", hasUnfinishedTest);
         }
 
-        public ActionResult StartTest()
+          public ActionResult StartTest()
         {
             var userId = this.User.Identity.GetUserId();
             var userTest = this.fullGameService.GetUserTest(userId);
 
             //Return test result
-            return RedirectToAction("Test", "Noit", new { testId = userTest.Id });
+            return RedirectToAction("Test", "FullTest", new { testId = userTest.Id });
         }
 
         public ActionResult ReceiveAnswer(int questionId, int answerId)
@@ -58,7 +48,7 @@ namespace Leaf.Web.Controllers
             this.fullGameService.SendAnswer(userTest.Id, questionId, answerId);
 
             //Return test result
-            return RedirectToAction("Test", "Noit", new { testId = userTest.Id });
+            return RedirectToAction("Test", "FullTest", new { testId = userTest.Id });
         }
 
         public ActionResult Test(int testId)

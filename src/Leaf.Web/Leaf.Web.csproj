@@ -203,10 +203,11 @@
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Areas\Noit\Controllers\FullTestController.cs" />
+    <Compile Include="Areas\Noit\NoitAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\NoitController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -225,6 +226,12 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Areas\Noit\Views\web.config" />
+    <Content Include="Areas\Noit\Views\FullTest\FullTest.cshtml" />
+    <Content Include="Areas\Noit\Views\FullTest\Test.cshtml" />
+    <Content Include="Areas\Noit\Views\Shared\_NoitLayout.cshtml" />
+    <Content Include="Areas\Noit\Views\Shared\_Question.cshtml" />
+    <Content Include="Areas\Noit\Views\_ViewStart.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -272,15 +279,10 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Noit\Index.cshtml" />
-    <Content Include="Views\Noit\_NoitLayout.cshtml" />
-    <Content Include="Views\Noit\Training.cshtml" />
-    <Content Include="Views\Noit\FullTest.cshtml" />
-    <Content Include="Views\Noit\_ViewStart.cshtml" />
-    <Content Include="Views\Noit\_Question.cshtml" />
-    <Content Include="Views\Noit\Test.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Noit\Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
