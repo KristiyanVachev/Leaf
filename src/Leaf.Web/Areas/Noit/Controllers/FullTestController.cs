@@ -30,13 +30,13 @@ namespace Leaf.Web.Areas.Noit.Controllers
             return View("FullTest", hasUnfinishedTest);
         }
 
-          public ActionResult StartTest()
+        public ActionResult StartTest()
         {
             var userId = this.User.Identity.GetUserId();
             var userTest = this.fullGameService.GetUserTest(userId);
 
             //Return test result
-            return RedirectToAction("Test", "FullTest", new { testId = userTest.Id });
+            return RedirectToAction("Test", "FullTest", new { id = userTest.Id });
         }
 
         public ActionResult ReceiveAnswer(int questionId, int answerId)
@@ -48,20 +48,20 @@ namespace Leaf.Web.Areas.Noit.Controllers
             this.fullGameService.SendAnswer(userTest.Id, questionId, answerId);
 
             //Return test result
-            return RedirectToAction("Test", "FullTest", new { testId = userTest.Id });
+            return RedirectToAction("Test", "FullTest", new { id = userTest.Id });
         }
 
-        public ActionResult Test(int testId)
+        public ActionResult Test(int id)
         {
-            var nextQuestion = this.fullGameService.GetNextQuestion(testId);
+            var nextQuestion = this.fullGameService.GetNextQuestion(id);
 
             if (nextQuestion != null)
             //if (!test.IsFinished)
             {
                 return View("Test", nextQuestion);
             }
-            
-            var test = this.fullGameService.GetTestById(testId);
+
+            var test = this.fullGameService.GetTestById(id);
 
             return View("FinishedTest", test);
         }
