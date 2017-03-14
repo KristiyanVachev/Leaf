@@ -60,13 +60,10 @@ namespace Leaf.Web.Areas.Noit.Controllers
             {
                 return View("Test", nextQuestion);
             }
+            
+            var test = this.fullGameService.GetTestById(testId);
 
-            nextQuestion = new Question
-            {
-                Condition = "Finished"
-            };
-
-            return View("Test", nextQuestion);
+            return View("FinishedTest", test);
         }
     }
 }

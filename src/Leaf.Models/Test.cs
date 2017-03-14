@@ -30,6 +30,8 @@ namespace Leaf.Models
 
         public DateTime? End { get; set; }
 
+        public int CorrectCount { get; set; }
+
         public string UserId { get; set; }
 
         [ForeignKey("UserId")]

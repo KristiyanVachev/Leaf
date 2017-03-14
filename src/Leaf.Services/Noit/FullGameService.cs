@@ -13,6 +13,7 @@ namespace Leaf.Services.Noit
     {
         //TODO: Extract IQuestion interface
         private readonly IRepository<Question> questionRepository;
+        private readonly IRepository<Answer> answerRepository;
         private readonly IRepository<Category> categoryRepository;
         private readonly IRepository<Test> testRepository;
         private readonly IRepository<AnsweredQuestion> answeredQuestionRepository;
@@ -20,6 +21,7 @@ namespace Leaf.Services.Noit
         private readonly IUnitOfWork unitOfWork;
 
         public FullGameService(IRepository<Question> questionRepository,
+            IRepository<Answer> answerRepository,
             IRepository<Category> categoryRepository,
             IRepository<Test> testRepository,
             IRepository<AnsweredQuestion> answeredQuestionRepository,
@@ -28,6 +30,7 @@ namespace Leaf.Services.Noit
         {
             //TODO: Extract "cannot be null" message to costant
             Guard.WhenArgument(questionRepository, "questionRepository cannot be null").IsNull().Throw();
+            Guard.WhenArgument(answerRepository, "answerRepository cannot be null").IsNull().Throw();
             Guard.WhenArgument(categoryRepository, "categoryRepository cannot be null").IsNull().Throw();
             Guard.WhenArgument(testRepository, "testRepository cannot be null").IsNull().Throw();
             Guard.WhenArgument(answeredQuestionRepository, "answeredQuestionRepository cannot be null").IsNull().Throw();
@@ -35,6 +38,7 @@ namespace Leaf.Services.Noit
             Guard.WhenArgument(unitOfWork, "unitOfWork cannot be null").IsNull().Throw();
 
             this.questionRepository = questionRepository;
+            this.answerRepository = answerRepository;
             this.categoryRepository = categoryRepository;
             this.testRepository = testRepository;
             this.answeredQuestionRepository = answeredQuestionRepository;
@@ -113,9 +117,22 @@ namespace Leaf.Services.Noit
             return userTest;
         }
 
+        public Test GetTestById(int testId)
+        {
+            return this.testRepository.GetById(testId);
+        }
+
         public void SendAnswer(int testId, int questionId, int answerId)
         {
             var test = this.testRepository.GetById(testId);
+
+            //Verify if answer is correct
+            var answer = this.answerRepository.GetById(answerId);
+
+            if (answer.IsCorrect)
+            {
+                test.CorrectCount++;
+            }
 
             //Add answer
             var newAnsweredQuestion = this.testFactory.CreateAnsweredQuestion(testId, questionId, answerId);

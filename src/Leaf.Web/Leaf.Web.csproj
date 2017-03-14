@@ -232,6 +232,7 @@
     <Content Include="Areas\Noit\Views\Shared\_NoitLayout.cshtml" />
     <Content Include="Areas\Noit\Views\Shared\_Question.cshtml" />
     <Content Include="Areas\Noit\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Noit\Views\FullTest\FinishedTest.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
