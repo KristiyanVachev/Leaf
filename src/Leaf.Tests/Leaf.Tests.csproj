@@ -74,6 +74,7 @@
     <Compile Include="Data\RepositoryTests\ConstructorTests.cs" />
     <Compile Include="Data\RepositoryTests\Fakes\FakeRepositoryType.cs" />
     <Compile Include="Data\RepositoryTests\GetByIdTests.cs" />
+    <Compile Include="Data\UnitOfWorkTests\CommitTests.cs" />
     <Compile Include="Data\UnitOfWorkTests\ConstructorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
