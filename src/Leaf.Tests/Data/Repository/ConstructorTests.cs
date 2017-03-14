@@ -1,6 +1,7 @@
 ﻿using System;
 using Leaf.Data;
 using Leaf.Data.Contracts;
+using Leaf.Tests.Data.Repository.Fakes;
 using Moq;
 using NUnit.Framework;
 
@@ -38,10 +39,5 @@ namespace Leaf.Tests.Data.Repository
             // Assert
             Assert.IsNotNull(repository);
         }
-    }
-
-    public class FakeRepositoryType
-    {
-        
     }
 }
