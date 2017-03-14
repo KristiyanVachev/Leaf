@@ -77,6 +77,7 @@
     <Compile Include="Data\UnitOfWorkTests\CommitTests.cs" />
     <Compile Include="Data\UnitOfWorkTests\ConstructorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\Noit\FullGameServiceTests\ConstructorTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -86,6 +87,18 @@
     <ProjectReference Include="..\Leaf.Data\Leaf.Data.csproj">
       <Project>{04fba009-268d-4ecb-ab5f-3c76b197be9a}</Project>
       <Name>Leaf.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Leaf.Factories\Leaf.Factories.csproj">
+      <Project>{f11987c8-e19a-4502-8535-c0c857dc2b2f}</Project>
+      <Name>Leaf.Factories</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Leaf.Models\Leaf.Models.csproj">
+      <Project>{9aa679c4-6bd2-4479-ba4f-1b9c88f8127b}</Project>
+      <Name>Leaf.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Leaf.Services\Leaf.Services.csproj">
+      <Project>{19cfe96a-3e91-4ebe-aa73-6447cae2c9d4}</Project>
+      <Name>Leaf.Services</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>
