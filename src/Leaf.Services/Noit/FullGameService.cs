@@ -48,19 +48,15 @@ namespace Leaf.Services.Noit
 
         public IEnumerable<Question> GetQuestions()
         {
-            //Get all categories.
-            //Get 3 questions from each category
+            var questions = new List<Question>();
 
-            List<Question> questions = new List<Question>();
+            var categorieIds = this.categoryRepository.Entities.Select(x => x.Id);
 
-            //TODO get only id's
-            var categories = this.categoryRepository.Entities;
-
-            foreach (var category in categories)
+            foreach (var categoryId in categorieIds)
             {
                 //TODO: Optimization: Avoid sorting all the questions by getting all the needed question's Id's and then getting 3 random Id's
                 var categoryQuestions = this.questionRepository
-                    .GetAll(x => x.CategoryId == category.Id)
+                    .GetAll(x => x.CategoryId == categoryId)
                     .OrderBy(x => Guid.NewGuid())
                     .Take(3);
 
