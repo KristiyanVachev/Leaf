@@ -11,7 +11,7 @@ namespace Leaf.Tests.Services.Noit.FullGameServiceTests
     public class ConstructorTests
     {
         [Test]
-        public void Constructor()
+        public void Constructor_ShouldNotThrow_WhenParametersNotNull()
         {
             //Arrange
             var mockQuestionRepository = new Mock<IRepository<Question>>();
@@ -34,5 +34,7 @@ namespace Leaf.Tests.Services.Noit.FullGameServiceTests
                     )
             );
         }
+
+        //TODO add tests for each parameter to be null and values assigned correctly
     }
 }

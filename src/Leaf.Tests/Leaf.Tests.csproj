@@ -78,6 +78,7 @@
     <Compile Include="Data\UnitOfWorkTests\ConstructorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\Noit\FullGameServiceTests\ConstructorTests.cs" />
+    <Compile Include="Services\Noit\FullGameServiceTests\GetNextQuestionTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
