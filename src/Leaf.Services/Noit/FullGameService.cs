@@ -72,14 +72,7 @@ namespace Leaf.Services.Noit
 
         public Test CreateTest(string userId)
         {
-            //Fix for the double creation. Works.
-            var userTest = this.testRepository.Entities.LastOrDefault(x => x.UserId == userId);
-            if (!(userTest == null || userTest.IsFinished))
-            {
-                return userTest;
-            }
-
-            var questions = GetQuestions();
+            var questions = this.GetQuestions();
 
             var test = this.testFactory.CreateTest(userId, questions);
 
@@ -107,7 +100,7 @@ namespace Leaf.Services.Noit
 
             if (userTest == null || userTest.IsFinished)
             {
-                userTest = CreateTest(userId);
+                userTest = this.CreateTest(userId);
             }
 
             return userTest;
