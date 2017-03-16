@@ -79,6 +79,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\Noit\FullGameServiceTests\ConstructorTests.cs" />
     <Compile Include="Services\Noit\FullGameServiceTests\GetNextQuestionTests.cs" />
+    <Compile Include="Services\Noit\FullGameServiceTests\GetTestByIdTests.cs" />
+    <Compile Include="Services\Noit\FullGameServiceTests\GetUserTestTests.cs" />
+    <Compile Include="Services\Noit\FullGameServiceTests\HasUnfinishedTestTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
