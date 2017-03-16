@@ -18,7 +18,7 @@ namespace Leaf.Tests.Data.Repository
             var mockedSet = new Mock<DbSet<FakeRepositoryType>>();
 
             var mockedDbContext = new Mock<ILeafDbContext>();
-            mockedDbContext.Setup(x => x.Set<FakeRepositoryType>()).Returns(mockedSet.Object);
+            mockedDbContext.Setup(x => x.DbSet<FakeRepositoryType>()).Returns(mockedSet.Object);
 
             var repository = new Repository<FakeRepositoryType>(mockedDbContext.Object);
 
@@ -31,7 +31,7 @@ namespace Leaf.Tests.Data.Repository
 
         [TestCase(1)]
         [TestCase(155)]
-        public void TestGetById_ShouldReturnCorrectly(int id)
+        public void GetById_ShouldReturnCorrectly(int id)
         {
             // Arrange
             var mockedResult = new Mock<FakeRepositoryType>();
@@ -40,7 +40,7 @@ namespace Leaf.Tests.Data.Repository
             mockedSet.Setup(s => s.Find(It.IsAny<object>())).Returns(mockedResult.Object);
 
             var mockedDbContext = new Mock<ILeafDbContext>();
-            mockedDbContext.Setup(x => x.Set<FakeRepositoryType>()).Returns(mockedSet.Object);
+            mockedDbContext.Setup(x => x.DbSet<FakeRepositoryType>()).Returns(mockedSet.Object);
 
             var repository = new Repository<FakeRepositoryType>(mockedDbContext.Object);
 

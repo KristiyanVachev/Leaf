@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
 using Leaf.Data.Contracts;
@@ -26,59 +25,71 @@ namespace Leaf.Data
         {
             get
             {
-                return this.dbContext.Set<T>()
-                    .ToList();
+                return this.dbContext.DbSet<T>().ToList();
             }
         }
 
         public void Add(T entity)
         {
-            var entry = this.dbContext.Entry(entity);
-            entry.State = EntityState.Added;
+            this.dbContext.SetAdded(entity);
         }
 
         public void Delete(T entity)
         {
-            var entry = this.dbContext.Entry(entity);
-            entry.State = EntityState.Deleted;
+            this.dbContext.SetDeleted(entity);
+        }
+
+        public IEnumerable<T> GetAll()
+        {
+            return this.dbContext
+                .DbSet<T>()
+                .ToList();
         }
 
         public IEnumerable<T> GetAll(Expression<Func<T, bool>> filterExpression)
         {
             return this.dbContext
-                   .Set<T>()
-                   .Where(filterExpression)
-                   .ToList();
+                .DbSet<T>()
+                .Where(filterExpression)
+                .ToList();
         }
 
-        public IEnumerable<T> GetAll<T1>(Expression<Func<T, bool>> filterExpression, Expression<Func<T, T1>> sortExpression)
+        public IEnumerable<T> GetAll<T1>(Expression<Func<T, bool>> filterExpression, Expression<Func<T, T1>> sortExpression, bool isDescending)
         {
-            return this.dbContext
-                   .Set<T>()
-                   .Where(filterExpression)
-                   .OrderBy(sortExpression)
-                   .ToList();
+            var result = this.dbContext
+                .DbSet<T>()
+                .Where(filterExpression);
+
+            if (isDescending)
+            {
+                result = result.OrderByDescending(sortExpression);
+            }
+            else
+            {
+                result = result.OrderBy(sortExpression);
+            }
+
+            return result.ToList();
         }
 
         public IEnumerable<T2> GetAll<T1, T2>(Expression<Func<T, bool>> filterExpression, Expression<Func<T, T1>> sortExpression, Expression<Func<T, T2>> selectExpression)
         {
             return this.dbContext
-                  .Set<T>()
-                  .Where(filterExpression)
-                  .OrderBy(sortExpression)
-                  .Select(selectExpression)
-                   .ToList();
+                .DbSet<T>()
+                .Where(filterExpression)
+                .OrderBy(sortExpression)
+                .Select(selectExpression)
+                .ToList();
         }
 
         public T GetById(object id)
         {
-            return this.dbContext.Set<T>().Find(id);
+            return this.dbContext.DbSet<T>().Find(id);
         }
 
         public void Update(T entity)
         {
-            var entry = this.dbContext.Entry(entity);
-            entry.State = EntityState.Modified;
+            this.dbContext.SetUpdated(entity);
         }
     }
 }

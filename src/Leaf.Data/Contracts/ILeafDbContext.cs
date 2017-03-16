@@ -1,16 +1,21 @@
 ﻿using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
 
 namespace Leaf.Data.Contracts
 {
     public interface ILeafDbContext
     {
-        DbSet<TEntity> Set<TEntity>()
+        IDbSet<TEntity> DbSet<TEntity>()
             where TEntity : class;
 
         int SaveChanges();
+        
+        void SetAdded<TEntry>(TEntry entity)
+           where TEntry : class;
 
-        DbEntityEntry<TEntity> Entry<TEntity>(TEntity entity)
-            where TEntity : class;
+        void SetDeleted<TEntry>(TEntry entity)
+            where TEntry : class;
+
+        void SetUpdated<TEntry>(TEntry entity)
+            where TEntry : class;
     }
 }
