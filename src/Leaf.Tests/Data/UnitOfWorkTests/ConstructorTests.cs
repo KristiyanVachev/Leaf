@@ -10,14 +10,14 @@ namespace Leaf.Tests.Data.UnitOfWorkTests
     public class ConstructorTests
     {
         [Test]
-        public void TestConstructor_PassDbContextNull_ShouldThrowArgumentNullException()
+        public void Constructor_PassDbContextNull_ShouldThrowArgumentNullException()
         {
             // Arrange, Act, Assert
             Assert.Throws<ArgumentNullException>(() => new UnitOfWork(null));
         }
 
         [Test]
-        public void TestConstructor_PassDbContextCorrectly_ShouldNotThrow()
+        public void Constructor_PassDbContextCorrectly_ShouldNotThrow()
         {
             // Arrange
             var mockedDbContext = new Mock<ILeafDbContext>();
@@ -27,7 +27,7 @@ namespace Leaf.Tests.Data.UnitOfWorkTests
         }
 
         [Test]
-        public void TestConstructor_PassDbContextCorrectly_ShouldInitializeCorrectly()
+        public void Constructor_PassDbContextCorrectly_ShouldInitializeCorrectly()
         {
             // Arrange
             var mockedDbContext = new Mock<ILeafDbContext>();
