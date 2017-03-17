@@ -20,7 +20,7 @@ namespace Leaf.Tests.Services.Noit.FullGameServiceTests
 
             var fakaTest = new Test
             {
-                Questions = {new Question()}
+                Questions = { new Question() }
             };
 
             mockTestService.Setup(x => x.GetTestById(id)).Returns(fakaTest);
@@ -44,6 +44,38 @@ namespace Leaf.Tests.Services.Noit.FullGameServiceTests
             mockTestService.Verify(x => x.GetTestById(id), Times.Once);
         }
 
-        //TODO: Add test verifying that the first question is returned
+        [TestCase(2)]
+        [TestCase(4567)]
+        public void GetNextQuestion_ShouldReturnTestsFirstQuestion(int id)
+        {
+            //Arrange
+            var mockTestService = new Mock<ITestService>();
+
+            var fakeQuestion = new Question();
+            var fakaTest = new Test
+            {
+                Questions = { fakeQuestion }
+            };
+
+            mockTestService.Setup(x => x.GetTestById(id)).Returns(fakaTest);
+
+            var mockAnswerRepository = new Mock<IRepository<Answer>>();
+            var mockAnsweredQuestionRepository = new Mock<IRepository<AnsweredQuestion>>();
+            var mockTestFactory = new Mock<ITestFactory>();
+            var mockUnitOfWork = new Mock<IUnitOfWork>();
+
+            var service = new FullGameService(mockTestService.Object,
+                mockAnswerRepository.Object,
+                mockAnsweredQuestionRepository.Object,
+                mockTestFactory.Object,
+                mockUnitOfWork.Object
+            );
+
+            //Act 
+            var result = service.GetNextQuestion(id);
+
+            //Assert
+            Assert.AreSame(fakeQuestion, result);
+        }
     }
 }
