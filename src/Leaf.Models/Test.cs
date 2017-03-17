@@ -15,11 +15,11 @@ namespace Leaf.Models
             this.questions = new HashSet<Question>();
         }
 
-        public Test(string userId, ICollection<Question> questions, bool isFinished ) : this()
+        public Test(string userId, ICollection<Question> questions) : this()
         {
             this.UserId = userId;
             this.questions = questions;
-            this.IsFinished = isFinished;
+            this.IsFinished = false;
         }
 
         public int Id { get; set; }
