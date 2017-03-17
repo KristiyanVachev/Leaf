@@ -86,6 +86,11 @@
     <Compile Include="Services\Noit\FullGameServiceTests\GetTestByIdTests.cs" />
     <Compile Include="Services\Noit\FullGameServiceTests\GetUserTestTests.cs" />
     <Compile Include="Services\Noit\FullGameServiceTests\HasUnfinishedTestTests.cs" />
+    <Compile Include="Services\Noit\TestServiceTests\ConstructorTests.cs" />
+    <Compile Include="Services\Noit\TestServiceTests\CreateTestTests.cs" />
+    <Compile Include="Services\Noit\TestServiceTests\GetLastTestByUserIdTests.cs" />
+    <Compile Include="Services\Noit\TestServiceTests\GetTestByIdTests.cs" />
+    <Compile Include="Services\Noit\TestServiceTests\IsNullOrFinishedTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
