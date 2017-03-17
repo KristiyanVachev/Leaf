@@ -17,6 +17,14 @@ namespace Leaf.Tests.Services.Noit.FullGameServiceTests
         {
             //Arrange
             var mockTestService = new Mock<ITestService>();
+
+            var fakaTest = new Test
+            {
+                Questions = {new Question()}
+            };
+
+            mockTestService.Setup(x => x.GetTestById(id)).Returns(fakaTest);
+
             var mockAnswerRepository = new Mock<IRepository<Answer>>();
             var mockAnsweredQuestionRepository = new Mock<IRepository<AnsweredQuestion>>();
             var mockTestFactory = new Mock<ITestFactory>();

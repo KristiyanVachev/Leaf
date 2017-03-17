@@ -38,11 +38,11 @@ namespace Leaf.Tests.Services.Noit.FullGameServiceTests
 
         [TestCase("4")]
         [TestCase("ndasfsa")]
-        public void HasUnfinishedTestTests_ShouldReturnTrue_WhenIsNullOrFinishedIsFalse(string userId)
+        public void HasUnfinishedTestTests_ShouldReturnTrue_WhenIsNullOrFinishedReturnsFalse(string userId)
         {
             //Arrange
             var mockTestService = new Mock<ITestService>();
-            mockTestService.Setup(x => x.IsNullOrFinished(It.IsAny<Test>())).Returns(true);
+            mockTestService.Setup(x => x.IsNullOrFinished(It.IsAny<Test>())).Returns(false);
 
             var mockAnswerRepository = new Mock<IRepository<Answer>>();
             var mockAnsweredQuestionRepository = new Mock<IRepository<AnsweredQuestion>>();
@@ -65,7 +65,7 @@ namespace Leaf.Tests.Services.Noit.FullGameServiceTests
 
         [TestCase("4")]
         [TestCase("ndasfsa")]
-        public void HasUnfinishedTestTests_ShouldReturnFalse_WhenIsNullOrFinishedIsTrue(string userId)
+        public void HasUnfinishedTestTests_ShouldReturnFalse_WhenIsNullOrFinishedReturnsTrue(string userId)
         {
             //Arrange
             var mockTestService = new Mock<ITestService>();
