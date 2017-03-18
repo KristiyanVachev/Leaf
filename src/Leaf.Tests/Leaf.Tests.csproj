@@ -80,6 +80,7 @@
     <Compile Include="Data\RepositoryTests\UpdateTests.cs" />
     <Compile Include="Data\UnitOfWorkTests\CommitTests.cs" />
     <Compile Include="Data\UnitOfWorkTests\ConstructorTests.cs" />
+    <Compile Include="Models\AnswerTests\PropertiesTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\Noit\FullGameServiceTests\ConstructorTests.cs" />
     <Compile Include="Services\Noit\FullGameServiceTests\GetNextQuestionTests.cs" />
@@ -114,6 +115,7 @@
       <Name>Leaf.Services</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>
