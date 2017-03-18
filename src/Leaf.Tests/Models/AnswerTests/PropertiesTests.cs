@@ -6,6 +6,20 @@ namespace Leaf.Tests.Models.AnswerTests
     [TestFixture]
     public class PropertiesTests
     {
+        [TestCase(2)]
+        [TestCase(423)]
+        public void Id_ShouldSetCorrectly(int value)
+        {
+            //Arrange
+            var answer = new Answer();
+
+            //Act
+            answer.Id = value;
+
+            //Assert
+            Assert.AreEqual(value, answer.Id);
+        }
+
         [TestCase("What is the purpose of this test?")]
         [TestCase("Nana-nana-na-nananana")]
         public void Content_ShouldSetCorrectly(string value)
