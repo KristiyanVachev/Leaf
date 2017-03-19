@@ -127,6 +127,7 @@
     <Compile Include="Services\Noit\TestServiceTests\IsNullOrFinishedTests.cs" />
     <Compile Include="Web\Noit\FullTestControllerTests\ConstructorTests.cs" />
     <Compile Include="Web\Noit\FullTestControllerTests\IndexTests.cs" />
+    <Compile Include="Web\Noit\FullTestControllerTests\ReceiveAnswerTests.cs" />
     <Compile Include="Web\Noit\FullTestControllerTests\StartTestTests.cs" />
   </ItemGroup>
   <ItemGroup>
