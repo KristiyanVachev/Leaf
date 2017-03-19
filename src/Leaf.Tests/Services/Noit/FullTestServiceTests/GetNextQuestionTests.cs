@@ -6,7 +6,7 @@ using Leaf.Services.Noit;
 using Moq;
 using NUnit.Framework;
 
-namespace Leaf.Tests.Services.Noit.FullGameServiceTests
+namespace Leaf.Tests.Services.Noit.FullTestServiceTests
 {
     [TestFixture]
     public class GetNextQuestionTests

@@ -115,11 +115,11 @@
     <Compile Include="Data\UnitOfWorkTests\ConstructorTests.cs" />
     <Compile Include="Models\AnswerTests\PropertiesTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\Noit\FullGameServiceTests\ConstructorTests.cs" />
-    <Compile Include="Services\Noit\FullGameServiceTests\GetNextQuestionTests.cs" />
-    <Compile Include="Services\Noit\FullGameServiceTests\GetTestByIdTests.cs" />
-    <Compile Include="Services\Noit\FullGameServiceTests\GetUserTestTests.cs" />
-    <Compile Include="Services\Noit\FullGameServiceTests\HasUnfinishedTestTests.cs" />
+    <Compile Include="Services\Noit\FullTestServiceTests\ConstructorTests.cs" />
+    <Compile Include="Services\Noit\FullTestServiceTests\GetNextQuestionTests.cs" />
+    <Compile Include="Services\Noit\FullTestServiceTests\GetTestByIdTests.cs" />
+    <Compile Include="Services\Noit\FullTestServiceTests\GetUserTestTests.cs" />
+    <Compile Include="Services\Noit\FullTestServiceTests\HasUnfinishedTestTests.cs" />
     <Compile Include="Services\Noit\TestServiceTests\ConstructorTests.cs" />
     <Compile Include="Services\Noit\TestServiceTests\CreateTestTests.cs" />
     <Compile Include="Services\Noit\TestServiceTests\GetLastTestByUserIdTests.cs" />
