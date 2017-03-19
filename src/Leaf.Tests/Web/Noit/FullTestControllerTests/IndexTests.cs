@@ -3,25 +3,53 @@ using Leaf.Services.Contracts;
 using Leaf.Web.Areas.Noit.Controllers;
 using Moq;
 using NUnit.Framework;
+using TestStack.FluentMVCTesting;
 
 namespace Leaf.Tests.Web.Noit.FullTestControllerTests
 {
     [TestFixture]
     public class IndexTests
     {
-        
+        [Test]
         public void Index_ShouldCallAutnenticationProviderCurrentUserId()
         {
             //Arrange
             var mockFullTestService = new Mock<IFullGameService>();
             var mockAuthenticationProvider = new Mock<IAuthenticationProvider>();
-            mockAuthenticationProvider.Setup(x => x.CurrentUserId).Returns(It.IsAny<string>);
-
+            var controller = new FullTestController(mockFullTestService.Object, mockAuthenticationProvider.Object);
+            
             //Act
-             new FullTestController(mockFullTestService.Object, mockAuthenticationProvider.Object);
+            controller.Index();
 
             //Assert
             mockAuthenticationProvider.Verify(x => x.CurrentUserId, Times.Once);
+        }
+
+        [Test]
+        public void Index_ShouldCallServiceHasUnfinishedTests()
+        {
+            //Arrange
+            var mockFullTestService = new Mock<IFullGameService>();
+            var mockAuthenticationProvider = new Mock<IAuthenticationProvider>();
+            var controller = new FullTestController(mockFullTestService.Object, mockAuthenticationProvider.Object);
+
+            //Act
+            controller.Index();
+
+            //Assert
+            mockFullTestService.Verify(x => x.HasUnfinishedTest(It.IsAny<string>()), Times.Once);
+        }
+
+        [Test]
+        public void Index_ShouldRenderView()
+        {
+            //Arrange
+            var mockFullTestService = new Mock<IFullGameService>();
+            var mockAuthenticationProvider = new Mock<IAuthenticationProvider>();
+            var controller = new FullTestController(mockFullTestService.Object, mockAuthenticationProvider.Object);
+
+            //Act && Assert
+            controller.WithCallTo(x => x.Index()).ShouldRenderView("FullTest");
         }
     }
 }
