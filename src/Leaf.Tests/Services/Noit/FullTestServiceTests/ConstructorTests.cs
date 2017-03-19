@@ -23,7 +23,7 @@ namespace Leaf.Tests.Services.Noit.FullGameServiceTests
 
             //Act && Assert
             Assert.DoesNotThrow(() =>
-                new FullGameService(mockTestService.Object,
+                new FullTestService(mockTestService.Object,
                     mockAnswerRepository.Object,
                     mockAnsweredQuestionRepository.Object,
                     mockTestFactory.Object,

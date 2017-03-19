@@ -22,7 +22,7 @@ namespace Leaf.Tests.Services.Noit.FullGameServiceTests
             var mockTestFactory = new Mock<ITestFactory>();
             var mockUnitOfWork = new Mock<IUnitOfWork>();
 
-            var service = new FullGameService(mockTestService.Object,
+            var service = new FullTestService(mockTestService.Object,
                 mockAnswerRepository.Object,
                 mockAnsweredQuestionRepository.Object,
                 mockTestFactory.Object,
@@ -49,7 +49,7 @@ namespace Leaf.Tests.Services.Noit.FullGameServiceTests
             var mockTestFactory = new Mock<ITestFactory>();
             var mockUnitOfWork = new Mock<IUnitOfWork>();
 
-            var service = new FullGameService(mockTestService.Object,
+            var service = new FullTestService(mockTestService.Object,
                 mockAnswerRepository.Object,
                 mockAnsweredQuestionRepository.Object,
                 mockTestFactory.Object,
@@ -79,7 +79,7 @@ namespace Leaf.Tests.Services.Noit.FullGameServiceTests
             var mockTestFactory = new Mock<ITestFactory>();
             var mockUnitOfWork = new Mock<IUnitOfWork>();
 
-            var service = new FullGameService(mockTestService.Object,
+            var service = new FullTestService(mockTestService.Object,
                 mockAnswerRepository.Object,
                 mockAnsweredQuestionRepository.Object,
                 mockTestFactory.Object,

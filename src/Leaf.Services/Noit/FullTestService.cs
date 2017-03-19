@@ -7,16 +7,15 @@ using Leaf.Factories;
 
 namespace Leaf.Services.Noit
 {
-    public class FullGameService : IFullGameService
+    public class FullTestService : IFullGameService
     {
-        //TODO: Extract IQuestion interface
         private readonly ITestService testService;
         private readonly IRepository<Answer> answerRepository;
         private readonly IRepository<AnsweredQuestion> answeredQuestionRepository;
         private readonly ITestFactory testFactory;
         private readonly IUnitOfWork unitOfWork;
 
-        public FullGameService(ITestService testService,
+        public FullTestService(ITestService testService,
             IRepository<Answer> answerRepository,
             IRepository<AnsweredQuestion> answeredQuestionRepository,
             ITestFactory testFactory,
