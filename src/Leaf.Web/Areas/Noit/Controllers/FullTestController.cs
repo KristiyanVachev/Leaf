@@ -1,20 +1,22 @@
 ﻿using System.Web.Mvc;
 using Bytes2you.Validation;
-using Leaf.Models;
+using Leaf.Auth.Contracts;
 using Leaf.Services.Contracts;
-using Microsoft.AspNet.Identity;
 
 namespace Leaf.Web.Areas.Noit.Controllers
 {
     public class FullTestController : Controller
     {
         private readonly IFullGameService fullGameService;
+        private readonly IAuthenticationProvider authenticationProvider;
 
-        public FullTestController(IFullGameService fullGameService)
+        public FullTestController(IFullGameService fullGameService, IAuthenticationProvider authenticationProvider)
         {
             Guard.WhenArgument(fullGameService, "FullGameService cannot be null").IsNull().Throw();
+            Guard.WhenArgument(authenticationProvider, "AuthenticationProvider cannot be null").IsNull().Throw();
 
             this.fullGameService = fullGameService;
+            this.authenticationProvider = authenticationProvider;
         }
 
         // GET: Noit/FullTest
@@ -23,7 +25,7 @@ namespace Leaf.Web.Areas.Noit.Controllers
             //TODO: Show begin or continue button
             //TODO: List previous tests with their results
 
-            var userId = this.User.Identity.GetUserId();
+            var userId = this.authenticationProvider.CurrentUserId;
             var hasUnfinishedTest = this.fullGameService.HasUnfinishedTest(userId);
 
             //Return test result
@@ -32,7 +34,7 @@ namespace Leaf.Web.Areas.Noit.Controllers
 
         public ActionResult StartTest()
         {
-            var userId = this.User.Identity.GetUserId();
+            var userId = this.authenticationProvider.CurrentUserId;
             var userTest = this.fullGameService.GetUserTest(userId);
 
             //Return test result
@@ -41,7 +43,7 @@ namespace Leaf.Web.Areas.Noit.Controllers
 
         public ActionResult ReceiveAnswer(int questionId, int answerId)
         {
-            var userId = this.User.Identity.GetUserId();
+            var userId = this.authenticationProvider.CurrentUserId;
             var userTest = this.fullGameService.GetUserTest(userId);
 
             //Send answer

@@ -133,6 +133,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Leaf.Auth\Leaf.Auth.csproj">
+      <Project>{5DDF6FC2-6034-4E7A-A34B-1E8C2FC93978}</Project>
+      <Name>Leaf.Auth</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Leaf.Data\Leaf.Data.csproj">
       <Project>{04fba009-268d-4ecb-ab5f-3c76b197be9a}</Project>
       <Name>Leaf.Data</Name>

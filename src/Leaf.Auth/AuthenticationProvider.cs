@@ -7,7 +7,7 @@ using Microsoft.AspNet.Identity.Owin;
 
 namespace Leaf.Auth
 {
-    public class HttpContextAuthenticationProvider : IAuthenticationProvider
+    public class AuthenticationProvider : IAuthenticationProvider
     {
         public bool IsAuthenticated
         {

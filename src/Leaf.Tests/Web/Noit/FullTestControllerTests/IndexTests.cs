@@ -1,28 +1,27 @@
-﻿using Leaf.Services.Contracts;
+﻿using Leaf.Auth.Contracts;
+using Leaf.Services.Contracts;
 using Leaf.Web.Areas.Noit.Controllers;
 using Moq;
 using NUnit.Framework;
-using TestStack.FluentMVCTesting;
 
 namespace Leaf.Tests.Web.Noit.FullTestControllerTests
 {
     [TestFixture]
     public class IndexTests
     {
-        [Test]
-        public void Index_ShouldCallServiceHasUnfinishedTest()
+        
+        public void Index_ShouldCallAutnenticationProviderCurrentUserId()
         {
             //Arrange
             var mockFullTestService = new Mock<IFullGameService>();
+            var mockAuthenticationProvider = new Mock<IAuthenticationProvider>();
+            mockAuthenticationProvider.Setup(x => x.CurrentUserId).Returns(It.IsAny<string>);
 
             //Act
-            var controller = new FullTestController(mockFullTestService.Object);
+             new FullTestController(mockFullTestService.Object, mockAuthenticationProvider.Object);
 
-            //TODO Extract authentication
             //Assert
-            //controller.WithCallTo(c => c.Index())
-            //    .ShouldRenderView("FullTest");
-
+            mockAuthenticationProvider.Verify(x => x.CurrentUserId, Times.Once);
         }
     }
 }
