@@ -62,6 +62,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Leaf.Commom\Leaf.Commom.csproj">
+      <Project>{19ef76b8-7b35-4164-960c-d6c5b5374f73}</Project>
+      <Name>Leaf.Commom</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Leaf.Data\Leaf.Data.csproj">
       <Project>{04fba009-268d-4ecb-ab5f-3c76b197be9a}</Project>
       <Name>Leaf.Data</Name>

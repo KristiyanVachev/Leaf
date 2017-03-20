@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using Bytes2you.Validation;
+using Leaf.Commom;
 using Leaf.Data.Contracts;
 using Leaf.Factories;
 using Leaf.Models;
@@ -13,28 +14,33 @@ namespace Leaf.Services.Noit
         private readonly IRepository<Test> testRepository;
         private readonly ITestFactory testFactory;
         private readonly IUnitOfWork unitOfWork;
+        private readonly IDateTimeProvider dateTimeProvider;
 
         public TestService(IQuestionService questionService,
             IRepository<Test> testRepository,
             ITestFactory testFactory,
+            IDateTimeProvider dateTimeProvider,
             IUnitOfWork unitOfWork)
         {
             Guard.WhenArgument(questionService, "questionService cannot be null").IsNull().Throw();
             Guard.WhenArgument(testRepository, "testRepository cannot be null").IsNull().Throw();
             Guard.WhenArgument(testFactory, "testFactory cannot be null").IsNull().Throw();
+            Guard.WhenArgument(dateTimeProvider, "dateTimeProvider cannot be null").IsNull().Throw();
             Guard.WhenArgument(unitOfWork, "unitOfWork cannot be null").IsNull().Throw();
 
             this.questionService = questionService;
             this.testRepository = testRepository;
             this.testFactory = testFactory;
+            this.dateTimeProvider = dateTimeProvider;
             this.unitOfWork = unitOfWork;
         }
 
         public Test CreateTest(string userId)
         {
             var questions = this.questionService.GetQuestions();
+            var currentTime = dateTimeProvider.GetCurrenTime();
 
-            var test = this.testFactory.CreateTest(userId, questions);
+            var test = this.testFactory.CreateTest(userId, questions, currentTime);
 
             this.testRepository.Add(test);
             this.unitOfWork.Commit();

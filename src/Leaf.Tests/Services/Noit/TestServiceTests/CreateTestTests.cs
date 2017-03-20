@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using Leaf.Commom;
 using Leaf.Data.Contracts;
 using Leaf.Factories;
 using Leaf.Models;
@@ -20,11 +22,13 @@ namespace Leaf.Tests.Services.Noit.TestServiceTests
             var mockQuestionService = new Mock<IQuestionService>();
             var mockTestRepository = new Mock<IRepository<Test>>();
             var mockTestFactory = new Mock<ITestFactory>();
+            var mockDateTimeProvider = new Mock<IDateTimeProvider>();
             var mockUnitOfWork = new Mock<IUnitOfWork>();
 
             var service = new TestService(mockQuestionService.Object,
                 mockTestRepository.Object,
                 mockTestFactory.Object,
+                mockDateTimeProvider.Object,
                 mockUnitOfWork.Object
             );
 
@@ -37,17 +41,19 @@ namespace Leaf.Tests.Services.Noit.TestServiceTests
 
         [TestCase("21")]
         [TestCase("dasd2eds")]
-        public void CreateTest_ShouldCallTestFactoryCreateTest_WithCorrectUserId(string userId)
+        public void CreateTest_ShouldCallDateTimeProviderGetCurrentTime_WithCorrectUserId(string userId)
         {
             //Arrange
             var mockQuestionService = new Mock<IQuestionService>();
             var mockTestRepository = new Mock<IRepository<Test>>();
             var mockTestFactory = new Mock<ITestFactory>();
+            var mockDateTimeProvider = new Mock<IDateTimeProvider>();
             var mockUnitOfWork = new Mock<IUnitOfWork>();
 
             var service = new TestService(mockQuestionService.Object,
                 mockTestRepository.Object,
                 mockTestFactory.Object,
+                mockDateTimeProvider.Object,
                 mockUnitOfWork.Object
             );
 
@@ -55,7 +61,32 @@ namespace Leaf.Tests.Services.Noit.TestServiceTests
             service.CreateTest(userId);
 
             //Assert
-            mockTestFactory.Verify(x => x.CreateTest(userId, It.IsAny<IEnumerable<Question>>()), Times.Once());
+            mockDateTimeProvider.Verify(x => x.GetCurrenTime(), Times.Once);
+        }
+
+        [TestCase("21")]
+        [TestCase("dasd2eds")]
+        public void CreateTest_ShouldCallTestFactoryCreateTest_WithCorrectUserId(string userId)
+        {
+            //Arrange
+            var mockQuestionService = new Mock<IQuestionService>();
+            var mockTestRepository = new Mock<IRepository<Test>>();
+            var mockTestFactory = new Mock<ITestFactory>();
+            var mockDateTimeProvider = new Mock<IDateTimeProvider>();
+            var mockUnitOfWork = new Mock<IUnitOfWork>();
+
+            var service = new TestService(mockQuestionService.Object,
+                mockTestRepository.Object,
+                mockTestFactory.Object,
+                mockDateTimeProvider.Object,
+                mockUnitOfWork.Object
+            );
+
+            //Act
+            service.CreateTest(userId);
+
+            //Assert
+            mockTestFactory.Verify(x => x.CreateTest(userId, It.IsAny<IEnumerable<Question>>(), It.IsAny<DateTime>()), Times.Once());
         }
 
 
@@ -67,11 +98,13 @@ namespace Leaf.Tests.Services.Noit.TestServiceTests
             var mockQuestionService = new Mock<IQuestionService>();
             var mockTestRepository = new Mock<IRepository<Test>>();
             var mockTestFactory = new Mock<ITestFactory>();
+            var mockDateTimeProvider = new Mock<IDateTimeProvider>();
             var mockUnitOfWork = new Mock<IUnitOfWork>();
 
             var service = new TestService(mockQuestionService.Object,
                 mockTestRepository.Object,
                 mockTestFactory.Object,
+                mockDateTimeProvider.Object,
                 mockUnitOfWork.Object
             );
 
@@ -90,11 +123,13 @@ namespace Leaf.Tests.Services.Noit.TestServiceTests
             var mockQuestionService = new Mock<IQuestionService>();
             var mockTestRepository = new Mock<IRepository<Test>>();
             var mockTestFactory = new Mock<ITestFactory>();
+            var mockDateTimeProvider = new Mock<IDateTimeProvider>();
             var mockUnitOfWork = new Mock<IUnitOfWork>();
 
             var service = new TestService(mockQuestionService.Object,
                 mockTestRepository.Object,
                 mockTestFactory.Object,
+                mockDateTimeProvider.Object,
                 mockUnitOfWork.Object
             );
 
@@ -116,13 +151,15 @@ namespace Leaf.Tests.Services.Noit.TestServiceTests
 
             var fakeTest = new Test();
 
-            mockTestFactory.Setup(x => x.CreateTest(It.IsAny<string>(), It.IsAny<IEnumerable<Question>>())).Returns(fakeTest);
+            mockTestFactory.Setup(x => x.CreateTest(It.IsAny<string>(), It.IsAny<IEnumerable<Question>>(), It.IsAny<DateTime>())).Returns(fakeTest);
 
+            var mockDateTimeProvider = new Mock<IDateTimeProvider>();
             var mockUnitOfWork = new Mock<IUnitOfWork>();
 
             var service = new TestService(mockQuestionService.Object,
                 mockTestRepository.Object,
                 mockTestFactory.Object,
+                mockDateTimeProvider.Object,
                 mockUnitOfWork.Object
             );
 

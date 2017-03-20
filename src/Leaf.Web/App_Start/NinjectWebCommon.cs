@@ -64,9 +64,10 @@ namespace Leaf.Web.App_Start
         private static void RegisterServices(IKernel kernel)
         {
             kernel.Load(new AuthNinjectModule());
+            kernel.Load(new CommonNinjectModule());
             kernel.Load(new DataNinjectModule());
-            kernel.Load(new ServiceNinjectModule());
             kernel.Load(new FactoryNinjectModule());
+            kernel.Load(new ServiceNinjectModule());
         }
     }
 }

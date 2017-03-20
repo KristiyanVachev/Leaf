@@ -15,10 +15,11 @@ namespace Leaf.Models
             this.questions = new HashSet<Question>();
         }
 
-        public Test(string userId, ICollection<Question> questions) : this()
+        public Test(string userId, ICollection<Question> questions, DateTime createdOn) : this()
         {
             this.UserId = userId;
             this.questions = questions;
+            this.CreatedOn = createdOn;
             this.IsFinished = false;
         }
 
@@ -26,9 +27,9 @@ namespace Leaf.Models
 
         public bool IsFinished { get; set; }
 
-        public DateTime? Start { get; set; }
+        public DateTime? CreatedOn { get; set; }
 
-        public DateTime? End { get; set; }
+        public DateTime? FinishedOn { get; set; }
 
         public int CorrectCount { get; set; }
 
