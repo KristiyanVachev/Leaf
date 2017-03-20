@@ -1,4 +1,4 @@
-﻿@model Leaf.Models.Question
+﻿@model  Leaf.Web.Areas.Noit.Models.NextQuestionViewModel
 
 <link href="~/Content/questionBox.css" rel="stylesheet" />
 
@@ -13,7 +13,7 @@
             @Html.ActionLink(answer.Content,
                "ReceiveAnswer",
                "FullTest",
-               new { questionId = this.Model.Id, answerId = answer.Id },
+               new { questionId = this.Model.QuestionId, answerId = answer.Id },
                new { @class = "btn btn-primary answer" })
         }
     </div>

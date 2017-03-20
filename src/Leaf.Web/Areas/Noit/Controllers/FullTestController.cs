@@ -2,6 +2,7 @@
 using Bytes2you.Validation;
 using Leaf.Auth.Contracts;
 using Leaf.Services.Contracts;
+using Leaf.Web.Areas.Noit.Models;
 
 namespace Leaf.Web.Areas.Noit.Controllers
 {
@@ -60,7 +61,8 @@ namespace Leaf.Web.Areas.Noit.Controllers
             if (nextQuestion != null)
             //if (!test.IsFinished)
             {
-                return View("Test", nextQuestion);
+                var nextQuestionViewModel = new NextQuestionViewModel(nextQuestion.Id, nextQuestion.Condition, nextQuestion.Answers);
+                return View("Test", nextQuestionViewModel);
             }
 
             var test = this.fullGameService.GetTestById(id);
