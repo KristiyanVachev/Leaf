@@ -2,6 +2,7 @@
 using Leaf.Models;
 using Leaf.Services.Contracts;
 using Leaf.Web.Areas.Noit.Controllers;
+using Leaf.Web.Areas.Noit.Models;
 using Moq;
 using NUnit.Framework;
 using TestStack.FluentMVCTesting;
@@ -17,12 +18,16 @@ namespace Leaf.Tests.Web.Noit.FullTestControllerTests
         {
             //Arrange
             var mockFullTestService = new Mock<IFullGameService>();
+            var fakeTest = new Test { CorrectCount = 0 };
+            mockFullTestService.Setup(x => x.GetTestById(It.IsAny<int>())).Returns(fakeTest);
+
             var mockAuthenticationProvider = new Mock<IAuthenticationProvider>();
 
             var controller = new FullTestController(mockFullTestService.Object, mockAuthenticationProvider.Object);
+            var fakeTestViewModel = new TestViewModel(testId);
 
             //Act
-            controller.Test(testId);
+            controller.Test(fakeTestViewModel);
 
             //Assert
             mockFullTestService.Verify(x => x.GetNextQuestion(testId), Times.Once);
@@ -39,12 +44,13 @@ namespace Leaf.Tests.Web.Noit.FullTestControllerTests
             var mockAuthenticationProvider = new Mock<IAuthenticationProvider>();
 
             var controller = new FullTestController(mockFullTestService.Object, mockAuthenticationProvider.Object);
+            var fakeTestViewModel = new TestViewModel(testId);
 
             //Act
-            controller.Test(testId);
+            controller.Test(fakeTestViewModel);
 
             //Assert
-            controller.WithCallTo(x => x.Test(testId)).ShouldRenderView("Test");
+            controller.WithCallTo(x => x.Test(fakeTestViewModel)).ShouldRenderView("Test");
         }
 
         [TestCase(8)]
@@ -53,12 +59,16 @@ namespace Leaf.Tests.Web.Noit.FullTestControllerTests
         {
             //Arrange
             var mockFullTestService = new Mock<IFullGameService>();
+            var fakeTest = new Test { CorrectCount = 0 };
+            mockFullTestService.Setup(x => x.GetTestById(It.IsAny<int>())).Returns(fakeTest);
+
             var mockAuthenticationProvider = new Mock<IAuthenticationProvider>();
 
             var controller = new FullTestController(mockFullTestService.Object, mockAuthenticationProvider.Object);
+            var fakeTestViewModel = new TestViewModel(testId);
 
             //Act
-            controller.Test(testId);
+            controller.Test(fakeTestViewModel);
 
             //Assert
             mockFullTestService.Verify(x => x.GetTestById(testId), Times.Once);
@@ -70,15 +80,19 @@ namespace Leaf.Tests.Web.Noit.FullTestControllerTests
         {
             //Arrange
             var mockFullTestService = new Mock<IFullGameService>();
+            var fakeTest = new Test { CorrectCount = 0 };
+            mockFullTestService.Setup(x => x.GetTestById(It.IsAny<int>())).Returns(fakeTest);
+
             var mockAuthenticationProvider = new Mock<IAuthenticationProvider>();
 
             var controller = new FullTestController(mockFullTestService.Object, mockAuthenticationProvider.Object);
+            var fakeTestViewModel = new TestViewModel(testId);
 
             //Act
-            controller.Test(testId);
+            controller.Test(fakeTestViewModel);
 
             //Assert
-            controller.WithCallTo(x => x.Test(testId)).ShouldRenderView("FinishedTest");
+            controller.WithCallTo(x => x.Test(fakeTestViewModel)).ShouldRenderView("FinishedTest");
         }
     }
 }

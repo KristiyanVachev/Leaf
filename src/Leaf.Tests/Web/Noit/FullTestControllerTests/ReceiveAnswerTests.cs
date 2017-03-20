@@ -2,6 +2,7 @@
 using Leaf.Models;
 using Leaf.Services.Contracts;
 using Leaf.Web.Areas.Noit.Controllers;
+using Leaf.Web.Areas.Noit.Models;
 using Moq;
 using NUnit.Framework;
 using TestStack.FluentMVCTesting;
@@ -81,7 +82,7 @@ namespace Leaf.Tests.Web.Noit.FullTestControllerTests
             var controller = new FullTestController(mockFullTestService.Object, mockAuthenticationProvider.Object);
 
             //Act && Assert
-            controller.WithCallTo(x => x.ReceiveAnswer(questionId, answerId)).ShouldRedirectTo(x => x.Test);
+            controller.WithCallTo(x => x.ReceiveAnswer(questionId, answerId)).ShouldRedirectTo(x => x.Test(It.IsAny<TestViewModel>()));
         }
 
     }
