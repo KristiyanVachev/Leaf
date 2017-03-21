@@ -22,7 +22,11 @@ namespace Leaf.Data.Migrations
 
             context.Categories.AddOrUpdate(
                 c => c.Id,
-                new Category { Name = "Компютърни системи", Id = 0 }
+                new Category { Name = "Компютърни системи", Id = 0 },
+                new Category { Name = "Софтуерни системи", Id = 1 },
+                new Category { Name = "Операционни системи", Id = 2 },
+                new Category { Name = "Мултимедия", Id = 3 },
+                new Category { Name = "Компресиране на данни", Id = 4 }
             );
 
             context.Questions.AddOrUpdate(
