@@ -1,14 +1,8 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Web.Mvc;
-
-namespace Leaf.Web.Areas.Noit.Models
+﻿namespace Leaf.Web.Areas.Noit.Models.Submit
 {
     public class SubmissionViewModel
     {
-        [Display(Name = "Category")]
         public string CategoryName { get; set; }
-        public IEnumerable<SelectListItem> Categories { get; set; }
 
         public string Condition { get; set; }
 

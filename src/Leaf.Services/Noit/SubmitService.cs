@@ -26,12 +26,14 @@ namespace Leaf.Services.Noit
             this.unitOfWork = unitOfWork;
         }
 
-        public void CreateSubmission(string userId, string category, string condition, string correctAnswer)
+        public Submission CreateSubmission(string userId, string category, string condition, string correctAnswer)
         {
             var newSubmission = this.submitFactory.CreateSubmission(userId, category, condition, correctAnswer);
 
             this.submissionRepository.Add(newSubmission);
             this.unitOfWork.Commit();
+
+            return newSubmission;
         }
 
         public IEnumerable<SelectListItem> GetCategories()
@@ -44,6 +46,11 @@ namespace Leaf.Services.Noit
                                 });
 
             return new SelectList(categories, "Value", "Text");
+        }
+
+        public Submission GetSubmissionById(int id)
+        {
+            return this.submissionRepository.GetById(id);
         }
     }
 }

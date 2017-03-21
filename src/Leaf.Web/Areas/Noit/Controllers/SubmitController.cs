@@ -1,8 +1,7 @@
-﻿using System.Net;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using Leaf.Auth.Contracts;
 using Leaf.Services.Contracts;
-using Leaf.Web.Areas.Noit.Models;
+using Leaf.Web.Areas.Noit.Models.Submit;
 
 namespace Leaf.Web.Areas.Noit.Controllers
 {
@@ -24,10 +23,23 @@ namespace Leaf.Web.Areas.Noit.Controllers
             return View();
         }
 
-        public ActionResult Submission()
+        public ActionResult New()
         {
             var categories = this.submitService.GetCategories();
-            var viewModel = new SubmissionViewModel { Categories = categories };
+            var viewModel = new NewSubmitViewModel() { Categories = categories };
+
+            return this.View(viewModel);
+        }
+
+        public ActionResult Submission(int id)
+        {
+            var submission = this.submitService.GetSubmissionById(id);
+
+            var viewModel = new SubmissionViewModel
+            {
+                Condition = submission.Condition,
+                CorrectAnswer = submission.CorrectAnswer
+            };
 
             return this.View(viewModel);
         }
@@ -37,10 +49,9 @@ namespace Leaf.Web.Areas.Noit.Controllers
         {
             var userId = authenticationProvider.CurrentUserId;
 
-            this.submitService.CreateSubmission(userId, viewModel.CategoryName, viewModel.Condition, viewModel.CorrectAnswer);
-            return this.RedirectToAction("Index");
+            var submission = this.submitService.CreateSubmission(userId, viewModel.CategoryName, viewModel.Condition, viewModel.CorrectAnswer);
+
+            return this.RedirectToAction("Submission", new {id = submission.Id});
         }
-
-
     }
 }
