@@ -1,4 +1,4 @@
-﻿namespace Leaf.Web.Areas.Noit.Models
+﻿namespace Leaf.Web.Areas.Noit.Models.FullTest
 {
     public class TestViewModel
     {
