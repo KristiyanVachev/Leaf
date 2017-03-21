@@ -54,10 +54,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Contracts\IFullGameService.cs" />
+    <Compile Include="Contracts\IModerationService.cs" />
     <Compile Include="Contracts\IQuestionService.cs" />
+    <Compile Include="Contracts\ISubmitService.cs" />
     <Compile Include="Contracts\ITestService.cs" />
     <Compile Include="Noit\FullTestService.cs" />
+    <Compile Include="Noit\ModerationService.cs" />
     <Compile Include="Noit\QuestionService.cs" />
+    <Compile Include="Noit\SubmitService.cs" />
     <Compile Include="Noit\TestService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

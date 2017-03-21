@@ -1,0 +1,12 @@
+﻿@model IEnumerable<Leaf.Models.Submission>
+
+@{
+    ViewBag.Title = "Submissions";
+}
+
+<h2>Submissions</h2>
+
+@foreach (var submission in Model)
+{
+    <h2>@submission.Condition</h2>
+}

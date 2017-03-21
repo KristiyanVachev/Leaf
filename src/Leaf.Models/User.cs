@@ -6,10 +6,12 @@ namespace Leaf.Models
     public class User : IdentityUser
     {
         private ICollection<Test> tests;
+        private ICollection<Submission> submissions;
 
         public User()
         {
             this.tests = new HashSet<Test>();
+            this.submissions = new HashSet<Submission>();
         }
 
         public int Points { get; set; }
@@ -22,6 +24,12 @@ namespace Leaf.Models
         {
             get { return this.tests; }
             set { this.tests = value; }
+        }
+
+        public virtual ICollection<Submission> Submissions
+        {
+            get { return this.submissions; }
+            set { this.submissions = value; }
         }
     }
 }

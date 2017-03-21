@@ -11,6 +11,8 @@ namespace Leaf.Web.App_Start.NinjectModules
             this.Bind<IFullGameService>().To<FullTestService>();
             this.Bind<IQuestionService>().To<QuestionService>();
             this.Bind<ITestService>().To<TestService>();
+            this.Bind<ISubmitService>().To<SubmitService>();
+            this.Bind<IModerationService>().To<ModerationService>();
         }
     }
 }

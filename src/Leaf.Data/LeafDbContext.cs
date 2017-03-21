@@ -29,6 +29,8 @@ namespace Leaf.Data
 
         public virtual IDbSet<AnsweredQuestion> AnsweredQuestions { get; set; }
 
+        public virtual IDbSet<Submission> Submissions { get; set; }
+
         public static LeafDbContext Create()
         {
             return new LeafDbContext();
