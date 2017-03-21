@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Bytes2you.Validation;
 using Leaf.Data.Contracts;
 using Leaf.Models;
 using Leaf.Services.Contracts;
@@ -11,6 +12,8 @@ namespace Leaf.Services.Noit
 
         public ModerationService(IRepository<Submission> submissionRepository)
         {
+            Guard.WhenArgument(submissionRepository, "submissionRepository cannot be null").IsNull().Throw();
+
             this.submissionRepository = submissionRepository;
         }
 

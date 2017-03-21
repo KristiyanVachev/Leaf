@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using Bytes2you.Validation;
 using Leaf.Data.Contracts;
 using Leaf.Factories;
 using Leaf.Models;
@@ -20,6 +21,11 @@ namespace Leaf.Services.Noit
              IRepository<Category> categoryRepository,
              IUnitOfWork unitOfWork)
         {
+            Guard.WhenArgument(submitFactory, "submitFactory cannot be null").IsNull().Throw();
+            Guard.WhenArgument(submissionRepository, "submissionRepository cannot be null").IsNull().Throw();
+            Guard.WhenArgument(categoryRepository, "categoryRepository cannot be null").IsNull().Throw();
+            Guard.WhenArgument(unitOfWork, "unitOfWork cannot be null").IsNull().Throw();
+
             this.submitFactory = submitFactory;
             this.submissionRepository = submissionRepository;
             this.categoryRepository = categoryRepository;
