@@ -7,7 +7,7 @@ namespace Leaf.Web.Areas.Noit.Models
     public class SubmissionViewModel
     {
         [Display(Name = "Category")]
-        public int CategoryId { get; set; }
+        public string CategoryName { get; set; }
         public IEnumerable<SelectListItem> Categories { get; set; }
 
         public string Condition { get; set; }

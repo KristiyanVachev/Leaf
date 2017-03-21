@@ -26,10 +26,10 @@ namespace Leaf.Web.Areas.Noit.Controllers
 
         public ActionResult Submission()
         {
-            //TODO: Categories dropdown list
-            //var viewModel = new SubmissionViewModel { Categories = GetCategories() };
+            var categories = this.submitService.GetCategories();
+            var viewModel = new SubmissionViewModel { Categories = categories };
 
-            return this.View(new SubmissionViewModel());
+            return this.View(viewModel);
         }
 
         [HttpPost]
@@ -37,20 +37,10 @@ namespace Leaf.Web.Areas.Noit.Controllers
         {
             var userId = authenticationProvider.CurrentUserId;
 
-            this.submitService.CreateSubmission(userId, "Category", viewModel.Condition, viewModel.CorrectAnswer);
+            this.submitService.CreateSubmission(userId, viewModel.CategoryName, viewModel.Condition, viewModel.CorrectAnswer);
             return this.RedirectToAction("Index");
         }
 
-        //private IEnumerable<SelectListItem> GetCategories()
-        //{
-        //    var categories = categoryRepository.GetAll().Select(x =>
-        //                        new SelectListItem
-        //                        {
-        //                            Value = x.Id.ToString(),
-        //                            Text = x.Name
-        //                        });
 
-        //    return new SelectList(categories, "Value", "Text");
-        //}
     }
 }

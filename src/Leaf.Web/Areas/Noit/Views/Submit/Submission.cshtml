@@ -14,12 +14,12 @@
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-        @*<div class="form-group">
+        <div class="form-group">
             @Html.LabelFor(m => m.Categories, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(m => m.CategoryId, Model.Categories)
+                @Html.DropDownListFor(m => m.CategoryName, Model.Categories)
             </div>
-        </div>*@
+        </div>
         
         <div class="form-group">
             @Html.LabelFor(model => model.Condition, htmlAttributes: new { @class = "control-label col-md-2" })
