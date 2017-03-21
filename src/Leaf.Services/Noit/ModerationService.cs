@@ -20,5 +20,15 @@ namespace Leaf.Services.Noit
 
             return submissions;
         }
+
+        public Submission GetSubmissionById(int id)
+        {
+            return this.submissionRepository.GetById(id);
+        }
+
+        public void Approve(int id)
+        {
+            //Convert the submission to question
+        }
     }
 }

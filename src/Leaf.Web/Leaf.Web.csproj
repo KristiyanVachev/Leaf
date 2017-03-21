@@ -246,6 +246,7 @@
     <Content Include="Areas\Noit\Views\Moderation\Index.cshtml" />
     <Content Include="Areas\Noit\Views\Moderation\Submissions.cshtml" />
     <Content Include="Areas\Noit\Views\Submit\New.cshtml" />
+    <Content Include="Areas\Noit\Views\Moderation\Submission.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

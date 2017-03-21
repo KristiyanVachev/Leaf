@@ -1,0 +1,9 @@
+﻿@model Leaf.Models.Submission
+
+@{
+    ViewBag.Title = "Submission";
+}
+
+<h2>Submission</h2>
+
+@Html.ActionLink("Approve", "Approve", "Moderation", new { submissionId = this.Model.Id }, null)

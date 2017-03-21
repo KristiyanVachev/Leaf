@@ -24,5 +24,17 @@ namespace Leaf.Web.Areas.Noit.Controllers
 
             return View(submissions);
         }
+
+        public ActionResult Submission(int id)
+        {
+            var submission = this.moderationService.GetSubmissionById(id);
+
+            return View(submission);
+        }
+
+        public void Approve(int submissionId)
+        {
+            this.moderationService.Approve(submissionId);
+        }
     }
 }
