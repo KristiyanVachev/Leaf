@@ -6,5 +6,7 @@ namespace Leaf.Services.Contracts
     public interface IQuestionService
     {
         IEnumerable<Question> GetQuestions();
+
+        Question CreateQuestion(Submission submission);
     }
 }

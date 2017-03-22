@@ -9,12 +9,17 @@ namespace Leaf.Services.Noit
     public class ModerationService : IModerationService
     {
         private IRepository<Submission> submissionRepository;
+        private IQuestionService questionService;
 
-        public ModerationService(IRepository<Submission> submissionRepository)
+        public ModerationService(IRepository<Submission> submissionRepository,
+            IQuestionService questionService
+            )
         {
             Guard.WhenArgument(submissionRepository, "submissionRepository cannot be null").IsNull().Throw();
+            Guard.WhenArgument(questionService, "questionService cannot be null").IsNull().Throw();
 
             this.submissionRepository = submissionRepository;
+            this.questionService = questionService;
         }
 
         public IEnumerable<Submission> GetSubmissions()
@@ -31,7 +36,16 @@ namespace Leaf.Services.Noit
 
         public void Approve(int id)
         {
+            //Get submission
+            var submission = this.submissionRepository.GetById(id);
+
             //Convert the submission to question
+
+            //TODO redirect to moderation/question/{id}
+            this.questionService.CreateQuestion(submission);
+
+            //Add approved by and date of approval to submission
+
         }
     }
 }

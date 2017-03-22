@@ -4,6 +4,17 @@ namespace Leaf.Models
 {
     public class Answer
     {
+        public Answer()
+        {
+
+        }
+
+        public Answer(string content, bool isCorrect) : this()
+        {
+            this.Content = content;
+            this.IsCorrect = isCorrect;
+        }
+
         public int Id { get; set; }
 
         public string Content { get; set; }

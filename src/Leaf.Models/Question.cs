@@ -14,6 +14,11 @@ namespace Leaf.Models
             this.tests = new HashSet<Test>();
         }
 
+        public Question(string condition) : this()
+        {
+            this.Condition = condition;
+        }
+
         public int Id { get; set; }
 
         //[StringLenght( 100, MinimumLength = 10)]

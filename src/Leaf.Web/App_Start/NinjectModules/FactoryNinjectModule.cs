@@ -10,6 +10,7 @@ namespace Leaf.Web.App_Start.NinjectModules
         {
             this.Bind<ITestFactory>().ToFactory().InSingletonScope();
             this.Bind<ISubmitFactory>().ToFactory().InSingletonScope();
+            this.Bind<IQuestionFactory>().ToFactory().InSingletonScope();
         }
     }
 }
