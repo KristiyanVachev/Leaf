@@ -9,6 +9,6 @@ namespace Leaf.Services.Contracts
 
         Submission GetSubmissionById(int id);
 
-        void Approve(int id);
+        Question Approve(int id);
     }
 }

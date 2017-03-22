@@ -8,5 +8,7 @@ namespace Leaf.Services.Contracts
         IEnumerable<Question> GetQuestions();
 
         Question CreateQuestion(Submission submission);
+
+        Question GetById(int id);
     }
 }

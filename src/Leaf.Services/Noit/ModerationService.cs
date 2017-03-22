@@ -34,7 +34,7 @@ namespace Leaf.Services.Noit
             return this.submissionRepository.GetById(id);
         }
 
-        public void Approve(int id)
+        public Question Approve(int id)
         {
             //Get submission
             var submission = this.submissionRepository.GetById(id);
@@ -42,8 +42,9 @@ namespace Leaf.Services.Noit
             //Convert the submission to question
 
             //TODO redirect to moderation/question/{id}
-            this.questionService.CreateQuestion(submission);
+            var question =  this.questionService.CreateQuestion(submission);
 
+            return question;
             //Add approved by and date of approval to submission
 
         }

@@ -1,0 +1,16 @@
+﻿@model Leaf.Models.Question
+
+
+@{
+    ViewBag.Title = "Question";
+}
+
+<h2>Question</h2>
+
+<h3>@Model.Condition</h3>
+
+@foreach (var answer in Model.Answers)
+{
+    <p>@answer.Content</p>
+}
+

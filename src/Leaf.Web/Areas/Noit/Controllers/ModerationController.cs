@@ -6,10 +6,12 @@ namespace Leaf.Web.Areas.Noit.Controllers
     public class ModerationController : Controller
     {
         private IModerationService moderationService;
+        private IQuestionService questionService;
 
-        public ModerationController(IModerationService moderationService)
+        public ModerationController(IModerationService moderationService, IQuestionService questionService)
         {
             this.moderationService = moderationService;
+            this.questionService = questionService;
         }
 
         // GET: Noit/Moderation
@@ -32,9 +34,18 @@ namespace Leaf.Web.Areas.Noit.Controllers
             return View(submission);
         }
 
-        public void Approve(int submissionId)
+        public RedirectToRouteResult Approve(int submissionId)
         {
-            this.moderationService.Approve(submissionId);
+            var question = this.moderationService.Approve(submissionId);
+
+            return this.RedirectToAction("Question", new { id = question.Id });
+        }
+
+        public ActionResult Question(int id)
+        {
+            var question = this.questionService.GetById(id);
+
+            return View(question);
         }
     }
 }

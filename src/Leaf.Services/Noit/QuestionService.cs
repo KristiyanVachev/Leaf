@@ -82,5 +82,10 @@ namespace Leaf.Services.Noit
 
             return newQuestion;
         }
+
+        public Question GetById(int id)
+        {
+            return this.questionRepository.GetById(id);
+        }
     }
 }
