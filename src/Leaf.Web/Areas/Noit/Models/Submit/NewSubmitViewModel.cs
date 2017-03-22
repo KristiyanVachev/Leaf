@@ -14,6 +14,6 @@ namespace Leaf.Web.Areas.Noit.Models.Submit
 
         public string CorrectAnswer { get; set; }
 
-        public string IncorrectAnswerOne { get; set; }
+        public string[] IncorrectAnswers { get; set; }
     }
 }

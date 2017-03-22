@@ -28,7 +28,7 @@
                 @Html.ValidationMessageFor(model => model.Condition, "", new { @class = "text-danger" })
             </div>
         </div>
-
+        
         <div class="form-group">
             @Html.LabelFor(model => model.CorrectAnswer, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -37,14 +37,16 @@
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.IncorrectAnswerOne, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.IncorrectAnswerOne, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.IncorrectAnswerOne, "", new { @class = "text-danger" })
+        @for (int i = 0; i < @Model.IncorrectAnswers.Length; i++)
+        {
+            <div class="form-group">
+                @Html.LabelFor(model => model.IncorrectAnswers[i], htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.IncorrectAnswers[i], new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.IncorrectAnswers[i], "", new { @class = "text-danger" })
+                </div>
             </div>
-        </div>
-
+        }
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
