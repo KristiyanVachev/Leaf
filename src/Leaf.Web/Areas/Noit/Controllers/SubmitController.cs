@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 using Leaf.Auth.Contracts;
 using Leaf.Services.Contracts;
@@ -43,7 +44,8 @@ namespace Leaf.Web.Areas.Noit.Controllers
             var viewModel = new SubmissionViewModel
             {
                 Condition = submission.Condition,
-                CorrectAnswer = submission.CorrectAnswer
+                CorrectAnswer = submission.CorrectAnswer,
+                IncorrectAnswers = submission.IncorrectAnswers.Select(x => x.Content)
             };
 
             return this.View(viewModel);
@@ -57,7 +59,8 @@ namespace Leaf.Web.Areas.Noit.Controllers
             var submission = this.submitService.CreateSubmission(userId,
                 viewModel.CategoryName,
                 viewModel.Condition,
-                viewModel.CorrectAnswer
+                viewModel.CorrectAnswer,
+                viewModel.IncorrectAnswers
                 );
 
             return this.RedirectToAction("Submission", new {id = submission.Id});

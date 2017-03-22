@@ -1,4 +1,6 @@
-﻿namespace Leaf.Web.Areas.Noit.Models.Submit
+﻿using System.Collections.Generic;
+
+namespace Leaf.Web.Areas.Noit.Models.Submit
 {
     public class SubmissionViewModel
     {
@@ -8,6 +10,6 @@
 
         public string CorrectAnswer { get; set; }
 
-        public string[] IncorrectAnswers { get; set; }
+        public IEnumerable<string> IncorrectAnswers { get; set; }
     }
 }

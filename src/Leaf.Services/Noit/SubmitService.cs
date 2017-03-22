@@ -13,28 +13,39 @@ namespace Leaf.Services.Noit
     {
         private ISubmitFactory submitFactory;
         private IRepository<Submission> submissionRepository;
+        private IRepository<SubmissionAnswer> submissionAnswerRepository;
         private IRepository<Category> categoryRepository;
         private IUnitOfWork unitOfWork;
 
         public SubmitService(ISubmitFactory submitFactory,
              IRepository<Submission> submissionRepository,
+             IRepository<SubmissionAnswer> submissionAnswerRepository,
              IRepository<Category> categoryRepository,
              IUnitOfWork unitOfWork)
         {
             Guard.WhenArgument(submitFactory, "submitFactory cannot be null").IsNull().Throw();
             Guard.WhenArgument(submissionRepository, "submissionRepository cannot be null").IsNull().Throw();
+            Guard.WhenArgument(submissionAnswerRepository, "submissionAnswerRepository cannot be null").IsNull().Throw();
             Guard.WhenArgument(categoryRepository, "categoryRepository cannot be null").IsNull().Throw();
             Guard.WhenArgument(unitOfWork, "unitOfWork cannot be null").IsNull().Throw();
 
             this.submitFactory = submitFactory;
             this.submissionRepository = submissionRepository;
+            this.submissionAnswerRepository = submissionAnswerRepository;
             this.categoryRepository = categoryRepository;
             this.unitOfWork = unitOfWork;
         }
 
-        public Submission CreateSubmission(string userId, string category, string condition, string correctAnswer)
+        public Submission CreateSubmission(string userId, string category, string condition, string correctAnswer, string[] incorrectAnswers)
         {
             var newSubmission = this.submitFactory.CreateSubmission(userId, category, condition, correctAnswer);
+
+            foreach (var incorrectAnswer in incorrectAnswers)
+            {
+                var newSubmissionAnswer = this.submitFactory.CreateSubmissionAnswer(incorrectAnswer);
+                newSubmission.IncorrectAnswers.Add(newSubmissionAnswer);
+                submissionAnswerRepository.Add(newSubmissionAnswer);
+            }
 
             this.submissionRepository.Add(newSubmission);
             this.unitOfWork.Commit();

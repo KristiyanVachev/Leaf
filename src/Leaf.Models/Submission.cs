@@ -1,15 +1,18 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Leaf.Models
 {
     public class Submission
     {
+        private ICollection<SubmissionAnswer> incorrectAnswers;
+
         public Submission()
         {
-            
+            this.incorrectAnswers = new HashSet<SubmissionAnswer>();
         }
 
-        public Submission(string userId, string category, string condition, string correctAnswer)
+        public Submission(string userId, string category, string condition, string correctAnswer) : this()
         {
             this.UserId = userId;
             this.Category = category;
@@ -29,5 +32,11 @@ namespace Leaf.Models
 
         [ForeignKey("UserId")]
         public virtual User Sender { get; set; }
+
+        public virtual ICollection<SubmissionAnswer> IncorrectAnswers
+        {
+            get { return this.incorrectAnswers; }
+            set { this.incorrectAnswers = value; }
+        }
     }
 }

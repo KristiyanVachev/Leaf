@@ -61,6 +61,7 @@
     <Compile Include="AnsweredQuestion.cs" />
     <Compile Include="Category.cs" />
     <Compile Include="Submission.cs" />
+    <Compile Include="SubmissionAnswer.cs" />
     <Compile Include="Test.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Question.cs" />

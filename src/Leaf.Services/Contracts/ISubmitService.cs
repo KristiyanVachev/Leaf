@@ -6,7 +6,12 @@ namespace Leaf.Services.Contracts
 {
     public interface ISubmitService
     {
-        Submission CreateSubmission(string userId, string category, string condition, string correctAnswer);
+        Submission CreateSubmission(string userId,
+            string category,
+            string condition,
+            string correctAnswer,
+            string[] incorrectAnswers
+            );
 
         IEnumerable<SelectListItem> GetCategories();
 
