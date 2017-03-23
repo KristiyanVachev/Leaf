@@ -94,6 +94,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Leaf.Auth\Leaf.Auth.csproj">
+      <Project>{5ddf6fc2-6034-4e7a-a34b-1e8c2fc93978}</Project>
+      <Name>Leaf.Auth</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Leaf.Commom\Leaf.Commom.csproj">
       <Project>{19ef76b8-7b35-4164-960c-d6c5b5374f73}</Project>
       <Name>Leaf.Commom</Name>

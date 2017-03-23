@@ -60,6 +60,7 @@
     <Compile Include="Answer.cs" />
     <Compile Include="AnsweredQuestion.cs" />
     <Compile Include="Category.cs" />
+    <Compile Include="Enums\SubmissionState.cs" />
     <Compile Include="Submission.cs" />
     <Compile Include="SubmissionAnswer.cs" />
     <Compile Include="Test.cs" />

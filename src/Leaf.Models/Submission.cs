@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using Leaf.Models.Enums;
 
 namespace Leaf.Models
 {
@@ -12,15 +14,25 @@ namespace Leaf.Models
             this.incorrectAnswers = new HashSet<SubmissionAnswer>();
         }
 
-        public Submission(string userId, string category, string condition, string correctAnswer) : this()
+        public Submission(string userId, string category, string condition, string correctAnswer, DateTime sentOn) : this()
         {
-            this.UserId = userId;
+            this.SenderId = userId;
             this.Category = category;
             this.Condition = condition;
             this.CorrectAnswer = correctAnswer;
+            this.SentOn = sentOn;
+            this.State = SubmissionState.Pending;
         }
 
         public int Id { get; set; }
+
+        public SubmissionState State { get; set; }
+
+        public string ApprovedByName { get; set; }
+
+        public DateTime? SentOn { get; set; }
+
+        public DateTime? ApprovedOn { get; set; }
 
         public string Category { get; set; }
 
@@ -28,9 +40,9 @@ namespace Leaf.Models
 
         public string CorrectAnswer { get; set; }
 
-        public string UserId { get; set; }
+        public string SenderId { get; set; }
 
-        [ForeignKey("UserId")]
+        [ForeignKey("SenderId")]
         public virtual User Sender { get; set; }
 
         public virtual ICollection<SubmissionAnswer> IncorrectAnswers
