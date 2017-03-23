@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Bytes2you.Validation;
+using Leaf.Commom;
 using Leaf.Data.Contracts;
 using Leaf.Factories;
 using Leaf.Models;
@@ -44,9 +45,8 @@ namespace Leaf.Services.Noit
                 var categoryQuestions = this.questionRepository
                     .GetAll(x => x.CategoryId == categoryId)
                     .OrderBy(x => Guid.NewGuid())
-                    .Take(3);
+                    .Take(Constants.QuestionsPerCategory);
 
-                //TODO extract as a constant
                 foreach (var categoryQuestion in categoryQuestions)
                 {
                     questions.Add(categoryQuestion);
