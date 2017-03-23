@@ -8,5 +8,5 @@
 
 @foreach (var submission in Model)
 {
-    <h2>@submission.Condition</h2>
+    <p>@Html.ActionLink(submission.Condition, "Submission", "Moderation", new { id = submission.Id }, null)</p>
 }
