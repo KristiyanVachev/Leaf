@@ -22,7 +22,7 @@ namespace Leaf.Web.Areas.Noit.Controllers
 
         public ActionResult Submissions()
         {
-            var submissions = this.moderationService.GetSubmissions();
+            var submissions = this.moderationService.GetPendingSubmissions();
 
             return View(submissions);
         }

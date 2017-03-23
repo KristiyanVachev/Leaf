@@ -37,9 +37,9 @@ namespace Leaf.Services.Noit
             this.unitOfWork = unitOfWork;
         }
 
-        public IEnumerable<Submission> GetSubmissions()
+        public IEnumerable<Submission> GetPendingSubmissions()
         {
-            var submissions = this.submissionRepository.GetAll();
+            var submissions = this.submissionRepository.GetAll(x => x.State == SubmissionState.Pending);
 
             return submissions;
         }

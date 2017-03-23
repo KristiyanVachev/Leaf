@@ -5,7 +5,7 @@ namespace Leaf.Services.Contracts
 {
     public interface IModerationService
     {
-        IEnumerable<Submission> GetSubmissions();
+        IEnumerable<Submission> GetPendingSubmissions();
 
         Submission GetSubmissionById(int id);
 
