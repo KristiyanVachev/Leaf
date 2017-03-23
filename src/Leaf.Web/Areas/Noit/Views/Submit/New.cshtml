@@ -25,7 +25,7 @@
             @Html.LabelFor(model => model.Condition, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Condition, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Condition, "", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(model => model.Condition)
             </div>
         </div>
         
@@ -54,4 +54,8 @@
             </div>
         </div>
     </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
 }
