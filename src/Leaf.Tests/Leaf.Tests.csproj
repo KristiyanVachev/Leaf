@@ -120,6 +120,10 @@
     <Compile Include="Services\Noit\FullTestServiceTests\GetTestByIdTests.cs" />
     <Compile Include="Services\Noit\FullTestServiceTests\GetUserTestTests.cs" />
     <Compile Include="Services\Noit\FullTestServiceTests\HasUnfinishedTestTests.cs" />
+    <Compile Include="Services\Noit\SubmitServiceTests\ConstructorTests.cs" />
+    <Compile Include="Services\Noit\SubmitServiceTests\CreateSubmission.cs" />
+    <Compile Include="Services\Noit\SubmitServiceTests\GetCategoriesTests.cs" />
+    <Compile Include="Services\Noit\SubmitServiceTests\GetSubmissionByIdTests.cs" />
     <Compile Include="Services\Noit\TestServiceTests\ConstructorTests.cs" />
     <Compile Include="Services\Noit\TestServiceTests\CreateTestTests.cs" />
     <Compile Include="Services\Noit\TestServiceTests\GetLastTestByUserIdTests.cs" />
