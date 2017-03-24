@@ -7,6 +7,7 @@ using Leaf.Web.Areas.Noit.Models.Submit;
 
 namespace Leaf.Web.Areas.Noit.Controllers
 {
+    [Authorize]
     public class SubmitController : Controller
     {
         private ISubmitService submitService;

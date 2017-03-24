@@ -7,6 +7,7 @@ using Leaf.Web.Areas.Noit.Models.FullTest;
 
 namespace Leaf.Web.Areas.Noit.Controllers
 {
+    [Authorize]
     public class FullTestController : Controller
     {
         private readonly IFullGameService fullGameService;
