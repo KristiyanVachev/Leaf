@@ -2,6 +2,7 @@
 using Leaf.Auth.Contracts;
 using Leaf.Services.Contracts;
 using Leaf.Web.Areas.Noit.Controllers;
+using Leaf.Web.Areas.Noit.Models;
 using Moq;
 using NUnit.Framework;
 
@@ -16,9 +17,12 @@ namespace Leaf.Tests.Web.Noit.SubmitControllerTests
             // Arrange
             var mockSubmitService = new Mock<ISubmitService>();
             var mockAuthenticationProvider = new Mock<IAuthenticationProvider>();
+            var mockViewModelFactory = new Mock<IViewModelFactory>();
 
             // Act
-            var controller = new SubmitController(mockSubmitService.Object, mockAuthenticationProvider.Object);
+            var controller = new SubmitController(mockSubmitService.Object,
+                mockAuthenticationProvider.Object, 
+                mockViewModelFactory.Object);
 
             // Assert
             Assert.IsNotNull(controller);
@@ -29,9 +33,10 @@ namespace Leaf.Tests.Web.Noit.SubmitControllerTests
         {
             //Arrange
             var mockAuthenticationProvider = new Mock<IAuthenticationProvider>();
+            var mockViewModelFactory = new Mock<IViewModelFactory>();
 
             //Act && Assert
-            Assert.Throws<ArgumentNullException>(() => new SubmitController(null, mockAuthenticationProvider.Object));
+            Assert.Throws<ArgumentNullException>(() => new SubmitController(null, mockAuthenticationProvider.Object, mockViewModelFactory.Object));
         }
 
         [Test]
@@ -39,9 +44,10 @@ namespace Leaf.Tests.Web.Noit.SubmitControllerTests
         {
             //Arrange
             var mockSubmitService = new Mock<ISubmitService>();
+            var mockViewModelFactory = new Mock<IViewModelFactory>();
 
             //Act && Assert
-            Assert.Throws<ArgumentNullException>(() => new SubmitController(mockSubmitService.Object, null));
+            Assert.Throws<ArgumentNullException>(() => new SubmitController(mockSubmitService.Object, null, mockViewModelFactory.Object));
         }
     }
 }

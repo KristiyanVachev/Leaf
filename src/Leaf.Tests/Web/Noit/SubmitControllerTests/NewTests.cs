@@ -1,6 +1,9 @@
-﻿using Leaf.Auth.Contracts;
+﻿using System.Collections.Generic;
+using System.Web.Mvc;
+using Leaf.Auth.Contracts;
 using Leaf.Services.Contracts;
 using Leaf.Web.Areas.Noit.Controllers;
+using Leaf.Web.Areas.Noit.Models;
 using Leaf.Web.Areas.Noit.Models.Submit;
 using Moq;
 using NUnit.Framework;
@@ -17,8 +20,11 @@ namespace Leaf.Tests.Web.Noit.SubmitControllerTests
             // Arrange
             var mockSubmitService = new Mock<ISubmitService>();
             var mockAuthenticationProvider = new Mock<IAuthenticationProvider>();
+            var mockViewModelFactory = new Mock<IViewModelFactory>();
 
-            var controller = new SubmitController(mockSubmitService.Object, mockAuthenticationProvider.Object);
+            var controller = new SubmitController(mockSubmitService.Object,
+                mockAuthenticationProvider.Object,
+                mockViewModelFactory.Object);
 
             //Act
             controller.New();
@@ -28,13 +34,42 @@ namespace Leaf.Tests.Web.Noit.SubmitControllerTests
         }
 
         [Test]
+        public void New_ShouldCallViewModelFactory()
+        {
+            // Arrange
+            var mockSubmitService = new Mock<ISubmitService>();
+            var mockAuthenticationProvider = new Mock<IAuthenticationProvider>();
+            var mockViewModelFactory = new Mock<IViewModelFactory>();
+
+            var controller = new SubmitController(mockSubmitService.Object,
+                mockAuthenticationProvider.Object,
+                mockViewModelFactory.Object);
+
+            //Act
+            controller.New();
+
+            //Assert
+            mockViewModelFactory.Verify(x => x.CreateNewSubmitViewModel(It.IsAny<IEnumerable<SelectListItem>>(), It.IsAny<string[]>()), Times.Once);
+        }
+
+        [Test]
         public void New_ShouldRenderView_WithViewModel()
         {
             // Arrange
             var mockSubmitService = new Mock<ISubmitService>();
             var mockAuthenticationProvider = new Mock<IAuthenticationProvider>();
+            var mockViewModelFactory = new Mock<IViewModelFactory>();
 
-            var controller = new SubmitController(mockSubmitService.Object, mockAuthenticationProvider.Object);
+            var fakeNewSubmitVieModel = new NewSubmitViewModel();
+
+            mockViewModelFactory.Setup(x => x.CreateNewSubmitViewModel(
+                    It.IsAny<IEnumerable<SelectListItem>>(),
+                    It.IsAny<string[]>()))
+                .Returns(fakeNewSubmitVieModel);
+
+            var controller = new SubmitController(mockSubmitService.Object,
+                mockAuthenticationProvider.Object,
+                mockViewModelFactory.Object);
 
             //Act && Assert
             controller.WithCallTo(x => x.New()).ShouldRenderDefaultView().WithModel<NewSubmitViewModel>();

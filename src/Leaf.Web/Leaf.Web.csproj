@@ -212,6 +212,7 @@
     <Compile Include="Areas\Noit\Models\Submit\SubmissionViewModel.cs" />
     <Compile Include="Areas\Noit\Models\FullTest\TestDetailsViewModel.cs" />
     <Compile Include="Areas\Noit\Models\FullTest\TestViewModel.cs" />
+    <Compile Include="Areas\Noit\Models\IViewModelFactory.cs" />
     <Compile Include="Areas\Noit\NoitAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />

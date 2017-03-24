@@ -3,6 +3,7 @@ using System.Web.Mvc;
 using Bytes2you.Validation;
 using Leaf.Auth.Contracts;
 using Leaf.Services.Contracts;
+using Leaf.Web.Areas.Noit.Models;
 using Leaf.Web.Areas.Noit.Models.Submit;
 
 namespace Leaf.Web.Areas.Noit.Controllers
@@ -12,15 +13,19 @@ namespace Leaf.Web.Areas.Noit.Controllers
     {
         private ISubmitService submitService;
         private IAuthenticationProvider authenticationProvider;
+        private IViewModelFactory viewModelFactory;
 
         public SubmitController(ISubmitService submitService,
-            IAuthenticationProvider authenticationProvider)
+            IAuthenticationProvider authenticationProvider,
+            IViewModelFactory viewModelFactory)
         {
             Guard.WhenArgument(submitService, "submitService cannot be null").IsNull().Throw();
             Guard.WhenArgument(authenticationProvider, "AuthenticationProvider cannot be null").IsNull().Throw();
+            Guard.WhenArgument(viewModelFactory, "viewModelFactory cannot be null").IsNull().Throw();
 
             this.submitService = submitService;
             this.authenticationProvider = authenticationProvider;
+            this.viewModelFactory = viewModelFactory;
         }
 
         // GET: Noit/Submit
@@ -32,11 +37,8 @@ namespace Leaf.Web.Areas.Noit.Controllers
         public ActionResult New()
         {
             var categories = this.submitService.GetCategories();
-            var viewModel = new NewSubmitViewModel()
-            {
-                Categories = categories,
-                IncorrectAnswers = new string[3]
-            };
+
+            var viewModel = this.viewModelFactory.CreateNewSubmitViewModel(categories, new string[3]);
 
             return this.View(viewModel);
         }
@@ -45,12 +47,8 @@ namespace Leaf.Web.Areas.Noit.Controllers
         {
             var submission = this.submitService.GetSubmissionById(id);
 
-            var viewModel = new SubmissionViewModel
-            {
-                Condition = submission.Condition,
-                CorrectAnswer = submission.CorrectAnswer,
-                IncorrectAnswers = submission.IncorrectAnswers.Select(x => x.Content)
-            };
+            var viewModel = this.viewModelFactory.CreateSubmissionViewModel(submission.Category, submission.Condition,
+                submission.CorrectAnswer, submission.IncorrectAnswers.Select(x => x.Content));
 
             return this.View(viewModel);
         }
@@ -67,7 +65,7 @@ namespace Leaf.Web.Areas.Noit.Controllers
                 viewModel.IncorrectAnswers
                 );
 
-            return this.RedirectToAction("Submission", new {id = submission.Id});
+            return this.RedirectToAction("Submission", new { id = submission.Id });
         }
     }
 }

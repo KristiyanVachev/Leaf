@@ -4,6 +4,15 @@ namespace Leaf.Web.Areas.Noit.Models.Submit
 {
     public class SubmissionViewModel
     {
+        public SubmissionViewModel(string categoryName, string condtion, string correctAnswer,
+            IEnumerable<string> incorrectAnswers)
+        {
+            this.CategoryName = categoryName;
+            this.Condition = condtion;
+            this.CorrectAnswer = correctAnswer;
+            this.IncorrectAnswers = incorrectAnswers;
+        }
+
         public string CategoryName { get; set; }
 
         public string Condition { get; set; }

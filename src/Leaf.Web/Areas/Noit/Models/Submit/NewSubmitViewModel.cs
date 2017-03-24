@@ -6,6 +6,17 @@ namespace Leaf.Web.Areas.Noit.Models.Submit
 {
     public class NewSubmitViewModel
     {
+        public NewSubmitViewModel()
+        {
+            
+        }
+
+        public NewSubmitViewModel(IEnumerable<SelectListItem> categories, string[] incorrectAnswers)
+        {
+            this.Categories = categories;
+            this.IncorrectAnswers = incorrectAnswers;
+        }
+
         [Display(Name = "Category")]
         public string CategoryName { get; set; }
         public IEnumerable<SelectListItem> Categories { get; set; }
