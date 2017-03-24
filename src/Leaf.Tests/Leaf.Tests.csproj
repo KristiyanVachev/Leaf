@@ -134,6 +134,10 @@
     <Compile Include="Web\Noit\FullTestControllerTests\ReceiveAnswerTests.cs" />
     <Compile Include="Web\Noit\FullTestControllerTests\StartTestTests.cs" />
     <Compile Include="Web\Noit\FullTestControllerTests\TestTests.cs" />
+    <Compile Include="Web\Noit\SubmitControllerTests\ConstructorTests.cs" />
+    <Compile Include="Web\Noit\SubmitControllerTests\IndexTests.cs" />
+    <Compile Include="Web\Noit\SubmitControllerTests\NewTests.cs" />
+    <Compile Include="Web\Noit\SubmitControllerTests\SubmissionTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

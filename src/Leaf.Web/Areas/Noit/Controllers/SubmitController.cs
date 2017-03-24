@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Web.Mvc;
+using Bytes2you.Validation;
 using Leaf.Auth.Contracts;
 using Leaf.Services.Contracts;
 using Leaf.Web.Areas.Noit.Models.Submit;
@@ -16,6 +16,9 @@ namespace Leaf.Web.Areas.Noit.Controllers
         public SubmitController(ISubmitService submitService,
             IAuthenticationProvider authenticationProvider)
         {
+            Guard.WhenArgument(submitService, "submitService cannot be null").IsNull().Throw();
+            Guard.WhenArgument(authenticationProvider, "AuthenticationProvider cannot be null").IsNull().Throw();
+
             this.submitService = submitService;
             this.authenticationProvider = authenticationProvider;
         }
