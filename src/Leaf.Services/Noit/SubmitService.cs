@@ -46,6 +46,10 @@ namespace Leaf.Services.Noit
             var currentTime = dateTimeProvider.GetCurrenTime();
             var newSubmission = this.submitFactory.CreateSubmission(userId, category, condition, correctAnswer, currentTime);
 
+            //I don't like how I put the answers after the submission is created. 
+            //I tried creating a collection of answers first, and then sending them in the constructor. 
+            //But that resulted in the answers being created in the database with correct submissionId, but when
+            //retrieving the submission, the answers are not in the collection
             foreach (var incorrectAnswer in incorrectAnswers)
             {
                 var newSubmissionAnswer = this.submitFactory.CreateSubmissionAnswer(incorrectAnswer);
