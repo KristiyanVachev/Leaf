@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Web.Mvc;
 using Leaf.Web.Areas.Noit.Models.Submit;
 
@@ -10,5 +11,7 @@ namespace Leaf.Web.Areas.Noit.Models
 
         SubmissionViewModel CreateSubmissionViewModel(string categoryName, string condtion, string correctAnswer,
             IEnumerable<string> incorrectAnswers);
+
+        ShortSubmission CreateShortSubmission(int id, string condition, string sender, DateTime sentOn);
     }
 }

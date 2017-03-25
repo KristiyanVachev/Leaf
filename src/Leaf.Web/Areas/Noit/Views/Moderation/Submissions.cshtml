@@ -1,12 +1,27 @@
-﻿@model IEnumerable<Leaf.Models.Submission>
+﻿@using PagedList.Mvc
 
-@{
-    ViewBag.Title = "Submissions";
-}
+@model PagedList.IPagedList<Leaf.Web.Areas.Noit.Models.Submit.ShortSubmission>
+
+<link href="~/Content/PagedList.css" rel="stylesheet"
+      type="text/css" />
 
 <h2>Submissions</h2>
 
 @foreach (var submission in Model)
 {
-    <p>@Html.ActionLink(submission.Condition, "Submission", "Moderation", new { id = submission.Id }, null)</p>
+    Html.RenderPartial("_ListSubmissionPartial", submission);
 }
+
+<div class="pages total">
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+    @Html.PagedListPager(Model, page => Url.Action("Submissions", "Moderation",
+        new { page = page }), PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(
+            new AjaxOptions()
+            {
+                HttpMethod = "GET",
+                UpdateTargetId = "list",
+                InsertionMode = InsertionMode.Replace
+            }))
+</div>
+

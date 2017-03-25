@@ -77,6 +77,14 @@
       <HintPath>..\packages\Ninject.MVC5.3.2.1.0\lib\net45-full\Ninject.Web.Mvc.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -209,6 +217,7 @@
     <Compile Include="Areas\Noit\Controllers\SubmitController.cs" />
     <Compile Include="Areas\Noit\Models\FullTest\NextQuestionViewModel.cs" />
     <Compile Include="Areas\Noit\Models\Submit\NewSubmitViewModel.cs" />
+    <Compile Include="Areas\Noit\Models\Submit\ShortSubmission.cs" />
     <Compile Include="Areas\Noit\Models\Submit\SubmissionViewModel.cs" />
     <Compile Include="Areas\Noit\Models\FullTest\TestDetailsViewModel.cs" />
     <Compile Include="Areas\Noit\Models\FullTest\TestViewModel.cs" />
@@ -229,6 +238,7 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\PagedList.css" />
     <Content Include="Content\questionBox.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -250,6 +260,7 @@
     <Content Include="Areas\Noit\Views\Submit\New.cshtml" />
     <Content Include="Areas\Noit\Views\Moderation\Submission.cshtml" />
     <Content Include="Areas\Noit\Views\Moderation\Question.cshtml" />
+    <Content Include="Areas\Noit\Views\Moderation\_ListSubmissionPartial.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

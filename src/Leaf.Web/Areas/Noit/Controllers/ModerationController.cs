@@ -1,17 +1,24 @@
-﻿using System.Web.Mvc;
+﻿using System.Linq;
+using System.Web.Mvc;
 using Leaf.Services.Contracts;
+using Leaf.Web.Areas.Noit.Models;
+using PagedList;
 
 namespace Leaf.Web.Areas.Noit.Controllers
 {
     public class ModerationController : Controller
     {
-        private IModerationService moderationService;
-        private IQuestionService questionService;
+        private readonly IModerationService moderationService;
+        private readonly IQuestionService questionService;
+        private readonly IViewModelFactory viewModelFactory;
 
-        public ModerationController(IModerationService moderationService, IQuestionService questionService)
+        public ModerationController(IModerationService moderationService,
+            IQuestionService questionService,
+            IViewModelFactory viewModelFactory)
         {
             this.moderationService = moderationService;
             this.questionService = questionService;
+            this.viewModelFactory = viewModelFactory;
         }
 
         // GET: Noit/Moderation
@@ -20,11 +27,14 @@ namespace Leaf.Web.Areas.Noit.Controllers
             return View();
         }
 
-        public ActionResult Submissions()
+        public ActionResult Submissions(int count = 2, int page = 1)
         {
-            var submissions = this.moderationService.GetPendingSubmissions();
+            var submissions = this.moderationService.GetPendingSubmissions()
+                .Select(x => this.viewModelFactory.CreateShortSubmission(x.Id, x.Condition, x.Sender.UserName, x.SentOn.Value));
 
-            return View(submissions);
+            var model = submissions.ToPagedList(page, count);
+
+            return View(model);
         }
 
         public ActionResult Submission(int id)
