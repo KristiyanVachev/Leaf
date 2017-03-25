@@ -55,7 +55,7 @@ namespace Leaf.Services.Noit
 
             var question =  this.questionService.CreateQuestion(submission);
 
-            //TODO add name of moderator that has approved the question
+            submission.ApprovedByName = authenticationProvider.CurrentUserName;
             submission.ApprovedOn = dateTimeProvider.GetCurrenTime();
             submission.State = SubmissionState.Approved;
 

@@ -9,21 +9,11 @@ namespace Leaf.Auth
 {
     public class AuthenticationProvider : IAuthenticationProvider
     {
-        public bool IsAuthenticated
-        {
-            get
-            {
-                return HttpContext.Current.User.Identity.IsAuthenticated;
-            }
-        }
+        public bool IsAuthenticated => HttpContext.Current.User.Identity.IsAuthenticated;
 
-        public string CurrentUserId
-        {
-            get
-            {
-                return HttpContext.Current.User.Identity.GetUserId();
-            }
-        }
+        public string CurrentUserId => HttpContext.Current.User.Identity.GetUserId();
+
+        public string CurrentUserName => HttpContext.Current.User.Identity.GetUserName();
 
         public IdentityResult CreateUser(string email, string password)
         {
