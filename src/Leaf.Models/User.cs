@@ -14,6 +14,12 @@ namespace Leaf.Models
             this.submissions = new HashSet<Submission>();
         }
 
+        public User(string userName) 
+            : this()
+        {
+            this.UserName = userName;
+        }
+
         public int Points { get; set; }
 
         public int Level { get; set; }
