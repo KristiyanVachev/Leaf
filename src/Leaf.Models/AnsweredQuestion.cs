@@ -4,6 +4,11 @@ namespace Leaf.Models
 {
     public class AnsweredQuestion
     {
+        public AnsweredQuestion()
+        {
+            
+        }
+        
         public AnsweredQuestion(int testId, int questionId, int answerId)
         {
             //ASK better to assign question ID or question

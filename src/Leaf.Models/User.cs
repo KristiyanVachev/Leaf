@@ -7,11 +7,13 @@ namespace Leaf.Models
     {
         private ICollection<Test> tests;
         private ICollection<Submission> submissions;
+        private ICollection<CategoryStatistic> categoryStatistics;
 
         public User()
         {
             this.tests = new HashSet<Test>();
             this.submissions = new HashSet<Submission>();
+            this.categoryStatistics = new HashSet<CategoryStatistic>();
         }
 
         public User(string userName) 
@@ -19,10 +21,6 @@ namespace Leaf.Models
         {
             this.UserName = userName;
         }
-
-        public int Points { get; set; }
-
-        public int Level { get; set; }
 
         public bool IsLastTestFinished { get; set; }
 
@@ -36,6 +34,12 @@ namespace Leaf.Models
         {
             get { return this.submissions; }
             set { this.submissions = value; }
+        }
+
+        public virtual ICollection<CategoryStatistic> CategoryStatistics
+        {
+            get { return this.categoryStatistics; }
+            set { this.categoryStatistics = value; }
         }
     }
 }

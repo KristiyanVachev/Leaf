@@ -31,6 +31,8 @@ namespace Leaf.Data
 
         public virtual IDbSet<Submission> Submissions { get; set; }
 
+        public virtual IDbSet<CategoryStatistic> CategoryStatistics { get; set; }
+
         public static LeafDbContext Create()
         {
             return new LeafDbContext();
