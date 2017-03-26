@@ -21,13 +21,7 @@ namespace Leaf.Models
 
         public int Id { get; set; }
 
-        //[StringLenght( 100, MinimumLength = 10)]
         public string Condition { get; set; }
-
-        //statistics for every question
-        public int TimesAnswered { get; set; }
-
-        public int CorrectlyAnsweredCount { get; set; }
 
         public int CategoryId { get; set; }
 

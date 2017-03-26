@@ -215,7 +215,6 @@
     <Compile Include="Areas\Noit\Controllers\FullTestController.cs" />
     <Compile Include="Areas\Noit\Controllers\ModerationController.cs" />
     <Compile Include="Areas\Noit\Controllers\SubmitController.cs" />
-    <Compile Include="Areas\Noit\Controllers\TrainingController.cs" />
     <Compile Include="Areas\Noit\Models\FullTest\NextQuestionViewModel.cs" />
     <Compile Include="Areas\Noit\Models\Submit\NewSubmitViewModel.cs" />
     <Compile Include="Areas\Noit\Models\Submit\ShortSubmission.cs" />
@@ -264,7 +263,6 @@
     <Content Include="Areas\Noit\Views\Moderation\Submission.cshtml" />
     <Content Include="Areas\Noit\Views\Moderation\Question.cshtml" />
     <Content Include="Areas\Noit\Views\Moderation\_ListSubmissionPartial.cshtml" />
-    <Content Include="Areas\Noit\Views\Training\Index.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

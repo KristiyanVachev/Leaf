@@ -17,8 +17,6 @@ namespace Leaf.Models
 
         public string Name { get; set; }
 
-        public int Difficulty { get; set; }
-
         public virtual ICollection<Question> Questions
         {
             get { return this.questions; }
