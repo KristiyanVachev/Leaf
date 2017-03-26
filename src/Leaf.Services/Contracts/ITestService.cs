@@ -1,4 +1,5 @@
-﻿using Leaf.Models;
+﻿using System.Collections.Generic;
+using Leaf.Models;
 
 namespace Leaf.Services.Contracts
 {
@@ -20,6 +21,6 @@ namespace Leaf.Services.Contracts
 
         void EndTest(int testId);
 
-        void UpdateUserCategoriesStatistics(int testId);
+        IDictionary<int, int[]> GatherTestStatistics(int testId);
     }
 }

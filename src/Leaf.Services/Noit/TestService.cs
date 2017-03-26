@@ -112,31 +112,33 @@ namespace Leaf.Services.Noit
             this.unitOfWork.Commit();
         }
 
-        public void UpdateUserCategoriesStatistics(int testId)
+        public IDictionary<int, int[]> GatherTestStatistics(int testId)
         {
             var test = this.testRepository.GetById(testId);
 
-            var stats = new Dictionary<Category, int[]>();
+            var stats = new Dictionary<int, int[]>();
 
             foreach (var answeredQuestion in test.AnsweredQuestions)
             {
-                var category = answeredQuestion.Question.Category;
+                var categoryId = answeredQuestion.Question.Category.Id;
                 var isCorrect = answeredQuestion.Answer.IsCorrect;
 
-                if (!stats.ContainsKey(category))
+                if (!stats.ContainsKey(categoryId))
                 {
-                    stats[category] = new int[] { 0, 0 };
+                    stats[categoryId] = new int[] { 0, 0 };
                 }
 
                 if (isCorrect)
                 {
-                    stats[category][0]++;
+                    stats[categoryId][0]++;
                 }
                 else
                 {
-                    stats[category][1]++;
+                    stats[categoryId][1]++;
                 }
             }
+
+            return stats;
         }
     }
 }

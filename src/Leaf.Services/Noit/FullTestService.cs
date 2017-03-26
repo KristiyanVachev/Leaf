@@ -8,13 +8,16 @@ namespace Leaf.Services.Noit
     public class FullTestService : IFullGameService
     {
         private readonly ITestService testService;
+        private readonly IUserService userService;
 
-        public FullTestService(ITestService testService)
+        public FullTestService(ITestService testService, IUserService userService)
         {
             //TODO: Extract "cannot be null" message to costant
             Guard.WhenArgument(testService, "testService cannot be null").IsNull().Throw();
+            Guard.WhenArgument(userService, "userService cannot be null").IsNull().Throw();
 
             this.testService = testService;
+            this.userService = userService;
         }
 
         public bool HasUnfinishedTest(string userId)
@@ -59,7 +62,14 @@ namespace Leaf.Services.Noit
         {
             this.testService.EndTest(testId);
 
-            this.testService.UpdateUserCategoriesStatistics(testId);
+            var testStats = this.testService.GatherTestStatistics(testId);
+
+            var test = this.testService.GetTestById(testId);
+            var userId = test.User.Id;
+
+            this.userService.UpdateUserStatistics(userId, testStats);
+
+            //TODO update statistics of answers
         }
     }
 }

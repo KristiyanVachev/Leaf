@@ -72,8 +72,6 @@ namespace Leaf.Web.Areas.Noit.Controllers
             var test = this.fullGameService.GetTestById(viewModel.TestId);
             var testDetailsViewModel = new TestDetailsViewModel(test.CorrectCount);
 
-            this.fullGameService.EndTest(test.Id);
-
             return View("FinishedTest", testDetailsViewModel);
         }
     }

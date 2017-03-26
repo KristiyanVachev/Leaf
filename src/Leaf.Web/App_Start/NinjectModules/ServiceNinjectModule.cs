@@ -13,6 +13,7 @@ namespace Leaf.Web.App_Start.NinjectModules
             this.Bind<ITestService>().To<TestService>();
             this.Bind<ISubmitService>().To<SubmitService>();
             this.Bind<IModerationService>().To<ModerationService>();
+            this.Bind<IUserService>().To<UserService>();
         }
     }
 }

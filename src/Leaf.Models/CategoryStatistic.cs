@@ -4,6 +4,16 @@ namespace Leaf.Models
 {
     public class CategoryStatistic
     {
+        public CategoryStatistic()
+        {
+            
+        }
+
+        public CategoryStatistic(int categoryId)
+        {
+            this.CategoryId = categoryId;
+        }
+
         public int Id { get; set; }
 
         public int Correct { get; set; }
