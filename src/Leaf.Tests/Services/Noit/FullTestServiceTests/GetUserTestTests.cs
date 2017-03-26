@@ -17,17 +17,8 @@ namespace Leaf.Tests.Services.Noit.FullTestServiceTests
         {
             //Arrange
             var mockTestService = new Mock<ITestService>();
-            var mockAnswerRepository = new Mock<IRepository<Answer>>();
-            var mockAnsweredQuestionRepository = new Mock<IRepository<AnsweredQuestion>>();
-            var mockTestFactory = new Mock<ITestFactory>();
-            var mockUnitOfWork = new Mock<IUnitOfWork>();
 
-            var service = new FullTestService(mockTestService.Object,
-                mockAnswerRepository.Object,
-                mockAnsweredQuestionRepository.Object,
-                mockTestFactory.Object,
-                mockUnitOfWork.Object
-            );
+            var service = new FullTestService(mockTestService.Object);
 
             //Act 
             service.GetUserTest(id);
@@ -44,17 +35,7 @@ namespace Leaf.Tests.Services.Noit.FullTestServiceTests
             var mockTestService = new Mock<ITestService>();
             mockTestService.Setup(x => x.IsNullOrFinished(It.IsAny<Test>())).Returns(true);
 
-            var mockAnswerRepository = new Mock<IRepository<Answer>>();
-            var mockAnsweredQuestionRepository = new Mock<IRepository<AnsweredQuestion>>();
-            var mockTestFactory = new Mock<ITestFactory>();
-            var mockUnitOfWork = new Mock<IUnitOfWork>();
-
-            var service = new FullTestService(mockTestService.Object,
-                mockAnswerRepository.Object,
-                mockAnsweredQuestionRepository.Object,
-                mockTestFactory.Object,
-                mockUnitOfWork.Object
-            );
+            var service = new FullTestService(mockTestService.Object);
 
             //Act 
             service.GetUserTest(id);
@@ -74,17 +55,7 @@ namespace Leaf.Tests.Services.Noit.FullTestServiceTests
             var mockTest = new Mock<Test>();
             mockTestService.Setup(x => x.CreateTest(id)).Returns(mockTest.Object);
 
-            var mockAnswerRepository = new Mock<IRepository<Answer>>();
-            var mockAnsweredQuestionRepository = new Mock<IRepository<AnsweredQuestion>>();
-            var mockTestFactory = new Mock<ITestFactory>();
-            var mockUnitOfWork = new Mock<IUnitOfWork>();
-
-            var service = new FullTestService(mockTestService.Object,
-                mockAnswerRepository.Object,
-                mockAnsweredQuestionRepository.Object,
-                mockTestFactory.Object,
-                mockUnitOfWork.Object
-            );
+            var service = new FullTestService(mockTestService.Object);
 
             //Act 
             var result = service.GetUserTest(id);

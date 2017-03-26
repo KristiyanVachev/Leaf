@@ -15,15 +15,16 @@ namespace Leaf.Tests.Services.Noit.TestServiceTests
         [Test]
         public void IsNullOrFinished_ShouldReturnTrue_WhenTestIsNull()
         {
-            //Arrange
             var mockQuestionService = new Mock<IQuestionService>();
             var mockTestRepository = new Mock<IRepository<Test>>();
+            var mockAnsweredQuestionRepository = new Mock<IRepository<AnsweredQuestion>>();
             var mockTestFactory = new Mock<ITestFactory>();
             var mockDateTimeProvider = new Mock<IDateTimeProvider>();
             var mockUnitOfWork = new Mock<IUnitOfWork>();
 
             var service = new TestService(mockQuestionService.Object,
                 mockTestRepository.Object,
+                mockAnsweredQuestionRepository.Object,
                 mockTestFactory.Object,
                 mockDateTimeProvider.Object,
                 mockUnitOfWork.Object
@@ -39,15 +40,16 @@ namespace Leaf.Tests.Services.Noit.TestServiceTests
         [Test]
         public void IsNullOrFinished_ShouldReturnTrue_WhenTestIsUnfinished()
         {
-            //Arrange
             var mockQuestionService = new Mock<IQuestionService>();
             var mockTestRepository = new Mock<IRepository<Test>>();
+            var mockAnsweredQuestionRepository = new Mock<IRepository<AnsweredQuestion>>();
             var mockTestFactory = new Mock<ITestFactory>();
             var mockDateTimeProvider = new Mock<IDateTimeProvider>();
             var mockUnitOfWork = new Mock<IUnitOfWork>();
 
             var service = new TestService(mockQuestionService.Object,
                 mockTestRepository.Object,
+                mockAnsweredQuestionRepository.Object,
                 mockTestFactory.Object,
                 mockDateTimeProvider.Object,
                 mockUnitOfWork.Object
@@ -65,15 +67,16 @@ namespace Leaf.Tests.Services.Noit.TestServiceTests
         [Test]
         public void IsNullOrFinished_ShouldReturnFalse_WhenTestIsNotFinished()
         {
-            //Arrange
             var mockQuestionService = new Mock<IQuestionService>();
             var mockTestRepository = new Mock<IRepository<Test>>();
+            var mockAnsweredQuestionRepository = new Mock<IRepository<AnsweredQuestion>>();
             var mockTestFactory = new Mock<ITestFactory>();
             var mockDateTimeProvider = new Mock<IDateTimeProvider>();
             var mockUnitOfWork = new Mock<IUnitOfWork>();
 
             var service = new TestService(mockQuestionService.Object,
                 mockTestRepository.Object,
+                mockAnsweredQuestionRepository.Object,
                 mockTestFactory.Object,
                 mockDateTimeProvider.Object,
                 mockUnitOfWork.Object

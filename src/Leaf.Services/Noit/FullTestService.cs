@@ -1,38 +1,20 @@
 ﻿using System.Linq;
 using Bytes2you.Validation;
-using Leaf.Data.Contracts;
 using Leaf.Models;
 using Leaf.Services.Contracts;
-using Leaf.Factories;
 
 namespace Leaf.Services.Noit
 {
     public class FullTestService : IFullGameService
     {
         private readonly ITestService testService;
-        private readonly IRepository<Answer> answerRepository;
-        private readonly IRepository<AnsweredQuestion> answeredQuestionRepository;
-        private readonly ITestFactory testFactory;
-        private readonly IUnitOfWork unitOfWork;
 
-        public FullTestService(ITestService testService,
-            IRepository<Answer> answerRepository,
-            IRepository<AnsweredQuestion> answeredQuestionRepository,
-            ITestFactory testFactory,
-            IUnitOfWork unitOfWork)
+        public FullTestService(ITestService testService)
         {
             //TODO: Extract "cannot be null" message to costant
             Guard.WhenArgument(testService, "testService cannot be null").IsNull().Throw();
-            Guard.WhenArgument(answerRepository, "answerRepository cannot be null").IsNull().Throw();
-            Guard.WhenArgument(answeredQuestionRepository, "answeredQuestionRepository cannot be null").IsNull().Throw();
-            Guard.WhenArgument(testFactory, "testFactory cannot be null").IsNull().Throw();
-            Guard.WhenArgument(unitOfWork, "unitOfWork cannot be null").IsNull().Throw();
 
             this.testService = testService;
-            this.answerRepository = answerRepository;
-            this.answeredQuestionRepository = answeredQuestionRepository;
-            this.testFactory = testFactory;
-            this.unitOfWork = unitOfWork;
         }
 
         public bool HasUnfinishedTest(string userId)
@@ -61,31 +43,9 @@ namespace Leaf.Services.Noit
 
         public void SendAnswer(int testId, int questionId, int answerId)
         {
-            var test = this.testService.GetTestById(testId);
+            this.testService.AddAnswer(testId, questionId, answerId);
 
-            //Verify if answer is correct
-            var answer = this.answerRepository.GetById(answerId);
-
-            if (answer.IsCorrect)
-            {
-                test.CorrectCount++;
-            }
-
-            //Add answer
-            var newAnsweredQuestion = this.testFactory.CreateAnsweredQuestion(testId, questionId, answerId);
-            this.answeredQuestionRepository.Add(newAnsweredQuestion);
-
-            //Remove the question
-            test.Questions.Remove(test.Questions.FirstOrDefault(x => x.Id == questionId));
-
-            //Finished the test if no more questions
-            if (!test.Questions.Any())
-            {
-                test.IsFinished = true;
-            }
-
-            this.unitOfWork.Commit();
-
+            this.testService.RemoveQuestionById(testId, questionId);
         }
 
         public Question GetNextQuestion(int testId)
@@ -93,6 +53,13 @@ namespace Leaf.Services.Noit
             var test = this.testService.GetTestById(testId);
 
             return test.Questions.FirstOrDefault();
+        }
+
+        public void EndTest(int testId)
+        {
+            this.testService.EndTest(testId);
+
+            this.testService.UpdateUserCategoriesStatistics(testId);
         }
     }
 }

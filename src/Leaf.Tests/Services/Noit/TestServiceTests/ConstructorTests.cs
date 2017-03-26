@@ -18,6 +18,7 @@ namespace Leaf.Tests.Services.Noit.TestServiceTests
             //Arrange
             var mockQuestionService = new Mock<IQuestionService>();
             var mockTestRepository = new Mock<IRepository<Test>>();
+            var mockAnsweredQuestionRepository = new Mock<IRepository<AnsweredQuestion>>();
             var mockTestFactory = new Mock<ITestFactory>();
             var mockDateTimeProvider = new Mock<IDateTimeProvider>();
             var mockUnitOfWork = new Mock<IUnitOfWork>();
@@ -26,6 +27,7 @@ namespace Leaf.Tests.Services.Noit.TestServiceTests
             Assert.DoesNotThrow(() =>
                 new TestService(mockQuestionService.Object,
                     mockTestRepository.Object,
+                    mockAnsweredQuestionRepository.Object,
                     mockTestFactory.Object,
                     mockDateTimeProvider.Object,
                     mockUnitOfWork.Object

@@ -16,20 +16,9 @@ namespace Leaf.Tests.Services.Noit.FullTestServiceTests
         {
             //Arrange
             var mockTestService = new Mock<ITestService>();
-            var mockAnswerRepository = new Mock<IRepository<Answer>>();
-            var mockAnsweredQuestionRepository = new Mock<IRepository<AnsweredQuestion>>();
-            var mockTestFactory = new Mock<ITestFactory>();
-            var mockUnitOfWork = new Mock<IUnitOfWork>();
 
             //Act && Assert
-            Assert.DoesNotThrow(() =>
-                new FullTestService(mockTestService.Object,
-                    mockAnswerRepository.Object,
-                    mockAnsweredQuestionRepository.Object,
-                    mockTestFactory.Object,
-                    mockUnitOfWork.Object
-                    )
-            );
+            Assert.DoesNotThrow(() => new FullTestService(mockTestService.Object));
         }
 
         //TODO add tests for each parameter to be null and values assigned correctly

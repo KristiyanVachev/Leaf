@@ -14,5 +14,7 @@ namespace Leaf.Services.Contracts
         void SendAnswer(int testId, int questionId, int answerId);
 
         Question GetNextQuestion(int test);
+
+        void EndTest(int testId);
     }
 }

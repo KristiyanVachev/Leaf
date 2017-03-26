@@ -25,17 +25,7 @@ namespace Leaf.Tests.Services.Noit.FullTestServiceTests
 
             mockTestService.Setup(x => x.GetTestById(id)).Returns(fakaTest);
 
-            var mockAnswerRepository = new Mock<IRepository<Answer>>();
-            var mockAnsweredQuestionRepository = new Mock<IRepository<AnsweredQuestion>>();
-            var mockTestFactory = new Mock<ITestFactory>();
-            var mockUnitOfWork = new Mock<IUnitOfWork>();
-
-            var service = new FullTestService(mockTestService.Object,
-                mockAnswerRepository.Object,
-                mockAnsweredQuestionRepository.Object,
-                mockTestFactory.Object,
-                mockUnitOfWork.Object
-            );
+            var service = new FullTestService(mockTestService.Object);
 
             //Act 
             service.GetNextQuestion(id);
@@ -59,17 +49,7 @@ namespace Leaf.Tests.Services.Noit.FullTestServiceTests
 
             mockTestService.Setup(x => x.GetTestById(id)).Returns(fakaTest);
 
-            var mockAnswerRepository = new Mock<IRepository<Answer>>();
-            var mockAnsweredQuestionRepository = new Mock<IRepository<AnsweredQuestion>>();
-            var mockTestFactory = new Mock<ITestFactory>();
-            var mockUnitOfWork = new Mock<IUnitOfWork>();
-
-            var service = new FullTestService(mockTestService.Object,
-                mockAnswerRepository.Object,
-                mockAnsweredQuestionRepository.Object,
-                mockTestFactory.Object,
-                mockUnitOfWork.Object
-            );
+            var service = new FullTestService(mockTestService.Object);
 
             //Act 
             var result = service.GetNextQuestion(id);

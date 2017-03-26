@@ -2,7 +2,6 @@
 using Bytes2you.Validation;
 using Leaf.Auth.Contracts;
 using Leaf.Services.Contracts;
-using Leaf.Web.Areas.Noit.Models;
 using Leaf.Web.Areas.Noit.Models.FullTest;
 
 namespace Leaf.Web.Areas.Noit.Controllers
@@ -25,7 +24,6 @@ namespace Leaf.Web.Areas.Noit.Controllers
         // GET: Noit/FullTest
         public ActionResult Index()
         {
-            //TODO: Show begin or continue button
             //TODO: List previous tests with their results
 
             var userId = this.authenticationProvider.CurrentUserId;
@@ -68,9 +66,13 @@ namespace Leaf.Web.Areas.Noit.Controllers
                 var nextQuestionViewModel = new NextQuestionViewModel(nextQuestion.Id, nextQuestion.Condition, nextQuestion.Answers);
                 return View("Test", nextQuestionViewModel);
             }
+            
+            this.fullGameService.EndTest(viewModel.TestId);
 
             var test = this.fullGameService.GetTestById(viewModel.TestId);
             var testDetailsViewModel = new TestDetailsViewModel(test.CorrectCount);
+
+            this.fullGameService.EndTest(test.Id);
 
             return View("FinishedTest", testDetailsViewModel);
         }
