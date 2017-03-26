@@ -17,8 +17,9 @@ namespace Leaf.Tests.Services.Noit.FullTestServiceTests
         {
             //Arrange
             var mockTestService = new Mock<ITestService>();
+            var mockUserService = new Mock<IUserService>();
 
-            var service = new FullTestService(mockTestService.Object);
+            var service = new FullTestService(mockTestService.Object, mockUserService.Object);
 
             //Act 
             service.GetTestById(id);

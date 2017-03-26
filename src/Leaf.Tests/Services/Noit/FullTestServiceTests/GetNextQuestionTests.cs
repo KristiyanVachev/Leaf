@@ -17,6 +17,7 @@ namespace Leaf.Tests.Services.Noit.FullTestServiceTests
         {
             //Arrange
             var mockTestService = new Mock<ITestService>();
+            var mockUserService = new Mock<IUserService>();
 
             var fakaTest = new Test
             {
@@ -25,7 +26,7 @@ namespace Leaf.Tests.Services.Noit.FullTestServiceTests
 
             mockTestService.Setup(x => x.GetTestById(id)).Returns(fakaTest);
 
-            var service = new FullTestService(mockTestService.Object);
+            var service = new FullTestService(mockTestService.Object, mockUserService.Object);
 
             //Act 
             service.GetNextQuestion(id);
@@ -40,6 +41,7 @@ namespace Leaf.Tests.Services.Noit.FullTestServiceTests
         {
             //Arrange
             var mockTestService = new Mock<ITestService>();
+            var mockUserService = new Mock<IUserService>();
 
             var fakeQuestion = new Question();
             var fakaTest = new Test
@@ -49,7 +51,7 @@ namespace Leaf.Tests.Services.Noit.FullTestServiceTests
 
             mockTestService.Setup(x => x.GetTestById(id)).Returns(fakaTest);
 
-            var service = new FullTestService(mockTestService.Object);
+            var service = new FullTestService(mockTestService.Object, mockUserService.Object);
 
             //Act 
             var result = service.GetNextQuestion(id);
