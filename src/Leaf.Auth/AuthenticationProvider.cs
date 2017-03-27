@@ -15,6 +15,27 @@ namespace Leaf.Auth
 
         public string CurrentUserName => HttpContext.Current.User.Identity.GetUserName();
 
+        public bool IsInRole(string userId, string roleName)
+        {
+            var manager = HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>();
+
+            return manager.IsInRole(userId, roleName);
+        }
+
+        public IdentityResult AddToRole(string userId, string roleName)
+        {
+            var manager = HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>();
+
+            return manager.AddToRole(userId, roleName);
+        }
+
+        public IdentityResult RemoveFromRole(string userId, string roleName)
+        {
+            var manager = HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>();
+
+            return manager.RemoveFromRole(userId, roleName);
+        }
+
         public IdentityResult CreateUser(string email, string password)
         {
             var user = new User { Email = email, UserName = email };

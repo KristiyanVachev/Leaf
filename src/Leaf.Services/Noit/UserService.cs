@@ -59,5 +59,10 @@ namespace Leaf.Services.Noit
             this.userRepository.Update(user);
             this.unitOfWork.Commit();
         }
+
+        public IEnumerable<User> GetAll()
+        {
+            return this.userRepository.GetAll().ToList();
+        }
     }
 }

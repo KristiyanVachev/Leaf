@@ -1,0 +1,54 @@
+﻿@using PagedList.Mvc
+@model PagedList.IPagedList<Leaf.Web.Areas.Administration.Models.UserViewModel>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().UserName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().IsModerator)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().IsAdmin)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                @if (item.IsModerator)
+                {
+                    @Html.ActionLink("Remove moderator", "RemoveRole", new { userId = item.UserId, roleName = "NoitModerator", page = Model.PageNumber })
+                }
+                else
+                {
+                    @Html.ActionLink("Make moderator", "AddRole", new { userId = item.UserId, roleName = "NoitModerator", page = Model.PageNumber })
+
+                }
+            </td>
+            <td>
+                @if (item.IsAdmin)
+                {
+                    @Html.ActionLink("Remove administrator", "RemoveRole", new { userId = item.UserId, roleName = "Administrator", page = Model.PageNumber })
+                }
+                else
+                {
+                    @Html.ActionLink("Make administrator", "AddRole", new { userId = item.UserId, roleName = "Administrator", page = Model.PageNumber })
+
+                }
+            </td>
+        </tr>
+    }
+
+</table>
+<div class="pages total">
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+    @Html.PagedListPager(Model, page => Url.Action("Index", "UsersAdministration",
+        new { page = page }))
+</div>

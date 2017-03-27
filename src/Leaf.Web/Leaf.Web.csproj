@@ -212,6 +212,9 @@
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Areas\Administration\AdministrationAreaRegistration.cs" />
+    <Compile Include="Areas\Administration\Controllers\UsersAdministrationController.cs" />
+    <Compile Include="Areas\Administration\Models\UserViewModel.cs" />
     <Compile Include="Areas\Noit\Controllers\FullTestController.cs" />
     <Compile Include="Areas\Noit\Controllers\ModerationController.cs" />
     <Compile Include="Areas\Noit\Controllers\SubmitController.cs" />
@@ -263,6 +266,10 @@
     <Content Include="Areas\Noit\Views\Moderation\Submission.cshtml" />
     <Content Include="Areas\Noit\Views\Moderation\Question.cshtml" />
     <Content Include="Areas\Noit\Views\Moderation\_ListSubmissionPartial.cshtml" />
+    <Content Include="Areas\Administration\Views\web.config" />
+    <Content Include="Areas\Administration\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Administration\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Administration\Views\UsersAdministration\Index.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

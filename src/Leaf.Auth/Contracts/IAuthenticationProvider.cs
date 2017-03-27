@@ -4,13 +4,19 @@ using Microsoft.AspNet.Identity.Owin;
 
 namespace Leaf.Auth.Contracts
 {
-   public interface IAuthenticationProvider
+    public interface IAuthenticationProvider
     {
         bool IsAuthenticated { get; }
 
         string CurrentUserId { get; }
 
         string CurrentUserName { get; }
+
+        bool IsInRole(string userId, string roleName);
+
+        IdentityResult AddToRole(string userId, string roleName);
+
+        IdentityResult RemoveFromRole(string userId, string roleName);
 
         IdentityResult CreateUser(User user, string password);
 
