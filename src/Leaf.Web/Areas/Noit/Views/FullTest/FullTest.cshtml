@@ -1,10 +1,11 @@
 ﻿@using Leaf.Models
 @model  bool  
 @{
-    ViewBag.Title = "FullTest";
-    ViewBag.ButtonText = Model ? "Continue test" : "Start new test";
+    ViewBag.ButtonText = Model ? "Продължете стария си тест" : "Започнете нов тест";
 }
 
-<h2>FullTest</h2>
+<h2>Цял тест</h2>
+
+<p>Решете един цял тест, за времето което бихте имали и на истинската олимпиада, за да видите колко точки имате и каква оценка бихте получили.</p>
 
 <h3>@Html.ActionLink((string)ViewBag.ButtonText, "StartTest", "FullTest", null, null)</h3>

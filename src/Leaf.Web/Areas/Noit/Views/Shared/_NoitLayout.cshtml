@@ -17,13 +17,13 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Leaf", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Листо", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Full Test", "Index", "FullTest", new { area = "Noit" }, null)</li>
-                    <li>@Html.ActionLink("Submit a question", "Index", "Submit", new { area = "Noit" }, null)</li>
-                    <li>@Html.ActionLink("Moderation", "Index", "Moderation", new { area = "Noit" }, null)</li>
+                    <li>@Html.ActionLink("Тест", "Index", "FullTest", new { area = "Noit" }, null)</li>
+                    <li>@Html.ActionLink("Изпратете въпрос", "Index", "Submit", new { area = "Noit" }, null)</li>
+                    <li>@Html.ActionLink("Модерация", "Index", "Moderation", new { area = "Noit" }, null)</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -33,7 +33,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - Leaf</p>
+            <p>&copy; @DateTime.Now.Year - Листо</p>
         </footer>
     </div>
 

@@ -4,20 +4,16 @@
 }
 
 .question-holder {
-    border: 1px solid black;
     width: 620px;
 }
 
 .answer-holder {
-    border: 1px solid black;
     width: 620px;
 }
 
 .asnwer {
-    border: 1px solid black;
     width: 300px;
 }
 
 #result {
-    border: 1px solid black;
 }
