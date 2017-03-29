@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
+using Leaf.Commom;
 
 namespace Leaf.Web.Areas.Noit.Models.Submit
 {
@@ -22,14 +24,32 @@ namespace Leaf.Web.Areas.Noit.Models.Submit
         public IEnumerable<SelectListItem> Categories { get; set; }
 
         [Required]
-        [MinLength(8, ErrorMessage = "Condition must be atleast 8 symbols long")]
-        [MaxLength(100, ErrorMessage = "Condition must be below 100 symbols long.")]
+        [AllowHtml]
+        [MinLength(8, ErrorMessage = Constants.ConditionMinLenght)]
+        [MaxLength(100, ErrorMessage = Constants.ConditionMaxLenght)]
         public string Condition { get; set; }
 
         [Required]
-        [MaxLength(50, ErrorMessage = "Correct answer must be below 50 symbols long.")]
+        [AllowHtml]
+        [MaxLength(50, ErrorMessage = Constants.CommentMaxLenght)]
         public string CorrectAnswer { get; set; }
 
+        [Required]
+        [AllowHtml]
+        [MaxLength(50, ErrorMessage = Constants.CommentMaxLenght)]
+        public string IncorrectAnswerOne { get; set; }
+
+        [Required]
+        [AllowHtml]
+        [MaxLength(50, ErrorMessage = Constants.CommentMaxLenght)]
+        public string IncorrectAnswerTwo { get; set; }
+
+        [Required]
+        [AllowHtml]
+        [MaxLength(50, ErrorMessage = Constants.CommentMaxLenght)]
+        public string IncorrectAnswerThree { get; set; }
+
+        [AllowHtml]
         [Required]
         public string[] IncorrectAnswers { get; set; }
     }

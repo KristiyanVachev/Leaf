@@ -1,11 +1,13 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
+using Leaf.Commom;
 using Leaf.Services.Contracts;
 using Leaf.Web.Areas.Noit.Models;
 using PagedList;
 
 namespace Leaf.Web.Areas.Noit.Controllers
 {
+    [Authorize(Roles = Constants.NoitModerator)]
     public class ModerationController : Controller
     {
         private readonly IModerationService moderationService;

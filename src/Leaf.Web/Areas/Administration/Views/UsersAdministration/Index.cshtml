@@ -1,4 +1,5 @@
-﻿@using PagedList.Mvc
+﻿@using Leaf.Commom
+@using PagedList.Mvc
 @model PagedList.IPagedList<Leaf.Web.Areas.Administration.Models.UserViewModel>
 
 <table class="table">
@@ -23,22 +24,22 @@
             <td>
                 @if (item.IsModerator)
                 {
-                    @Html.ActionLink("Remove moderator", "RemoveRole", new { userId = item.UserId, roleName = "NoitModerator", page = Model.PageNumber })
+                    @Html.ActionLink("Премахни модератор", "RemoveRole", new { userId = item.UserId, roleName = Constants.NoitModerator, page = Model.PageNumber })
                 }
                 else
                 {
-                    @Html.ActionLink("Make moderator", "AddRole", new { userId = item.UserId, roleName = "NoitModerator", page = Model.PageNumber })
+                    @Html.ActionLink("Направи модератор", "AddRole", new { userId = item.UserId, roleName = Constants.NoitModerator, page = Model.PageNumber })
 
                 }
             </td>
             <td>
                 @if (item.IsAdmin)
                 {
-                    @Html.ActionLink("Remove administrator", "RemoveRole", new { userId = item.UserId, roleName = "Administrator", page = Model.PageNumber })
+                    @Html.ActionLink("Премахни администратор", "RemoveRole", new { userId = item.UserId, roleName = Constants.Administrator, page = Model.PageNumber })
                 }
                 else
                 {
-                    @Html.ActionLink("Make administrator", "AddRole", new { userId = item.UserId, roleName = "Administrator", page = Model.PageNumber })
+                    @Html.ActionLink("Направи администратор", "AddRole", new { userId = item.UserId, roleName = Constants.Administrator, page = Model.PageNumber })
 
                 }
             </td>

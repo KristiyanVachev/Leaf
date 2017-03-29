@@ -2,12 +2,14 @@
 using System.Web.Mvc;
 using Bytes2you.Validation;
 using Leaf.Auth.Contracts;
+using Leaf.Commom;
 using Leaf.Services.Contracts;
 using Leaf.Web.Areas.Administration.Models;
 using PagedList;
 
 namespace Leaf.Web.Areas.Administration.Controllers
 {
+    [Authorize(Roles = Constants.Administrator)]
     public class UsersAdministrationController : Controller
     {
         private readonly IUserService userService;
@@ -29,8 +31,8 @@ namespace Leaf.Web.Areas.Administration.Controllers
 
             var model = users.Select(x => new UserViewModel(x.Id,
                 x.UserName,
-                this.authenticationProvider.IsInRole(x.Id, "NoitModerator"),
-                this.authenticationProvider.IsInRole(x.Id, "Administrator")));
+                this.authenticationProvider.IsInRole(x.Id, Constants.NoitModerator),
+                this.authenticationProvider.IsInRole(x.Id, Constants.Administrator)));
 
             return this.View(model.ToPagedList(page, count));
         }

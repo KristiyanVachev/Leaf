@@ -59,11 +59,19 @@ namespace Leaf.Web.Areas.Noit.Controllers
         {
             var userId = authenticationProvider.CurrentUserId;
 
+            //YAGNI? Better to have a collection of answers, because later I can add questions with diffrent count of 
+            //incorrect answers. But right now I don't need that and the exra database model... But I've already created them...
+            var incorrectAnswers = new string[Constants.IncorrectSubmissionAnswersCount];
+            incorrectAnswers[0] = viewModel.IncorrectAnswerOne;
+            incorrectAnswers[1] = viewModel.IncorrectAnswerTwo;
+            incorrectAnswers[2] = viewModel.IncorrectAnswerThree;
+
+
             var submission = this.submitService.CreateSubmission(userId,
                 viewModel.CategoryName,
                 viewModel.Condition,
                 viewModel.CorrectAnswer,
-                viewModel.IncorrectAnswers
+                incorrectAnswers
                 );
 
             return this.RedirectToAction("Submission", new { id = submission.Id });

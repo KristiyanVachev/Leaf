@@ -1,9 +1,10 @@
-﻿<!DOCTYPE html>
+﻿@using Leaf.Commom
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>Листо</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
@@ -23,7 +24,10 @@
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Тест", "Index", "FullTest", new { area = "Noit" }, null)</li>
                     <li>@Html.ActionLink("Изпратете въпрос", "Index", "Submit", new { area = "Noit" }, null)</li>
-                    <li>@Html.ActionLink("Модерация", "Index", "Moderation", new { area = "Noit" }, null)</li>
+                    @if (Request.IsAuthenticated && User.IsInRole(Constants.NoitModerator))
+                    {
+                        <li>@Html.ActionLink("Модерация", "Index", "Moderation", new { area = "Noit" }, null)</li>
+                    }
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

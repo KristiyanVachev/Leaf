@@ -1,5 +1,7 @@
 ﻿using System.Linq;
+using Leaf.Commom;
 using Leaf.Models;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace Leaf.Data.Migrations
 {
@@ -73,26 +75,16 @@ namespace Leaf.Data.Migrations
                 }
             );
 
-            //context.Tests.AddOrUpdate(
-            //        t => t.Id,
-            //        new Test
-            //        {
-            //            AnsweredQuestions =
-            //            {
-            //                new AnsweredQuestion
-            //                {
-            //                    QuestionId = 0,
-            //                    AnswerId = 1
-            //                },
-            //                new AnsweredQuestion
-            //                {
-            //                    QuestionId = 2,
-            //                    AnswerId = 11
-            //                }
-            //            },
-            //            IsFinished = false
-            //        }
-            //    );
+            context.Roles.AddOrUpdate(
+                x => x.Id,
+                new IdentityRole
+                {
+                    Name = Constants.Administrator
+                },
+                new IdentityRole
+                {
+                    Name = Constants.NoitModerator
+                });
 
             context.SaveChanges();
         }

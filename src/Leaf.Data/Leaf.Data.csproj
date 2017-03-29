@@ -71,6 +71,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Leaf.Commom\Leaf.Commom.csproj">
+      <Project>{19ef76b8-7b35-4164-960c-d6c5b5374f73}</Project>
+      <Name>Leaf.Commom</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Leaf.Models\Leaf.Models.csproj">
       <Project>{9aa679c4-6bd2-4479-ba4f-1b9c88f8127b}</Project>
       <Name>Leaf.Models</Name>
