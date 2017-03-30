@@ -136,6 +136,10 @@
     <Compile Include="Services\Noit\FullTestServiceTests\GetTestByIdTests.cs" />
     <Compile Include="Services\Noit\FullTestServiceTests\GetUserTestTests.cs" />
     <Compile Include="Services\Noit\FullTestServiceTests\HasUnfinishedTestTests.cs" />
+    <Compile Include="Services\Noit\ModerationServiceTests\ApproveTests.cs" />
+    <Compile Include="Services\Noit\ModerationServiceTests\ConstructorTests.cs" />
+    <Compile Include="Services\Noit\ModerationServiceTests\GetPendingSubmissionsTests.cs" />
+    <Compile Include="Services\Noit\ModerationServiceTests\GetSubmissionByIdTests.cs" />
     <Compile Include="Services\Noit\SubmitServiceTests\ConstructorTests.cs" />
     <Compile Include="Services\Noit\SubmitServiceTests\CreateSubmission.cs" />
     <Compile Include="Services\Noit\SubmitServiceTests\GetCategoriesTests.cs" />
@@ -150,6 +154,12 @@
     <Compile Include="Web\Noit\FullTestControllerTests\ReceiveAnswerTests.cs" />
     <Compile Include="Web\Noit\FullTestControllerTests\StartTestTests.cs" />
     <Compile Include="Web\Noit\FullTestControllerTests\TestTests.cs" />
+    <Compile Include="Web\Noit\ModerationControllerTests\ApproveTests.cs" />
+    <Compile Include="Web\Noit\ModerationControllerTests\ConstructorTests.cs" />
+    <Compile Include="Web\Noit\ModerationControllerTests\IndexTests.cs" />
+    <Compile Include="Web\Noit\ModerationControllerTests\QuestionTests.cs" />
+    <Compile Include="Web\Noit\ModerationControllerTests\Submissions.cs" />
+    <Compile Include="Web\Noit\ModerationControllerTests\SubmissionTests.cs" />
     <Compile Include="Web\Noit\SubmitControllerTests\ConstructorTests.cs" />
     <Compile Include="Web\Noit\SubmitControllerTests\CreateSubmissionTests.cs" />
     <Compile Include="Web\Noit\SubmitControllerTests\IndexTests.cs" />
