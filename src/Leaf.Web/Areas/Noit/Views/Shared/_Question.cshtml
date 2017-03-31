@@ -7,8 +7,23 @@
 
     <div class="answer-holder">
         @*Shuffle the order of the answers *@
+        @{
+            var random = new Random();
 
-        @foreach (var answer in Model.Answers)
+            var shuffledAnswers = Model.Answers.ToArray();
+
+            //shuffle the array
+            for (int i = 0; i < shuffledAnswers.Length; i++)
+            {
+                var ramdonNumber = random.Next(0, shuffledAnswers.Length);
+
+                var temp = shuffledAnswers[i];
+                shuffledAnswers[i] = shuffledAnswers[ramdonNumber];
+                shuffledAnswers[ramdonNumber] = temp;
+            }
+        }
+
+        @foreach (var answer in shuffledAnswers)
         {
             @Html.ActionLink(answer.Content,
                "ReceiveAnswer",
