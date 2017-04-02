@@ -55,6 +55,7 @@ namespace Leaf.Web.Areas.Noit.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public RedirectToRouteResult CreateSubmission(NewSubmitViewModel viewModel)
         {
             var userId = authenticationProvider.CurrentUserId;
