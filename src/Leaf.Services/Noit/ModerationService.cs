@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Bytes2you.Validation;
 using Leaf.Auth.Contracts;
 using Leaf.Commom;
@@ -39,7 +40,9 @@ namespace Leaf.Services.Noit
 
         public IEnumerable<Submission> GetPendingSubmissions()
         {
-            var submissions = this.submissionRepository.GetAll(x => x.State == SubmissionState.Pending);
+            var submissions = this.submissionRepository.Entities
+                .Where(x => x.State == SubmissionState.Pending)
+                .ToList();
 
             return submissions;
         }

@@ -55,7 +55,10 @@ namespace Leaf.Services.Noit
 
         public Test GetLastTestByUserId(string userId)
         {
-            return this.testRepository.Entities.LastOrDefault(x => x.UserId == userId);
+            return this.testRepository.Entities
+                .Where(x => x.UserId == userId)
+                .OrderByDescending(x => x.Id)
+                .FirstOrDefault();
         }
 
         public Test GetTestById(int testId)

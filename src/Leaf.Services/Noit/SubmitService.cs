@@ -65,7 +65,7 @@ namespace Leaf.Services.Noit
 
         public IEnumerable<SelectListItem> GetCategories()
         {
-            var categories = categoryRepository.GetAll().Select(x =>
+            var categories = categoryRepository.Entities.Select(x =>
                                 new SelectListItem
                                 {
                                     Value = x.Name,

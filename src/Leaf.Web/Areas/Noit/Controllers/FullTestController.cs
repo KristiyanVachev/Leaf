@@ -43,8 +43,11 @@ namespace Leaf.Web.Areas.Noit.Controllers
             return RedirectToAction("Test", "FullTest", testViewModel);
         }
 
-        public ActionResult ReceiveAnswer(int questionId, int answerId)
+        public ActionResult ReceiveAnswer(int testId, int questionId, int answerId)
         {
+            //Use given testId rather than retrieving it from the user
+            //Check if test is not finished and user is owner
+
             var userId = this.authenticationProvider.CurrentUserId;
             var userTest = this.fullGameService.GetUserTest(userId);
 
@@ -63,7 +66,11 @@ namespace Leaf.Web.Areas.Noit.Controllers
             if (nextQuestion != null)
             //if (!test.IsFinished)
             {
-                var nextQuestionViewModel = new NextQuestionViewModel(nextQuestion.Id, nextQuestion.Condition, nextQuestion.Answers);
+                var nextQuestionViewModel = new NextQuestionViewModel(viewModel.TestId, 
+                    nextQuestion.Id,
+                    nextQuestion.Condition, 
+                    nextQuestion.Answers);
+
                 return View("Test", nextQuestionViewModel);
             }
             

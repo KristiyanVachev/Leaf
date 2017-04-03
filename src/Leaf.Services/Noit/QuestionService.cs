@@ -37,13 +37,13 @@ namespace Leaf.Services.Noit
         {
             var questions = new List<Question>();
 
-            var categoryIds = this.categoryRepository.Entities.Select(x => x.Id);
+            var categoryIds = this.categoryRepository.Entities.Select(x => x.Id).ToList();
 
             foreach (var categoryId in categoryIds)
             {
                 //TODO: Optimization: Avoid sorting all the questions by getting all the needed question's Id's and then getting 3 random Id's
-                var categoryQuestions = this.questionRepository
-                    .GetAll(x => x.CategoryId == categoryId)
+                var categoryQuestions = this.questionRepository.Entities
+                    .Where(x => x.CategoryId == categoryId)
                     .OrderBy(x => Guid.NewGuid())
                     .Take(Constants.QuestionsPerCategory);
 
@@ -61,7 +61,7 @@ namespace Leaf.Services.Noit
             var newQuestion = this.questionFactory.CreateQuestion(submission.Condition);
 
             //Category
-            var category = categoryRepository.GetAll(x => x.Name == submission.Category).FirstOrDefault();
+            var category = categoryRepository.Entities.FirstOrDefault(x => x.Name == submission.Category);
             newQuestion.Category = category;
 
             //Answers

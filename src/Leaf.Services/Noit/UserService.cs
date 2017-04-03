@@ -62,7 +62,7 @@ namespace Leaf.Services.Noit
 
         public IEnumerable<User> GetAll()
         {
-            return this.userRepository.GetAll().ToList();
+            return this.userRepository.Entities.ToList();
         }
     }
 }

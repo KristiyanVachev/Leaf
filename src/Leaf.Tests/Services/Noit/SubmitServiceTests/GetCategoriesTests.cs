@@ -37,7 +37,7 @@ namespace Leaf.Tests.Services.Noit.SubmitServiceTests
             service.GetCategories();
 
             //Assert
-            mockCategoryRepository.Verify(x => x.GetAll(), Times.Once);
+            mockCategoryRepository.Verify(x => x.Entities, Times.Once);
         }
 
         [Test]

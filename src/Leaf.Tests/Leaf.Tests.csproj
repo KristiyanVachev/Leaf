@@ -116,7 +116,6 @@
     <Compile Include="Data\RepositoryTests\ConstructorTests.cs" />
     <Compile Include="Data\RepositoryTests\DeleteTests.cs" />
     <Compile Include="Data\RepositoryTests\Fakes\FakeRepositoryType.cs" />
-    <Compile Include="Data\RepositoryTests\GetAllTests.cs" />
     <Compile Include="Data\RepositoryTests\GetByIdTests.cs" />
     <Compile Include="Data\RepositoryTests\UpdateTests.cs" />
     <Compile Include="Data\UnitOfWorkTests\CommitTests.cs" />

@@ -3,7 +3,6 @@ using Leaf.Auth.Contracts;
 using Leaf.Commom;
 using Leaf.Data.Contracts;
 using Leaf.Models;
-using Leaf.Models.Enums;
 using Leaf.Services.Contracts;
 using Leaf.Services.Noit;
 using Moq;
@@ -35,7 +34,7 @@ namespace Leaf.Tests.Services.Noit.ModerationServiceTests
             controller.GetPendingSubmissions();
 
             //Assert
-            mockSubmissionRepository.Verify(x => x.GetAll(y => y.State == SubmissionState.Pending), Times.Once);
+            mockSubmissionRepository.Verify(x => x.Entities, Times.Once);
         }
 
         [Test]
