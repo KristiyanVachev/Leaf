@@ -1,5 +1,5 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
+using Bytes2you.Validation;
 using Leaf.Data.Contracts;
 
 namespace Leaf.Data
@@ -11,10 +11,7 @@ namespace Leaf.Data
 
         public Repository(ILeafDbContext dbContext)
         {
-            if (dbContext == null)
-            {
-                throw new ArgumentNullException("dbContext cannot be null");
-            }
+            Guard.WhenArgument(dbContext, "dbContext cannot be null").IsNull().Throw();
 
             this.dbContext = dbContext;
         }
