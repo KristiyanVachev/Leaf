@@ -1,4 +1,5 @@
-﻿using Leaf.Data.Contracts;
+﻿using Leaf.Auth.Contracts;
+using Leaf.Data.Contracts;
 using Leaf.Factories;
 using Leaf.Models;
 using Leaf.Services.Contracts;
@@ -18,8 +19,12 @@ namespace Leaf.Tests.Services.Noit.FullTestServiceTests
             //Arrange
             var mockTestService = new Mock<ITestService>();
             var mockUserService = new Mock<IUserService>();
+            var mockAuthenticationProvider = new Mock<IAuthenticationProvider>();
 
-            var service = new FullTestService(mockTestService.Object, mockUserService.Object);
+            var service = new FullTestService(mockTestService.Object,
+                mockUserService.Object,
+                mockAuthenticationProvider.Object);
+         
             //Act 
             service.HasUnfinishedTest(userId);
 
@@ -36,8 +41,12 @@ namespace Leaf.Tests.Services.Noit.FullTestServiceTests
             mockTestService.Setup(x => x.IsNullOrFinished(It.IsAny<Test>())).Returns(false);
 
             var mockUserService = new Mock<IUserService>();
+            var mockAuthenticationProvider = new Mock<IAuthenticationProvider>();
 
-            var service = new FullTestService(mockTestService.Object, mockUserService.Object);
+            var service = new FullTestService(mockTestService.Object,
+                mockUserService.Object,
+                mockAuthenticationProvider.Object);           
+            
             //Act 
             var result = service.HasUnfinishedTest(userId);
 
@@ -54,8 +63,12 @@ namespace Leaf.Tests.Services.Noit.FullTestServiceTests
             mockTestService.Setup(x => x.IsNullOrFinished(It.IsAny<Test>())).Returns(true);
 
             var mockUserService = new Mock<IUserService>();
+            var mockAuthenticationProvider = new Mock<IAuthenticationProvider>();
 
-            var service = new FullTestService(mockTestService.Object, mockUserService.Object);
+            var service = new FullTestService(mockTestService.Object,
+                mockUserService.Object,
+                mockAuthenticationProvider.Object);
+
             //Act 
             var result = service.HasUnfinishedTest(userId);
 

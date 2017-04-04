@@ -1,4 +1,5 @@
-﻿using Leaf.Data.Contracts;
+﻿using Leaf.Auth.Contracts;
+using Leaf.Data.Contracts;
 using Leaf.Factories;
 using Leaf.Models;
 using Leaf.Services.Contracts;
@@ -18,6 +19,7 @@ namespace Leaf.Tests.Services.Noit.FullTestServiceTests
             //Arrange
             var mockTestService = new Mock<ITestService>();
             var mockUserService = new Mock<IUserService>();
+            var mockAuthenticationProvider = new Mock<IAuthenticationProvider>();
 
             var fakaTest = new Test
             {
@@ -26,7 +28,9 @@ namespace Leaf.Tests.Services.Noit.FullTestServiceTests
 
             mockTestService.Setup(x => x.GetTestById(id)).Returns(fakaTest);
 
-            var service = new FullTestService(mockTestService.Object, mockUserService.Object);
+            var service = new FullTestService(mockTestService.Object,
+                mockUserService.Object,
+                mockAuthenticationProvider.Object);
 
             //Act 
             service.GetNextQuestion(id);
@@ -42,6 +46,7 @@ namespace Leaf.Tests.Services.Noit.FullTestServiceTests
             //Arrange
             var mockTestService = new Mock<ITestService>();
             var mockUserService = new Mock<IUserService>();
+            var mockAuthenticationProvider = new Mock<IAuthenticationProvider>();
 
             var fakeQuestion = new Question();
             var fakaTest = new Test
@@ -51,7 +56,9 @@ namespace Leaf.Tests.Services.Noit.FullTestServiceTests
 
             mockTestService.Setup(x => x.GetTestById(id)).Returns(fakaTest);
 
-            var service = new FullTestService(mockTestService.Object, mockUserService.Object);
+            var service = new FullTestService(mockTestService.Object,
+                mockUserService.Object,
+                mockAuthenticationProvider.Object);
 
             //Act 
             var result = service.GetNextQuestion(id);

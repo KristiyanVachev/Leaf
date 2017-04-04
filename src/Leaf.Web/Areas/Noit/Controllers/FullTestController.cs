@@ -45,26 +45,33 @@ namespace Leaf.Web.Areas.Noit.Controllers
 
         public ActionResult ReceiveAnswer(int testId, int questionId, int answerId)
         {
-            //Use given testId rather than retrieving it from the user
-            //Check if test is not finished and user is owner
+            var userIsOwner = this.fullGameService.UserIsOwner(testId);
 
-            var userId = this.authenticationProvider.CurrentUserId;
-            var userTest = this.fullGameService.GetUserTest(userId);
+            if (!userIsOwner)
+            {
+                return RedirectToAction("NotFound", "Error");
+            }
 
             //Send answer
-            this.fullGameService.SendAnswer(userTest.Id, questionId, answerId);
+            this.fullGameService.SendAnswer(testId, questionId, answerId);
 
             //Return test result
-            var testViewModel = new TestViewModel(userTest.Id);
+            var testViewModel = new TestViewModel(testId);
             return RedirectToAction("Test", "FullTest", testViewModel);
         }
 
         public ActionResult Test(TestViewModel viewModel)
         {
+            var userIsOwner = this.fullGameService.UserIsOwner(viewModel.TestId);
+
+            if (!userIsOwner)
+            {
+                return RedirectToAction("NotFound", "Error");
+            }
+
             var nextQuestion = this.fullGameService.GetNextQuestion(viewModel.TestId);
 
             if (nextQuestion != null)
-            //if (!test.IsFinished)
             {
                 var nextQuestionViewModel = new NextQuestionViewModel(viewModel.TestId, 
                     nextQuestion.Id,
