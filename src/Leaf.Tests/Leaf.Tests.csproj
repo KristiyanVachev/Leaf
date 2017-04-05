@@ -133,7 +133,7 @@
     <Compile Include="Services\Noit\FullTestServiceTests\ConstructorTests.cs" />
     <Compile Include="Services\Noit\FullTestServiceTests\GetNextQuestionTests.cs" />
     <Compile Include="Services\Noit\FullTestServiceTests\GetTestByIdTests.cs" />
-    <Compile Include="Services\Noit\FullTestServiceTests\GetUserTestTests.cs" />
+    <Compile Include="Services\Noit\FullTestServiceTests\CreateTestTests.cs" />
     <Compile Include="Services\Noit\FullTestServiceTests\HasUnfinishedTestTests.cs" />
     <Compile Include="Services\Noit\ModerationServiceTests\ApproveTests.cs" />
     <Compile Include="Services\Noit\ModerationServiceTests\ConstructorTests.cs" />

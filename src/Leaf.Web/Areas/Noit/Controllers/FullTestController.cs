@@ -26,17 +26,17 @@ namespace Leaf.Web.Areas.Noit.Controllers
         {
             //TODO: List previous tests with their results
 
-            var userId = this.authenticationProvider.CurrentUserId;
-            var hasUnfinishedTest = this.fullGameService.HasUnfinishedTest(userId);
+            var hasUnfinishedTest = this.fullGameService.HasUnfinishedTest();
 
             //Return test result
             return View("FullTest", hasUnfinishedTest);
         }
 
-        public ActionResult StartTest()
+        public ActionResult GetUserTest()
         {
-            var userId = this.authenticationProvider.CurrentUserId;
-            var userTest = this.fullGameService.GetUserTest(userId);
+            var hasUnfinishedTest = this.fullGameService.HasUnfinishedTest();
+
+            var userTest = hasUnfinishedTest ? this.fullGameService.ContinueTest() : this.fullGameService.CreateTest();
 
             //Return test result
             var testViewModel = new TestViewModel(userTest.Id);

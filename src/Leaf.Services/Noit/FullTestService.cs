@@ -24,23 +24,27 @@ namespace Leaf.Services.Noit
             this.authenticationProvider = authenticationProvider;
         }
 
-        public bool HasUnfinishedTest(string userId)
+        public bool HasUnfinishedTest()
         {
+            var userId = this.authenticationProvider.CurrentUserId;
+
             var userTest = this.testService.GetLastTestByUserId(userId);
 
             return !this.testService.IsNullOrFinished(userTest);
         }
 
-        public Test GetUserTest(string userId)
+        public Test ContinueTest()
         {
-            var userTest = this.testService.GetLastTestByUserId(userId);
+            var userId = this.authenticationProvider.CurrentUserId;
 
-            if (this.testService.IsNullOrFinished(userTest))
-            {
-                userTest = this.testService.CreateTest(userId);
-            }
+            return this.testService.GetLastTestByUserId(userId);
+        }
 
-            return userTest;
+        public Test CreateTest()
+        {
+            var userId = this.authenticationProvider.CurrentUserId;
+
+            return this.testService.CreateTest(userId);
         }
 
         public Test GetTestById(int testId)

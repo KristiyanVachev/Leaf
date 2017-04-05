@@ -11,21 +11,6 @@ namespace Leaf.Tests.Web.Noit.FullTestControllerTests
     public class IndexTests
     {
         [Test]
-        public void Index_ShouldCallAutnenticationProviderCurrentUserId()
-        {
-            //Arrange
-            var mockFullTestService = new Mock<IFullGameService>();
-            var mockAuthenticationProvider = new Mock<IAuthenticationProvider>();
-            var controller = new FullTestController(mockFullTestService.Object, mockAuthenticationProvider.Object);
-            
-            //Act
-            controller.Index();
-
-            //Assert
-            mockAuthenticationProvider.Verify(x => x.CurrentUserId, Times.Once);
-        }
-
-        [Test]
         public void Index_ShouldCallServiceHasUnfinishedTests()
         {
             //Arrange
@@ -37,7 +22,7 @@ namespace Leaf.Tests.Web.Noit.FullTestControllerTests
             controller.Index();
 
             //Assert
-            mockFullTestService.Verify(x => x.HasUnfinishedTest(It.IsAny<string>()), Times.Once);
+            mockFullTestService.Verify(x => x.HasUnfinishedTest(), Times.Once);
         }
 
         [Test]

@@ -1,6 +1,4 @@
 ﻿using Leaf.Auth.Contracts;
-using Leaf.Data.Contracts;
-using Leaf.Factories;
 using Leaf.Models;
 using Leaf.Services.Contracts;
 using Leaf.Services.Noit;
@@ -10,69 +8,69 @@ using NUnit.Framework;
 namespace Leaf.Tests.Services.Noit.FullTestServiceTests
 {
     [TestFixture]
-    public class GetUserTestTests
+    public class CreateTestTests
     {
+        [Test]
+        public void CreateTest_ShouldCallGetUserId()
+        {
+            //Arrange
+            var mockTestService = new Mock<ITestService>();
+            mockTestService.Setup(x => x.IsNullOrFinished(It.IsAny<Test>())).Returns(true);
+
+            var mockUserService = new Mock<IUserService>();
+            var mockAuthenticationProvider = new Mock<IAuthenticationProvider>();
+
+            var service = new FullTestService(mockTestService.Object,
+                mockUserService.Object,
+                mockAuthenticationProvider.Object);
+            //Act 
+            service.CreateTest();
+
+            //Assert
+            mockAuthenticationProvider.Verify(x => x.CurrentUserId, Times.Once);
+        }
+
         [TestCase("3")]
         [TestCase("dsdws")]
-        public void GetUserTest_ShouldCallGetLastTestByUserId_WithCorrectId(string id)
+        public void CreateTest_ShouldCallCreateTest_WithCorrectId(string id)
         {
             //Arrange
             var mockTestService = new Mock<ITestService>();
             var mockUserService = new Mock<IUserService>();
             var mockAuthenticationProvider = new Mock<IAuthenticationProvider>();
 
+            mockAuthenticationProvider.Setup(x => x.CurrentUserId).Returns(id);
+
             var service = new FullTestService(mockTestService.Object,
                 mockUserService.Object,
                 mockAuthenticationProvider.Object);
 
             //Act 
-            service.GetUserTest(id);
+            service.CreateTest();
 
             //Assert
-            mockTestService.Verify(x => x.GetLastTestByUserId(id), Times.Once);   
+            mockTestService.Verify(x => x.CreateTest(id), Times.Once);   
         }
 
         [TestCase("4")]
         [TestCase("fasfs")]
-        public void GetUserTest_ShouldCallCreateTest_WhenTestIsUnfinished(string id)
+        public void CreateTest_ShouldReturnCreatedTest(string id)
         {
             //Arrange
             var mockTestService = new Mock<ITestService>();
-            mockTestService.Setup(x => x.IsNullOrFinished(It.IsAny<Test>())).Returns(true);
-
-            var mockUserService = new Mock<IUserService>();
-            var mockAuthenticationProvider = new Mock<IAuthenticationProvider>();
-
-            var service = new FullTestService(mockTestService.Object,
-                mockUserService.Object,
-                mockAuthenticationProvider.Object);
-            //Act 
-            service.GetUserTest(id);
-
-            //Assert
-            mockTestService.Verify(x => x.CreateTest(id), Times.Once);
-        }
-
-        [TestCase("4")]
-        [TestCase("fasfs")]
-        public void GetUserTest_ShouldReturnCreatedTest_WhenLastTestIsUnfinished(string id)
-        {
-            //Arrange
-            var mockTestService = new Mock<ITestService>();
-            mockTestService.Setup(x => x.IsNullOrFinished(It.IsAny<Test>())).Returns(true);
-
             var mockTest = new Mock<Test>();
             mockTestService.Setup(x => x.CreateTest(id)).Returns(mockTest.Object);
 
             var mockUserService = new Mock<IUserService>();
             var mockAuthenticationProvider = new Mock<IAuthenticationProvider>();
+            mockAuthenticationProvider.Setup(x => x.CurrentUserId).Returns(id);
 
             var service = new FullTestService(mockTestService.Object,
                 mockUserService.Object,
                 mockAuthenticationProvider.Object);
 
             //Act 
-            var result = service.GetUserTest(id);
+            var result = service.CreateTest();
 
             //Assert
             Assert.AreSame(mockTest.Object, result);

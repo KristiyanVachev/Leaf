@@ -20,13 +20,14 @@ namespace Leaf.Tests.Services.Noit.FullTestServiceTests
             var mockTestService = new Mock<ITestService>();
             var mockUserService = new Mock<IUserService>();
             var mockAuthenticationProvider = new Mock<IAuthenticationProvider>();
+            mockAuthenticationProvider.Setup(x => x.CurrentUserId).Returns(userId);
 
             var service = new FullTestService(mockTestService.Object,
                 mockUserService.Object,
                 mockAuthenticationProvider.Object);
          
             //Act 
-            service.HasUnfinishedTest(userId);
+            service.HasUnfinishedTest();
 
             //Assert
             mockTestService.Verify(x => x.GetLastTestByUserId(userId), Times.Once);
@@ -48,7 +49,7 @@ namespace Leaf.Tests.Services.Noit.FullTestServiceTests
                 mockAuthenticationProvider.Object);           
             
             //Act 
-            var result = service.HasUnfinishedTest(userId);
+            var result = service.HasUnfinishedTest();
 
             //Assert
             Assert.IsTrue(result);
@@ -70,7 +71,7 @@ namespace Leaf.Tests.Services.Noit.FullTestServiceTests
                 mockAuthenticationProvider.Object);
 
             //Act 
-            var result = service.HasUnfinishedTest(userId);
+            var result = service.HasUnfinishedTest();
 
             //Assert
             Assert.IsFalse(result);

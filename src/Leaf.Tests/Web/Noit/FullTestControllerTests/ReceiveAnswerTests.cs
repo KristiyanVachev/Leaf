@@ -18,7 +18,6 @@ namespace Leaf.Tests.Web.Noit.FullTestControllerTests
         {
             //Arrange
             var mockFullTestService = new Mock<IFullGameService>();
-            mockFullTestService.Setup(x => x.GetUserTest(It.IsAny<string>())).Returns(new Test { Id = testId });
             mockFullTestService.Setup(x => x.UserIsOwner(It.IsAny<int>())).Returns(true);
 
             var mockAuthenticationProvider = new Mock<IAuthenticationProvider>();
@@ -38,7 +37,6 @@ namespace Leaf.Tests.Web.Noit.FullTestControllerTests
         {
             //Arrange
             var mockFullTestService = new Mock<IFullGameService>();
-            mockFullTestService.Setup(x => x.GetUserTest(It.IsAny<string>())).Returns(new Test { Id = 0 });
             mockFullTestService.Setup(x => x.UserIsOwner(It.IsAny<int>())).Returns(true);
 
             var mockAuthenticationProvider = new Mock<IAuthenticationProvider>();
