@@ -1,5 +1,4 @@
-﻿using Leaf.Auth.Contracts;
-using Leaf.Services.Contracts;
+﻿using Leaf.Services.Contracts;
 using Leaf.Web.Areas.Noit.Controllers;
 using Moq;
 using NUnit.Framework;
@@ -15,8 +14,7 @@ namespace Leaf.Tests.Web.Noit.FullTestControllerTests
         {
             //Arrange
             var mockFullTestService = new Mock<IFullGameService>();
-            var mockAuthenticationProvider = new Mock<IAuthenticationProvider>();
-            var controller = new FullTestController(mockFullTestService.Object, mockAuthenticationProvider.Object);
+            var controller = new FullTestController(mockFullTestService.Object);
 
             //Act
             controller.Index();
@@ -30,8 +28,7 @@ namespace Leaf.Tests.Web.Noit.FullTestControllerTests
         {
             //Arrange
             var mockFullTestService = new Mock<IFullGameService>();
-            var mockAuthenticationProvider = new Mock<IAuthenticationProvider>();
-            var controller = new FullTestController(mockFullTestService.Object, mockAuthenticationProvider.Object);
+            var controller = new FullTestController(mockFullTestService.Object);
 
             //Act && Assert
             controller.WithCallTo(x => x.Index()).ShouldRenderView("FullTest");

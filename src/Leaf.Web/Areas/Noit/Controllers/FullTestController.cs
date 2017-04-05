@@ -10,15 +10,12 @@ namespace Leaf.Web.Areas.Noit.Controllers
     public class FullTestController : Controller
     {
         private readonly IFullGameService fullGameService;
-        private readonly IAuthenticationProvider authenticationProvider;
 
-        public FullTestController(IFullGameService fullGameService, IAuthenticationProvider authenticationProvider)
+        public FullTestController(IFullGameService fullGameService)
         {
             Guard.WhenArgument(fullGameService, "FullGameService cannot be null").IsNull().Throw();
-            Guard.WhenArgument(authenticationProvider, "AuthenticationProvider cannot be null").IsNull().Throw();
 
             this.fullGameService = fullGameService;
-            this.authenticationProvider = authenticationProvider;
         }
 
         // GET: Noit/FullTest

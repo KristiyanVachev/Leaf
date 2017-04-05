@@ -1,6 +1,4 @@
-﻿using Leaf.Auth.Contracts;
-using Leaf.Models;
-using Leaf.Services.Contracts;
+﻿using Leaf.Services.Contracts;
 using Leaf.Web.Areas.Noit.Controllers;
 using Leaf.Web.Areas.Noit.Models.FullTest;
 using Moq;
@@ -20,9 +18,7 @@ namespace Leaf.Tests.Web.Noit.FullTestControllerTests
             var mockFullTestService = new Mock<IFullGameService>();
             mockFullTestService.Setup(x => x.UserIsOwner(It.IsAny<int>())).Returns(true);
 
-            var mockAuthenticationProvider = new Mock<IAuthenticationProvider>();
-
-            var controller = new FullTestController(mockFullTestService.Object, mockAuthenticationProvider.Object);
+            var controller = new FullTestController(mockFullTestService.Object);
 
             //Act
             controller.ReceiveAnswer(testId, questionId, answerId);
@@ -39,8 +35,7 @@ namespace Leaf.Tests.Web.Noit.FullTestControllerTests
             var mockFullTestService = new Mock<IFullGameService>();
             mockFullTestService.Setup(x => x.UserIsOwner(It.IsAny<int>())).Returns(true);
 
-            var mockAuthenticationProvider = new Mock<IAuthenticationProvider>();
-            var controller = new FullTestController(mockFullTestService.Object, mockAuthenticationProvider.Object);
+            var controller = new FullTestController(mockFullTestService.Object);
 
             //Act && Assert
             controller.WithCallTo(x => x.ReceiveAnswer(testId, questionId, answerId)).ShouldRedirectTo(x => x.Test(It.IsAny<TestViewModel>()));

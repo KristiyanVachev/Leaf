@@ -22,10 +22,7 @@ namespace Leaf.Tests.Web.Noit.FullTestControllerTests
             mockFullTestService.Setup(x => x.GetTestById(It.IsAny<int>())).Returns(fakeTest);
             mockFullTestService.Setup(x => x.UserIsOwner(It.IsAny<int>())).Returns(true);
 
-            var mockAuthenticationProvider = new Mock<IAuthenticationProvider>();
-            mockAuthenticationProvider.Setup(x => x.CurrentUserId).Returns(It.IsAny<string>());
-
-            var controller = new FullTestController(mockFullTestService.Object, mockAuthenticationProvider.Object);
+            var controller = new FullTestController(mockFullTestService.Object);
             var fakeTestViewModel = new TestViewModel(testId);
 
             //Act
@@ -44,9 +41,7 @@ namespace Leaf.Tests.Web.Noit.FullTestControllerTests
             mockFullTestService.Setup(x => x.GetNextQuestion(testId)).Returns(new Question());
             mockFullTestService.Setup(x => x.UserIsOwner(It.IsAny<int>())).Returns(true);
 
-            var mockAuthenticationProvider = new Mock<IAuthenticationProvider>();
-
-            var controller = new FullTestController(mockFullTestService.Object, mockAuthenticationProvider.Object);
+            var controller = new FullTestController(mockFullTestService.Object);
             var fakeTestViewModel = new TestViewModel(testId);
 
             //Act
@@ -66,9 +61,7 @@ namespace Leaf.Tests.Web.Noit.FullTestControllerTests
             mockFullTestService.Setup(x => x.GetTestById(It.IsAny<int>())).Returns(fakeTest);
             mockFullTestService.Setup(x => x.UserIsOwner(It.IsAny<int>())).Returns(true);
 
-            var mockAuthenticationProvider = new Mock<IAuthenticationProvider>();
-
-            var controller = new FullTestController(mockFullTestService.Object, mockAuthenticationProvider.Object);
+            var controller = new FullTestController(mockFullTestService.Object);
             var fakeTestViewModel = new TestViewModel(testId);
 
             //Act
@@ -88,9 +81,7 @@ namespace Leaf.Tests.Web.Noit.FullTestControllerTests
             mockFullTestService.Setup(x => x.GetTestById(It.IsAny<int>())).Returns(fakeTest);
             mockFullTestService.Setup(x => x.UserIsOwner(It.IsAny<int>())).Returns(true);
 
-            var mockAuthenticationProvider = new Mock<IAuthenticationProvider>();
-
-            var controller = new FullTestController(mockFullTestService.Object, mockAuthenticationProvider.Object);
+            var controller = new FullTestController(mockFullTestService.Object);
             var fakeTestViewModel = new TestViewModel(testId);
 
             //Act

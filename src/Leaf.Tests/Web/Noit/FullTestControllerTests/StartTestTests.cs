@@ -1,5 +1,4 @@
-﻿using Leaf.Auth.Contracts;
-using Leaf.Models;
+﻿using Leaf.Models;
 using Leaf.Services.Contracts;
 using Leaf.Web.Areas.Noit.Controllers;
 using Leaf.Web.Areas.Noit.Models.FullTest;
@@ -21,8 +20,7 @@ namespace Leaf.Tests.Web.Noit.FullTestControllerTests
 
             mockFullTestService.Setup(x => x.ContinueTest()).Returns(new Test { Id = 0 });
 
-            var mockAuthenticationProvider = new Mock<IAuthenticationProvider>();
-            var controller = new FullTestController(mockFullTestService.Object, mockAuthenticationProvider.Object);
+            var controller = new FullTestController(mockFullTestService.Object);
 
             //Act && Assert
             controller.WithCallTo(x => x.GetUserTest()).ShouldRedirectTo(x => x.Test(It.IsAny<TestViewModel>()));

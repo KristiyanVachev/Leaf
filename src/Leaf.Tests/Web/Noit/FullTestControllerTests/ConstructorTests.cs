@@ -1,5 +1,4 @@
 ﻿using System;
-using Leaf.Auth.Contracts;
 using Leaf.Services.Contracts;
 using Leaf.Web.Areas.Noit.Controllers;
 using Moq;
@@ -15,10 +14,9 @@ namespace Leaf.Tests.Web.Noit.FullTestControllerTests
         {
             // Arrange
             var mockFullTestService = new Mock<IFullGameService>();
-            var mockAuthenticationProvider = new Mock<IAuthenticationProvider>();
 
             // Act
-            var controller = new FullTestController(mockFullTestService.Object, mockAuthenticationProvider.Object);
+            var controller = new FullTestController(mockFullTestService.Object);
 
             // Assert
             Assert.IsNotNull(controller);
@@ -27,21 +25,8 @@ namespace Leaf.Tests.Web.Noit.FullTestControllerTests
         [Test]
         public void Constructor_ShouldThrowNullArgumentException_WhenServiceIsNull()
         {
-            //Arrange
-            var mockAuthenticationProvider = new Mock<IAuthenticationProvider>();
-
-            //Act && Assert
-            Assert.Throws<ArgumentNullException>(() => new FullTestController(null, mockAuthenticationProvider.Object));
-        }
-
-        [Test]
-        public void Constructor_ShouldThrowNullArgumentException_WhenAuthenticationProviderIsNull()
-        {
-            //Arrange
-            var mockFullTestService = new Mock<IFullGameService>();
-
-            //Act && Assert
-            Assert.Throws<ArgumentNullException>(() => new FullTestController(mockFullTestService.Object, null));
+            //Arrange && Act && Assert
+            Assert.Throws<ArgumentNullException>(() => new FullTestController(null));
         }
     }
 }
