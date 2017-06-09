@@ -7,7 +7,11 @@ namespace Leaf.Services.Contracts
     {
         Test CreateTest(string userId);
 
+        Test CreatePractice(string userId);
+
         Test GetLastTestByUserId(string userId);
+
+        Test GetLastPracticeByUserId(string userId);
 
         Test GetTestById(int testId);
 

@@ -24,6 +24,8 @@ namespace Leaf.Models
 
         public bool IsLastTestFinished { get; set; }
 
+        public bool IsLastPracticeFinished { get; set; }
+
         public virtual ICollection<Test> Tests
         {
             get { return this.tests; }

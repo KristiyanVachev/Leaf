@@ -28,6 +28,22 @@ namespace Leaf.Web.Areas.Noit.Controllers
             return View("FullTest", hasUnfinishedTest);
         }
 
+        public ActionResult Practice()
+        {
+            var hasUnfinishedPractice = this.fullGameService.HasUnfinishedPractice();
+
+            return View("Practice", hasUnfinishedPractice);
+        }
+
+        public ActionResult GetUserPractice()
+        {
+            var userTest = this.fullGameService.HasUnfinishedPractice() ? this.fullGameService.ContinuePractice() : this.fullGameService.CreatePractice();
+
+            //Return test result
+            var testViewModel = new TestViewModel(userTest.Id);
+            return RedirectToAction("Test", "FullTest", testViewModel);
+        }
+
         public ActionResult GetUserTest()
         {
             var hasUnfinishedTest = this.fullGameService.HasUnfinishedTest();

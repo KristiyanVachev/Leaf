@@ -92,7 +92,7 @@ namespace Leaf.Tests.Services.Noit.TestServiceTests
             service.CreateTest(userId);
 
             //Assert
-            mockTestFactory.Verify(x => x.CreateTest(userId, It.IsAny<IEnumerable<Question>>(), It.IsAny<DateTime>()), Times.Once());
+            mockTestFactory.Verify(x => x.CreateTest(userId, It.IsAny<IEnumerable<Question>>(), It.IsAny<DateTime>(), It.IsAny<string>()), Times.Once());
         }
 
 
@@ -162,7 +162,7 @@ namespace Leaf.Tests.Services.Noit.TestServiceTests
 
             var fakeTest = new Test();
 
-            mockTestFactory.Setup(x => x.CreateTest(It.IsAny<string>(), It.IsAny<IEnumerable<Question>>(), It.IsAny<DateTime>())).Returns(fakeTest);
+            mockTestFactory.Setup(x => x.CreateTest(It.IsAny<string>(), It.IsAny<IEnumerable<Question>>(), It.IsAny<DateTime>(), It.IsAny<string>())).Returns(fakeTest);
 
             var mockDateTimeProvider = new Mock<IDateTimeProvider>();
             var mockUnitOfWork = new Mock<IUnitOfWork>();

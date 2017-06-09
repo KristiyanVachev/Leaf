@@ -1,0 +1,9 @@
+﻿@Model  bool
+@{
+    ViewBag.ButtonText = Model ? "Продължете старата си тренировка" : "Започнете нова тренировка";
+}
+
+<h2>Тренировка</h2>
+
+
+<h3>@Html.ActionLink((string)ViewBag.ButtonText, "GetUserPractice", "FullTest", null, null)</h3>

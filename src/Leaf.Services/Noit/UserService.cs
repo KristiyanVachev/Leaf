@@ -64,5 +64,10 @@ namespace Leaf.Services.Noit
         {
             return this.userRepository.Entities.ToList();
         }
+
+        public User GetById(string id)
+        {
+            return this.userRepository.GetById(id);
+        }
     }
 }

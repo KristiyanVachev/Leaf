@@ -23,6 +23,7 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Тест", "Index", "FullTest", new { area = "Noit" }, null)</li>
+                    <li>@Html.ActionLink("Тренировка", "Practice", "FullTest", new { area = "Noit" }, null)</li>
                     <li>@Html.ActionLink("Изпратете въпрос", "Index", "Submit", new { area = "Noit" }, null)</li>
                     @if (Request.IsAuthenticated && User.IsInRole(Constants.NoitModerator))
                     {

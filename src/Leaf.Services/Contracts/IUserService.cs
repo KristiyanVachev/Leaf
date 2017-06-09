@@ -8,5 +8,7 @@ namespace Leaf.Services.Contracts
         void UpdateUserStatistics(string userId, IDictionary<int, int[]> statistics);
 
         IEnumerable<User> GetAll();
+
+        User GetById(string id);
     }
 }

@@ -45,7 +45,21 @@ namespace Leaf.Services.Noit
             var questions = this.questionService.GetQuestions();
             var currentTime = dateTimeProvider.GetCurrenTime();
 
-            var test = this.testFactory.CreateTest(userId, questions, currentTime);
+            var test = this.testFactory.CreateTest(userId, questions, currentTime, "Test");
+
+            this.testRepository.Add(test);
+            this.unitOfWork.Commit();
+
+            return test;
+        }
+
+        public Test CreatePractice(string userId)
+        {
+            //TODO get tailored questions by user's worst categories
+            var questions = this.questionService.GetQuestions();
+            var currentTime = dateTimeProvider.GetCurrenTime();
+
+            var test = this.testFactory.CreateTest(userId, questions, currentTime, "Practice");
 
             this.testRepository.Add(test);
             this.unitOfWork.Commit();
@@ -58,8 +72,17 @@ namespace Leaf.Services.Noit
             return this.testRepository.Entities
                 .Where(x => x.UserId == userId)
                 .OrderByDescending(x => x.Id)
-                .FirstOrDefault();
+                .FirstOrDefault(x => x.Type == "Test");
         }
+
+        public Test GetLastPracticeByUserId(string userId)
+        {
+            return this.testRepository.Entities
+                .Where(x => x.UserId == userId)
+                .OrderByDescending(x => x.Id)
+                .FirstOrDefault(x => x.Type == "Practice");
+        }
+
 
         public Test GetTestById(int testId)
         {

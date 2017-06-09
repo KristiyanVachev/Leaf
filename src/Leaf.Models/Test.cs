@@ -15,15 +15,18 @@ namespace Leaf.Models
             this.questions = new HashSet<Question>();
         }
 
-        public Test(string userId, ICollection<Question> questions, DateTime createdOn) : this()
+        public Test(string userId, ICollection<Question> questions, DateTime createdOn, string type) : this()
         {
             this.UserId = userId;
             this.questions = questions;
             this.CreatedOn = createdOn;
+            this.Type = type;
             this.IsFinished = false;
         }
 
         public int Id { get; set; }
+
+        public string Type { get; set; }
 
         public bool IsFinished { get; set; }
 

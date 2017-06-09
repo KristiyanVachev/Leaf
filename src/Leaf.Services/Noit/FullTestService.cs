@@ -24,6 +24,15 @@ namespace Leaf.Services.Noit
             this.authenticationProvider = authenticationProvider;
         }
 
+        public bool HasUnfinishedPractice()
+        {
+            var userId = this.authenticationProvider.CurrentUserId;
+
+            var user = this.userService.GetById(userId);
+
+            return user.IsLastPracticeFinished;
+        }
+
         public bool HasUnfinishedTest()
         {
             var userId = this.authenticationProvider.CurrentUserId;
@@ -31,6 +40,22 @@ namespace Leaf.Services.Noit
             var userTest = this.testService.GetLastTestByUserId(userId);
 
             return !this.testService.IsNullOrFinished(userTest);
+        }
+
+        public Test ContinuePractice()
+        {
+            var userId = this.authenticationProvider.CurrentUserId;
+
+            return this.testService.GetLastPracticeByUserId(userId);
+
+            //TODO update user's hasUnfinishedPractice
+        }
+
+        public Test CreatePractice()
+        {
+            var userId = this.authenticationProvider.CurrentUserId;
+
+            return this.testService.CreatePractice(userId);
         }
 
         public Test ContinueTest()

@@ -6,9 +6,15 @@ namespace Leaf.Services.Contracts
     {
         bool HasUnfinishedTest();
 
+        bool HasUnfinishedPractice();
+
         Test ContinueTest();
 
         Test CreateTest();
+
+        Test ContinuePractice();
+
+        Test CreatePractice();
 
         Test GetTestById(int testId);
 
