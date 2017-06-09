@@ -1,7 +1,6 @@
 ﻿using Leaf.Auth.Contracts;
-using Leaf.Data.Contracts;
-using Leaf.Factories;
 using Leaf.Models;
+using Leaf.Models.Enums;
 using Leaf.Services.Contracts;
 using Leaf.Services.Noit;
 using Moq;
@@ -30,7 +29,7 @@ namespace Leaf.Tests.Services.Noit.FullTestServiceTests
             service.HasUnfinishedTest();
 
             //Assert
-            mockTestService.Verify(x => x.GetLastTest(userId), Times.Once);
+            mockTestService.Verify(x => x.GetLastTest(userId, It.IsAny<TestType>()), Times.Once);
         }
 
         [TestCase("4")]

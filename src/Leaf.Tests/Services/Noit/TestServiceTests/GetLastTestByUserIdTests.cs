@@ -2,6 +2,7 @@
 using Leaf.Data.Contracts;
 using Leaf.Factories;
 using Leaf.Models;
+using Leaf.Models.Enums;
 using Leaf.Services.Contracts;
 using Leaf.Services.Noit;
 using Moq;
@@ -32,7 +33,7 @@ namespace Leaf.Tests.Services.Noit.TestServiceTests
             );
 
             //Act
-            service.GetLastTest(userId);
+            service.GetLastTest(userId, It.IsAny<TestType>());
 
             //Assert
             mockTestRepository.Verify(x => x.Entities, Times.Once);

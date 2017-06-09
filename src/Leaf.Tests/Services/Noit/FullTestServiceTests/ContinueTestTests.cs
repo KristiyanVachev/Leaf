@@ -1,5 +1,6 @@
 ﻿using Leaf.Auth.Contracts;
 using Leaf.Models;
+using Leaf.Models.Enums;
 using Leaf.Services.Contracts;
 using Leaf.Services.Noit;
 using Moq;
@@ -49,7 +50,7 @@ namespace Leaf.Tests.Services.Noit.FullTestServiceTests
             service.ContinueTest();
 
             //Assert
-            mockTestService.Verify(x => x.GetLastTest(id), Times.Once);
+            mockTestService.Verify(x => x.GetLastTest(id, It.IsAny<TestType>()), Times.Once);
         }
 
         [TestCase("4")]
@@ -59,7 +60,7 @@ namespace Leaf.Tests.Services.Noit.FullTestServiceTests
             //Arrange
             var mockTestService = new Mock<ITestService>();
             var mockTest = new Mock<Test>();
-            mockTestService.Setup(x => x.GetLastTest(id)).Returns(mockTest.Object);
+            mockTestService.Setup(x => x.GetLastTest(id, It.IsAny<TestType>())).Returns(mockTest.Object);
 
             var mockUserService = new Mock<IUserService>();
             var mockAuthenticationProvider = new Mock<IAuthenticationProvider>();
