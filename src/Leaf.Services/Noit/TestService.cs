@@ -67,6 +67,7 @@ namespace Leaf.Services.Noit
             return test;
         }
 
+        //TODO Merge in one method
         public Test GetLastTestByUserId(string userId)
         {
             return this.testRepository.Entities

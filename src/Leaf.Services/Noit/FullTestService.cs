@@ -24,13 +24,14 @@ namespace Leaf.Services.Noit
             this.authenticationProvider = authenticationProvider;
         }
 
+        //TODO Merge in one method
         public bool HasUnfinishedPractice()
         {
             var userId = this.authenticationProvider.CurrentUserId;
 
-            var user = this.userService.GetById(userId);
+            var userTest = this.testService.GetLastPracticeByUserId(userId);
 
-            return user.IsLastPracticeFinished;
+            return !this.testService.IsNullOrFinished(userTest);
         }
 
         public bool HasUnfinishedTest()
