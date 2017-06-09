@@ -16,7 +16,7 @@ namespace Leaf.Tests.Web.Noit.FullTestControllerTests
             var mockFullTestService = new Mock<IFullGameService>();
 
             // Act
-            var controller = new FullTestController(mockFullTestService.Object);
+            var controller = new TestsController(mockFullTestService.Object);
 
             // Assert
             Assert.IsNotNull(controller);
@@ -26,7 +26,7 @@ namespace Leaf.Tests.Web.Noit.FullTestControllerTests
         public void Constructor_ShouldThrowNullArgumentException_WhenServiceIsNull()
         {
             //Arrange && Act && Assert
-            Assert.Throws<ArgumentNullException>(() => new FullTestController(null));
+            Assert.Throws<ArgumentNullException>(() => new TestsController(null));
         }
     }
 }

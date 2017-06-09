@@ -6,11 +6,11 @@ using Leaf.Web.Areas.Noit.Models.FullTest;
 namespace Leaf.Web.Areas.Noit.Controllers
 {
     [Authorize]
-    public class FullTestController : Controller
+    public class TestsController : Controller
     {
         private readonly IFullGameService fullGameService;
 
-        public FullTestController(IFullGameService fullGameService)
+        public TestsController(IFullGameService fullGameService)
         {
             Guard.WhenArgument(fullGameService, "FullGameService cannot be null").IsNull().Throw();
 
@@ -41,7 +41,7 @@ namespace Leaf.Web.Areas.Noit.Controllers
 
             //Return test result
             var testViewModel = new TestViewModel(userTest.Id);
-            return RedirectToAction("Test", "FullTest", testViewModel);
+            return RedirectToAction("Test", "Tests", testViewModel);
         }
 
         public ActionResult GetUserTest()
@@ -52,7 +52,7 @@ namespace Leaf.Web.Areas.Noit.Controllers
 
             //Return test result
             var testViewModel = new TestViewModel(userTest.Id);
-            return RedirectToAction("Test", "FullTest", testViewModel);
+            return RedirectToAction("Test", "Tests", testViewModel);
         }
 
         public ActionResult ReceiveAnswer(int testId, int questionId, int answerId)
@@ -69,7 +69,7 @@ namespace Leaf.Web.Areas.Noit.Controllers
 
             //Return test result
             var testViewModel = new TestViewModel(testId);
-            return RedirectToAction("Test", "FullTest", testViewModel);
+            return RedirectToAction("Test", "Tests", testViewModel);
         }
 
         public ActionResult Test(TestViewModel viewModel)

@@ -27,7 +27,7 @@
         {
             @Html.ActionLink(answer.Content,
                "ReceiveAnswer",
-               "FullTest",
+               "Tests",
                new {testId = this.Model.TestId ,questionId = this.Model.QuestionId, answerId = answer.Id },
                new { @class = "btn btn-primary answer" })
         }

@@ -20,7 +20,7 @@ namespace Leaf.Tests.Web.Noit.FullTestControllerTests
 
             mockFullTestService.Setup(x => x.ContinueTest()).Returns(new Test { Id = 0 });
 
-            var controller = new FullTestController(mockFullTestService.Object);
+            var controller = new TestsController(mockFullTestService.Object);
 
             //Act && Assert
             controller.WithCallTo(x => x.GetUserTest()).ShouldRedirectTo(x => x.Test(It.IsAny<TestViewModel>()));

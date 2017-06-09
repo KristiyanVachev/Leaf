@@ -18,7 +18,7 @@ namespace Leaf.Tests.Web.Noit.FullTestControllerTests
             var mockFullTestService = new Mock<IFullGameService>();
             mockFullTestService.Setup(x => x.UserIsOwner(It.IsAny<int>())).Returns(true);
 
-            var controller = new FullTestController(mockFullTestService.Object);
+            var controller = new TestsController(mockFullTestService.Object);
 
             //Act
             controller.ReceiveAnswer(testId, questionId, answerId);
@@ -35,7 +35,7 @@ namespace Leaf.Tests.Web.Noit.FullTestControllerTests
             var mockFullTestService = new Mock<IFullGameService>();
             mockFullTestService.Setup(x => x.UserIsOwner(It.IsAny<int>())).Returns(true);
 
-            var controller = new FullTestController(mockFullTestService.Object);
+            var controller = new TestsController(mockFullTestService.Object);
 
             //Act && Assert
             controller.WithCallTo(x => x.ReceiveAnswer(testId, questionId, answerId)).ShouldRedirectTo(x => x.Test(It.IsAny<TestViewModel>()));

@@ -14,7 +14,7 @@ namespace Leaf.Tests.Web.Noit.FullTestControllerTests
         {
             //Arrange
             var mockFullTestService = new Mock<IFullGameService>();
-            var controller = new FullTestController(mockFullTestService.Object);
+            var controller = new TestsController(mockFullTestService.Object);
 
             //Act
             controller.Index();
@@ -28,7 +28,7 @@ namespace Leaf.Tests.Web.Noit.FullTestControllerTests
         {
             //Arrange
             var mockFullTestService = new Mock<IFullGameService>();
-            var controller = new FullTestController(mockFullTestService.Object);
+            var controller = new TestsController(mockFullTestService.Object);
 
             //Act && Assert
             controller.WithCallTo(x => x.Index()).ShouldRenderView("FullTest");
