@@ -2,6 +2,7 @@
 using Bytes2you.Validation;
 using Leaf.Auth.Contracts;
 using Leaf.Models;
+using Leaf.Models.Enums;
 using Leaf.Services.Contracts;
 
 namespace Leaf.Services.Noit
@@ -29,7 +30,7 @@ namespace Leaf.Services.Noit
         {
             var userId = this.authenticationProvider.CurrentUserId;
 
-            var userTest = this.testService.GetLastPracticeByUserId(userId);
+            var userTest = this.testService.GetLastTest(userId, TestType.Practice);
 
             return !this.testService.IsNullOrFinished(userTest);
         }
@@ -38,7 +39,7 @@ namespace Leaf.Services.Noit
         {
             var userId = this.authenticationProvider.CurrentUserId;
 
-            var userTest = this.testService.GetLastTestByUserId(userId);
+            var userTest = this.testService.GetLastTest(userId, TestType.Test);
 
             return !this.testService.IsNullOrFinished(userTest);
         }
@@ -47,7 +48,7 @@ namespace Leaf.Services.Noit
         {
             var userId = this.authenticationProvider.CurrentUserId;
 
-            return this.testService.GetLastPracticeByUserId(userId);
+            return this.testService.GetLastTest(userId, TestType.Practice);
 
             //TODO update user's hasUnfinishedPractice
         }
@@ -63,7 +64,7 @@ namespace Leaf.Services.Noit
         {
             var userId = this.authenticationProvider.CurrentUserId;
 
-            return this.testService.GetLastTestByUserId(userId);
+            return this.testService.GetLastTest(userId, TestType.Test);
         }
 
         public Test CreateTest()

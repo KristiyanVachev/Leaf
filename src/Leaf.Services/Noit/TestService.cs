@@ -5,6 +5,7 @@ using Leaf.Commom;
 using Leaf.Data.Contracts;
 using Leaf.Factories;
 using Leaf.Models;
+using Leaf.Models.Enums;
 using Leaf.Services.Contracts;
 
 namespace Leaf.Services.Noit
@@ -67,23 +68,13 @@ namespace Leaf.Services.Noit
             return test;
         }
 
-        //TODO Merge in one method
-        public Test GetLastTestByUserId(string userId)
+        public Test GetLastTest(string userId, TestType type)
         {
             return this.testRepository.Entities
                 .Where(x => x.UserId == userId)
                 .OrderByDescending(x => x.Id)
-                .FirstOrDefault(x => x.Type == "Test");
+                .FirstOrDefault(x => x.Type == type.ToString());
         }
-
-        public Test GetLastPracticeByUserId(string userId)
-        {
-            return this.testRepository.Entities
-                .Where(x => x.UserId == userId)
-                .OrderByDescending(x => x.Id)
-                .FirstOrDefault(x => x.Type == "Practice");
-        }
-
 
         public Test GetTestById(int testId)
         {

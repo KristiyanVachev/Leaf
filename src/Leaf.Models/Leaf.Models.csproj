@@ -62,6 +62,7 @@
     <Compile Include="Category.cs" />
     <Compile Include="CategoryStatistic.cs" />
     <Compile Include="Enums\SubmissionState.cs" />
+    <Compile Include="Enums\TestType.cs" />
     <Compile Include="Submission.cs" />
     <Compile Include="SubmissionAnswer.cs" />
     <Compile Include="Test.cs" />

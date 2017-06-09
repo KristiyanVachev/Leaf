@@ -32,7 +32,7 @@ namespace Leaf.Tests.Services.Noit.TestServiceTests
             );
 
             //Act
-            service.GetLastTestByUserId(userId);
+            service.GetLastTest(userId);
 
             //Assert
             mockTestRepository.Verify(x => x.Entities, Times.Once);

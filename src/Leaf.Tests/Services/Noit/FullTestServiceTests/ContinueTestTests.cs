@@ -49,7 +49,7 @@ namespace Leaf.Tests.Services.Noit.FullTestServiceTests
             service.ContinueTest();
 
             //Assert
-            mockTestService.Verify(x => x.GetLastTestByUserId(id), Times.Once);
+            mockTestService.Verify(x => x.GetLastTest(id), Times.Once);
         }
 
         [TestCase("4")]
@@ -59,7 +59,7 @@ namespace Leaf.Tests.Services.Noit.FullTestServiceTests
             //Arrange
             var mockTestService = new Mock<ITestService>();
             var mockTest = new Mock<Test>();
-            mockTestService.Setup(x => x.GetLastTestByUserId(id)).Returns(mockTest.Object);
+            mockTestService.Setup(x => x.GetLastTest(id)).Returns(mockTest.Object);
 
             var mockUserService = new Mock<IUserService>();
             var mockAuthenticationProvider = new Mock<IAuthenticationProvider>();

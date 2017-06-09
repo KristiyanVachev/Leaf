@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Leaf.Models;
+using Leaf.Models.Enums;
 
 namespace Leaf.Services.Contracts
 {
@@ -9,9 +10,7 @@ namespace Leaf.Services.Contracts
 
         Test CreatePractice(string userId);
 
-        Test GetLastTestByUserId(string userId);
-
-        Test GetLastPracticeByUserId(string userId);
+        Test GetLastTest(string userId, TestType type);
 
         Test GetTestById(int testId);
 

@@ -30,7 +30,7 @@ namespace Leaf.Tests.Services.Noit.FullTestServiceTests
             service.HasUnfinishedTest();
 
             //Assert
-            mockTestService.Verify(x => x.GetLastTestByUserId(userId), Times.Once);
+            mockTestService.Verify(x => x.GetLastTest(userId), Times.Once);
         }
 
         [TestCase("4")]
