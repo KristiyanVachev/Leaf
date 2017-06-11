@@ -19,7 +19,7 @@ namespace Leaf.Tests.Web.Noit.FullTestControllerTests
             var mockFullTestService = new Mock<IFullGameService>();
             mockFullTestService.Setup(x => x.HasUnfinishedTest(TestType.Test)).Returns(true);
 
-            mockFullTestService.Setup(x => x.ContinueTest()).Returns(new Test { Id = 0 });
+            mockFullTestService.Setup(x => x.ContinueTest(TestType.Test)).Returns(new Test { Id = 0 });
 
             var controller = new TestsController(mockFullTestService.Object);
 

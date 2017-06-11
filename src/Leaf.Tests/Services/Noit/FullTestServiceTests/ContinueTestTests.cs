@@ -25,7 +25,7 @@ namespace Leaf.Tests.Services.Noit.FullTestServiceTests
                 mockUserService.Object,
                 mockAuthenticationProvider.Object);
             //Act 
-            service.ContinueTest();
+            service.ContinueTest(TestType.Test);
 
             //Assert
             mockAuthenticationProvider.Verify(x => x.CurrentUserId, Times.Once);
@@ -47,7 +47,7 @@ namespace Leaf.Tests.Services.Noit.FullTestServiceTests
                 mockAuthenticationProvider.Object);
 
             //Act 
-            service.ContinueTest();
+            service.ContinueTest(TestType.Test);
 
             //Assert
             mockTestService.Verify(x => x.GetLastTest(id, It.IsAny<TestType>()), Times.Once);
@@ -71,7 +71,7 @@ namespace Leaf.Tests.Services.Noit.FullTestServiceTests
                 mockAuthenticationProvider.Object);
 
             //Act 
-            var result = service.ContinueTest();
+            var result = service.ContinueTest(TestType.Test);
 
             //Assert
             Assert.AreSame(mockTest.Object, result);

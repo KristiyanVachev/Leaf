@@ -7,11 +7,9 @@ namespace Leaf.Services.Contracts
     {
         bool HasUnfinishedTest(TestType type);
 
-        Test ContinueTest();
+        Test ContinueTest(TestType type);
 
         Test CreateTest();
-
-        Test ContinuePractice();
 
         Test CreatePractice();
 
