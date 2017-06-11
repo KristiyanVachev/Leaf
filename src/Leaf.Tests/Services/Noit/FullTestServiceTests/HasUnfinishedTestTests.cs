@@ -26,7 +26,7 @@ namespace Leaf.Tests.Services.Noit.FullTestServiceTests
                 mockAuthenticationProvider.Object);
          
             //Act 
-            service.HasUnfinishedTest();
+            service.HasUnfinishedTest(TestType.Test);
 
             //Assert
             mockTestService.Verify(x => x.GetLastTest(userId, It.IsAny<TestType>()), Times.Once);
@@ -48,7 +48,7 @@ namespace Leaf.Tests.Services.Noit.FullTestServiceTests
                 mockAuthenticationProvider.Object);           
             
             //Act 
-            var result = service.HasUnfinishedTest();
+            var result = service.HasUnfinishedTest(TestType.Test);
 
             //Assert
             Assert.IsTrue(result);
@@ -70,7 +70,7 @@ namespace Leaf.Tests.Services.Noit.FullTestServiceTests
                 mockAuthenticationProvider.Object);
 
             //Act 
-            var result = service.HasUnfinishedTest();
+            var result = service.HasUnfinishedTest(TestType.Test);
 
             //Assert
             Assert.IsFalse(result);

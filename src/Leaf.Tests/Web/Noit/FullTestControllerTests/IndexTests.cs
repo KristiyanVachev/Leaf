@@ -1,4 +1,5 @@
-﻿using Leaf.Services.Contracts;
+﻿using Leaf.Models.Enums;
+using Leaf.Services.Contracts;
 using Leaf.Web.Areas.Noit.Controllers;
 using Moq;
 using NUnit.Framework;
@@ -20,7 +21,7 @@ namespace Leaf.Tests.Web.Noit.FullTestControllerTests
             controller.Index();
 
             //Assert
-            mockFullTestService.Verify(x => x.HasUnfinishedTest(), Times.Once);
+            mockFullTestService.Verify(x => x.HasUnfinishedTest(TestType.Test), Times.Once);
         }
 
         [Test]

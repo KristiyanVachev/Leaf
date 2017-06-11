@@ -1,5 +1,6 @@
 ﻿using System.Web.Mvc;
 using Bytes2you.Validation;
+using Leaf.Models.Enums;
 using Leaf.Services.Contracts;
 using Leaf.Web.Areas.Noit.Models.FullTest;
 
@@ -22,7 +23,7 @@ namespace Leaf.Web.Areas.Noit.Controllers
         {
             //TODO: List previous tests with their results
 
-            var hasUnfinishedTest = this.fullGameService.HasUnfinishedTest();
+            var hasUnfinishedTest = this.fullGameService.HasUnfinishedTest(TestType.Test);
 
             //Return test result
             return View("FullTest", hasUnfinishedTest);
@@ -30,14 +31,14 @@ namespace Leaf.Web.Areas.Noit.Controllers
 
         public ActionResult Practice()
         {
-            var hasUnfinishedPractice = this.fullGameService.HasUnfinishedPractice();
+            var hasUnfinishedPractice = this.fullGameService.HasUnfinishedTest(TestType.Practice);
 
             return View("Practice", hasUnfinishedPractice);
         }
 
         public ActionResult GetUserPractice()
         {
-            var userTest = this.fullGameService.HasUnfinishedPractice() ? this.fullGameService.ContinuePractice() : this.fullGameService.CreatePractice();
+            var userTest = this.fullGameService.HasUnfinishedTest(TestType.Practice) ? this.fullGameService.ContinuePractice() : this.fullGameService.CreatePractice();
 
             //Return test result
             var testViewModel = new TestViewModel(userTest.Id);
@@ -46,7 +47,7 @@ namespace Leaf.Web.Areas.Noit.Controllers
 
         public ActionResult GetUserTest()
         {
-            var hasUnfinishedTest = this.fullGameService.HasUnfinishedTest();
+            var hasUnfinishedTest = this.fullGameService.HasUnfinishedTest(TestType.Test);
 
             var userTest = hasUnfinishedTest ? this.fullGameService.ContinueTest() : this.fullGameService.CreateTest();
 

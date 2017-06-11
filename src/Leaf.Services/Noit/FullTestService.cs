@@ -25,21 +25,11 @@ namespace Leaf.Services.Noit
             this.authenticationProvider = authenticationProvider;
         }
 
-        //TODO Merge in one method
-        public bool HasUnfinishedPractice()
+        public bool HasUnfinishedTest(TestType type)
         {
             var userId = this.authenticationProvider.CurrentUserId;
 
-            var userTest = this.testService.GetLastTest(userId, TestType.Practice);
-
-            return !this.testService.IsNullOrFinished(userTest);
-        }
-
-        public bool HasUnfinishedTest()
-        {
-            var userId = this.authenticationProvider.CurrentUserId;
-
-            var userTest = this.testService.GetLastTest(userId, TestType.Test);
+            var userTest = this.testService.GetLastTest(userId, type);
 
             return !this.testService.IsNullOrFinished(userTest);
         }

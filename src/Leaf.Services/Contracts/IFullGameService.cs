@@ -1,12 +1,11 @@
 ﻿using Leaf.Models;
+using Leaf.Models.Enums;
 
 namespace Leaf.Services.Contracts
 {
     public interface IFullGameService
     {
-        bool HasUnfinishedTest();
-
-        bool HasUnfinishedPractice();
+        bool HasUnfinishedTest(TestType type);
 
         Test ContinueTest();
 

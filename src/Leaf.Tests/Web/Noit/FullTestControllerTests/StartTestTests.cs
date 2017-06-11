@@ -1,4 +1,5 @@
 ﻿using Leaf.Models;
+using Leaf.Models.Enums;
 using Leaf.Services.Contracts;
 using Leaf.Web.Areas.Noit.Controllers;
 using Leaf.Web.Areas.Noit.Models.FullTest;
@@ -16,7 +17,7 @@ namespace Leaf.Tests.Web.Noit.FullTestControllerTests
         {
             //Arrange
             var mockFullTestService = new Mock<IFullGameService>();
-            mockFullTestService.Setup(x => x.HasUnfinishedTest()).Returns(true);
+            mockFullTestService.Setup(x => x.HasUnfinishedTest(TestType.Test)).Returns(true);
 
             mockFullTestService.Setup(x => x.ContinueTest()).Returns(new Test { Id = 0 });
 
