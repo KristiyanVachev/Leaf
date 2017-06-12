@@ -3,7 +3,7 @@ using Leaf.Models.Enums;
 
 namespace Leaf.Services.Contracts
 {
-    public interface IFullGameService
+    public interface ITestsService
     {
         Test CreateTest(TestType type);
 

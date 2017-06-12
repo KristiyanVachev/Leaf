@@ -81,13 +81,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Contracts\IFullGameService.cs" />
+    <Compile Include="Contracts\ITestsService.cs" />
     <Compile Include="Contracts\IModerationService.cs" />
     <Compile Include="Contracts\IQuestionService.cs" />
     <Compile Include="Contracts\ISubmitService.cs" />
     <Compile Include="Contracts\ITestService.cs" />
     <Compile Include="Contracts\IUserService.cs" />
-    <Compile Include="Noit\FullTestService.cs" />
+    <Compile Include="Noit\TestsService.cs" />
     <Compile Include="Noit\ModerationService.cs" />
     <Compile Include="Noit\QuestionService.cs" />
     <Compile Include="Noit\SubmitService.cs" />

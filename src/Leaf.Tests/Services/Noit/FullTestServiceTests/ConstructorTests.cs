@@ -18,7 +18,7 @@ namespace Leaf.Tests.Services.Noit.FullTestServiceTests
             var mockAuthenticationProvider = new Mock<IAuthenticationProvider>();
 
             //Act && Assert
-            Assert.DoesNotThrow(() => new FullTestService(mockTestService.Object,
+            Assert.DoesNotThrow(() => new TestsService(mockTestService.Object,
                 mockUserService.Object,
                 mockAuthenticationProvider.Object));
         }

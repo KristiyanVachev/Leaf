@@ -8,7 +8,7 @@ namespace Leaf.Web.App_Start.NinjectModules
     {
         public override void Load()
         {
-            this.Bind<IFullGameService>().To<FullTestService>();
+            this.Bind<ITestsService>().To<TestsService>();
             this.Bind<IQuestionService>().To<QuestionService>();
             this.Bind<ITestService>().To<TestService>();
             this.Bind<ISubmitService>().To<SubmitService>();

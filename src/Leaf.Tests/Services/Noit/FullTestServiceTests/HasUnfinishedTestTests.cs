@@ -21,7 +21,7 @@ namespace Leaf.Tests.Services.Noit.FullTestServiceTests
             var mockAuthenticationProvider = new Mock<IAuthenticationProvider>();
             mockAuthenticationProvider.Setup(x => x.CurrentUserId).Returns(userId);
 
-            var service = new FullTestService(mockTestService.Object,
+            var service = new TestsService(mockTestService.Object,
                 mockUserService.Object,
                 mockAuthenticationProvider.Object);
          
@@ -43,7 +43,7 @@ namespace Leaf.Tests.Services.Noit.FullTestServiceTests
             var mockUserService = new Mock<IUserService>();
             var mockAuthenticationProvider = new Mock<IAuthenticationProvider>();
 
-            var service = new FullTestService(mockTestService.Object,
+            var service = new TestsService(mockTestService.Object,
                 mockUserService.Object,
                 mockAuthenticationProvider.Object);           
             
@@ -65,7 +65,7 @@ namespace Leaf.Tests.Services.Noit.FullTestServiceTests
             var mockUserService = new Mock<IUserService>();
             var mockAuthenticationProvider = new Mock<IAuthenticationProvider>();
 
-            var service = new FullTestService(mockTestService.Object,
+            var service = new TestsService(mockTestService.Object,
                 mockUserService.Object,
                 mockAuthenticationProvider.Object);
 

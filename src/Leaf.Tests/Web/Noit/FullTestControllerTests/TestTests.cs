@@ -17,7 +17,7 @@ namespace Leaf.Tests.Web.Noit.FullTestControllerTests
         public void Test_ShouldCallServiceGetNextQuestion_WithCorrectTestId(int testId)
         {
             //Arrange
-            var mockFullTestService = new Mock<IFullGameService>();
+            var mockFullTestService = new Mock<ITestsService>();
             var fakeTest = new Test { CorrectCount = 0 };
             mockFullTestService.Setup(x => x.GetTestById(It.IsAny<int>())).Returns(fakeTest);
             mockFullTestService.Setup(x => x.UserIsOwner(It.IsAny<int>())).Returns(true);
@@ -37,7 +37,7 @@ namespace Leaf.Tests.Web.Noit.FullTestControllerTests
         public void Test_ShouldReturnView_WhenGetNextQuestionRetursAQuestion(int testId)
         {
             //Arrange
-            var mockFullTestService = new Mock<IFullGameService>();
+            var mockFullTestService = new Mock<ITestsService>();
             mockFullTestService.Setup(x => x.GetNextQuestion(testId)).Returns(new Question());
             mockFullTestService.Setup(x => x.UserIsOwner(It.IsAny<int>())).Returns(true);
 
@@ -56,7 +56,7 @@ namespace Leaf.Tests.Web.Noit.FullTestControllerTests
         public void Test_ShouldCallServiceGetTestById_WhenTestIsFinished(int testId)
         {
             //Arrange
-            var mockFullTestService = new Mock<IFullGameService>();
+            var mockFullTestService = new Mock<ITestsService>();
             var fakeTest = new Test { CorrectCount = 0 };
             mockFullTestService.Setup(x => x.GetTestById(It.IsAny<int>())).Returns(fakeTest);
             mockFullTestService.Setup(x => x.UserIsOwner(It.IsAny<int>())).Returns(true);
@@ -76,7 +76,7 @@ namespace Leaf.Tests.Web.Noit.FullTestControllerTests
         public void Test_ShouldReturnView_WhenTestIsFinsihed(int testId)
         {
             //Arrange
-            var mockFullTestService = new Mock<IFullGameService>();
+            var mockFullTestService = new Mock<ITestsService>();
             var fakeTest = new Test { CorrectCount = 0 };
             mockFullTestService.Setup(x => x.GetTestById(It.IsAny<int>())).Returns(fakeTest);
             mockFullTestService.Setup(x => x.UserIsOwner(It.IsAny<int>())).Returns(true);

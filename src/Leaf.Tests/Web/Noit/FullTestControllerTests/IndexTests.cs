@@ -14,7 +14,7 @@ namespace Leaf.Tests.Web.Noit.FullTestControllerTests
         public void Index_ShouldCallServiceHasUnfinishedTests()
         {
             //Arrange
-            var mockFullTestService = new Mock<IFullGameService>();
+            var mockFullTestService = new Mock<ITestsService>();
             var controller = new TestsController(mockFullTestService.Object);
 
             //Act
@@ -28,7 +28,7 @@ namespace Leaf.Tests.Web.Noit.FullTestControllerTests
         public void Index_ShouldRenderView()
         {
             //Arrange
-            var mockFullTestService = new Mock<IFullGameService>();
+            var mockFullTestService = new Mock<ITestsService>();
             var controller = new TestsController(mockFullTestService.Object);
 
             //Act && Assert

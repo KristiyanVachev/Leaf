@@ -13,7 +13,7 @@ namespace Leaf.Tests.Web.Noit.FullTestControllerTests
         public void Constructor_ShouldInitializeCorrectly()
         {
             // Arrange
-            var mockFullTestService = new Mock<IFullGameService>();
+            var mockFullTestService = new Mock<ITestsService>();
 
             // Act
             var controller = new TestsController(mockFullTestService.Object);

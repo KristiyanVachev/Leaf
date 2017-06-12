@@ -9,13 +9,13 @@ namespace Leaf.Web.Areas.Noit.Controllers
     [Authorize]
     public class TestsController : Controller
     {
-        private readonly IFullGameService fullGameService;
+        private readonly ITestsService testsService;
 
-        public TestsController(IFullGameService fullGameService)
+        public TestsController(ITestsService testsService)
         {
-            Guard.WhenArgument(fullGameService, "FullGameService cannot be null").IsNull().Throw();
+            Guard.WhenArgument(testsService, "FullGameService cannot be null").IsNull().Throw();
 
-            this.fullGameService = fullGameService;
+            this.testsService = testsService;
         }
 
         // GET: Noit/FullTest
@@ -23,7 +23,7 @@ namespace Leaf.Web.Areas.Noit.Controllers
         {
             //TODO: List previous tests with their results
 
-            var hasUnfinishedTest = this.fullGameService.HasUnfinishedTest(TestType.Test);
+            var hasUnfinishedTest = this.testsService.HasUnfinishedTest(TestType.Test);
 
             //Return test result
             return View("FullTest", hasUnfinishedTest);
@@ -31,16 +31,16 @@ namespace Leaf.Web.Areas.Noit.Controllers
 
         public ActionResult Practice()
         {
-            var hasUnfinishedPractice = this.fullGameService.HasUnfinishedTest(TestType.Practice);
+            var hasUnfinishedPractice = this.testsService.HasUnfinishedTest(TestType.Practice);
 
             return View("Practice", hasUnfinishedPractice);
         }
 
         public ActionResult GetUserPractice()
         {
-            var userTest = this.fullGameService.HasUnfinishedTest(TestType.Practice)
-                ? this.fullGameService.ContinueTest(TestType.Practice)
-                : this.fullGameService.CreateTest(TestType.Practice);
+            var userTest = this.testsService.HasUnfinishedTest(TestType.Practice)
+                ? this.testsService.ContinueTest(TestType.Practice)
+                : this.testsService.CreateTest(TestType.Practice);
 
             //Return test result
             var testViewModel = new TestViewModel(userTest.Id);
@@ -49,11 +49,11 @@ namespace Leaf.Web.Areas.Noit.Controllers
 
         public ActionResult GetUserTest()
         {
-            var hasUnfinishedTest = this.fullGameService.HasUnfinishedTest(TestType.Test);
+            var hasUnfinishedTest = this.testsService.HasUnfinishedTest(TestType.Test);
 
             var userTest = hasUnfinishedTest 
-                ? this.fullGameService.ContinueTest(TestType.Test) 
-                : this.fullGameService.CreateTest(TestType.Test);
+                ? this.testsService.ContinueTest(TestType.Test) 
+                : this.testsService.CreateTest(TestType.Test);
 
             //Return test result
             var testViewModel = new TestViewModel(userTest.Id);
@@ -62,7 +62,7 @@ namespace Leaf.Web.Areas.Noit.Controllers
 
         public ActionResult ReceiveAnswer(int testId, int questionId, int answerId)
         {
-            var userIsOwner = this.fullGameService.UserIsOwner(testId);
+            var userIsOwner = this.testsService.UserIsOwner(testId);
 
             if (!userIsOwner)
             {
@@ -70,7 +70,7 @@ namespace Leaf.Web.Areas.Noit.Controllers
             }
 
             //Send answer
-            this.fullGameService.SendAnswer(testId, questionId, answerId);
+            this.testsService.SendAnswer(testId, questionId, answerId);
 
             //Return test result
             var testViewModel = new TestViewModel(testId);
@@ -79,14 +79,14 @@ namespace Leaf.Web.Areas.Noit.Controllers
 
         public ActionResult Test(TestViewModel viewModel)
         {
-            var userIsOwner = this.fullGameService.UserIsOwner(viewModel.TestId);
+            var userIsOwner = this.testsService.UserIsOwner(viewModel.TestId);
 
             if (!userIsOwner)
             {
                 return RedirectToAction("NotFound", "Error");
             }
 
-            var nextQuestion = this.fullGameService.GetNextQuestion(viewModel.TestId);
+            var nextQuestion = this.testsService.GetNextQuestion(viewModel.TestId);
 
             if (nextQuestion != null)
             {
@@ -98,9 +98,9 @@ namespace Leaf.Web.Areas.Noit.Controllers
                 return View("Test", nextQuestionViewModel);
             }
 
-            this.fullGameService.EndTest(viewModel.TestId);
+            this.testsService.EndTest(viewModel.TestId);
 
-            var test = this.fullGameService.GetTestById(viewModel.TestId);
+            var test = this.testsService.GetTestById(viewModel.TestId);
             var testDetailsViewModel = new TestDetailsViewModel(test.CorrectCount);
 
             return View("FinishedTest", testDetailsViewModel);

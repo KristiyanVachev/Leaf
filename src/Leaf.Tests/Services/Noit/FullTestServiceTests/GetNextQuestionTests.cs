@@ -28,7 +28,7 @@ namespace Leaf.Tests.Services.Noit.FullTestServiceTests
 
             mockTestService.Setup(x => x.GetTestById(id)).Returns(fakaTest);
 
-            var service = new FullTestService(mockTestService.Object,
+            var service = new TestsService(mockTestService.Object,
                 mockUserService.Object,
                 mockAuthenticationProvider.Object);
 
@@ -56,7 +56,7 @@ namespace Leaf.Tests.Services.Noit.FullTestServiceTests
 
             mockTestService.Setup(x => x.GetTestById(id)).Returns(fakaTest);
 
-            var service = new FullTestService(mockTestService.Object,
+            var service = new TestsService(mockTestService.Object,
                 mockUserService.Object,
                 mockAuthenticationProvider.Object);
 

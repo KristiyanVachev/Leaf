@@ -7,13 +7,13 @@ using Leaf.Services.Contracts;
 
 namespace Leaf.Services.Noit
 {
-    public class FullTestService : IFullGameService
+    public class TestsService : ITestsService
     {
         private readonly ITestService testService;
         private readonly IUserService userService;
         private readonly IAuthenticationProvider authenticationProvider;
 
-        public FullTestService(ITestService testService, IUserService userService, IAuthenticationProvider authenticationProvider)
+        public TestsService(ITestService testService, IUserService userService, IAuthenticationProvider authenticationProvider)
         {
             //TODO: Extract "cannot be null" message to costant
             Guard.WhenArgument(testService, "testService cannot be null").IsNull().Throw();

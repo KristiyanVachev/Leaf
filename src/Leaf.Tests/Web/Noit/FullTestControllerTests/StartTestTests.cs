@@ -16,7 +16,7 @@ namespace Leaf.Tests.Web.Noit.FullTestControllerTests
         public void StartTest_ShouldRedirectToTestActionMethod()
         {
             //Arrange
-            var mockFullTestService = new Mock<IFullGameService>();
+            var mockFullTestService = new Mock<ITestsService>();
             mockFullTestService.Setup(x => x.HasUnfinishedTest(TestType.Test)).Returns(true);
 
             mockFullTestService.Setup(x => x.ContinueTest(TestType.Test)).Returns(new Test { Id = 0 });
