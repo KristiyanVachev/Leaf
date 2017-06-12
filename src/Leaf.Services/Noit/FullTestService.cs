@@ -24,21 +24,20 @@ namespace Leaf.Services.Noit
             this.userService = userService;
             this.authenticationProvider = authenticationProvider;
         }
-
-        public bool HasUnfinishedTest(TestType type)
+   
+        public Test CreateTest(TestType type)
         {
             var userId = this.authenticationProvider.CurrentUserId;
 
-            var userTest = this.testService.GetLastTest(userId, type);
+            if (type == TestType.Test)
+            {
+                return this.testService.CreateTest(userId);
+            }
+            else
+            {
+                return this.testService.CreatePractice(userId);
 
-            return !this.testService.IsNullOrFinished(userTest);
-        }
-
-        public Test CreatePractice()
-        {
-            var userId = this.authenticationProvider.CurrentUserId;
-
-            return this.testService.CreatePractice(userId);
+            }
         }
 
         public Test ContinueTest(TestType type)
@@ -48,11 +47,13 @@ namespace Leaf.Services.Noit
             return this.testService.GetLastTest(userId, type);
         }
 
-        public Test CreateTest()
+        public bool HasUnfinishedTest(TestType type)
         {
             var userId = this.authenticationProvider.CurrentUserId;
 
-            return this.testService.CreateTest(userId);
+            var userTest = this.testService.GetLastTest(userId, type);
+
+            return !this.testService.IsNullOrFinished(userTest);
         }
 
         public Test GetTestById(int testId)

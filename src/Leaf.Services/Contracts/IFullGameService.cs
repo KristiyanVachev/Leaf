@@ -5,13 +5,11 @@ namespace Leaf.Services.Contracts
 {
     public interface IFullGameService
     {
-        bool HasUnfinishedTest(TestType type);
+        Test CreateTest(TestType type);
 
         Test ContinueTest(TestType type);
 
-        Test CreateTest();
-
-        Test CreatePractice();
+        bool HasUnfinishedTest(TestType type);
 
         Test GetTestById(int testId);
 

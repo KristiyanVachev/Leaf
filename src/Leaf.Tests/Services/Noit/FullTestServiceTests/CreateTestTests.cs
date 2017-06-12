@@ -1,5 +1,6 @@
 ﻿using Leaf.Auth.Contracts;
 using Leaf.Models;
+using Leaf.Models.Enums;
 using Leaf.Services.Contracts;
 using Leaf.Services.Noit;
 using Moq;
@@ -24,7 +25,7 @@ namespace Leaf.Tests.Services.Noit.FullTestServiceTests
                 mockUserService.Object,
                 mockAuthenticationProvider.Object);
             //Act 
-            service.CreateTest();
+            service.CreateTest(TestType.Test);
 
             //Assert
             mockAuthenticationProvider.Verify(x => x.CurrentUserId, Times.Once);
@@ -46,7 +47,7 @@ namespace Leaf.Tests.Services.Noit.FullTestServiceTests
                 mockAuthenticationProvider.Object);
 
             //Act 
-            service.CreateTest();
+            service.CreateTest(TestType.Test);
 
             //Assert
             mockTestService.Verify(x => x.CreateTest(id), Times.Once);   
@@ -70,7 +71,7 @@ namespace Leaf.Tests.Services.Noit.FullTestServiceTests
                 mockAuthenticationProvider.Object);
 
             //Act 
-            var result = service.CreateTest();
+            var result = service.CreateTest(TestType.Test);
 
             //Assert
             Assert.AreSame(mockTest.Object, result);

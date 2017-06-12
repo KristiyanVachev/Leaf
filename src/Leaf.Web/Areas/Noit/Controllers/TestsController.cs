@@ -38,7 +38,9 @@ namespace Leaf.Web.Areas.Noit.Controllers
 
         public ActionResult GetUserPractice()
         {
-            var userTest = this.fullGameService.HasUnfinishedTest(TestType.Practice) ? this.fullGameService.ContinueTest(TestType.Practice) : this.fullGameService.CreatePractice();
+            var userTest = this.fullGameService.HasUnfinishedTest(TestType.Practice)
+                ? this.fullGameService.ContinueTest(TestType.Practice)
+                : this.fullGameService.CreateTest(TestType.Practice);
 
             //Return test result
             var testViewModel = new TestViewModel(userTest.Id);
@@ -49,7 +51,9 @@ namespace Leaf.Web.Areas.Noit.Controllers
         {
             var hasUnfinishedTest = this.fullGameService.HasUnfinishedTest(TestType.Test);
 
-            var userTest = hasUnfinishedTest ? this.fullGameService.ContinueTest(TestType.Test) : this.fullGameService.CreateTest();
+            var userTest = hasUnfinishedTest 
+                ? this.fullGameService.ContinueTest(TestType.Test) 
+                : this.fullGameService.CreateTest(TestType.Test);
 
             //Return test result
             var testViewModel = new TestViewModel(userTest.Id);
@@ -86,14 +90,14 @@ namespace Leaf.Web.Areas.Noit.Controllers
 
             if (nextQuestion != null)
             {
-                var nextQuestionViewModel = new NextQuestionViewModel(viewModel.TestId, 
+                var nextQuestionViewModel = new NextQuestionViewModel(viewModel.TestId,
                     nextQuestion.Id,
-                    nextQuestion.Condition, 
+                    nextQuestion.Condition,
                     nextQuestion.Answers);
 
                 return View("Test", nextQuestionViewModel);
             }
-            
+
             this.fullGameService.EndTest(viewModel.TestId);
 
             var test = this.fullGameService.GetTestById(viewModel.TestId);
