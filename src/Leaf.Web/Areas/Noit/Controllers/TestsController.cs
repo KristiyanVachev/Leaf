@@ -81,6 +81,7 @@ namespace Leaf.Web.Areas.Noit.Controllers
         {
             var userIsOwner = this.testsService.UserIsOwner(viewModel.TestId);
 
+            //TODO Redirect to unauthorized page (create one first)
             if (!userIsOwner)
             {
                 return RedirectToAction("NotFound", "Error");
