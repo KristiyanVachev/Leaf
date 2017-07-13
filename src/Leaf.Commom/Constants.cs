@@ -3,7 +3,7 @@
     public static class Constants
     {
         public const string Administrator = "Administrator";
-        public const string NoitModerator = "NoitModerator";
+        public const string Moderator = "Moderator";
 
         public const string CannotBeNull = "{0} cannot be null!";
 

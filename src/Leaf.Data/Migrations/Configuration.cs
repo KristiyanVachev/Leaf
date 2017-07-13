@@ -83,7 +83,7 @@ namespace Leaf.Data.Migrations
                 },
                 new IdentityRole
                 {
-                    Name = Constants.NoitModerator
+                    Name = Constants.Moderator
                 });
 
             context.SaveChanges();

@@ -31,7 +31,7 @@ namespace Leaf.Web.Areas.Administration.Controllers
 
             var model = users.Select(x => new UserViewModel(x.Id,
                 x.UserName,
-                this.authenticationProvider.IsInRole(x.Id, Constants.NoitModerator),
+                this.authenticationProvider.IsInRole(x.Id, Constants.Moderator),
                 this.authenticationProvider.IsInRole(x.Id, Constants.Administrator)));
 
             return this.View(model.ToPagedList(page, count));

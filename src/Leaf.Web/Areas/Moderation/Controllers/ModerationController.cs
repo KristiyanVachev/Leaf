@@ -7,7 +7,7 @@ using PagedList;
 
 namespace Leaf.Web.Areas.Moderation.Controllers
 {
-    [Authorize(Roles = Constants.NoitModerator)]
+    [Authorize(Roles = Constants.Moderator)]
     public class ModerationController : Controller
     {
         private readonly IModerationService moderationService;

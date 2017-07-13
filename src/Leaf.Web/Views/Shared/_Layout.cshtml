@@ -27,7 +27,7 @@
                     <li>@Html.ActionLink("Изпрати въпрос", "Index", "Submit")</li>
                     <li>@Html.ActionLink("За листо", "About", "Home")</li>
                     <li>@Html.ActionLink("Контакти", "Contact", "Home")</li>
-                    @if (Request.IsAuthenticated && User.IsInRole(Constants.NoitModerator))
+                    @if (Request.IsAuthenticated && User.IsInRole(Constants.Moderator))
                     {
                         <li>@Html.ActionLink("Модерация", "Index", "Moderation", new { area = "Moderation" }, null)</li>
                     }

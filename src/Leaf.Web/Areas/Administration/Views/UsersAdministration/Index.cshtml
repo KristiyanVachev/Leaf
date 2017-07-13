@@ -24,11 +24,11 @@
             <td>
                 @if (item.IsModerator)
                 {
-                    @Html.ActionLink("Премахни модератор", "RemoveRole", new { userId = item.UserId, roleName = Constants.NoitModerator, page = Model.PageNumber })
+                    @Html.ActionLink("Премахни модератор", "RemoveRole", new { userId = item.UserId, roleName = Constants.Moderator, page = Model.PageNumber })
                 }
                 else
                 {
-                    @Html.ActionLink("Направи модератор", "AddRole", new { userId = item.UserId, roleName = Constants.NoitModerator, page = Model.PageNumber })
+                    @Html.ActionLink("Направи модератор", "AddRole", new { userId = item.UserId, roleName = Constants.Moderator, page = Model.PageNumber })
 
                 }
             </td>
