@@ -1,22 +1,22 @@
 ﻿using System.Web.Mvc;
 
-namespace Leaf.Web.Areas.Noit
+namespace Leaf.Web.Areas.Moderation
 {
-    public class NoitAreaRegistration : AreaRegistration 
+    public class ModerationAreaRegistration : AreaRegistration 
     {
         public override string AreaName 
         {
             get 
             {
-                return "Noit";
+                return "Moderation";
             }
         }
 
         public override void RegisterArea(AreaRegistrationContext context) 
         {
             context.MapRoute(
-                "Noit_default",
-                "Noit/{controller}/{action}/{id}",
+                "Moderation_default",
+                "Moderation/{controller}/{action}/{id}",
                 new { action = "Index", id = UrlParameter.Optional }
             );
         }

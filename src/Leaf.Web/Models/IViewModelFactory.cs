@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
-using Leaf.Web.Areas.Noit.Models.Submit;
+using Leaf.Web.Models.Submit;
 
-namespace Leaf.Web.Areas.Noit.Models
+namespace Leaf.Web.Models
 {
     public interface IViewModelFactory
     {

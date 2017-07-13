@@ -1,6 +1,6 @@
 ﻿using System;
 using Leaf.Services.Contracts;
-using Leaf.Web.Areas.Noit.Controllers;
+using Leaf.Web.Controllers;
 using Moq;
 using NUnit.Framework;
 

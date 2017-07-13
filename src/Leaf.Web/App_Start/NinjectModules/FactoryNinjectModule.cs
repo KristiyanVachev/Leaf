@@ -1,6 +1,6 @@
 ﻿using Ninject.Modules;
 using Leaf.Factories;
-using Leaf.Web.Areas.Noit.Models;
+using Leaf.Web.Models;
 using Ninject.Extensions.Factory;
 
 namespace Leaf.Web.App_Start.NinjectModules

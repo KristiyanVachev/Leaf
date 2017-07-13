@@ -95,6 +95,8 @@ namespace Leaf.Services.Noit
 
             var test = this.testService.GetTestById(testId);
 
+            //BUG throws when test id doesn't exist
+
             return test.UserId == userId;
         }
     }

@@ -2,9 +2,9 @@
 using Bytes2you.Validation;
 using Leaf.Models.Enums;
 using Leaf.Services.Contracts;
-using Leaf.Web.Areas.Noit.Models.FullTest;
+using Leaf.Web.Models.Tests;
 
-namespace Leaf.Web.Areas.Noit.Controllers
+namespace Leaf.Web.Controllers
 {
     [Authorize]
     public class TestsController : Controller

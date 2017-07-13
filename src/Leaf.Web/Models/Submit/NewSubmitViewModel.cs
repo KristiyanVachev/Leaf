@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 using Leaf.Commom;
 
-namespace Leaf.Web.Areas.Noit.Models.Submit
+namespace Leaf.Web.Models.Submit
 {
     public class NewSubmitViewModel
     {

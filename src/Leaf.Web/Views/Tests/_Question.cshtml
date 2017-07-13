@@ -1,4 +1,4 @@
-﻿@model  Leaf.Web.Areas.Noit.Models.FullTest.NextQuestionViewModel
+﻿@model  Leaf.Web.Models.Tests.NextQuestionViewModel
 
 <link href="~/Content/questionBox.css" rel="stylesheet" />
 
@@ -26,10 +26,10 @@
         @foreach (var answer in shuffledAnswers)
         {
             @Html.ActionLink(answer.Content,
-               "ReceiveAnswer",
-               "Tests",
-               new {testId = this.Model.TestId ,questionId = this.Model.QuestionId, answerId = answer.Id },
-               new { @class = "btn btn-primary answer" })
+                "ReceiveAnswer",
+                "Tests",
+                new {testId = this.Model.TestId ,questionId = this.Model.QuestionId, answerId = answer.Id },
+                new { @class = "btn btn-primary answer" })
         }
     </div>
 </div>

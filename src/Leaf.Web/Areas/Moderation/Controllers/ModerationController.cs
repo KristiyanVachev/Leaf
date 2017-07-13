@@ -2,10 +2,10 @@
 using System.Web.Mvc;
 using Leaf.Commom;
 using Leaf.Services.Contracts;
-using Leaf.Web.Areas.Noit.Models;
+using Leaf.Web.Models;
 using PagedList;
 
-namespace Leaf.Web.Areas.Noit.Controllers
+namespace Leaf.Web.Areas.Moderation.Controllers
 {
     [Authorize(Roles = Constants.NoitModerator)]
     public class ModerationController : Controller
@@ -23,7 +23,7 @@ namespace Leaf.Web.Areas.Noit.Controllers
             this.viewModelFactory = viewModelFactory;
         }
 
-        // GET: Noit/Moderation
+        // GET: Moderation/Moderation
         public ActionResult Index()
         {
             return View();

@@ -2,8 +2,8 @@
 using Leaf.Auth.Contracts;
 using Leaf.Models;
 using Leaf.Services.Contracts;
-using Leaf.Web.Areas.Noit.Controllers;
-using Leaf.Web.Areas.Noit.Models;
+using Leaf.Web.Controllers;
+using Leaf.Web.Models;
 using Moq;
 using NUnit.Framework;
 using TestStack.FluentMVCTesting;

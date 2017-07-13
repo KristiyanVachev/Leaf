@@ -23,8 +23,14 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("НОИТ", "Noit", "Home")</li>
+                    <li>@Html.ActionLink("Тестове", "Index", "Tests")</li>
+                    <li>@Html.ActionLink("Изпрати въпрос", "Index", "Submit")</li>
                     <li>@Html.ActionLink("За листо", "About", "Home")</li>
                     <li>@Html.ActionLink("Контакти", "Contact", "Home")</li>
+                    @if (Request.IsAuthenticated && User.IsInRole(Constants.NoitModerator))
+                    {
+                        <li>@Html.ActionLink("Модерация", "Index", "Moderation", new { area = "Moderation" }, null)</li>
+                    }
                     @if (Request.IsAuthenticated && User.IsInRole(Constants.Administrator))
                     {
                         <li>@Html.ActionLink("Администрация", "Index", "Administration", new { area = "Administration" }, null)</li>

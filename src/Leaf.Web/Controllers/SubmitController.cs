@@ -4,10 +4,10 @@ using Bytes2you.Validation;
 using Leaf.Auth.Contracts;
 using Leaf.Commom;
 using Leaf.Services.Contracts;
-using Leaf.Web.Areas.Noit.Models;
-using Leaf.Web.Areas.Noit.Models.Submit;
+using Leaf.Web.Models;
+using Leaf.Web.Models.Submit;
 
-namespace Leaf.Web.Areas.Noit.Controllers
+namespace Leaf.Web.Controllers
 {
     [Authorize]
     public class SubmitController : Controller

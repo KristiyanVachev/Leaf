@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Leaf.Web.Areas.Noit.Models.Submit
+namespace Leaf.Web.Models.Submit
 {
     public class SubmissionViewModel
     {
