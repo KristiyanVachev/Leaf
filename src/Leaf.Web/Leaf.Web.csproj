@@ -256,7 +256,6 @@
     <Content Include="images\Error500.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Views\Tests\FullTest.cshtml" />
     <Content Include="Views\Tests\Test.cshtml" />
     <Content Include="Views\Tests\_Question.cshtml" />
     <Content Include="Views\Tests\FinishedTest.cshtml" />
@@ -273,7 +272,6 @@
     <Content Include="Areas\Administration\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Administration\Views\UsersAdministration\Index.cshtml" />
     <Content Include="Areas\Administration\Views\Administration\Index.cshtml" />
-    <Content Include="Views\Tests\Practice.cshtml" />
     <Content Include="Areas\Moderation\Views\web.config" />
     <Content Include="Areas\Moderation\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Moderation\Views\Shared\_Layout.cshtml" />

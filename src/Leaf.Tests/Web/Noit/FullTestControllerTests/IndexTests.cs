@@ -25,14 +25,17 @@ namespace Leaf.Tests.Web.Noit.FullTestControllerTests
         }
 
         [Test]
-        public void Index_ShouldRenderView()
+        public void Index_ShouldCallServiceHasUnfinishedPractice()
         {
             //Arrange
             var mockFullTestService = new Mock<ITestsService>();
             var controller = new TestsController(mockFullTestService.Object);
 
-            //Act && Assert
-            controller.WithCallTo(x => x.Index()).ShouldRenderView("FullTest");
+            //Act
+            controller.Index();
+
+            //Assert
+            mockFullTestService.Verify(x => x.HasUnfinishedTest(TestType.Practice), Times.Once);
         }
     }
 }
