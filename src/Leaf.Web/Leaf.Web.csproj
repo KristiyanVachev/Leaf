@@ -220,6 +220,7 @@
     <Compile Include="Controllers\TestsController.cs" />
     <Compile Include="Areas\Moderation\Controllers\ModerationController.cs" />
     <Compile Include="Controllers\SubmitController.cs" />
+    <Compile Include="Models\Tests\IndexViewModel.cs" />
     <Compile Include="Models\Tests\NextQuestionViewModel.cs" />
     <Compile Include="Models\Submit\NewSubmitViewModel.cs" />
     <Compile Include="Models\Submit\ShortSubmission.cs" />
@@ -325,6 +326,7 @@
     <Content Include="Views\Error\NotFound.cshtml" />
     <Content Include="Views\Error\ServerError.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Tests\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

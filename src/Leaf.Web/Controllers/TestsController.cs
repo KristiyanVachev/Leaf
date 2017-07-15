@@ -21,19 +21,12 @@ namespace Leaf.Web.Controllers
         // GET: Noit/FullTest
         public ActionResult Index()
         {
-            //TODO: List previous tests with their results
-
             var hasUnfinishedTest = this.testsService.HasUnfinishedTest(TestType.Test);
-
-            //Return test result
-            return View("FullTest", hasUnfinishedTest);
-        }
-
-        public ActionResult Practice()
-        {
             var hasUnfinishedPractice = this.testsService.HasUnfinishedTest(TestType.Practice);
 
-            return View("Practice", hasUnfinishedPractice);
+            var indexViewModel = new IndexViewModel(hasUnfinishedTest, hasUnfinishedPractice);
+
+            return View("Index", indexViewModel);
         }
 
         public ActionResult GetUserPractice()
