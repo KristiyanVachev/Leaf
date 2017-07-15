@@ -13,6 +13,7 @@ namespace Leaf.Data.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
+            AutomaticMigrationDataLossAllowed = true;
             ContextKey = "Leaf.Data.LeafDbContext";
         }
 
