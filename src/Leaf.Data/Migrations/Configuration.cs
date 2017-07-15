@@ -101,6 +101,8 @@ namespace Leaf.Data.Migrations
                 var userManager = new UserManager<User>(userStore);
                 var userToInsert = new User { UserName = "typhon", Email = "typhon04@gmail.com" };
                 userManager.Create(userToInsert, "nanana");
+
+                userManager.AddToRoles(userToInsert.Id, new [] {Constants.Administrator, Constants.Moderator});
             }
 
             context.SaveChanges();
