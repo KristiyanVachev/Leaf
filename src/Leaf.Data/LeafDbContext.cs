@@ -21,6 +21,8 @@ namespace Leaf.Data
 
         public virtual IDbSet<Test> Tests { get; set; }
 
+        public virtual IDbSet<Topic> Topics { get; set; }
+
         public virtual IDbSet<Category> Categories { get; set; }
 
         public virtual IDbSet<Question> Questions { get; set; }

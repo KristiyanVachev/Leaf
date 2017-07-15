@@ -22,13 +22,18 @@ namespace Leaf.Data.Migrations
                 return;
             }
 
+            context.Topics.AddOrUpdate(
+                t => t.Id,
+                new Topic { Name = "НОИТ", Id = 0}
+            );
+
             context.Categories.AddOrUpdate(
                 c => c.Id,
-                new Category { Name = "Компютърни системи", Id = 0 },
-                new Category { Name = "Софтуерни системи", Id = 1 },
-                new Category { Name = "Операционни системи", Id = 2 },
-                new Category { Name = "Мултимедия", Id = 3 },
-                new Category { Name = "Компресиране на данни", Id = 4 }
+                new Category { Name = "Компютърни системи", Id = 0, TopicId = 0},
+                new Category { Name = "Софтуерни системи", Id = 1, TopicId = 0 },
+                new Category { Name = "Операционни системи", Id = 2, TopicId = 0 },
+                new Category { Name = "Мултимедия", Id = 3, TopicId = 0 },
+                new Category { Name = "Компресиране на данни", Id = 4, TopicId = 0 }
             );
 
             context.Questions.AddOrUpdate(
@@ -45,7 +50,8 @@ namespace Leaf.Data.Migrations
                         new Answer {Id = 2, Content = "Видеокарта", IsCorrect = false, QuestionId = 0 },
                         new Answer {Id = 3, Content = "LAN карта", IsCorrect = false, QuestionId = 0},
                     },
-                    CategoryId = 0
+                    CategoryId = 0,
+                    TopicId = 0
                 },
                 new Question
                 {
@@ -58,7 +64,8 @@ namespace Leaf.Data.Migrations
                         new Answer {Id = 6, Content = "Да, 2 пъти", IsCorrect = false, QuestionId = 1 },
                         new Answer {Id = 7, Content = "Не", IsCorrect = false, QuestionId = 1},
                     },
-                    CategoryId = 0
+                    CategoryId = 0,
+                    TopicId = 0
                 },
                 new Question
                 {
@@ -71,7 +78,8 @@ namespace Leaf.Data.Migrations
                         new Answer {Id = 10, Content = "Производител", IsCorrect = false, QuestionId = 2 },
                         new Answer {Id = 11, Content = "Възможни скорости на записване", IsCorrect = false, QuestionId = 2},
                     },
-                    CategoryId = 0
+                    CategoryId = 0,
+                    TopicId = 0
                 }
             );
 

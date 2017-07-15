@@ -23,6 +23,11 @@ namespace Leaf.Models
 
         public string Condition { get; set; }
 
+        public int TopicId { get; set; }
+
+        [ForeignKey("TopicId")]
+        public virtual Topic Topic { get; set; }
+
         public int CategoryId { get; set; }
 
         [ForeignKey("CategoryId")]
