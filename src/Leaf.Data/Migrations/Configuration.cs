@@ -1,7 +1,8 @@
 ﻿using System.Linq;
-using Leaf.Commom;
 using Leaf.Models;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using Constants = Leaf.Commom.Constants;
 
 namespace Leaf.Data.Migrations
 {
@@ -24,12 +25,12 @@ namespace Leaf.Data.Migrations
 
             context.Topics.AddOrUpdate(
                 t => t.Id,
-                new Topic { Name = "НОИТ", Id = 0}
+                new Topic { Name = "НОИТ", Id = 0 }
             );
 
             context.Categories.AddOrUpdate(
                 c => c.Id,
-                new Category { Name = "Компютърни системи", Id = 0, TopicId = 0},
+                new Category { Name = "Компютърни системи", Id = 0, TopicId = 0 },
                 new Category { Name = "Софтуерни системи", Id = 1, TopicId = 0 },
                 new Category { Name = "Операционни системи", Id = 2, TopicId = 0 },
                 new Category { Name = "Мултимедия", Id = 3, TopicId = 0 },
@@ -93,6 +94,14 @@ namespace Leaf.Data.Migrations
                 {
                     Name = Constants.Moderator
                 });
+
+            if (!(context.Users.Any(u => u.UserName == "typhon")))
+            {
+                var userStore = new UserStore<User>(context);
+                var userManager = new UserManager<User>(userStore);
+                var userToInsert = new User { UserName = "typhon", Email = "typhon04@gmail.com" };
+                userManager.Create(userToInsert, "nanana");
+            }
 
             context.SaveChanges();
         }
