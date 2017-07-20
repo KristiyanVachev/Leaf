@@ -1,4 +1,5 @@
 ﻿using Leaf.Services.Contracts;
+using Leaf.Services.Utilities.Contracts;
 using Leaf.Web.Areas.Moderation.Controllers;
 using Leaf.Web.Models;
 using Moq;
@@ -15,7 +16,7 @@ namespace Leaf.Tests.Web.Noit.ModerationControllerTests
         {
             // Arrange
             var mockModerationService = new Mock<IModerationService>();
-            var mockQuestionService = new Mock<IQuestionService>();
+            var mockQuestionService = new Mock<IQuestionUtility>();
             var mockViewModelFactory = new Mock<IViewModelFactory>();
 
             var controller = new ModerationController(mockModerationService.Object,
@@ -35,7 +36,7 @@ namespace Leaf.Tests.Web.Noit.ModerationControllerTests
         {
             // Arrange
             var mockModerationService = new Mock<IModerationService>();
-            var mockQuestionService = new Mock<IQuestionService>();
+            var mockQuestionService = new Mock<IQuestionUtility>();
             var mockViewModelFactory = new Mock<IViewModelFactory>();
 
             var controller = new ModerationController(mockModerationService.Object,

@@ -4,18 +4,18 @@ using Bytes2you.Validation;
 using Leaf.Data.Contracts;
 using Leaf.Factories;
 using Leaf.Models;
-using Leaf.Services.Contracts;
+using Leaf.Services.Utilities.Contracts;
 
-namespace Leaf.Services
+namespace Leaf.Services.Utilities
 {
-    public class UserService : IUserService
+    public class UserUtility : IUserUtility
     {
         private readonly IRepository<User> userRepository;
         private readonly IRepository<CategoryStatistic> categoryStatisticsRepository;
         private readonly IUserFactory userFactory;
         private readonly IUnitOfWork unitOfWork;
 
-        public UserService(IRepository<User> userRepository,
+        public UserUtility(IRepository<User> userRepository,
             IRepository<CategoryStatistic> categoryStatisticsRepository,
             IUserFactory userFactory,
             IUnitOfWork unitOfWork)

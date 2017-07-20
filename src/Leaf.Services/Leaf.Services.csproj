@@ -81,18 +81,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Contracts\ITestsService.cs" />
-    <Compile Include="Contracts\IModerationService.cs" />
-    <Compile Include="Contracts\IQuestionService.cs" />
-    <Compile Include="Contracts\ISubmitService.cs" />
     <Compile Include="Contracts\ITestService.cs" />
-    <Compile Include="Contracts\IUserService.cs" />
-    <Compile Include="TestsService.cs" />
-    <Compile Include="ModerationService.cs" />
-    <Compile Include="QuestionService.cs" />
-    <Compile Include="SubmitService.cs" />
+    <Compile Include="Contracts\IModerationService.cs" />
+    <Compile Include="Utilities\Contracts\IQuestionUtility.cs" />
+    <Compile Include="Contracts\ISubmitService.cs" />
+    <Compile Include="Utilities\Contracts\ITestUtility.cs" />
+    <Compile Include="Utilities\Contracts\IUserUtility.cs" />
     <Compile Include="TestService.cs" />
-    <Compile Include="UserService.cs" />
+    <Compile Include="ModerationService.cs" />
+    <Compile Include="Utilities\QuestionUtility.cs" />
+    <Compile Include="SubmitService.cs" />
+    <Compile Include="Utilities\TestUtility.cs" />
+    <Compile Include="Utilities\UserUtility.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

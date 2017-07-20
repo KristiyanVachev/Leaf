@@ -1,25 +1,24 @@
-﻿using System.Collections.Generic;
-using Leaf.Models;
+﻿using Leaf.Models;
 using Leaf.Models.Enums;
 
 namespace Leaf.Services.Contracts
 {
     public interface ITestService
     {
-        Test CreateTest(string userId, TestType type, IEnumerable<Question> questions);
+        Test CreateTest(TestType type);
 
-        Test GetLastTest(string userId, TestType type);
+        Test ContinueTest(TestType type);
+
+        bool HasUnfinishedTest(TestType type);
 
         Test GetTestById(int testId);
 
-        void AddAnswer(int testId, int questionId, int answerId);
+        void SendAnswer(int testId, int questionId, int answerId);
 
-        void RemoveQuestionById(int testId, int questionId);
-
-        bool TestIsFinished(int testId);
+        Question GetNextQuestion(int test);
 
         void EndTest(int testId);
 
-        IDictionary<int, int[]> GatherTestStatistics(int testId);
+        bool UserIsOwner(int testId);
     }
 }

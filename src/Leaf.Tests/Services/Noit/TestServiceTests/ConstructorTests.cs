@@ -2,8 +2,7 @@
 using Leaf.Data.Contracts;
 using Leaf.Factories;
 using Leaf.Models;
-using Leaf.Services;
-using Leaf.Services.Contracts;
+using Leaf.Services.Utilities;
 using Moq;
 using NUnit.Framework;
 
@@ -16,7 +15,6 @@ namespace Leaf.Tests.Services.Noit.TestServiceTests
         public void Constructor_ShouldNotThrow_WhenParametersNotNull()
         {
             //Arrange
-            var mockQuestionService = new Mock<IQuestionService>();
             var mockTestRepository = new Mock<IRepository<Test>>();
             var mockAnsweredQuestionRepository = new Mock<IRepository<AnsweredQuestion>>();
             var mockTestFactory = new Mock<ITestFactory>();
@@ -25,8 +23,7 @@ namespace Leaf.Tests.Services.Noit.TestServiceTests
 
             //Act && Assert
             Assert.DoesNotThrow(() =>
-                new TestService(mockQuestionService.Object,
-                    mockTestRepository.Object,
+                new TestUtility(mockTestRepository.Object,
                     mockAnsweredQuestionRepository.Object,
                     mockTestFactory.Object,
                     mockDateTimeProvider.Object,

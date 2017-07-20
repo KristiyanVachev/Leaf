@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using Leaf.Models;
 
-namespace Leaf.Services.Contracts
+namespace Leaf.Services.Utilities.Contracts
 {
-    public interface IQuestionService
+    public interface IQuestionUtility
     {
         IEnumerable<Question> GetQuestions();
 

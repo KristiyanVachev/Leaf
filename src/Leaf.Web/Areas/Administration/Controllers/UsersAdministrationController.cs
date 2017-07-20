@@ -4,6 +4,7 @@ using Bytes2you.Validation;
 using Leaf.Auth.Contracts;
 using Leaf.Commom;
 using Leaf.Services.Contracts;
+using Leaf.Services.Utilities.Contracts;
 using Leaf.Web.Areas.Administration.Models;
 using PagedList;
 
@@ -12,10 +13,10 @@ namespace Leaf.Web.Areas.Administration.Controllers
     [Authorize(Roles = Constants.Administrator)]
     public class UsersAdministrationController : Controller
     {
-        private readonly IUserService userService;
+        private readonly IUserUtility userService;
         private readonly IAuthenticationProvider authenticationProvider;
 
-        public UsersAdministrationController(IUserService userService, IAuthenticationProvider authenticationProvider)
+        public UsersAdministrationController(IUserUtility userService, IAuthenticationProvider authenticationProvider)
         {
             Guard.WhenArgument(userService, "userService cannot be null").IsNull().Throw();
             Guard.WhenArgument(authenticationProvider, "authenticationProvider cannot be null").IsNull().Throw();

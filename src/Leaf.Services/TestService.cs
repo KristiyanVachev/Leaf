@@ -1,142 +1,106 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using Bytes2you.Validation;
-using Leaf.Commom;
-using Leaf.Data.Contracts;
-using Leaf.Factories;
+using Leaf.Auth.Contracts;
 using Leaf.Models;
 using Leaf.Models.Enums;
 using Leaf.Services.Contracts;
+using Leaf.Services.Utilities.Contracts;
 
 namespace Leaf.Services
 {
     public class TestService : ITestService
     {
-        private readonly IQuestionService questionService;
-        private readonly IRepository<Test> testRepository;
-        private readonly IRepository<AnsweredQuestion> answeredQuestionRepository;
-        private readonly ITestFactory testFactory;
-        private readonly IUnitOfWork unitOfWork;
-        private readonly IDateTimeProvider dateTimeProvider;
+        private readonly ITestUtility testUtility;
+        private readonly IQuestionUtility questionUtility;
+        private readonly IUserUtility userUtility;
+        private readonly IAuthenticationProvider authenticationProvider;
 
-        public TestService(IQuestionService questionService,
-            IRepository<Test> testRepository,
-            IRepository<AnsweredQuestion> answeredQuestionRepository,
-            ITestFactory testFactory,
-            IDateTimeProvider dateTimeProvider,
-            IUnitOfWork unitOfWork)
+        public TestService(
+            ITestUtility testUtility,
+            IQuestionUtility questionUtility,
+            IUserUtility userUtility,
+            IAuthenticationProvider authenticationProvider)
         {
-            Guard.WhenArgument(questionService, "questionService cannot be null").IsNull().Throw();
-            Guard.WhenArgument(testRepository, "testRepository cannot be null").IsNull().Throw();
-            Guard.WhenArgument(answeredQuestionRepository, "answeredQuestionRepository cannot be null").IsNull().Throw();
-            Guard.WhenArgument(testFactory, "testFactory cannot be null").IsNull().Throw();
-            Guard.WhenArgument(dateTimeProvider, "dateTimeProvider cannot be null").IsNull().Throw();
-            Guard.WhenArgument(unitOfWork, "unitOfWork cannot be null").IsNull().Throw();
+            //TODO: Extract "cannot be null" message to costant
+            Guard.WhenArgument(testUtility, "testUtility cannot be null").IsNull().Throw();
+            Guard.WhenArgument(questionUtility, "questionUtility cannot be null").IsNull().Throw();
+            Guard.WhenArgument(userUtility, "userUtility cannot be null").IsNull().Throw();
+            Guard.WhenArgument(authenticationProvider, "authenticationProvider cannot be null").IsNull().Throw();
 
-            this.questionService = questionService;
-            this.testRepository = testRepository;
-            this.answeredQuestionRepository = answeredQuestionRepository;
-            this.testFactory = testFactory;
-            this.dateTimeProvider = dateTimeProvider;
-            this.unitOfWork = unitOfWork;
+            this.testUtility = testUtility;
+            this.questionUtility = questionUtility;
+            this.userUtility = userUtility;
+            this.authenticationProvider = authenticationProvider;
         }
 
-        public Test CreateTest(string userId, TestType type, IEnumerable<Question> questions)
+        public Test CreateTest(TestType type)
         {
-            var currentTime = dateTimeProvider.GetCurrenTime();
+            var userId = this.authenticationProvider.CurrentUserId;
 
-            var test = this.testFactory.CreateTest(userId, questions, currentTime, type);
+            //TODO get tailored questions for practice tests
+            var questions = this.questionUtility.GetQuestions();
 
-            this.testRepository.Add(test);
-            this.unitOfWork.Commit();
-
-            return test;
+            return this.testUtility.CreateTest(userId, type, questions);
         }
 
-        public Test GetLastTest(string userId, TestType type)
+        public Test ContinueTest(TestType type)
         {
-            return this.testRepository.Entities
-                .Where(x => x.UserId == userId)
-                .OrderByDescending(x => x.Id)
-                .FirstOrDefault(x => x.Type == type);
+            var userId = this.authenticationProvider.CurrentUserId;
+
+            return this.testUtility.GetLastTest(userId, type);
+        }
+
+        public bool HasUnfinishedTest(TestType type)
+        {
+            var userId = this.authenticationProvider.CurrentUserId;
+
+            var userTest = this.testUtility.GetLastTest(userId, type);
+
+            return !(userTest == null || userTest.IsFinished);
         }
 
         public Test GetTestById(int testId)
         {
-            return this.testRepository.GetById(testId);
+            return this.testUtility.GetTestById(testId);
         }
 
-        public void AddAnswer(int testId, int questionId, int answerId)
+        public void SendAnswer(int testId, int questionId, int answerId)
         {
-            var test = this.testRepository.GetById(testId);
+            this.testUtility.AddAnswer(testId, questionId, answerId);
 
-            var newAnsweredQuestion = this.testFactory.CreateAnsweredQuestion(testId, questionId, answerId);
-
-            test.AnsweredQuestions.Add(newAnsweredQuestion);
-
-            this.answeredQuestionRepository.Add(newAnsweredQuestion);
-            this.testRepository.Update(test);
-
-            this.unitOfWork.Commit();
+            this.testUtility.RemoveQuestionById(testId, questionId);
         }
 
-        public void RemoveQuestionById(int testId, int questionId)
+        public Question GetNextQuestion(int testId)
         {
-            var test = this.testRepository.GetById(testId);
+            var test = this.testUtility.GetTestById(testId);
 
-            test.Questions.Remove(test.Questions.FirstOrDefault(x => x.Id == questionId));
-
-            this.testRepository.Update(test);
-            this.unitOfWork.Commit(); ;
-        }
-
-        public bool TestIsFinished(int testId)
-        {
-            var test = this.testRepository.GetById(testId);
-
-            return test.Questions.Any();
+            return test.Questions.FirstOrDefault();
         }
 
         public void EndTest(int testId)
         {
-            var test = this.testRepository.GetById(testId);
+            this.testUtility.EndTest(testId);
 
-            var correctsCount = test.AnsweredQuestions.Count(answeredQuestion => answeredQuestion.Answer.IsCorrect);
+            var testStats = this.testUtility.GatherTestStatistics(testId);
 
-            test.CorrectCount = correctsCount;
-            test.IsFinished = true;
+            var test = this.testUtility.GetTestById(testId);
+            var userId = test.User.Id;
 
-            this.testRepository.Update(test);
-            this.unitOfWork.Commit();
+            this.userUtility.UpdateUserStatistics(userId, testStats);
+
+            //TODO update statistics of answers
         }
 
-        public IDictionary<int, int[]> GatherTestStatistics(int testId)
+        public bool UserIsOwner(int testId)
         {
-            var test = this.testRepository.GetById(testId);
+            var userId = this.authenticationProvider.CurrentUserId;
 
-            var stats = new Dictionary<int, int[]>();
+            var test = this.testUtility.GetTestById(testId);
 
-            foreach (var answeredQuestion in test.AnsweredQuestions)
-            {
-                var categoryId = answeredQuestion.Question.Category.Id;
-                var isCorrect = answeredQuestion.Answer.IsCorrect;
+            //BUG throws when test id doesn't exist
 
-                if (!stats.ContainsKey(categoryId))
-                {
-                    stats[categoryId] = new int[] { 0, 0 };
-                }
-
-                if (isCorrect)
-                {
-                    stats[categoryId][0]++;
-                }
-                else
-                {
-                    stats[categoryId][1]++;
-                }
-            }
-
-            return stats;
+            return test.UserId == userId;
         }
     }
 }

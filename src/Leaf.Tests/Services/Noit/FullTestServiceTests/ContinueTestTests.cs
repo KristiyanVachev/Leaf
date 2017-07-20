@@ -3,6 +3,7 @@ using Leaf.Models;
 using Leaf.Models.Enums;
 using Leaf.Services;
 using Leaf.Services.Contracts;
+using Leaf.Services.Utilities.Contracts;
 using Moq;
 using NUnit.Framework;
 
@@ -15,12 +16,12 @@ namespace Leaf.Tests.Services.Noit.FullTestServiceTests
         public void ContinueTest_ShouldCallGetUserId()
         {
             //Arrange
-            var mockTestService = new Mock<ITestService>();
-            var mockQuestionService = new Mock<IQuestionService>();
-            var mockUserService = new Mock<IUserService>();
+            var mockTestService = new Mock<ITestUtility>();
+            var mockQuestionService = new Mock<IQuestionUtility>();
+            var mockUserService = new Mock<IUserUtility>();
             var mockAuthenticationProvider = new Mock<IAuthenticationProvider>();
 
-            var service = new TestsService(mockTestService.Object,
+            var service = new TestService(mockTestService.Object,
                 mockQuestionService.Object,
                 mockUserService.Object,
                 mockAuthenticationProvider.Object);
@@ -37,14 +38,14 @@ namespace Leaf.Tests.Services.Noit.FullTestServiceTests
         public void ContinueTest_ShouldCallGetLastTestByUserId_WithCorrectId(string id)
         {
             //Arrange
-            var mockTestService = new Mock<ITestService>();
-            var mockQuestionService = new Mock<IQuestionService>();
-            var mockUserService = new Mock<IUserService>();
+            var mockTestService = new Mock<ITestUtility>();
+            var mockQuestionService = new Mock<IQuestionUtility>();
+            var mockUserService = new Mock<IUserUtility>();
             var mockAuthenticationProvider = new Mock<IAuthenticationProvider>();
 
             mockAuthenticationProvider.Setup(x => x.CurrentUserId).Returns(id);
 
-            var service = new TestsService(mockTestService.Object,
+            var service = new TestService(mockTestService.Object,
                 mockQuestionService.Object,
                 mockUserService.Object,
                 mockAuthenticationProvider.Object);
@@ -61,9 +62,9 @@ namespace Leaf.Tests.Services.Noit.FullTestServiceTests
         public void ContinueTest_ShouldReturnLastTest(string id)
         {
             //Arrange
-            var mockTestService = new Mock<ITestService>();
-            var mockQuestionService = new Mock<IQuestionService>();
-            var mockUserService = new Mock<IUserService>();
+            var mockTestService = new Mock<ITestUtility>();
+            var mockQuestionService = new Mock<IQuestionUtility>();
+            var mockUserService = new Mock<IUserUtility>();
             var mockAuthenticationProvider = new Mock<IAuthenticationProvider>();
 
             var mockTest = new Mock<Test>();
@@ -71,7 +72,7 @@ namespace Leaf.Tests.Services.Noit.FullTestServiceTests
 
             mockAuthenticationProvider.Setup(x => x.CurrentUserId).Returns(id);
 
-            var service = new TestsService(mockTestService.Object,
+            var service = new TestService(mockTestService.Object,
                 mockQuestionService.Object,
                 mockUserService.Object,
                 mockAuthenticationProvider.Object);

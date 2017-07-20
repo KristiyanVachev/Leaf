@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using Leaf.Models;
 
-namespace Leaf.Services.Contracts
+namespace Leaf.Services.Utilities.Contracts
 {
-    public interface IUserService
+    public interface IUserUtility
     {
         void UpdateUserStatistics(string userId, IDictionary<int, int[]> statistics);
 

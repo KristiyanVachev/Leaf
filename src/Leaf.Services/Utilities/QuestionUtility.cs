@@ -6,18 +6,18 @@ using Leaf.Commom;
 using Leaf.Data.Contracts;
 using Leaf.Factories;
 using Leaf.Models;
-using Leaf.Services.Contracts;
+using Leaf.Services.Utilities.Contracts;
 
-namespace Leaf.Services
+namespace Leaf.Services.Utilities
 {
-    public class QuestionService : IQuestionService
+    public class QuestionUtility : IQuestionUtility
     {
         private readonly IRepository<Question> questionRepository;
         private readonly IRepository<Category> categoryRepository;
         private readonly IQuestionFactory questionFactory;
         private readonly IUnitOfWork unitOfWork;
 
-        public QuestionService(IRepository<Question> questionRepository,
+        public QuestionUtility(IRepository<Question> questionRepository,
             IRepository<Category> categoryRepository,
             IQuestionFactory questionFactory,
             IUnitOfWork unitOfWork)

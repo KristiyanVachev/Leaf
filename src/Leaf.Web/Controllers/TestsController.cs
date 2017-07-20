@@ -9,9 +9,9 @@ namespace Leaf.Web.Controllers
     [Authorize]
     public class TestsController : Controller
     {
-        private readonly ITestsService testsService;
+        private readonly ITestService testsService;
 
-        public TestsController(ITestsService testsService)
+        public TestsController(ITestService testsService)
         {
             Guard.WhenArgument(testsService, "FullGameService cannot be null").IsNull().Throw();
 

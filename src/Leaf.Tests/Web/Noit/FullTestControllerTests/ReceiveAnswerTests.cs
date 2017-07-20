@@ -15,7 +15,7 @@ namespace Leaf.Tests.Web.Noit.FullTestControllerTests
         public void ReceiveAnswer_ShouldCallServiceSendAnswer(int questionId, int answerId, int testId, string userId)
         {
             //Arrange
-            var mockFullTestService = new Mock<ITestsService>();
+            var mockFullTestService = new Mock<ITestService>();
             mockFullTestService.Setup(x => x.UserIsOwner(It.IsAny<int>())).Returns(true);
 
             var controller = new TestsController(mockFullTestService.Object);
@@ -32,7 +32,7 @@ namespace Leaf.Tests.Web.Noit.FullTestControllerTests
         public void ReceiveAnswer_ShouldRedirectToTestActionMethod(int testId, int questionId, int answerId)
         {
             //Arrange
-            var mockFullTestService = new Mock<ITestsService>();
+            var mockFullTestService = new Mock<ITestService>();
             mockFullTestService.Setup(x => x.UserIsOwner(It.IsAny<int>())).Returns(true);
 
             var controller = new TestsController(mockFullTestService.Object);

@@ -2,6 +2,7 @@
 using System.Web.Mvc;
 using Leaf.Commom;
 using Leaf.Services.Contracts;
+using Leaf.Services.Utilities.Contracts;
 using Leaf.Web.Models;
 using PagedList;
 
@@ -11,11 +12,11 @@ namespace Leaf.Web.Areas.Moderation.Controllers
     public class ModerationController : Controller
     {
         private readonly IModerationService moderationService;
-        private readonly IQuestionService questionService;
+        private readonly IQuestionUtility questionService;
         private readonly IViewModelFactory viewModelFactory;
 
         public ModerationController(IModerationService moderationService,
-            IQuestionService questionService,
+            IQuestionUtility questionService,
             IViewModelFactory viewModelFactory)
         {
             this.moderationService = moderationService;

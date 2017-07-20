@@ -1,6 +1,7 @@
 ﻿using Leaf.Auth.Contracts;
 using Leaf.Services;
 using Leaf.Services.Contracts;
+using Leaf.Services.Utilities.Contracts;
 using Moq;
 using NUnit.Framework;
 
@@ -13,13 +14,13 @@ namespace Leaf.Tests.Services.Noit.FullTestServiceTests
         public void Constructor_ShouldNotThrow_WhenParametersNotNull()
         {
             //Arrange
-            var mockTestService = new Mock<ITestService>();
-            var mockQuestionService = new Mock<IQuestionService>();
-            var mockUserService = new Mock<IUserService>();
+            var mockTestService = new Mock<ITestUtility>();
+            var mockQuestionService = new Mock<IQuestionUtility>();
+            var mockUserService = new Mock<IUserUtility>();
             var mockAuthenticationProvider = new Mock<IAuthenticationProvider>();
 
             //Act && Assert
-            Assert.DoesNotThrow(() => new TestsService(mockTestService.Object,
+            Assert.DoesNotThrow(() => new TestService(mockTestService.Object,
                 mockQuestionService.Object,
                 mockUserService.Object,
                 mockAuthenticationProvider.Object));

@@ -7,32 +7,33 @@ using Leaf.Data.Contracts;
 using Leaf.Models;
 using Leaf.Models.Enums;
 using Leaf.Services.Contracts;
+using Leaf.Services.Utilities.Contracts;
 
 namespace Leaf.Services
 {
     public class ModerationService : IModerationService
     {
         private IRepository<Submission> submissionRepository;
-        private IQuestionService questionService;
+        private IQuestionUtility questionUtility;
         private IDateTimeProvider dateTimeProvider;
         private IAuthenticationProvider authenticationProvider;
         private IUnitOfWork unitOfWork;
 
         public ModerationService(IRepository<Submission> submissionRepository,
-            IQuestionService questionService,
+            IQuestionUtility questionUtility,
             IDateTimeProvider dateTimeProvider,
             IAuthenticationProvider authenticationProvider,
             IUnitOfWork unitOfWork
             )
         {
             Guard.WhenArgument(submissionRepository, "submissionRepository cannot be null").IsNull().Throw();
-            Guard.WhenArgument(questionService, "questionService cannot be null").IsNull().Throw();
+            Guard.WhenArgument(questionUtility, "questionUtility cannot be null").IsNull().Throw();
             Guard.WhenArgument(dateTimeProvider, "dateTimeProvider cannot be null").IsNull().Throw();
             Guard.WhenArgument(authenticationProvider, "authenticationProvider cannot be null").IsNull().Throw();
             Guard.WhenArgument(unitOfWork, "unitOfWork cannot be null").IsNull().Throw();
 
             this.submissionRepository = submissionRepository;
-            this.questionService = questionService;
+            this.questionUtility = questionUtility;
             this.dateTimeProvider = dateTimeProvider;
             this.authenticationProvider = authenticationProvider;
             this.unitOfWork = unitOfWork;
@@ -56,7 +57,7 @@ namespace Leaf.Services
         {
             var submission = this.submissionRepository.GetById(id);
 
-            var question =  this.questionService.CreateQuestion(submission);
+            var question =  this.questionUtility.CreateQuestion(submission);
 
             submission.ApprovedByName = authenticationProvider.CurrentUserName;
             submission.ApprovedOn = dateTimeProvider.GetCurrenTime();

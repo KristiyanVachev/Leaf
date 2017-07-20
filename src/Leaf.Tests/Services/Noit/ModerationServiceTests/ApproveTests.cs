@@ -5,6 +5,7 @@ using Leaf.Models;
 using Leaf.Models.Enums;
 using Leaf.Services;
 using Leaf.Services.Contracts;
+using Leaf.Services.Utilities.Contracts;
 using Moq;
 using NUnit.Framework;
 
@@ -23,7 +24,7 @@ namespace Leaf.Tests.Services.Noit.ModerationServiceTests
             var fakeSubmission = new Submission();
             mockSubmissionRepository.Setup(x => x.GetById(id)).Returns(fakeSubmission);
 
-            var mockQuestionService = new Mock<IQuestionService>();
+            var mockQuestionService = new Mock<IQuestionUtility>();
             var mockDateTimeProvider = new Mock<IDateTimeProvider>();
             var mockAuthenticationProvider = new Mock<IAuthenticationProvider>();
             var mockUnitOfWork = new Mock<IUnitOfWork>();
@@ -52,7 +53,7 @@ namespace Leaf.Tests.Services.Noit.ModerationServiceTests
             var fakeSubmission = new Submission();
             mockSubmissionRepository.Setup(x => x.GetById(id)).Returns(fakeSubmission);
 
-            var mockQuestionService = new Mock<IQuestionService>();
+            var mockQuestionService = new Mock<IQuestionUtility>();
             var mockDateTimeProvider = new Mock<IDateTimeProvider>();
             var mockAuthenticationProvider = new Mock<IAuthenticationProvider>();
             var mockUnitOfWork = new Mock<IUnitOfWork>();
@@ -81,7 +82,7 @@ namespace Leaf.Tests.Services.Noit.ModerationServiceTests
             var fakeSubmission = new Submission();
             mockSubmissionRepository.Setup(x => x.GetById(id)).Returns(fakeSubmission);
 
-            var mockQuestionService = new Mock<IQuestionService>();
+            var mockQuestionService = new Mock<IQuestionUtility>();
             var mockDateTimeProvider = new Mock<IDateTimeProvider>();
             var mockAuthenticationProvider = new Mock<IAuthenticationProvider>();
             var mockUnitOfWork = new Mock<IUnitOfWork>();
@@ -110,7 +111,7 @@ namespace Leaf.Tests.Services.Noit.ModerationServiceTests
             var fakeSubmission = new Submission();
             mockSubmissionRepository.Setup(x => x.GetById(id)).Returns(fakeSubmission);
 
-            var mockQuestionService = new Mock<IQuestionService>();
+            var mockQuestionService = new Mock<IQuestionUtility>();
             var mockDateTimeProvider = new Mock<IDateTimeProvider>();
             var mockAuthenticationProvider = new Mock<IAuthenticationProvider>();
             var mockUnitOfWork = new Mock<IUnitOfWork>();
