@@ -55,7 +55,7 @@ namespace Leaf.Services
 
             var userTest = this.testService.GetLastTest(userId, type);
 
-            return !this.testService.IsNullOrFinished(userTest);
+            return !(userTest == null || userTest.IsFinished);
         }
 
         public Test GetTestById(int testId)

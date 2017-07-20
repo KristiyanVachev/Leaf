@@ -66,11 +66,6 @@ namespace Leaf.Services
             return this.testRepository.GetById(testId);
         }
 
-        public bool IsNullOrFinished(Test test)
-        {
-            return test == null || test.IsFinished;
-        }
-
         public void AddAnswer(int testId, int questionId, int answerId)
         {
             var test = this.testRepository.GetById(testId);

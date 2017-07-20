@@ -12,8 +12,6 @@ namespace Leaf.Services.Contracts
 
         Test GetTestById(int testId);
 
-        bool IsNullOrFinished(Test test);
-
         void AddAnswer(int testId, int questionId, int answerId);
 
         void RemoveQuestionById(int testId, int questionId);

@@ -149,7 +149,6 @@
     <Compile Include="Services\Noit\TestServiceTests\CreateTestTests.cs" />
     <Compile Include="Services\Noit\TestServiceTests\GetLastTestByUserIdTests.cs" />
     <Compile Include="Services\Noit\TestServiceTests\GetTestByIdTests.cs" />
-    <Compile Include="Services\Noit\TestServiceTests\IsNullOrFinishedTests.cs" />
     <Compile Include="Web\Noit\FullTestControllerTests\ConstructorTests.cs" />
     <Compile Include="Web\Noit\FullTestControllerTests\IndexTests.cs" />
     <Compile Include="Web\Noit\FullTestControllerTests\ReceiveAnswerTests.cs" />

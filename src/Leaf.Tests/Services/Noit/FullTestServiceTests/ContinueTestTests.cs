@@ -20,8 +20,6 @@ namespace Leaf.Tests.Services.Noit.FullTestServiceTests
             var mockUserService = new Mock<IUserService>();
             var mockAuthenticationProvider = new Mock<IAuthenticationProvider>();
 
-            mockTestService.Setup(x => x.IsNullOrFinished(It.IsAny<Test>())).Returns(true);
-
             var service = new TestsService(mockTestService.Object,
                 mockQuestionService.Object,
                 mockUserService.Object,
