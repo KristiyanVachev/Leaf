@@ -5,39 +5,41 @@ using Leaf.Models;
 using Leaf.Models.Enums;
 using Leaf.Services.Contracts;
 
-namespace Leaf.Services.Noit
+namespace Leaf.Services
 {
     public class TestsService : ITestsService
     {
         private readonly ITestService testService;
+        private readonly IQuestionService questionService;
         private readonly IUserService userService;
         private readonly IAuthenticationProvider authenticationProvider;
 
-        public TestsService(ITestService testService, IUserService userService, IAuthenticationProvider authenticationProvider)
+        public TestsService(
+            ITestService testService,
+            IQuestionService questionService,
+            IUserService userService,
+            IAuthenticationProvider authenticationProvider)
         {
             //TODO: Extract "cannot be null" message to costant
             Guard.WhenArgument(testService, "testService cannot be null").IsNull().Throw();
+            Guard.WhenArgument(questionService, "questionService cannot be null").IsNull().Throw();
             Guard.WhenArgument(userService, "userService cannot be null").IsNull().Throw();
             Guard.WhenArgument(authenticationProvider, "authenticationProvider cannot be null").IsNull().Throw();
 
             this.testService = testService;
+            this.questionService = questionService;
             this.userService = userService;
             this.authenticationProvider = authenticationProvider;
         }
-   
+
         public Test CreateTest(TestType type)
         {
             var userId = this.authenticationProvider.CurrentUserId;
 
-            if (type == TestType.Test)
-            {
-                return this.testService.CreateTest(userId);
-            }
-            else
-            {
-                return this.testService.CreatePractice(userId);
+            //TODO get tailored questions for practice tests
+            var questions = this.questionService.GetQuestions();
 
-            }
+            return this.testService.CreateTest(userId, type, questions);
         }
 
         public Test ContinueTest(TestType type)

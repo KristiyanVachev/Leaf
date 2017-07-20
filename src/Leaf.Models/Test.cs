@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using Leaf.Models.Enums;
 
 namespace Leaf.Models
 {
@@ -15,7 +16,7 @@ namespace Leaf.Models
             this.questions = new HashSet<Question>();
         }
 
-        public Test(string userId, ICollection<Question> questions, DateTime createdOn, string type) : this()
+        public Test(string userId, ICollection<Question> questions, DateTime createdOn, TestType type) : this()
         {
             this.UserId = userId;
             this.questions = questions;
@@ -26,7 +27,7 @@ namespace Leaf.Models
 
         public int Id { get; set; }
 
-        public string Type { get; set; }
+        public TestType Type { get; set; }
 
         public bool IsFinished { get; set; }
 

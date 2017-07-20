@@ -8,7 +8,7 @@ using Leaf.Factories;
 using Leaf.Models;
 using Leaf.Services.Contracts;
 
-namespace Leaf.Services.Noit
+namespace Leaf.Services
 {
     public class QuestionService : IQuestionService
     {

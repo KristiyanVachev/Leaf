@@ -8,7 +8,7 @@ using Leaf.Models;
 using Leaf.Models.Enums;
 using Leaf.Services.Contracts;
 
-namespace Leaf.Services.Noit
+namespace Leaf.Services
 {
     public class ModerationService : IModerationService
     {

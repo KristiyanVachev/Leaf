@@ -87,12 +87,12 @@
     <Compile Include="Contracts\ISubmitService.cs" />
     <Compile Include="Contracts\ITestService.cs" />
     <Compile Include="Contracts\IUserService.cs" />
-    <Compile Include="Noit\TestsService.cs" />
-    <Compile Include="Noit\ModerationService.cs" />
-    <Compile Include="Noit\QuestionService.cs" />
-    <Compile Include="Noit\SubmitService.cs" />
-    <Compile Include="Noit\TestService.cs" />
-    <Compile Include="Noit\UserService.cs" />
+    <Compile Include="TestsService.cs" />
+    <Compile Include="ModerationService.cs" />
+    <Compile Include="QuestionService.cs" />
+    <Compile Include="SubmitService.cs" />
+    <Compile Include="TestService.cs" />
+    <Compile Include="UserService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

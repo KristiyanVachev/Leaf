@@ -1,5 +1,5 @@
-﻿using Leaf.Services.Contracts;
-using Leaf.Services.Noit;
+﻿using Leaf.Services;
+using Leaf.Services.Contracts;
 using Ninject.Modules;
 
 namespace Leaf.Web.App_Start.NinjectModules

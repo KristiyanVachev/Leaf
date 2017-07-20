@@ -1,8 +1,8 @@
 ﻿using Leaf.Auth.Contracts;
 using Leaf.Models;
 using Leaf.Models.Enums;
+using Leaf.Services;
 using Leaf.Services.Contracts;
-using Leaf.Services.Noit;
 using Moq;
 using NUnit.Framework;
 
@@ -16,14 +16,17 @@ namespace Leaf.Tests.Services.Noit.FullTestServiceTests
         {
             //Arrange
             var mockTestService = new Mock<ITestService>();
-            mockTestService.Setup(x => x.IsNullOrFinished(It.IsAny<Test>())).Returns(true);
-
+            var mockQuestionService = new Mock<IQuestionService>();
             var mockUserService = new Mock<IUserService>();
             var mockAuthenticationProvider = new Mock<IAuthenticationProvider>();
 
+            mockTestService.Setup(x => x.IsNullOrFinished(It.IsAny<Test>())).Returns(true);
+
             var service = new TestsService(mockTestService.Object,
+                mockQuestionService.Object,
                 mockUserService.Object,
                 mockAuthenticationProvider.Object);
+
             //Act 
             service.ContinueTest(TestType.Test);
 
@@ -37,12 +40,14 @@ namespace Leaf.Tests.Services.Noit.FullTestServiceTests
         {
             //Arrange
             var mockTestService = new Mock<ITestService>();
+            var mockQuestionService = new Mock<IQuestionService>();
             var mockUserService = new Mock<IUserService>();
             var mockAuthenticationProvider = new Mock<IAuthenticationProvider>();
 
             mockAuthenticationProvider.Setup(x => x.CurrentUserId).Returns(id);
 
             var service = new TestsService(mockTestService.Object,
+                mockQuestionService.Object,
                 mockUserService.Object,
                 mockAuthenticationProvider.Object);
 
@@ -59,14 +64,17 @@ namespace Leaf.Tests.Services.Noit.FullTestServiceTests
         {
             //Arrange
             var mockTestService = new Mock<ITestService>();
+            var mockQuestionService = new Mock<IQuestionService>();
+            var mockUserService = new Mock<IUserService>();
+            var mockAuthenticationProvider = new Mock<IAuthenticationProvider>();
+
             var mockTest = new Mock<Test>();
             mockTestService.Setup(x => x.GetLastTest(id, It.IsAny<TestType>())).Returns(mockTest.Object);
 
-            var mockUserService = new Mock<IUserService>();
-            var mockAuthenticationProvider = new Mock<IAuthenticationProvider>();
             mockAuthenticationProvider.Setup(x => x.CurrentUserId).Returns(id);
 
             var service = new TestsService(mockTestService.Object,
+                mockQuestionService.Object,
                 mockUserService.Object,
                 mockAuthenticationProvider.Object);
 

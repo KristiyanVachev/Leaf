@@ -6,9 +6,7 @@ namespace Leaf.Services.Contracts
 {
     public interface ITestService
     {
-        Test CreateTest(string userId);
-
-        Test CreatePractice(string userId);
+        Test CreateTest(string userId, TestType type, IEnumerable<Question> questions);
 
         Test GetLastTest(string userId, TestType type);
 

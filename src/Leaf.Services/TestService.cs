@@ -8,7 +8,7 @@ using Leaf.Models;
 using Leaf.Models.Enums;
 using Leaf.Services.Contracts;
 
-namespace Leaf.Services.Noit
+namespace Leaf.Services
 {
     public class TestService : ITestService
     {
@@ -41,26 +41,11 @@ namespace Leaf.Services.Noit
             this.unitOfWork = unitOfWork;
         }
 
-        public Test CreateTest(string userId)
+        public Test CreateTest(string userId, TestType type, IEnumerable<Question> questions)
         {
-            var questions = this.questionService.GetQuestions();
             var currentTime = dateTimeProvider.GetCurrenTime();
 
-            var test = this.testFactory.CreateTest(userId, questions, currentTime, "Test");
-
-            this.testRepository.Add(test);
-            this.unitOfWork.Commit();
-
-            return test;
-        }
-
-        public Test CreatePractice(string userId)
-        {
-            //TODO get tailored questions by user's worst categories
-            var questions = this.questionService.GetQuestions();
-            var currentTime = dateTimeProvider.GetCurrenTime();
-
-            var test = this.testFactory.CreateTest(userId, questions, currentTime, "Practice");
+            var test = this.testFactory.CreateTest(userId, questions, currentTime, type);
 
             this.testRepository.Add(test);
             this.unitOfWork.Commit();
@@ -73,7 +58,7 @@ namespace Leaf.Services.Noit
             return this.testRepository.Entities
                 .Where(x => x.UserId == userId)
                 .OrderByDescending(x => x.Id)
-                .FirstOrDefault(x => x.Type == type.ToString());
+                .FirstOrDefault(x => x.Type == type);
         }
 
         public Test GetTestById(int testId)
