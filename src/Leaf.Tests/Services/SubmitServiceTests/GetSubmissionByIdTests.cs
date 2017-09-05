@@ -6,7 +6,7 @@ using Leaf.Services;
 using Moq;
 using NUnit.Framework;
 
-namespace Leaf.Tests.Services.Noit.SubmitServiceTests
+namespace Leaf.Tests.Services.SubmitServiceTests
 {
     [TestFixture]
     public class GetSubmissionByIdTests

@@ -2,14 +2,12 @@
 using Leaf.Commom;
 using Leaf.Data.Contracts;
 using Leaf.Models;
-using Leaf.Models.Enums;
 using Leaf.Services;
-using Leaf.Services.Contracts;
 using Leaf.Services.Utilities.Contracts;
 using Moq;
 using NUnit.Framework;
 
-namespace Leaf.Tests.Services.Noit.ModerationServiceTests
+namespace Leaf.Tests.Services.ModerationServiceTests
 {
     [TestFixture]
     public class GetSubmissionByIdTests

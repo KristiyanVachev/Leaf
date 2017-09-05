@@ -4,11 +4,10 @@ using Leaf.Data.Contracts;
 using Leaf.Factories;
 using Leaf.Models;
 using Leaf.Services;
-using Leaf.Services.Contracts;
 using Moq;
 using NUnit.Framework;
 
-namespace Leaf.Tests.Services.Noit.SubmitServiceTests
+namespace Leaf.Tests.Services.SubmitServiceTests
 {
     [TestFixture]
     public class CreateSubmission

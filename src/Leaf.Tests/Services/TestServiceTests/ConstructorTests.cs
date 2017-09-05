@@ -1,11 +1,10 @@
 ﻿using Leaf.Auth.Contracts;
 using Leaf.Services;
-using Leaf.Services.Contracts;
 using Leaf.Services.Utilities.Contracts;
 using Moq;
 using NUnit.Framework;
 
-namespace Leaf.Tests.Services.Noit.FullTestServiceTests
+namespace Leaf.Tests.Services.TestServiceTests
 {
     [TestFixture]
     public class ConstructorTests
