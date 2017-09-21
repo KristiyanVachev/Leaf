@@ -10,7 +10,7 @@ using NUnit.Framework;
 namespace Leaf.Tests.Services.Utilities.TestUtilityTests
 {
     [TestFixture]
-    public class GetLastTestByUserIdTests
+    public class GetLastUnfinishedTestByUserIdTests
     {
         [TestCase("2e2qewdas")]
         [TestCase("2")]
@@ -30,7 +30,7 @@ namespace Leaf.Tests.Services.Utilities.TestUtilityTests
             );
 
             //Act
-            service.GetLastTest(userId, It.IsAny<TestType>());
+            service.GetLastUnfinishedTest(userId, It.IsAny<TestType>());
 
             //Assert
             mockTestRepository.Verify(x => x.Entities, Times.Once);

@@ -1,35 +1,35 @@
-﻿@model  Leaf.Web.Models.Tests.NextQuestionViewModel
+﻿@model  Leaf.Web.Models.Tests.QuestionViewModel
 
 <link href="~/Content/questionBox.css" rel="stylesheet" />
 
 <div class="general-holder">
-    <div class="question-holder">@Model.Condition</div>
+    <div class="question-holder">@Model.Number @Model.Question.Condition</div>
 
     <div class="answer-holder">
         @*Shuffle the order of the answers *@
         @{
             var random = new Random();
 
-            var shuffledAnswers = Model.Answers.ToArray();
+            var shuffledAnswers = Model.Question.Answers.ToArray();
 
             //shuffle the array
-            for (int i = 0; i < shuffledAnswers.Length; i++)
+            for (int j = 0; j < shuffledAnswers.Length; j++)
             {
                 var ramdonNumber = random.Next(0, shuffledAnswers.Length);
 
-                var temp = shuffledAnswers[i];
-                shuffledAnswers[i] = shuffledAnswers[ramdonNumber];
+                var temp = shuffledAnswers[j];
+                shuffledAnswers[j] = shuffledAnswers[ramdonNumber];
                 shuffledAnswers[ramdonNumber] = temp;
             }
         }
 
-        @foreach (var answer in shuffledAnswers)
+        
+        @for (int j = 0; j < shuffledAnswers.Length; j++)
         {
-            @Html.ActionLink(answer.Content,
-                "ReceiveAnswer",
-                "Tests",
-                new {testId = this.Model.TestId ,questionId = this.Model.QuestionId, answerId = answer.Id },
-                new { @class = "btn btn-primary answer" })
+            @Html.RadioButton("Question" + j + 1, "Answer" + (j + 1), new { id = j + (j + 1) * 4 })
+            @*@Html.RadioButtonFor(x => x.SelectedAnswer, shuffledAnswers[i].Content, new { id = i + (Model.Number - 1) * 4, name = "Question" + Model.Number })*@
+            <label for=@(j + (j + 1) * 4)>@shuffledAnswers[j].Content</label>
         }
+
     </div>
 </div>

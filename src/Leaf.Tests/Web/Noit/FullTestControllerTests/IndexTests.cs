@@ -10,32 +10,6 @@ namespace Leaf.Tests.Web.Noit.FullTestControllerTests
     [TestFixture]
     public class IndexTests
     {
-        [Test]
-        public void Index_ShouldCallServiceHasUnfinishedTests()
-        {
-            //Arrange
-            var mockFullTestService = new Mock<ITestService>();
-            var controller = new TestsController(mockFullTestService.Object);
-
-            //Act
-            controller.Index();
-
-            //Assert
-            mockFullTestService.Verify(x => x.HasUnfinishedTest(TestType.Test), Times.Once);
-        }
-
-        [Test]
-        public void Index_ShouldCallServiceHasUnfinishedPractice()
-        {
-            //Arrange
-            var mockFullTestService = new Mock<ITestService>();
-            var controller = new TestsController(mockFullTestService.Object);
-
-            //Act
-            controller.Index();
-
-            //Assert
-            mockFullTestService.Verify(x => x.HasUnfinishedTest(TestType.Practice), Times.Once);
-        }
+        //Should return default view
     }
 }

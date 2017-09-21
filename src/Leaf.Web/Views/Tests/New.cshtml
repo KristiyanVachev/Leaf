@@ -1,0 +1,50 @@
+﻿@using Leaf.Models
+@using Leaf.Web.Models.Tests
+@model  NewTestViewModel
+@*@model  IList<QuestionViewModel>*@
+
+<h2>Тест</h2>
+
+@using (Html.BeginForm("New", "Tests"))
+{
+
+    @Html.HiddenFor(x => x.TestId)
+
+    for (int i = 0; i < @Model.Questions.Count; i++)
+    {
+        <div class="general-holder">
+            <div class="question-holder">@Model.Questions[i].Question.Condition</div>
+
+            <div class="answer-holder">
+                @*Shuffle the order of the answers *@
+                @{
+                    var random = new Random();
+
+                    var shuffledAnswers = Model.Questions[i].Question.Answers.ToArray();
+
+                    //shuffle the array
+                    for (int j = 0; j < shuffledAnswers.Length; j++)
+                    {
+                        var ramdonNumber = random.Next(0, shuffledAnswers.Length);
+
+                        var temp = shuffledAnswers[j];
+                        shuffledAnswers[j] = shuffledAnswers[ramdonNumber];
+                        shuffledAnswers[ramdonNumber] = temp;
+                    }
+                }
+
+                @Html.HiddenFor(x => x.Questions[i].QuestionId)
+
+                @foreach (Answer answer in shuffledAnswers)
+                {
+                    @Html.RadioButtonFor(x => x.Questions[i].SelectedAnswerId, answer.Id, new { id = answer.Id })
+                    <label for=@answer.Id>@answer.Content</label>
+                }
+
+            </div>
+        </div>
+
+                    }
+
+                    <input type="submit" value="Submit" />
+                    }

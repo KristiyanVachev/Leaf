@@ -1,10 +1,4 @@
-﻿@model  Leaf.Web.Models.Tests.IndexViewModel
-
-
-@{
-    ViewBag.FullTestButton = Model.HasUnfinishedTest ? "Продължете стария си тест" : "Започнете нов тест";
-    ViewBag.PracticeButton = Model.HasUnfinishedPractice ? "Продължете старата си тренировка" : "Започнете нова тренировка";
-}
+﻿@using Leaf.Models.Enums
 
 <h1>Тестове</h1>
 
@@ -12,10 +6,10 @@
 
 <p>Решете един цял тест, за времето което бихте имали и на истинската олимпиада, за да видите колко точки имате и каква оценка бихте получили.</p>
 
-<h3>@Html.ActionLink((string)ViewBag.FullTestButton, "GetUserTest", "Tests", null, null)</h3>
+<h3>@Html.ActionLink("Започнете тест", "New", "Tests", new {type = TestType.Test }, null)</h3>
 
 <h2>Тренировка</h2>
 
 <p>Упражнявайте се за олимпиадата. Като със всяка тренировка ще обръщаме по-голямо внимание на слабите ви страни.</p>
 
-<h3>@Html.ActionLink((string)ViewBag.PracticeButton, "GetUserPractice", "Tests", null, null)</h3>
+<h3>@Html.ActionLink("Започнете тренировка", "New", "Tests", new { type = TestType.Practice }, null)</h3>

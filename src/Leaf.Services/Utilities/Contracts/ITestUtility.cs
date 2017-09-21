@@ -8,17 +8,13 @@ namespace Leaf.Services.Utilities.Contracts
     {
         Test CreateTest(string userId, TestType type, IEnumerable<Question> questions);
 
-        Test GetLastTest(string userId, TestType type);
+        Test GetLastUnfinishedTest(string userId, TestType type);
 
         Test GetTestById(int testId);
 
-        void AddAnswer(int testId, int questionId, int answerId);
+        void AddAnswers(int testId, Dictionary<int, int> answeredQuestions);
 
-        void RemoveQuestionById(int testId, int questionId);
-
-        bool TestIsFinished(int testId);
-
-        void EndTest(int testId);
+        void FinishTest(int testId);
 
         IDictionary<int, int[]> GatherTestStatistics(int testId);
     }

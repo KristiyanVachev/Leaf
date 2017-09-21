@@ -49,12 +49,13 @@ namespace Leaf.Services.Utilities
             return test;
         }
 
-        public Test GetLastTest(string userId, TestType type)
+        public Test GetLastUnfinishedTest(string userId, TestType type)
         {
             return this.testRepository.Entities
                 .Where(x => x.UserId == userId)
                 .OrderByDescending(x => x.Id)
-                .FirstOrDefault(x => x.Type == type);
+                .Where(x => x.Type == type)
+                .FirstOrDefault(x => x.IsFinished == false);
         }
 
         public Test GetTestById(int testId)
@@ -62,50 +63,37 @@ namespace Leaf.Services.Utilities
             return this.testRepository.GetById(testId);
         }
 
-        public void AddAnswer(int testId, int questionId, int answerId)
+        public void AddAnswers(int testId, Dictionary<int, int> answeredQuestions)
         {
             var test = this.testRepository.GetById(testId);
 
-            var newAnsweredQuestion = this.testFactory.CreateAnsweredQuestion(testId, questionId, answerId);
+            foreach (var answeredQuestion in answeredQuestions)
+            {
+                var newAnsweredQuestion = this.testFactory.CreateAnsweredQuestion(testId, answeredQuestion.Key, answeredQuestion.Value);
 
-            test.AnsweredQuestions.Add(newAnsweredQuestion);
+                this.answeredQuestionRepository.Add(newAnsweredQuestion);
+                test.AnsweredQuestions.Add(newAnsweredQuestion);
+            }
 
-            this.answeredQuestionRepository.Add(newAnsweredQuestion);
             this.testRepository.Update(test);
-
             this.unitOfWork.Commit();
         }
 
-        public void RemoveQuestionById(int testId, int questionId)
+        public void FinishTest(int testId)
         {
             var test = this.testRepository.GetById(testId);
 
-            test.Questions.Remove(test.Questions.FirstOrDefault(x => x.Id == questionId));
+            //TODO figure out lazy loading problem
+            //var correctsCount = test.AnsweredQuestions.Count(answeredQuestion => answeredQuestion.Answer.IsCorrect);
+            //test.CorrectCount = correctsCount;
 
-            this.testRepository.Update(test);
-            this.unitOfWork.Commit(); ;
-        }
-
-        public bool TestIsFinished(int testId)
-        {
-            var test = this.testRepository.GetById(testId);
-
-            return test.Questions.Any();
-        }
-
-        public void EndTest(int testId)
-        {
-            var test = this.testRepository.GetById(testId);
-
-            var correctsCount = test.AnsweredQuestions.Count(answeredQuestion => answeredQuestion.Answer.IsCorrect);
-
-            test.CorrectCount = correctsCount;
             test.IsFinished = true;
 
             this.testRepository.Update(test);
             this.unitOfWork.Commit();
         }
 
+        //TODO Refactor this ugly thing
         public IDictionary<int, int[]> GatherTestStatistics(int testId)
         {
             var test = this.testRepository.GetById(testId);

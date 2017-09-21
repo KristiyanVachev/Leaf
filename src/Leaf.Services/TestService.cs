@@ -1,4 +1,4 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
 using Bytes2you.Validation;
 using Leaf.Auth.Contracts;
 using Leaf.Models;
@@ -34,8 +34,15 @@ namespace Leaf.Services
         }
 
         public Test CreateTest(TestType type)
-        {
+        {           
             var userId = this.authenticationProvider.CurrentUserId;
+
+            var test = this.testUtility.GetLastUnfinishedTest(userId, type);
+
+            if (test != null)
+            {
+                return test;
+            }
 
             //TODO get tailored questions for practice tests
             var questions = this.questionUtility.GetQuestions();
@@ -43,20 +50,20 @@ namespace Leaf.Services
             return this.testUtility.CreateTest(userId, type, questions);
         }
 
-        public Test ContinueTest(TestType type)
+
+        public Test EndTest(int testId, Dictionary<int, int> answeredQuestions)
         {
-            var userId = this.authenticationProvider.CurrentUserId;
+            //TODO Validate
 
-            return this.testUtility.GetLastTest(userId, type);
-        }
+            //Populate answers for the test
+            this.testUtility.AddAnswers(testId, answeredQuestions);
 
-        public bool HasUnfinishedTest(TestType type)
-        {
-            var userId = this.authenticationProvider.CurrentUserId;
+            //Finish test
+            this.testUtility.FinishTest(testId);
+                        
+            //TODO Add statistics for user
 
-            var userTest = this.testUtility.GetLastTest(userId, type);
-
-            return !(userTest == null || userTest.IsFinished);
+            return this.testUtility.GetTestById(testId);
         }
 
         public Test GetTestById(int testId)
@@ -64,33 +71,6 @@ namespace Leaf.Services
             return this.testUtility.GetTestById(testId);
         }
 
-        public void SendAnswer(int testId, int questionId, int answerId)
-        {
-            this.testUtility.AddAnswer(testId, questionId, answerId);
-
-            this.testUtility.RemoveQuestionById(testId, questionId);
-        }
-
-        public Question GetNextQuestion(int testId)
-        {
-            var test = this.testUtility.GetTestById(testId);
-
-            return test.Questions.FirstOrDefault();
-        }
-
-        public void EndTest(int testId)
-        {
-            this.testUtility.EndTest(testId);
-
-            var testStats = this.testUtility.GatherTestStatistics(testId);
-
-            var test = this.testUtility.GetTestById(testId);
-            var userId = test.User.Id;
-
-            this.userUtility.UpdateUserStatistics(userId, testStats);
-
-            //TODO update statistics of answers
-        }
 
         public bool UserIsOwner(int testId)
         {

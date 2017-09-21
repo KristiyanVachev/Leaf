@@ -1,4 +1,5 @@
-﻿using Leaf.Models;
+﻿using System.Collections.Generic;
+using Leaf.Models;
 using Leaf.Models.Enums;
 
 namespace Leaf.Services.Contracts
@@ -7,17 +8,9 @@ namespace Leaf.Services.Contracts
     {
         Test CreateTest(TestType type);
 
-        Test ContinueTest(TestType type);
-
-        bool HasUnfinishedTest(TestType type);
+        Test EndTest(int testId, Dictionary<int, int> answeredQuestions);
 
         Test GetTestById(int testId);
-
-        void SendAnswer(int testId, int questionId, int answerId);
-
-        Question GetNextQuestion(int test);
-
-        void EndTest(int testId);
 
         bool UserIsOwner(int testId);
     }

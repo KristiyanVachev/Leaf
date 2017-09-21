@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System.Linq;
+using System.Web.Mvc;
 using Bytes2you.Validation;
 using Leaf.Models.Enums;
 using Leaf.Services.Contracts;
@@ -21,55 +22,10 @@ namespace Leaf.Web.Controllers
         // GET: Noit/FullTest
         public ActionResult Index()
         {
-            var hasUnfinishedTest = this.testsService.HasUnfinishedTest(TestType.Test);
-            var hasUnfinishedPractice = this.testsService.HasUnfinishedTest(TestType.Practice);
-
-            var indexViewModel = new IndexViewModel(hasUnfinishedTest, hasUnfinishedPractice);
-
-            return View("Index", indexViewModel);
+            return View("Index");
         }
 
-        public ActionResult GetUserPractice()
-        {
-            var userTest = this.testsService.HasUnfinishedTest(TestType.Practice)
-                ? this.testsService.ContinueTest(TestType.Practice)
-                : this.testsService.CreateTest(TestType.Practice);
-
-            //Return test result
-            var testViewModel = new TestViewModel(userTest.Id);
-            return RedirectToAction("Test", "Tests", testViewModel);
-        }
-
-        public ActionResult GetUserTest()
-        {
-            var hasUnfinishedTest = this.testsService.HasUnfinishedTest(TestType.Test);
-
-            var userTest = hasUnfinishedTest 
-                ? this.testsService.ContinueTest(TestType.Test) 
-                : this.testsService.CreateTest(TestType.Test);
-
-            //Return test result
-            var testViewModel = new TestViewModel(userTest.Id);
-            return RedirectToAction("Test", "Tests", testViewModel);
-        }
-
-        public ActionResult ReceiveAnswer(int testId, int questionId, int answerId)
-        {
-            var userIsOwner = this.testsService.UserIsOwner(testId);
-
-            if (!userIsOwner)
-            {
-                return RedirectToAction("NotFound", "Error");
-            }
-
-            //Send answer
-            this.testsService.SendAnswer(testId, questionId, answerId);
-
-            //Return test result
-            var testViewModel = new TestViewModel(testId);
-            return RedirectToAction("Test", "Tests", testViewModel);
-        }
-
+        [HttpGet]
         public ActionResult Test(TestViewModel viewModel)
         {
             var userIsOwner = this.testsService.UserIsOwner(viewModel.TestId);
@@ -80,24 +36,35 @@ namespace Leaf.Web.Controllers
                 return RedirectToAction("NotFound", "Error");
             }
 
-            var nextQuestion = this.testsService.GetNextQuestion(viewModel.TestId);
-
-            if (nextQuestion != null)
-            {
-                var nextQuestionViewModel = new NextQuestionViewModel(viewModel.TestId,
-                    nextQuestion.Id,
-                    nextQuestion.Condition,
-                    nextQuestion.Answers);
-
-                return View("Test", nextQuestionViewModel);
-            }
-
-            this.testsService.EndTest(viewModel.TestId);
-
             var test = this.testsService.GetTestById(viewModel.TestId);
             var testDetailsViewModel = new TestDetailsViewModel(test.CorrectCount);
 
             return View("FinishedTest", testDetailsViewModel);
+        }
+
+        //TODO? Should be POST? A test is created once, if it isn't finished it's returned
+        [HttpGet]
+        public ActionResult New(TestType type)
+        {
+            //Create a new test or get last unfinished one
+            var test = this.testsService.CreateTest(type);
+
+            //TODO pass start time
+            return View("New", new NewTestViewModel(test.Id, test.Questions));
+        }
+
+        //TODO should be PUT? Browsers can't create PUT. Could be done with ajax, but shouldn't bother...
+        [HttpPost]
+        public RedirectToRouteResult New(NewTestViewModel viewModel)
+        {
+            //Validate viewModel
+
+            //End test
+            var answeredQuestions = viewModel.Questions.ToDictionary(answeredQuestion => answeredQuestion.QuestionId, answeredQuestion => answeredQuestion.SelectedAnswerId);
+
+            var test = this.testsService.EndTest(viewModel.TestId, answeredQuestions);
+
+            return this.RedirectToAction("Test", new TestViewModel(test.Id));
         }
     }
 }

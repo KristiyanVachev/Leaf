@@ -131,11 +131,8 @@
     <Compile Include="Models\QuestionTests\PropertiesTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\TestServiceTests\ConstructorTests.cs" />
-    <Compile Include="Services\TestServiceTests\ContinueTestTests.cs" />
-    <Compile Include="Services\TestServiceTests\GetNextQuestionTests.cs" />
     <Compile Include="Services\TestServiceTests\GetTestByIdTests.cs" />
     <Compile Include="Services\TestServiceTests\CreateTestTests.cs" />
-    <Compile Include="Services\TestServiceTests\HasUnfinishedTestTests.cs" />
     <Compile Include="Services\TestServiceTests\UserIsOwnerTests.cs" />
     <Compile Include="Services\ModerationServiceTests\ApproveTests.cs" />
     <Compile Include="Services\ModerationServiceTests\ConstructorTests.cs" />
@@ -147,12 +144,10 @@
     <Compile Include="Services\SubmitServiceTests\GetSubmissionByIdTests.cs" />
     <Compile Include="Services\Utilities\TestUtilityTests\ConstructorTests.cs" />
     <Compile Include="Services\Utilities\TestUtilityTests\CreateTestTests.cs" />
-    <Compile Include="Services\Utilities\TestUtilityTests\GetLastTestByUserIdTests.cs" />
+    <Compile Include="Services\Utilities\TestUtilityTests\GetLastUnfinishedTestByUserIdTests.cs" />
     <Compile Include="Services\Utilities\TestUtilityTests\GetTestByIdTests.cs" />
     <Compile Include="Web\Noit\FullTestControllerTests\ConstructorTests.cs" />
     <Compile Include="Web\Noit\FullTestControllerTests\IndexTests.cs" />
-    <Compile Include="Web\Noit\FullTestControllerTests\ReceiveAnswerTests.cs" />
-    <Compile Include="Web\Noit\FullTestControllerTests\StartTestTests.cs" />
     <Compile Include="Web\Noit\FullTestControllerTests\TestTests.cs" />
     <Compile Include="Web\Noit\ModerationControllerTests\ApproveTests.cs" />
     <Compile Include="Web\Noit\ModerationControllerTests\ConstructorTests.cs" />
