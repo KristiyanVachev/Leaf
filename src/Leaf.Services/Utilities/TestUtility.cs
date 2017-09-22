@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using Bytes2you.Validation;
 using Leaf.Commom;
 using Leaf.Data.Contracts;
@@ -83,9 +84,11 @@ namespace Leaf.Services.Utilities
         {
             var test = this.testRepository.GetById(testId);
 
-            //TODO figure out lazy loading problem
-            //var correctsCount = test.AnsweredQuestions.Count(answeredQuestion => answeredQuestion.Answer.IsCorrect);
-            //test.CorrectCount = correctsCount;
+            var answeredQuestions =
+                this.answeredQuestionRepository.QueryObjectGraph(x => x.TestId == testId, "Answer").ToList();
+
+            var correctsCount = answeredQuestions.Count(answeredQuestion => answeredQuestion.Answer.IsCorrect);
+            test.CorrectCount = correctsCount;
 
             test.IsFinished = true;
 
