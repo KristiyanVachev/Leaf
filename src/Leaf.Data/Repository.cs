@@ -1,4 +1,8 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
+using System.Linq.Expressions;
 using Bytes2you.Validation;
 using Leaf.Data.Contracts;
 
@@ -31,6 +35,11 @@ namespace Leaf.Data
         public T GetById(object id)
         {
             return this.dbContext.DbSet<T>().Find(id);
+        }
+
+        public IEnumerable<T> QueryObjectGraph(Expression<Func<T, bool>> filter, string children)
+        {
+            return this.dbContext.DbSet<T>().Include(children).Where(filter);
         }
 
         public void Update(T entity)

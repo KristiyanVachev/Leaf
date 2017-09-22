@@ -1,4 +1,7 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
 
 namespace Leaf.Data.Contracts
 {
@@ -6,6 +9,8 @@ namespace Leaf.Data.Contracts
         where T : class
     {
         T GetById(object id);
+        
+        IEnumerable<T> QueryObjectGraph(Expression<Func<T, bool>> filter, string children);
 
         IQueryable<T> Entities { get; }
 
