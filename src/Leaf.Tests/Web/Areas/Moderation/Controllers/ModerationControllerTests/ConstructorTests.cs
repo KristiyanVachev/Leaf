@@ -5,7 +5,7 @@ using Leaf.Web.Models;
 using Moq;
 using NUnit.Framework;
 
-namespace Leaf.Tests.Web.Noit.ModerationControllerTests
+namespace Leaf.Tests.Web.Areas.Moderation.Controllers.ModerationControllerTests
 {
     [TestFixture]
     public class ConstructorTests

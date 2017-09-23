@@ -6,7 +6,7 @@ using Leaf.Web.Models;
 using Moq;
 using NUnit.Framework;
 
-namespace Leaf.Tests.Web.Noit.SubmitControllerTests
+namespace Leaf.Tests.Web.Controllers.SubmitControllerTests
 {
     [TestFixture]
     public class ConstructorTests

@@ -6,14 +6,13 @@ using Moq;
 using NUnit.Framework;
 using TestStack.FluentMVCTesting;
 
-namespace Leaf.Tests.Web.Noit.ModerationControllerTests
+namespace Leaf.Tests.Web.Areas.Moderation.Controllers.ModerationControllerTests
 {
     [TestFixture]
-    public class SubmissionTests
+    public class Submissions
     {
-        [TestCase(0)]
-        [TestCase(241)]
-        public void Submission_ShouldCallModerationService_GetSubmissionById(int id)
+        [Test]
+        public void Submissions_ShouldCallModerationService_GetPendingSubmissions()
         {
             // Arrange
             var mockModerationService = new Mock<IModerationService>();
@@ -25,15 +24,15 @@ namespace Leaf.Tests.Web.Noit.ModerationControllerTests
                 mockViewModelFactory.Object);
 
             //Act
-            controller.Submission(id);
+            controller.Submissions();
 
             //Assert
-            mockModerationService.Verify(x => x.GetSubmissionById(id), Times.Once);
+            mockModerationService.Verify(x => x.GetPendingSubmissions(), Times.Once);
         }
 
-        [TestCase(0)]
-        [TestCase(241)]
-        public void Submission_ShouldRenderView(int id)
+        [TestCase(2, 1)]
+        [TestCase(241, 23)]
+        public void Submissions_ShouldRenderView(int count, int page)
         {
             // Arrange
             var mockModerationService = new Mock<IModerationService>();
@@ -45,7 +44,7 @@ namespace Leaf.Tests.Web.Noit.ModerationControllerTests
                 mockViewModelFactory.Object);
 
             //Act && Assert
-            controller.WithCallTo(x => x.Submission(id)).ShouldRenderDefaultView();
+            controller.WithCallTo(x => x.Submissions(count, page)).ShouldRenderDefaultView();
         }
     }
 }

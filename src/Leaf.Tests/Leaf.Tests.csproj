@@ -146,20 +146,20 @@
     <Compile Include="Services\Utilities\TestUtilityTests\CreateTestTests.cs" />
     <Compile Include="Services\Utilities\TestUtilityTests\GetLastUnfinishedTestByUserIdTests.cs" />
     <Compile Include="Services\Utilities\TestUtilityTests\GetTestByIdTests.cs" />
-    <Compile Include="Web\Noit\FullTestControllerTests\ConstructorTests.cs" />
-    <Compile Include="Web\Noit\FullTestControllerTests\IndexTests.cs" />
-    <Compile Include="Web\Noit\FullTestControllerTests\TestTests.cs" />
-    <Compile Include="Web\Noit\ModerationControllerTests\ApproveTests.cs" />
-    <Compile Include="Web\Noit\ModerationControllerTests\ConstructorTests.cs" />
-    <Compile Include="Web\Noit\ModerationControllerTests\IndexTests.cs" />
-    <Compile Include="Web\Noit\ModerationControllerTests\QuestionTests.cs" />
-    <Compile Include="Web\Noit\ModerationControllerTests\Submissions.cs" />
-    <Compile Include="Web\Noit\ModerationControllerTests\SubmissionTests.cs" />
-    <Compile Include="Web\Noit\SubmitControllerTests\ConstructorTests.cs" />
-    <Compile Include="Web\Noit\SubmitControllerTests\CreateSubmissionTests.cs" />
-    <Compile Include="Web\Noit\SubmitControllerTests\IndexTests.cs" />
-    <Compile Include="Web\Noit\SubmitControllerTests\NewTests.cs" />
-    <Compile Include="Web\Noit\SubmitControllerTests\SubmissionTests.cs" />
+    <Compile Include="Web\Controllers\TestsControllerTests\ConstructorTests.cs" />
+    <Compile Include="Web\Controllers\TestsControllerTests\IndexTests.cs" />
+    <Compile Include="Web\Controllers\TestsControllerTests\TestTests.cs" />
+    <Compile Include="Web\Areas\Moderation\Controllers\ModerationControllerTests\ApproveTests.cs" />
+    <Compile Include="Web\Areas\Moderation\Controllers\ModerationControllerTests\ConstructorTests.cs" />
+    <Compile Include="Web\Areas\Moderation\Controllers\ModerationControllerTests\IndexTests.cs" />
+    <Compile Include="Web\Areas\Moderation\Controllers\ModerationControllerTests\QuestionTests.cs" />
+    <Compile Include="Web\Areas\Moderation\Controllers\ModerationControllerTests\Submissions.cs" />
+    <Compile Include="Web\Areas\Moderation\Controllers\ModerationControllerTests\SubmissionTests.cs" />
+    <Compile Include="Web\Controllers\SubmitControllerTests\ConstructorTests.cs" />
+    <Compile Include="Web\Controllers\SubmitControllerTests\CreateSubmissionTests.cs" />
+    <Compile Include="Web\Controllers\SubmitControllerTests\IndexTests.cs" />
+    <Compile Include="Web\Controllers\SubmitControllerTests\NewTests.cs" />
+    <Compile Include="Web\Controllers\SubmitControllerTests\SubmissionTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

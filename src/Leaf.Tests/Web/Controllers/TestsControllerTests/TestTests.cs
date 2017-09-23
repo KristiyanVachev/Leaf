@@ -6,7 +6,7 @@ using Moq;
 using NUnit.Framework;
 using TestStack.FluentMVCTesting;
 
-namespace Leaf.Tests.Web.Noit.FullTestControllerTests
+namespace Leaf.Tests.Web.Controllers.TestsControllerTests
 {
     [TestFixture]
     public class TestTests

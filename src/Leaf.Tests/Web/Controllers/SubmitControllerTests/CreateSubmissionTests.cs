@@ -8,7 +8,7 @@ using Moq;
 using NUnit.Framework;
 using TestStack.FluentMVCTesting;
 
-namespace Leaf.Tests.Web.Noit.SubmitControllerTests
+namespace Leaf.Tests.Web.Controllers.SubmitControllerTests
 {
     [TestFixture]
     public class CreateSubmissionTests

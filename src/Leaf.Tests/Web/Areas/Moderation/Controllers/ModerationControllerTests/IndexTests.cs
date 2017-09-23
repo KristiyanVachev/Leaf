@@ -6,7 +6,7 @@ using Moq;
 using NUnit.Framework;
 using TestStack.FluentMVCTesting;
 
-namespace Leaf.Tests.Web.Noit.ModerationControllerTests
+namespace Leaf.Tests.Web.Areas.Moderation.Controllers.ModerationControllerTests
 {
     [TestFixture]
     public class IndexTests
