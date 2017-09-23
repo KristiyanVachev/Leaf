@@ -24,7 +24,5 @@ namespace Leaf.Tests.Services.TestServiceTests
                 mockUserService.Object,
                 mockAuthenticationProvider.Object));
         }
-
-        //TODO add tests for each parameter to be null and values assigned correctly
     }
 }

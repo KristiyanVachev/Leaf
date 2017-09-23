@@ -77,7 +77,10 @@ namespace Leaf.Services
 
             var test = this.testUtility.GetTestById(testId);
 
-            //BUG throws when test id doesn't exist
+            if (test == null)
+            {
+                return false;
+            }
 
             return test.UserId == userId;
         }
