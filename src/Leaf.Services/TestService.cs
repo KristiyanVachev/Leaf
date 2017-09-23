@@ -50,7 +50,6 @@ namespace Leaf.Services
             return this.testUtility.CreateTest(userId, type, questions);
         }
 
-
         public Test EndTest(int testId, Dictionary<int, int> answeredQuestions)
         {
             //TODO Validate
