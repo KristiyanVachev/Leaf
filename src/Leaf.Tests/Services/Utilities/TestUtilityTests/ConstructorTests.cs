@@ -28,7 +28,7 @@ namespace Leaf.Tests.Services.Utilities.TestUtilityTests
                     mockTestFactory.Object,
                     mockDateTimeProvider.Object,
                     mockUnitOfWork.Object
-                    )
+                )
             );
         }
     }

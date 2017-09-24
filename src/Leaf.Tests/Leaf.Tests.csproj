@@ -142,6 +142,8 @@
     <Compile Include="Services\SubmitServiceTests\CreateSubmission.cs" />
     <Compile Include="Services\SubmitServiceTests\GetCategoriesTests.cs" />
     <Compile Include="Services\SubmitServiceTests\GetSubmissionByIdTests.cs" />
+    <Compile Include="Services\Utilities\QuestionUtilityTests\ConstructorTests.cs" />
+    <Compile Include="Services\Utilities\QuestionUtilityTests\GetByIdTests.cs" />
     <Compile Include="Services\Utilities\TestUtilityTests\AddAnswerTests.cs" />
     <Compile Include="Services\Utilities\TestUtilityTests\ConstructorTests.cs" />
     <Compile Include="Services\Utilities\TestUtilityTests\CreateTestTests.cs" />
