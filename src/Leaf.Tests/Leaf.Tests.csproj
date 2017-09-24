@@ -150,6 +150,8 @@
     <Compile Include="Services\Utilities\TestUtilityTests\FinishTestTests.cs" />
     <Compile Include="Services\Utilities\TestUtilityTests\GetLastUnfinishedTestByUserIdTests.cs" />
     <Compile Include="Services\Utilities\TestUtilityTests\GetTestByIdTests.cs" />
+    <Compile Include="Services\Utilities\UserUtilityTests\ConstructorTests.cs" />
+    <Compile Include="Services\Utilities\UserUtilityTests\GetByIdTests.cs" />
     <Compile Include="Web\Controllers\TestsControllerTests\ConstructorTests.cs" />
     <Compile Include="Web\Controllers\TestsControllerTests\IndexTests.cs" />
     <Compile Include="Web\Controllers\TestsControllerTests\TestTests.cs" />
