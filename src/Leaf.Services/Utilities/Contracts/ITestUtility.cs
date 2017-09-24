@@ -12,7 +12,7 @@ namespace Leaf.Services.Utilities.Contracts
 
         Test GetTestById(int testId);
 
-        void AddAnswers(int testId, Dictionary<int, int> answeredQuestions);
+        void AddAnswers(int testId, IDictionary<int, int> answeredQuestions);
 
         void FinishTest(int testId);
 

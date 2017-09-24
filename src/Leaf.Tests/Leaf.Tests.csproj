@@ -142,8 +142,10 @@
     <Compile Include="Services\SubmitServiceTests\CreateSubmission.cs" />
     <Compile Include="Services\SubmitServiceTests\GetCategoriesTests.cs" />
     <Compile Include="Services\SubmitServiceTests\GetSubmissionByIdTests.cs" />
+    <Compile Include="Services\Utilities\TestUtilityTests\AddAnswerTests.cs" />
     <Compile Include="Services\Utilities\TestUtilityTests\ConstructorTests.cs" />
     <Compile Include="Services\Utilities\TestUtilityTests\CreateTestTests.cs" />
+    <Compile Include="Services\Utilities\TestUtilityTests\FinishTestTests.cs" />
     <Compile Include="Services\Utilities\TestUtilityTests\GetLastUnfinishedTestByUserIdTests.cs" />
     <Compile Include="Services\Utilities\TestUtilityTests\GetTestByIdTests.cs" />
     <Compile Include="Web\Controllers\TestsControllerTests\ConstructorTests.cs" />

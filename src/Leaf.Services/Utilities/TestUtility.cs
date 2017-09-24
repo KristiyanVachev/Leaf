@@ -63,9 +63,14 @@ namespace Leaf.Services.Utilities
             return this.testRepository.GetById(testId);
         }
 
-        public void AddAnswers(int testId, Dictionary<int, int> answeredQuestions)
+        public void AddAnswers(int testId, IDictionary<int, int> answeredQuestions)
         {
             var test = this.testRepository.GetById(testId);
+
+            if (test == null)
+            {
+                return;
+            }
 
             foreach (var answeredQuestion in answeredQuestions)
             {
@@ -82,6 +87,11 @@ namespace Leaf.Services.Utilities
         public void FinishTest(int testId)
         {
             var test = this.testRepository.GetById(testId);
+
+            if (test == null)
+            {
+                return;
+            }
 
             var answeredQuestions =
                 this.answeredQuestionRepository.QueryObjectGraph(x => x.TestId == testId, "Answer").ToList();

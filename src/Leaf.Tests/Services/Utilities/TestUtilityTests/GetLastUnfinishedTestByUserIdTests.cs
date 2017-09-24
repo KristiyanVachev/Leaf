@@ -16,6 +16,7 @@ namespace Leaf.Tests.Services.Utilities.TestUtilityTests
         [TestCase("2")]
         public void GetLastTestByUserId_ShouldCallTestRepositoryEntities(string userId)
         {
+            //Arrange
             var mockTestRepository = new Mock<IRepository<Test>>();
             var mockAnsweredQuestionRepository = new Mock<IRepository<AnsweredQuestion>>();
             var mockTestFactory = new Mock<ITestFactory>();

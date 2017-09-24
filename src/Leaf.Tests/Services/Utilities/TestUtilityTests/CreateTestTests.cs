@@ -9,7 +9,7 @@ using Leaf.Services.Utilities;
 using Moq;
 using NUnit.Framework;
 
-namespace Leaf.Tests.Services.Noit.TestServiceTests
+namespace Leaf.Tests.Services.Utilities.TestUtilityTests
 {
     [TestFixture]
     public class CreateTestTests
