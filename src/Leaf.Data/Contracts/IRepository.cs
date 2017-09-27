@@ -12,6 +12,8 @@ namespace Leaf.Data.Contracts
         
         IEnumerable<T> QueryObjectGraph(Expression<Func<T, bool>> filter, string children);
 
+        IEnumerable<T> QueryObjectGraph(Expression<Func<T, bool>> filter, string children, string otherChildren);
+
         IQueryable<T> Entities { get; }
 
         void Add(T entity);

@@ -6,6 +6,7 @@ using Leaf.Data.Contracts;
 using Leaf.Factories;
 using Leaf.Models;
 using Leaf.Models.Enums;
+using Leaf.Services.Helpers;
 using Leaf.Services.Utilities.Contracts;
 
 namespace Leaf.Services.Utilities
@@ -15,24 +16,28 @@ namespace Leaf.Services.Utilities
         private readonly IRepository<Test> testRepository;
         private readonly IRepository<AnsweredQuestion> answeredQuestionRepository;
         private readonly ITestFactory testFactory;
+        private readonly IHelperFactory helperFactory;
         private readonly IUnitOfWork unitOfWork;
         private readonly IDateTimeProvider dateTimeProvider;
 
         public TestUtility(IRepository<Test> testRepository,
             IRepository<AnsweredQuestion> answeredQuestionRepository,
             ITestFactory testFactory,
+            IHelperFactory helperFactory,
             IDateTimeProvider dateTimeProvider,
             IUnitOfWork unitOfWork)
         {
             Guard.WhenArgument(testRepository, "testRepository cannot be null").IsNull().Throw();
             Guard.WhenArgument(answeredQuestionRepository, "answeredQuestionRepository cannot be null").IsNull().Throw();
             Guard.WhenArgument(testFactory, "testFactory cannot be null").IsNull().Throw();
+            Guard.WhenArgument(helperFactory, "helperFactory cannot be null").IsNull().Throw();
             Guard.WhenArgument(dateTimeProvider, "dateTimeProvider cannot be null").IsNull().Throw();
             Guard.WhenArgument(unitOfWork, "unitOfWork cannot be null").IsNull().Throw();
 
             this.testRepository = testRepository;
             this.answeredQuestionRepository = answeredQuestionRepository;
             this.testFactory = testFactory;
+            this.helperFactory = helperFactory;
             this.dateTimeProvider = dateTimeProvider;
             this.unitOfWork = unitOfWork;
         }
@@ -106,37 +111,34 @@ namespace Leaf.Services.Utilities
             this.unitOfWork.Commit();
         }
 
-        //TODO Refactor this ugly thing
-        public IEnumerable<CategoryStatistic> GatherCategoryStatistics(Dictionary<int, int> answeredQuestions)
+        public IEnumerable<CategoryStatisticHelper> GatherCategoryStatistics(int testId)
         {
-            var categoryStatistics = new List<CategoryStatistic>();
+            var answeredQuestions = this.answeredQuestionRepository
+                .QueryObjectGraph(x => x.TestId == testId, "Answer", "Question")
+                .ToList();
+
+            var categoryStatistics = new Dictionary<int, CategoryStatisticHelper>();
 
             foreach (var answeredQuestion in answeredQuestions)
             {
-                
+                var categoryId = answeredQuestion.Question.CategoryId;
+
+                if (!categoryStatistics.ContainsKey(categoryId))
+                {
+                    categoryStatistics[categoryId] = this.helperFactory.CreateCategoryStatisticHelper(categoryId);
+                }
+
+                if (answeredQuestion.Answer.IsCorrect)
+                {
+                    categoryStatistics[categoryId].AddCorrect();
+                }
+                else
+                {
+                    categoryStatistics[categoryId].AddIncorrect();
+                }
             }
-            
-            //foreach (var answeredQuestion in test.AnsweredQuestions)
-            //{
-            //    var categoryId = answeredQuestion.Question.Category.Id;
-            //    var isCorrect = answeredQuestion.Answer.IsCorrect;
 
-            //    if (!stats.ContainsKey(categoryId))
-            //    {
-            //        stats[categoryId] = new int[] { 0, 0 };
-            //    }
-
-            //    if (isCorrect)
-            //    {
-            //        stats[categoryId][0]++;
-            //    }
-            //    else
-            //    {
-            //        stats[categoryId][1]++;
-            //    }
-            //}
-
-            return categoryStatistics;
+            return categoryStatistics.Values.ToList();
         }
     }
 }

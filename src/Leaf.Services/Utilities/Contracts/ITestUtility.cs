@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Leaf.Models;
 using Leaf.Models.Enums;
+using Leaf.Services.Helpers;
 
 namespace Leaf.Services.Utilities.Contracts
 {
@@ -16,6 +17,6 @@ namespace Leaf.Services.Utilities.Contracts
 
         void FinishTest(int testId);
 
-        IEnumerable<CategoryStatistic> GatherCategoryStatistics(Dictionary<int, int> answeredQuestions);
+        IEnumerable<CategoryStatisticHelper> GatherCategoryStatistics(int testId);
     }
 }

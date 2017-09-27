@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using Leaf.Services.Helpers.Contracts;
 
 namespace Leaf.Services.Helpers
 {
-    public class FinishedTestHelper
+    public class FinishedTestHelper : IFinishedTestHelper
     {
         public FinishedTestHelper(int testId)
         {

@@ -131,6 +131,7 @@
     <Compile Include="Models\QuestionTests\PropertiesTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\TestServiceTests\ConstructorTests.cs" />
+    <Compile Include="Services\TestServiceTests\EndTestTests.cs" />
     <Compile Include="Services\TestServiceTests\GetTestByIdTests.cs" />
     <Compile Include="Services\TestServiceTests\CreateTestTests.cs" />
     <Compile Include="Services\TestServiceTests\UserIsOwnerTests.cs" />
@@ -148,8 +149,10 @@
     <Compile Include="Services\Utilities\TestUtilityTests\ConstructorTests.cs" />
     <Compile Include="Services\Utilities\TestUtilityTests\CreateTestTests.cs" />
     <Compile Include="Services\Utilities\TestUtilityTests\FinishTestTests.cs" />
+    <Compile Include="Services\Utilities\TestUtilityTests\GatherCategoryStatisticsTests.cs" />
     <Compile Include="Services\Utilities\TestUtilityTests\GetLastUnfinishedTestByUserIdTests.cs" />
     <Compile Include="Services\Utilities\TestUtilityTests\GetTestByIdTests.cs" />
+    <Compile Include="Services\Utilities\UserUtilityTests\AddCategoryStatisticsTests.cs" />
     <Compile Include="Services\Utilities\UserUtilityTests\ConstructorTests.cs" />
     <Compile Include="Services\Utilities\UserUtilityTests\GetByIdTests.cs" />
     <Compile Include="Web\Controllers\TestsControllerTests\ConstructorTests.cs" />

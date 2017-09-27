@@ -6,7 +6,6 @@ using Leaf.Factories;
 using Leaf.Models;
 using Leaf.Services.Helpers;
 using Leaf.Services.Utilities.Contracts;
-using CategoryStatistic = Leaf.Models.CategoryStatistic;
 
 namespace Leaf.Services.Utilities
 {
@@ -33,36 +32,7 @@ namespace Leaf.Services.Utilities
             this.unitOfWork = unitOfWork;
         }
 
-        public void UpdateUserStatistics(string userId, IDictionary<int, int[]> statistics)
-        {
-            var user = this.userRepository.GetById(userId);
-
-            foreach (var statisticsKey in statistics.Keys)
-            {
-                var categoryStatistic = user.CategoryStatistics.FirstOrDefault(x => x.CategoryId == statisticsKey);
-
-                if (categoryStatistic == null)
-                {
-                    var newCategoryStatistic = this.userFactory.CreateCategoryStatistic(statisticsKey);
-
-                    //TODO ASK: newCategoryStatistic is added to the database even without calling the repository
-                    //TODO ASK: Should I leave it to EF to do is magic and add it anyway, or is it better to add it 
-                    //TODO ASK: just for readability or maybe optimization
-                    //this.categoryStatisticsRepository.Add(newCategoryStatistic);
-                    user.CategoryStatistics.Add(newCategoryStatistic);
-
-                    categoryStatistic = newCategoryStatistic;
-                }
-
-                categoryStatistic.Correct += statistics[statisticsKey][0];
-                //TODO changed incorrect to total
-                categoryStatistic.Total += statistics[statisticsKey][1];
-            }
-
-            this.userRepository.Update(user);
-            this.unitOfWork.Commit();
-        }
-
+        //TODO add paging
         public IEnumerable<User> GetAll()
         {
             return this.userRepository.Entities.ToList();
@@ -73,10 +43,44 @@ namespace Leaf.Services.Utilities
             return this.userRepository.GetById(id);
         }
 
-        public void AddCategoryStatistics(ICollection<AnsweredQuestionHelper> answeredQuestions)
+        public void AddCategoryStatistics(string userId, IEnumerable<CategoryStatisticHelper> categoryStatistics)
         {
-            //TODO
-            throw new System.NotImplementedException();
+            var user = this.userRepository.GetById(userId);
+
+            if (user == null)
+            {
+                return;
+            }
+   
+            foreach (var newCategoryStatistics in categoryStatistics)
+            {
+                //Get if exists
+                var categoryStatistic = this.categoryStatisticsRepository.Entities
+                    .Where(x => x.UserId == user.Id)
+                    .FirstOrDefault(x => x.CategoryId == newCategoryStatistics.CategoryId);
+
+                //Create if it doesn't exist
+                if (categoryStatistic == null)
+                {
+                    categoryStatistic = this.userFactory.CreateCategoryStatistic(newCategoryStatistics.CategoryId);
+
+                    categoryStatistic.Correct += newCategoryStatistics.Correct;
+                    categoryStatistic.Total += newCategoryStatistics.Total;
+                    categoryStatistic.UserId = userId;
+
+                    this.categoryStatisticsRepository.Add(categoryStatistic);
+                }
+                else
+                {
+                    //Update
+                    categoryStatistic.Correct += newCategoryStatistics.Correct;
+                    categoryStatistic.Total += newCategoryStatistics.Total;
+
+                    this.categoryStatisticsRepository.Update(categoryStatistic);
+                }
+            }
+
+            this.unitOfWork.Commit();
         }
     }
 }

@@ -5,6 +5,7 @@ using Leaf.Data.Contracts;
 using Leaf.Factories;
 using Leaf.Models;
 using Leaf.Models.Enums;
+using Leaf.Services.Helpers;
 using Leaf.Services.Utilities;
 using Moq;
 using NUnit.Framework;
@@ -17,10 +18,11 @@ namespace Leaf.Tests.Services.Utilities.TestUtilityTests
         private Mock<IRepository<Test>> mockTestRepository;
         private Mock<IRepository<AnsweredQuestion>> mockAnsweredQuestionRepository;
         private Mock<ITestFactory> mockTestFactory;
+        private Mock<IHelperFactory> mockHelperFactory;
         private Mock<IDateTimeProvider> mockDateTimeProvider;
         private Mock<IUnitOfWork> mockUnitOfWork;
 
-        private TestUtility service;
+        private TestUtility utility;
 
         [SetUp]
         public void Init()
@@ -28,12 +30,14 @@ namespace Leaf.Tests.Services.Utilities.TestUtilityTests
             mockTestRepository = new Mock<IRepository<Test>>();
             mockAnsweredQuestionRepository = new Mock<IRepository<AnsweredQuestion>>();
             mockTestFactory = new Mock<ITestFactory>();
+            mockHelperFactory = new Mock<IHelperFactory>();
             mockDateTimeProvider = new Mock<IDateTimeProvider>();
             mockUnitOfWork = new Mock<IUnitOfWork>();
 
-            service = new TestUtility(mockTestRepository.Object,
+            utility = new TestUtility(mockTestRepository.Object,
                mockAnsweredQuestionRepository.Object,
                mockTestFactory.Object,
+               mockHelperFactory.Object,
                mockDateTimeProvider.Object,
                mockUnitOfWork.Object
            );
@@ -49,7 +53,7 @@ namespace Leaf.Tests.Services.Utilities.TestUtilityTests
             mockDateTimeProvider.Setup(x => x.GetCurrenTime()).Returns(fakeTime);
 
             //Act
-            var result = service.CreateTest(userId, type, It.IsAny<IEnumerable<Question>>());
+            var result = utility.CreateTest(userId, type, It.IsAny<IEnumerable<Question>>());
 
             //Assert
             mockTestFactory.Verify(
@@ -70,7 +74,7 @@ namespace Leaf.Tests.Services.Utilities.TestUtilityTests
                 .Returns(new Test());
 
             //Act
-            var result = service.CreateTest(userId, type, It.IsAny<IEnumerable<Question>>());
+            var result = utility.CreateTest(userId, type, It.IsAny<IEnumerable<Question>>());
 
             //Assert
             Assert.IsInstanceOf<Test>(result);

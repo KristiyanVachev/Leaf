@@ -39,7 +39,17 @@ namespace Leaf.Data
 
         public IEnumerable<T> QueryObjectGraph(Expression<Func<T, bool>> filter, string children)
         {
-            return this.dbContext.DbSet<T>().Include(children).Where(filter);
+            return this.dbContext.DbSet<T>()
+                .Include(children)
+                .Where(filter);
+        }
+
+        public IEnumerable<T> QueryObjectGraph(Expression<Func<T, bool>> filter, string children, string otherChildren)
+        {
+            return this.dbContext.DbSet<T>()
+                .Include(children)
+                .Include(otherChildren)
+                .Where(filter);
         }
 
         public void Update(T entity)

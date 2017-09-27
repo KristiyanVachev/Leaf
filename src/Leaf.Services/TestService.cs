@@ -1,10 +1,9 @@
-﻿using System.Collections.Generic;
-using Bytes2you.Validation;
+﻿using Bytes2you.Validation;
 using Leaf.Auth.Contracts;
 using Leaf.Models;
 using Leaf.Models.Enums;
 using Leaf.Services.Contracts;
-using Leaf.Services.Helpers;
+using Leaf.Services.Helpers.Contracts;
 using Leaf.Services.Utilities.Contracts;
 
 namespace Leaf.Services
@@ -35,7 +34,7 @@ namespace Leaf.Services
         }
 
         public Test CreateTest(TestType type)
-        {           
+        {
             var userId = this.authenticationProvider.CurrentUserId;
 
             var test = this.testUtility.GetLastUnfinishedTest(userId, type);
@@ -51,19 +50,25 @@ namespace Leaf.Services
             return this.testUtility.CreateTest(userId, type, questions);
         }
 
-        public Test EndTest(FinishedTestHelper finishedTestHelper)
+        public Test EndTest(IFinishedTestHelper finishedTestHelper)
         {
-            //TODO Validate
-
+            //TODO Validate answers
+            if (this.testUtility.GetTestById(finishedTestHelper.TestId) == null)
+            {
+                return null;
+            }
+            
             //Populate answers for the test
             this.testUtility.AddAnswers(finishedTestHelper.TestId, finishedTestHelper.AnsweredQuestions);
 
             //Finish test
             this.testUtility.FinishTest(finishedTestHelper.TestId);
 
-            //TODO Add statistics for user
-            //gather statistics
-            //this.userUtility.AddCategoryStatistics(finishedTest.AnsweredQuestions);
+            //Update user category statistics
+            var categoryStatistics = this.testUtility.GatherCategoryStatistics(finishedTestHelper.TestId);
+            var userId = this.authenticationProvider.CurrentUserId;
+
+            this.userUtility.AddCategoryStatistics(userId, categoryStatistics);
 
             return this.testUtility.GetTestById(finishedTestHelper.TestId);
         }
@@ -72,7 +77,6 @@ namespace Leaf.Services
         {
             return this.testUtility.GetTestById(testId);
         }
-
 
         public bool UserIsOwner(int testId)
         {

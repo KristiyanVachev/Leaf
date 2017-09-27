@@ -1,16 +1,15 @@
 ﻿using System.Collections.Generic;
 using Leaf.Models;
+using Leaf.Services.Helpers;
 
 namespace Leaf.Services.Utilities.Contracts
 {
     public interface IUserUtility
     {
-        void UpdateUserStatistics(string userId, IDictionary<int, int[]> statistics);
-
         IEnumerable<User> GetAll();
 
         User GetById(string id);
 
-        void AddCategoryStatistics(ICollection<Helpers.AnsweredQuestionHelper> answeredQuestions);
+        void AddCategoryStatistics(string userId, IEnumerable<CategoryStatisticHelper> categoryStatistics);
     }
 }

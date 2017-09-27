@@ -9,5 +9,7 @@ namespace Leaf.Services.Helpers
         FinishedTestHelper CreateFinishedTest(int testId);
 
         FinishedTestHelper CreateFinishedTest(int testId, DateTime end);
+
+        CategoryStatisticHelper CreateCategoryStatisticHelper(int categoryId, int total = 0, int correct = 0);
     }
 }
