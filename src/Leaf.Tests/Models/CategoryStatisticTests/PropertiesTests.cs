@@ -36,16 +36,16 @@ namespace Leaf.Tests.Models.CategoryStatisticTests
 
         [TestCase(2)]
         [TestCase(4421)]
-        public void Incorrect_ShouldSetCorrectly(int value)
+        public void Total_ShouldSetCorrectly(int value)
         {
             //Arrange
             var categoryStatistic = new CategoryStatistic();
 
             //Act
-            categoryStatistic.Incorrect = value;
+            categoryStatistic.Total = value;
 
             //Assert
-            Assert.AreEqual(value, categoryStatistic.Incorrect);
+            Assert.AreEqual(value, categoryStatistic.Total);
         }
 
         [TestCase("adsadd32-5303ed")]

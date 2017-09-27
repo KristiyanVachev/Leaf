@@ -83,6 +83,10 @@
   <ItemGroup>
     <Compile Include="Contracts\ITestService.cs" />
     <Compile Include="Contracts\IModerationService.cs" />
+    <Compile Include="Helpers\AnsweredQuestionHelper.cs" />
+    <Compile Include="Helpers\CategoryStatisticHelper.cs" />
+    <Compile Include="Helpers\FinishedTestHelper.cs" />
+    <Compile Include="Helpers\IHelperFactory.cs" />
     <Compile Include="Utilities\Contracts\IQuestionUtility.cs" />
     <Compile Include="Contracts\ISubmitService.cs" />
     <Compile Include="Utilities\Contracts\ITestUtility.cs" />

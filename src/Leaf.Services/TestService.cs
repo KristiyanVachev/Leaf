@@ -4,6 +4,7 @@ using Leaf.Auth.Contracts;
 using Leaf.Models;
 using Leaf.Models.Enums;
 using Leaf.Services.Contracts;
+using Leaf.Services.Helpers;
 using Leaf.Services.Utilities.Contracts;
 
 namespace Leaf.Services
@@ -50,19 +51,21 @@ namespace Leaf.Services
             return this.testUtility.CreateTest(userId, type, questions);
         }
 
-        public Test EndTest(int testId, Dictionary<int, int> answeredQuestions)
+        public Test EndTest(FinishedTestHelper finishedTestHelper)
         {
             //TODO Validate
 
             //Populate answers for the test
-            this.testUtility.AddAnswers(testId, answeredQuestions);
+            this.testUtility.AddAnswers(finishedTestHelper.TestId, finishedTestHelper.AnsweredQuestions);
 
             //Finish test
-            this.testUtility.FinishTest(testId);
-                        
-            //TODO Add statistics for user
+            this.testUtility.FinishTest(finishedTestHelper.TestId);
 
-            return this.testUtility.GetTestById(testId);
+            //TODO Add statistics for user
+            //gather statistics
+            //this.userUtility.AddCategoryStatistics(finishedTest.AnsweredQuestions);
+
+            return this.testUtility.GetTestById(finishedTestHelper.TestId);
         }
 
         public Test GetTestById(int testId)

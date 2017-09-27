@@ -63,7 +63,7 @@ namespace Leaf.Services.Utilities
             return this.testRepository.GetById(testId);
         }
 
-        public void AddAnswers(int testId, IDictionary<int, int> answeredQuestions)
+        public void AddAnswers(int testId, ICollection<Helpers.AnsweredQuestionHelper> answeredQuestions)
         {
             var test = this.testRepository.GetById(testId);
 
@@ -74,7 +74,7 @@ namespace Leaf.Services.Utilities
 
             foreach (var answeredQuestion in answeredQuestions)
             {
-                var newAnsweredQuestion = this.testFactory.CreateAnsweredQuestion(testId, answeredQuestion.Key, answeredQuestion.Value);
+                var newAnsweredQuestion = this.testFactory.CreateAnsweredQuestion(testId, answeredQuestion.QuestionId, answeredQuestion.AnswerId);
 
                 this.answeredQuestionRepository.Add(newAnsweredQuestion);
                 test.AnsweredQuestions.Add(newAnsweredQuestion);
@@ -93,8 +93,9 @@ namespace Leaf.Services.Utilities
                 return;
             }
 
-            var answeredQuestions =
-                this.answeredQuestionRepository.QueryObjectGraph(x => x.TestId == testId, "Answer").ToList();
+            var answeredQuestions = this.answeredQuestionRepository
+                .QueryObjectGraph(x => x.TestId == testId, "Answer")
+                .ToList();
 
             var correctsCount = answeredQuestions.Count(answeredQuestion => answeredQuestion.Answer.IsCorrect);
             test.CorrectCount = correctsCount;
@@ -106,33 +107,36 @@ namespace Leaf.Services.Utilities
         }
 
         //TODO Refactor this ugly thing
-        public IDictionary<int, int[]> GatherTestStatistics(int testId)
+        public IEnumerable<CategoryStatistic> GatherCategoryStatistics(Dictionary<int, int> answeredQuestions)
         {
-            var test = this.testRepository.GetById(testId);
+            var categoryStatistics = new List<CategoryStatistic>();
 
-            var stats = new Dictionary<int, int[]>();
-
-            foreach (var answeredQuestion in test.AnsweredQuestions)
+            foreach (var answeredQuestion in answeredQuestions)
             {
-                var categoryId = answeredQuestion.Question.Category.Id;
-                var isCorrect = answeredQuestion.Answer.IsCorrect;
-
-                if (!stats.ContainsKey(categoryId))
-                {
-                    stats[categoryId] = new int[] { 0, 0 };
-                }
-
-                if (isCorrect)
-                {
-                    stats[categoryId][0]++;
-                }
-                else
-                {
-                    stats[categoryId][1]++;
-                }
+                
             }
+            
+            //foreach (var answeredQuestion in test.AnsweredQuestions)
+            //{
+            //    var categoryId = answeredQuestion.Question.Category.Id;
+            //    var isCorrect = answeredQuestion.Answer.IsCorrect;
 
-            return stats;
+            //    if (!stats.ContainsKey(categoryId))
+            //    {
+            //        stats[categoryId] = new int[] { 0, 0 };
+            //    }
+
+            //    if (isCorrect)
+            //    {
+            //        stats[categoryId][0]++;
+            //    }
+            //    else
+            //    {
+            //        stats[categoryId][1]++;
+            //    }
+            //}
+
+            return categoryStatistics;
         }
     }
 }

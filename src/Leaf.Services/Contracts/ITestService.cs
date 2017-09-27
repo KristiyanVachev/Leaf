@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
-using Leaf.Models;
+﻿using Leaf.Models;
 using Leaf.Models.Enums;
+using Leaf.Services.Helpers;
 
 namespace Leaf.Services.Contracts
 {
@@ -8,7 +8,7 @@ namespace Leaf.Services.Contracts
     {
         Test CreateTest(TestType type);
 
-        Test EndTest(int testId, Dictionary<int, int> answeredQuestions);
+        Test EndTest(FinishedTestHelper finishedTestHelper);
 
         Test GetTestById(int testId);
 

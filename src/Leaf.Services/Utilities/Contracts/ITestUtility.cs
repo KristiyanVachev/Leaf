@@ -12,10 +12,10 @@ namespace Leaf.Services.Utilities.Contracts
 
         Test GetTestById(int testId);
 
-        void AddAnswers(int testId, IDictionary<int, int> answeredQuestions);
+        void AddAnswers(int testId, ICollection<Helpers.AnsweredQuestionHelper> answeredQuestions);
 
         void FinishTest(int testId);
 
-        IDictionary<int, int[]> GatherTestStatistics(int testId);
+        IEnumerable<CategoryStatistic> GatherCategoryStatistics(Dictionary<int, int> answeredQuestions);
     }
 }

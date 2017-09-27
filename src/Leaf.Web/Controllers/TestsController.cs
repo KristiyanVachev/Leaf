@@ -1,8 +1,8 @@
-﻿using System.Linq;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using Bytes2you.Validation;
 using Leaf.Models.Enums;
 using Leaf.Services.Contracts;
+using Leaf.Services.Helpers;
 using Leaf.Web.Models.Tests;
 
 namespace Leaf.Web.Controllers
@@ -10,13 +10,16 @@ namespace Leaf.Web.Controllers
     [Authorize]
     public class TestsController : Controller
     {
-        private readonly ITestService testsService;
+        private readonly ITestService testService;
+        private readonly IHelperFactory helperFactory;
 
-        public TestsController(ITestService testsService)
+        public TestsController(ITestService testService, IHelperFactory helperFactory)
         {
-            Guard.WhenArgument(testsService, "FullGameService cannot be null").IsNull().Throw();
+            Guard.WhenArgument(testService, "TestService cannot be null").IsNull().Throw();
+            Guard.WhenArgument(helperFactory, "HelperFactory cannot be null").IsNull().Throw();
 
-            this.testsService = testsService;
+            this.testService = testService;
+            this.helperFactory = helperFactory;
         }
 
         // GET: Noit/FullTest
@@ -28,7 +31,7 @@ namespace Leaf.Web.Controllers
         [HttpGet]
         public ActionResult Test(TestViewModel viewModel)
         {
-            var userIsOwner = this.testsService.UserIsOwner(viewModel.TestId);
+            var userIsOwner = this.testService.UserIsOwner(viewModel.TestId);
 
             //TODO Redirect to unauthorized page (create one first)
             if (!userIsOwner)
@@ -36,7 +39,7 @@ namespace Leaf.Web.Controllers
                 return RedirectToAction("NotFound", "Error");
             }
 
-            var test = this.testsService.GetTestById(viewModel.TestId);
+            var test = this.testService.GetTestById(viewModel.TestId);
             var testDetailsViewModel = new TestDetailsViewModel(test.CorrectCount);
 
             return View("FinishedTest", testDetailsViewModel);
@@ -47,7 +50,8 @@ namespace Leaf.Web.Controllers
         public ActionResult New(TestType type)
         {
             //Create a new test or get last unfinished one
-            var test = this.testsService.CreateTest(type);
+            //Rename to getNewTest
+            var test = this.testService.CreateTest(type);
 
             //TODO pass start time
             return View("New", new NewTestViewModel(test.Id, test.Questions));
@@ -60,9 +64,14 @@ namespace Leaf.Web.Controllers
             //Validate viewModel
 
             //End test
-            var answeredQuestions = viewModel.Questions.ToDictionary(answeredQuestion => answeredQuestion.QuestionId, answeredQuestion => answeredQuestion.SelectedAnswerId);
+            var finishedTestInfo = this.helperFactory.CreateFinishedTest(viewModel.TestId);
 
-            var test = this.testsService.EndTest(viewModel.TestId, answeredQuestions);
+            foreach (var question in viewModel.Questions)
+            {
+                finishedTestInfo.AnsweredQuestions.Add(this.helperFactory.CreateAnsweredQuestion(question.QuestionId, question.SelectedAnswerId));
+            }
+
+            var test = this.testService.EndTest(finishedTestInfo);
 
             return this.RedirectToAction("Test", new TestViewModel(test.Id));
         }

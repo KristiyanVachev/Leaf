@@ -10,5 +10,7 @@ namespace Leaf.Services.Utilities.Contracts
         IEnumerable<User> GetAll();
 
         User GetById(string id);
+
+        void AddCategoryStatistics(ICollection<Helpers.AnsweredQuestionHelper> answeredQuestions);
     }
 }

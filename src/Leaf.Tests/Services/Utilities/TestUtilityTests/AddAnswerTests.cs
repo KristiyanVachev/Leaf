@@ -3,6 +3,7 @@ using Leaf.Commom;
 using Leaf.Data.Contracts;
 using Leaf.Factories;
 using Leaf.Models;
+using Leaf.Services.Helpers;
 using Leaf.Services.Utilities;
 using Moq;
 using NUnit.Framework;
@@ -30,7 +31,7 @@ namespace Leaf.Tests.Services.Utilities.TestUtilityTests
             );
 
             //Act & Assert
-            Assert.DoesNotThrow(() => utility.AddAnswers(testId, It.IsAny<IDictionary<int, int>>()));
+            Assert.DoesNotThrow(() => utility.AddAnswers(testId, It.IsAny<ICollection<AnsweredQuestionHelper>>()));
         }
 
         [Test]
@@ -55,7 +56,12 @@ namespace Leaf.Tests.Services.Utilities.TestUtilityTests
 
             mockTestRepository.Setup(x => x.GetById(It.IsAny<int>())).Returns(fakeTest.Object);
 
-            var fakeAnsweredQuestions = new Dictionary<int, int> { { 1, 2 }, { 3, 4 }, { 5, 6 } };
+            var fakeAnsweredQuestions = new List<AnsweredQuestionHelper>
+            {
+                new AnsweredQuestionHelper(1, 2),
+                new AnsweredQuestionHelper(3, 4),
+                new AnsweredQuestionHelper(5, 6)
+            };
 
             //Act
             utility.AddAnswers(It.IsAny<int>(), fakeAnsweredQuestions);

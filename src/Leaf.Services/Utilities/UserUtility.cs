@@ -4,7 +4,9 @@ using Bytes2you.Validation;
 using Leaf.Data.Contracts;
 using Leaf.Factories;
 using Leaf.Models;
+using Leaf.Services.Helpers;
 using Leaf.Services.Utilities.Contracts;
+using CategoryStatistic = Leaf.Models.CategoryStatistic;
 
 namespace Leaf.Services.Utilities
 {
@@ -53,7 +55,8 @@ namespace Leaf.Services.Utilities
                 }
 
                 categoryStatistic.Correct += statistics[statisticsKey][0];
-                categoryStatistic.Incorrect += statistics[statisticsKey][1];
+                //TODO changed incorrect to total
+                categoryStatistic.Total += statistics[statisticsKey][1];
             }
 
             this.userRepository.Update(user);
@@ -68,6 +71,12 @@ namespace Leaf.Services.Utilities
         public User GetById(string id)
         {
             return this.userRepository.GetById(id);
+        }
+
+        public void AddCategoryStatistics(ICollection<AnsweredQuestionHelper> answeredQuestions)
+        {
+            //TODO
+            throw new System.NotImplementedException();
         }
     }
 }
