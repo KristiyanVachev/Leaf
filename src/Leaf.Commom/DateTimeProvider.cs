@@ -1,4 +1,5 @@
 ﻿using System;
+using Leaf.Commom.Contracts;
 
 namespace Leaf.Commom
 {

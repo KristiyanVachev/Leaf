@@ -24,6 +24,8 @@ namespace Leaf.Auth.Contracts
 
         SignInStatus SignInWithPassword(string email, string password, bool rememberMe, bool shouldLockout);
 
+        IdentityResult RegisterAndLoginUser(User user, string password, bool isPersistent, bool rememberBrowser);
+
         void SignOut();
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System.Web.Mvc;
 using Leaf.Commom;
+using Leaf.Commom.Contracts;
 using Leaf.Data.Contracts;
 using Leaf.Factories;
 using Leaf.Models;

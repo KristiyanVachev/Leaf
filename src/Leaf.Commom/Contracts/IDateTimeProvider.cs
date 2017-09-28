@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Leaf.Commom
+namespace Leaf.Commom.Contracts
 {
     public interface IDateTimeProvider
     {

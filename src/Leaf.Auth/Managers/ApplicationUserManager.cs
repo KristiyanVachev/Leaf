@@ -1,5 +1,4 @@
 ﻿using System;
-using Leaf.Auth.IdentityMessageServices;
 using Leaf.Data;
 using Leaf.Models;
 using Microsoft.AspNet.Identity;
@@ -51,8 +50,7 @@ namespace Leaf.Auth.Managers
                 Subject = "Security Code",
                 BodyFormat = "Your security code is {0}"
             });
-            manager.EmailService = new EmailService();
-            manager.SmsService = new SmsService();
+
             var dataProtectionProvider = options.DataProtectionProvider;
             if (dataProtectionProvider != null)
             {

@@ -16,10 +16,11 @@ namespace Leaf.Models
             this.categoryStatistics = new HashSet<CategoryStatistic>();
         }
 
-        public User(string userName) 
+        public User(string userName, string email) 
             : this()
         {
             this.UserName = userName;
+            this.Email = email;
         }
         
         public virtual ICollection<Test> Tests
