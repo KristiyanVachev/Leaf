@@ -33,7 +33,7 @@ namespace Leaf.Services
             this.authenticationProvider = authenticationProvider;
         }
 
-        public Test CreateTest(TestType type)
+        public Test NewTest(TestType type)
         {
             var userId = this.authenticationProvider.CurrentUserId;
 

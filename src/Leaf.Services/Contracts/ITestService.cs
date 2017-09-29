@@ -6,7 +6,7 @@ namespace Leaf.Services.Contracts
 {
     public interface ITestService
     {
-        Test CreateTest(TestType type);
+        Test NewTest(TestType type);
 
         Test EndTest(IFinishedTestHelper finishedTestHelper);
 

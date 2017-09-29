@@ -45,19 +45,15 @@ namespace Leaf.Web.Controllers
             return View("FinishedTest", testDetailsViewModel);
         }
 
-        //TODO? Should be POST? A test is created once, if it isn't finished it's returned
         [HttpGet]
         public ActionResult New(TestType type)
         {
-            //Create a new test or get last unfinished one
-            //Rename to getNewTest
-            var test = this.testService.CreateTest(type);
+            var test = this.testService.NewTest(type);
 
             //TODO pass start time
             return View("New", new NewTestViewModel(test.Id, test.Questions));
         }
 
-        //TODO should be PUT? Browsers can't create PUT. Could be done with ajax, but shouldn't bother...
         [HttpPost]
         public RedirectToRouteResult New(NewTestViewModel viewModel)
         {
