@@ -2,6 +2,7 @@
 using Leaf.Services.Contracts;
 using Leaf.Services.Helpers;
 using Leaf.Web.Controllers;
+using Leaf.Web.Models;
 using Leaf.Web.Models.Tests;
 using Moq;
 using NUnit.Framework;
@@ -19,12 +20,13 @@ namespace Leaf.Tests.Web.Controllers.TestsControllerTests
             //Arrange
             var mockFullTestService = new Mock<ITestService>();
             var mockHelperFactory = new Mock<IHelperFactory>();
+            var mockViewModelFactory = new Mock<IViewModelFactory>();
 
             var fakeTest = new Test { CorrectCount = 0 };
             mockFullTestService.Setup(x => x.GetTestById(It.IsAny<int>())).Returns(fakeTest);
             mockFullTestService.Setup(x => x.UserIsOwner(It.IsAny<int>())).Returns(true);
 
-            var controller = new TestsController(mockFullTestService.Object, mockHelperFactory.Object);
+            var controller = new TestsController(mockFullTestService.Object, mockHelperFactory.Object, mockViewModelFactory.Object);
             var fakeTestViewModel = new TestViewModel(testId);
 
             //Act
@@ -41,12 +43,13 @@ namespace Leaf.Tests.Web.Controllers.TestsControllerTests
             //Arrange
             var mockFullTestService = new Mock<ITestService>();
             var mockHelperFactory = new Mock<IHelperFactory>();
+            var mockViewModelFactory = new Mock<IViewModelFactory>();
 
             var fakeTest = new Test { CorrectCount = 0 };
             mockFullTestService.Setup(x => x.GetTestById(It.IsAny<int>())).Returns(fakeTest);
             mockFullTestService.Setup(x => x.UserIsOwner(It.IsAny<int>())).Returns(true);
 
-            var controller = new TestsController(mockFullTestService.Object, mockHelperFactory.Object);
+            var controller = new TestsController(mockFullTestService.Object, mockHelperFactory.Object, mockViewModelFactory.Object);
             var fakeTestViewModel = new TestViewModel(testId);
 
             //Act

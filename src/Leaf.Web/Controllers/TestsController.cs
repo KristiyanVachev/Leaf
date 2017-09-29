@@ -3,6 +3,7 @@ using Bytes2you.Validation;
 using Leaf.Models.Enums;
 using Leaf.Services.Contracts;
 using Leaf.Services.Helpers;
+using Leaf.Web.Models;
 using Leaf.Web.Models.Tests;
 
 namespace Leaf.Web.Controllers
@@ -12,14 +13,17 @@ namespace Leaf.Web.Controllers
     {
         private readonly ITestService testService;
         private readonly IHelperFactory helperFactory;
+        private readonly IViewModelFactory viewModelFactory;
 
-        public TestsController(ITestService testService, IHelperFactory helperFactory)
+        public TestsController(ITestService testService, IHelperFactory helperFactory, IViewModelFactory viewModelFactory)
         {
             Guard.WhenArgument(testService, "TestService cannot be null").IsNull().Throw();
             Guard.WhenArgument(helperFactory, "HelperFactory cannot be null").IsNull().Throw();
+            Guard.WhenArgument(viewModelFactory, "ViewModelFactory cannot be null").IsNull().Throw();
 
             this.testService = testService;
             this.helperFactory = helperFactory;
+            this.viewModelFactory = viewModelFactory;
         }
 
         // GET: Noit/FullTest
@@ -40,7 +44,9 @@ namespace Leaf.Web.Controllers
             }
 
             var test = this.testService.GetTestById(viewModel.TestId);
-            var testDetailsViewModel = new TestDetailsViewModel(test.CorrectCount);
+            var testDetailsViewModel = this.viewModelFactory.CreateTestDetailsViewModel(test.CorrectCount);
+            //var testDetailsViewModel = new TestDetailsViewModel(test.CorrectCount);
+
 
             return View("FinishedTest", testDetailsViewModel);
         }
@@ -51,25 +57,27 @@ namespace Leaf.Web.Controllers
             var test = this.testService.NewTest(type);
 
             //TODO pass start time
-            return View("New", new NewTestViewModel(test.Id, test.Questions));
+            var newTestViewModel = this.viewModelFactory.CreateNewTestViewModel(test.Id, test.Questions);
+            return View("New", newTestViewModel);
         }
 
         [HttpPost]
-        public RedirectToRouteResult New(NewTestViewModel viewModel)
+        public RedirectToRouteResult New(NewTestViewModel newTestViewModel)
         {
             //Validate viewModel
 
             //End test
-            var finishedTestInfo = this.helperFactory.CreateFinishedTest(viewModel.TestId);
+            var finishedTestInfo = this.helperFactory.CreateFinishedTest(newTestViewModel.TestId);
 
-            foreach (var question in viewModel.Questions)
+            foreach (var question in newTestViewModel.Questions)
             {
                 finishedTestInfo.AnsweredQuestions.Add(this.helperFactory.CreateAnsweredQuestion(question.QuestionId, question.SelectedAnswerId));
             }
 
             var test = this.testService.EndTest(finishedTestInfo);
 
-            return this.RedirectToAction("Test", new TestViewModel(test.Id));
+            var testViewModel = this.viewModelFactory.CreateTestViewModel(test.Id);
+            return this.RedirectToAction("Test", testViewModel);
         }
     }
 }
