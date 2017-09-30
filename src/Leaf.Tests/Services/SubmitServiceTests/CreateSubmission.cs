@@ -1,5 +1,4 @@
 ﻿using System;
-using Leaf.Commom;
 using Leaf.Commom.Contracts;
 using Leaf.Data.Contracts;
 using Leaf.Factories;
@@ -37,7 +36,7 @@ namespace Leaf.Tests.Services.SubmitServiceTests
 
             //Act
             service.CreateSubmission(It.IsAny<string>(),
-                It.IsAny<string>(),
+                It.IsAny<int>(),
                 It.IsAny<string>(),
                 It.IsAny<string>(),
                 fakeIncorrectAnswers);
@@ -70,14 +69,14 @@ namespace Leaf.Tests.Services.SubmitServiceTests
 
             //Act
             service.CreateSubmission(It.IsAny<string>(),
-                It.IsAny<string>(),
+                It.IsAny<int>(),
                 It.IsAny<string>(),
                 It.IsAny<string>(),
                 fakeIncorrectAnswers);
 
             //Assert
             mockSubmitFactory.Verify(x => x.CreateSubmission(It.IsAny<string>(),
-                It.IsAny<string>(),
+                It.IsAny<int>(),
                 It.IsAny<string>(),
                 It.IsAny<string>(),
                 It.IsAny<DateTime>()),
@@ -107,7 +106,7 @@ namespace Leaf.Tests.Services.SubmitServiceTests
             var fakeSubmission = new Submission();
 
             mockSubmitFactory.Setup(x => x.CreateSubmission(It.IsAny<string>(),
-                It.IsAny<string>(),
+                It.IsAny<int>(),
                 It.IsAny<string>(),
                 It.IsAny<string>(),
                 It.IsAny<DateTime>())).Returns(fakeSubmission);
@@ -116,7 +115,7 @@ namespace Leaf.Tests.Services.SubmitServiceTests
 
             //Act
             service.CreateSubmission(It.IsAny<string>(),
-                It.IsAny<string>(),
+                It.IsAny<int>(),
                 It.IsAny<string>(),
                 It.IsAny<string>(),
                 fakeIncorrectAnswers);
@@ -148,7 +147,7 @@ namespace Leaf.Tests.Services.SubmitServiceTests
             var fakeSubmission = new Submission();
 
             mockSubmitFactory.Setup(x => x.CreateSubmission(It.IsAny<string>(),
-                It.IsAny<string>(),
+                It.IsAny<int>(),
                 It.IsAny<string>(),
                 It.IsAny<string>(),
                 It.IsAny<DateTime>())).Returns(fakeSubmission);
@@ -157,7 +156,7 @@ namespace Leaf.Tests.Services.SubmitServiceTests
 
             //Act
             service.CreateSubmission(It.IsAny<string>(),
-                It.IsAny<string>(),
+                It.IsAny<int>(),
                 It.IsAny<string>(),
                 It.IsAny<string>(),
                 fakeIncorrectAnswers);
@@ -190,7 +189,7 @@ namespace Leaf.Tests.Services.SubmitServiceTests
 
             //Act
             service.CreateSubmission(It.IsAny<string>(),
-                It.IsAny<string>(),
+                It.IsAny<int>(),
                 It.IsAny<string>(),
                 It.IsAny<string>(),
                 fakeIncorrectAnswers);
@@ -223,7 +222,7 @@ namespace Leaf.Tests.Services.SubmitServiceTests
 
             //Act
             service.CreateSubmission(It.IsAny<string>(),
-                It.IsAny<string>(),
+                It.IsAny<int>(),
                 It.IsAny<string>(),
                 It.IsAny<string>(),
                 fakeIncorrectAnswers);
@@ -255,7 +254,7 @@ namespace Leaf.Tests.Services.SubmitServiceTests
             var fakeSubmission = new Submission();
 
             mockSubmitFactory.Setup(x => x.CreateSubmission(It.IsAny<string>(),
-                It.IsAny<string>(),
+                It.IsAny<int>(),
                 It.IsAny<string>(),
                 It.IsAny<string>(),
                 It.IsAny<DateTime>())).Returns(fakeSubmission);
@@ -264,7 +263,7 @@ namespace Leaf.Tests.Services.SubmitServiceTests
 
             //Act
             var result = service.CreateSubmission(It.IsAny<string>(),
-                 It.IsAny<string>(),
+                 It.IsAny<int>(),
                  It.IsAny<string>(),
                  It.IsAny<string>(),
                  fakeIncorrectAnswers);

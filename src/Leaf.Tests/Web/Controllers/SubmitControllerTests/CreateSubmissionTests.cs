@@ -33,7 +33,7 @@ namespace Leaf.Tests.Web.Controllers.SubmitControllerTests
             };
 
             mockSubmitService.Setup(x => x.CreateSubmission(It.IsAny<string>(),
-                    It.IsAny<string>(),
+                    It.IsAny<int>(),
                     It.IsAny<string>(),
                     It.IsAny<string>(),
                     It.IsAny<string[]>()))
@@ -66,7 +66,7 @@ namespace Leaf.Tests.Web.Controllers.SubmitControllerTests
             };
 
             mockSubmitService.Setup(x => x.CreateSubmission(It.IsAny<string>(),
-                    It.IsAny<string>(),
+                    It.IsAny<int>(),
                     It.IsAny<string>(),
                     It.IsAny<string>(),
                     It.IsAny<string[]>()))
@@ -77,7 +77,7 @@ namespace Leaf.Tests.Web.Controllers.SubmitControllerTests
 
             //Assert
             mockSubmitService.Verify(x => x.CreateSubmission(It.IsAny<string>(),
-                    It.IsAny<string>(),
+                    It.IsAny<int>(),
                     It.IsAny<string>(),
                     It.IsAny<string>(),
                     It.IsAny<string[]>()), Times.Once);
@@ -103,7 +103,7 @@ namespace Leaf.Tests.Web.Controllers.SubmitControllerTests
             };
 
             mockSubmitService.Setup(x => x.CreateSubmission(It.IsAny<string>(),
-                    It.IsAny<string>(),
+                    It.IsAny<int>(),
                     It.IsAny<string>(),
                     It.IsAny<string>(),
                     It.IsAny<string[]>()))

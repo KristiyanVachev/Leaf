@@ -48,12 +48,14 @@ namespace Leaf.Web.Controllers
         {
             var submission = this.submitService.GetSubmissionById(id);
 
-            var viewModel = this.viewModelFactory.CreateSubmissionViewModel(submission.Category, submission.Condition,
+            //TODO change info
+            var viewModel = this.viewModelFactory.CreateSubmissionViewModel(submission.CategoryId.ToString(), submission.Condition,
                 submission.CorrectAnswer, submission.IncorrectAnswers.Select(x => x.Content));
 
             return this.View(viewModel);
         }
 
+        //TODO Change method name to New
         [HttpPost]
         [ValidateAntiForgeryToken]
         public RedirectToRouteResult CreateSubmission(NewSubmitViewModel viewModel)
@@ -69,7 +71,7 @@ namespace Leaf.Web.Controllers
 
 
             var submission = this.submitService.CreateSubmission(userId,
-                viewModel.CategoryName,
+                viewModel.CategoryId,
                 viewModel.Condition,
                 viewModel.CorrectAnswer,
                 incorrectAnswers

@@ -14,10 +14,10 @@ namespace Leaf.Models
             this.incorrectAnswers = new HashSet<SubmissionAnswer>();
         }
 
-        public Submission(string userId, string category, string condition, string correctAnswer, DateTime sentOn) : this()
+        public Submission(string userId, int categoryId, string condition, string correctAnswer, DateTime sentOn) : this()
         {
             this.SenderId = userId;
-            this.Category = category;
+            this.CategoryId = categoryId;
             this.Condition = condition;
             this.CorrectAnswer = correctAnswer;
             this.SentOn = sentOn;
@@ -34,7 +34,7 @@ namespace Leaf.Models
 
         public DateTime? ApprovedOn { get; set; }
 
-        public string Category { get; set; }
+        public int CategoryId { get; set; }
 
         public string Condition { get; set; }
 

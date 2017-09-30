@@ -5,7 +5,7 @@ namespace Leaf.Factories
 {
     public interface ISubmitFactory
     {
-        Submission CreateSubmission(string userId, string category, string condition, string correctAnswer, DateTime sentOn);
+        Submission CreateSubmission(string userId, int categoryId, string condition, string correctAnswer, DateTime sentOn);
 
         SubmissionAnswer CreateSubmissionAnswer(string content);
     }

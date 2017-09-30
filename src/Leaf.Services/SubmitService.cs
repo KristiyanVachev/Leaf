@@ -42,10 +42,10 @@ namespace Leaf.Services
             this.unitOfWork = unitOfWork;
         }
 
-        public Submission CreateSubmission(string userId, string category, string condition, string correctAnswer, string[] incorrectAnswers)
+        public Submission CreateSubmission(string userId, int categoryId, string condition, string correctAnswer, string[] incorrectAnswers)
         {
             var currentTime = dateTimeProvider.GetCurrenTime();
-            var newSubmission = this.submitFactory.CreateSubmission(userId, category, condition, correctAnswer, currentTime);
+            var newSubmission = this.submitFactory.CreateSubmission(userId, categoryId, condition, correctAnswer, currentTime);
 
             //I don't like how I put the answers after the submission is created. 
             //I tried creating a collection of answers first, and then sending them in the constructor. 
@@ -69,7 +69,7 @@ namespace Leaf.Services
             var categories = categoryRepository.Entities.Select(x =>
                                 new SelectListItem
                                 {
-                                    Value = x.Name,
+                                    Value = x.Id.ToString(),
                                     Text = x.Name
                                 });
 

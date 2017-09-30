@@ -28,7 +28,7 @@ namespace Leaf.Tests.Web.Controllers.SubmitControllerTests
 
             var fakeSubmission = new Submission
             {
-                Category = "",
+                CategoryId = 0,
                 Condition = "",
                 CorrectAnswer = "",
                 IncorrectAnswers = new List<SubmissionAnswer>()
@@ -58,7 +58,7 @@ namespace Leaf.Tests.Web.Controllers.SubmitControllerTests
 
             var fakeSubmission = new Submission
             {
-                Category = "",
+                CategoryId = 0,
                 Condition = "",
                 CorrectAnswer = "",
                 IncorrectAnswers = new List<SubmissionAnswer>()

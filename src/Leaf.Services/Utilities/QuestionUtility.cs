@@ -61,10 +61,14 @@ namespace Leaf.Services.Utilities
             var newQuestion = this.questionFactory.CreateQuestion(submission.Condition);
 
             //Category
-            var category = categoryRepository.Entities.FirstOrDefault(x => x.Name == submission.Category);
-            newQuestion.Category = category;
+            //TODO change to submission hodling category id
+            //var category = categoryRepository.Entities.FirstOrDefault(x => x.Name == submission.Category);
+            //newQuestion.Category = category;
+            //TODO validate it exists
+            newQuestion.CategoryId = submission.CategoryId;
 
             //Answers
+            //TODO add answers one by one to newQuestion with a new list
             var answers = new List<Answer>();
             answers.Add(this.questionFactory.CreateAnswer(submission.CorrectAnswer, true));
 
@@ -74,8 +78,6 @@ namespace Leaf.Services.Utilities
             }
 
             newQuestion.Answers = answers;
-
-            //TODO: ASK adding the answers to answerRepository?
 
             this.questionRepository.Add(newQuestion);
             this.unitOfWork.Commit();

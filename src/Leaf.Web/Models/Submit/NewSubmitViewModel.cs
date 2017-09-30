@@ -18,8 +18,9 @@ namespace Leaf.Web.Models.Submit
             this.IncorrectAnswers = incorrectAnswers;
         }
 
-        [Display(Name = "Category")]
-        public string CategoryName { get; set; }
+        [Display(Name = "CategoryId")]
+        public int CategoryId { get; set; }
+
         public IEnumerable<SelectListItem> Categories { get; set; }
 
         [Required]

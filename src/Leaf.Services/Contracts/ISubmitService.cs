@@ -7,7 +7,7 @@ namespace Leaf.Services.Contracts
     public interface ISubmitService
     {
         Submission CreateSubmission(string userId,
-            string category,
+            int categoryId,
             string condition,
             string correctAnswer,
             string[] incorrectAnswers
