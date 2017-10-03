@@ -11,7 +11,7 @@ using TestStack.FluentMVCTesting;
 namespace Leaf.Tests.Web.Controllers.SubmitControllerTests
 {
     [TestFixture]
-    public class CreateSubmissionTests
+    public class NewHttpPostTests
     {
         [Test]
         public void CreateSubmission_ShouldCallAuthenticationServiceCurrentUserId()
@@ -40,7 +40,7 @@ namespace Leaf.Tests.Web.Controllers.SubmitControllerTests
                 .Returns(fakeSubmission);
                 
             //Act
-            controller.CreateSubmission(fakeNewSubmitViewModel);
+            controller.New(fakeNewSubmitViewModel);
 
             //Assert
             mockAuthenticationProvider.Verify(x => x.CurrentUserId, Times.Once);
@@ -73,7 +73,7 @@ namespace Leaf.Tests.Web.Controllers.SubmitControllerTests
                 .Returns(fakeSubmission);
 
             //Act
-            controller.CreateSubmission(fakeNewSubmitViewModel);
+            controller.New(fakeNewSubmitViewModel);
 
             //Assert
             mockSubmitService.Verify(x => x.CreateSubmission(It.IsAny<string>(),
@@ -110,7 +110,7 @@ namespace Leaf.Tests.Web.Controllers.SubmitControllerTests
                 .Returns(fakeSubmission);
 
             //Act
-            controller.WithCallTo(x => x.CreateSubmission(fakeNewSubmitViewModel))
+            controller.WithCallTo(x => x.New(fakeNewSubmitViewModel))
                 .ShouldRedirectTo(x => x.Submission);
         }
     }

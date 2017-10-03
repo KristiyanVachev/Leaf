@@ -35,6 +35,7 @@ namespace Leaf.Web.Controllers
             return View();
         }
 
+        [HttpGet]
         public ActionResult New()
         {
             var categories = this.submitService.GetCategories();
@@ -55,10 +56,9 @@ namespace Leaf.Web.Controllers
             return this.View(viewModel);
         }
 
-        //TODO Change method name to New
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public RedirectToRouteResult CreateSubmission(NewSubmitViewModel viewModel)
+        public RedirectToRouteResult New(NewSubmitViewModel viewModel)
         {
             var userId = authenticationProvider.CurrentUserId;
 

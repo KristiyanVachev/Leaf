@@ -205,9 +205,9 @@
     <Compile Include="Web\Areas\Moderation\Controllers\ModerationControllerTests\Submissions.cs" />
     <Compile Include="Web\Areas\Moderation\Controllers\ModerationControllerTests\SubmissionTests.cs" />
     <Compile Include="Web\Controllers\SubmitControllerTests\ConstructorTests.cs" />
-    <Compile Include="Web\Controllers\SubmitControllerTests\CreateSubmissionTests.cs" />
+    <Compile Include="Web\Controllers\SubmitControllerTests\NewHttpPostTests.cs" />
     <Compile Include="Web\Controllers\SubmitControllerTests\IndexTests.cs" />
-    <Compile Include="Web\Controllers\SubmitControllerTests\NewTests.cs" />
+    <Compile Include="Web\Controllers\SubmitControllerTests\NewHttpGetTests.cs" />
     <Compile Include="Web\Controllers\SubmitControllerTests\SubmissionTests.cs" />
   </ItemGroup>
   <ItemGroup>

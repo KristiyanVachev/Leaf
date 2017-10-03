@@ -12,7 +12,7 @@ using TestStack.FluentMVCTesting;
 namespace Leaf.Tests.Web.Controllers.SubmitControllerTests
 {
     [TestFixture]
-    public class NewTests
+    public class NewHttpGetTests
     {
         [Test]
         public void New_ShouldCallSubmitService_GetCategories()
