@@ -17,7 +17,7 @@ namespace Leaf.Web.Models
 
         TestViewModel CreateTestViewModel(int testId);
 
-        NewSubmitViewModel CreateNewSubmitViewModel(IEnumerable<SelectListItem> categories, string[] incorrectAnswers);
+        NewSubmitViewModel CreateNewSubmitViewModel(IEnumerable<SelectListItem> categories);
 
         SubmissionViewModel CreateSubmissionViewModel(string categoryName, string condtion, string correctAnswer,
             IEnumerable<string> incorrectAnswers);

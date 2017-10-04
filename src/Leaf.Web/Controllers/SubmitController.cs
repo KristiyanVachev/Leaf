@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 using Bytes2you.Validation;
 using Leaf.Auth.Contracts;
@@ -40,9 +41,25 @@ namespace Leaf.Web.Controllers
         {
             var categories = this.submitService.GetCategories();
 
-            var viewModel = this.viewModelFactory.CreateNewSubmitViewModel(categories, new string[Constants.IncorrectSubmissionAnswersCount]);
+            var viewModel = this.viewModelFactory.CreateNewSubmitViewModel(categories);
 
             return this.View(viewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public RedirectToRouteResult New(NewSubmitViewModel viewModel)
+        {
+            var userId = authenticationProvider.CurrentUserId;
+
+            var submission = this.submitService.CreateSubmission(userId,
+                viewModel.CategoryId,
+                viewModel.Condition,
+                viewModel.CorrectAnswer,
+                viewModel.IncorrectAnswers
+            );
+
+            return this.RedirectToAction("Submission", new { id = submission.Id });
         }
 
         public ActionResult Submission(int id)
@@ -54,30 +71,6 @@ namespace Leaf.Web.Controllers
                 submission.CorrectAnswer, submission.IncorrectAnswers.Select(x => x.Content));
 
             return this.View(viewModel);
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public RedirectToRouteResult New(NewSubmitViewModel viewModel)
-        {
-            var userId = authenticationProvider.CurrentUserId;
-
-            //YAGNI? Better to have a collection of answers, because later I can add questions with diffrent count of 
-            //incorrect answers. But right now I don't need that and the exra database model... But I've already created them...
-            var incorrectAnswers = new string[Constants.IncorrectSubmissionAnswersCount];
-            incorrectAnswers[0] = viewModel.IncorrectAnswerOne;
-            incorrectAnswers[1] = viewModel.IncorrectAnswerTwo;
-            incorrectAnswers[2] = viewModel.IncorrectAnswerThree;
-
-
-            var submission = this.submitService.CreateSubmission(userId,
-                viewModel.CategoryId,
-                viewModel.Condition,
-                viewModel.CorrectAnswer,
-                incorrectAnswers
-                );
-
-            return this.RedirectToAction("Submission", new { id = submission.Id });
         }
     }
 }

@@ -10,7 +10,7 @@ namespace Leaf.Services.Contracts
             int categoryId,
             string condition,
             string correctAnswer,
-            string[] incorrectAnswers
+            ICollection<string> incorrectAnswers
             );
 
         IEnumerable<SelectListItem> GetCategories();

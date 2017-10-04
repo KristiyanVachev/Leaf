@@ -9,13 +9,12 @@ namespace Leaf.Web.Models.Submit
     {
         public NewSubmitViewModel()
         {
-            
+
         }
 
-        public NewSubmitViewModel(IEnumerable<SelectListItem> categories, string[] incorrectAnswers)
+        public NewSubmitViewModel(IEnumerable<SelectListItem> categories)
         {
             this.Categories = categories;
-            this.IncorrectAnswers = incorrectAnswers;
         }
 
         [Display(Name = "CategoryId")]
@@ -36,21 +35,7 @@ namespace Leaf.Web.Models.Submit
 
         [Required]
         [AllowHtml]
-        [MaxLength(50, ErrorMessage = Constants.CommentMaxLenght)]
-        public string IncorrectAnswerOne { get; set; }
-
-        [Required]
-        [AllowHtml]
-        [MaxLength(50, ErrorMessage = Constants.CommentMaxLenght)]
-        public string IncorrectAnswerTwo { get; set; }
-
-        [Required]
-        [AllowHtml]
-        [MaxLength(50, ErrorMessage = Constants.CommentMaxLenght)]
-        public string IncorrectAnswerThree { get; set; }
-
-        [AllowHtml]
-        [Required]
-        public string[] IncorrectAnswers { get; set; }
+        //TODO Add fluent validation
+        public IList<string> IncorrectAnswers { get; set; }
     }
 }

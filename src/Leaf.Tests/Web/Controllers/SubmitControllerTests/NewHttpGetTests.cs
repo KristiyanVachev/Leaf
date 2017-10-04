@@ -49,7 +49,7 @@ namespace Leaf.Tests.Web.Controllers.SubmitControllerTests
             controller.New();
 
             //Assert
-            mockViewModelFactory.Verify(x => x.CreateNewSubmitViewModel(It.IsAny<IEnumerable<SelectListItem>>(), It.IsAny<string[]>()), Times.Once);
+            mockViewModelFactory.Verify(x => x.CreateNewSubmitViewModel(It.IsAny<IEnumerable<SelectListItem>>()), Times.Once);
         }
 
         [Test]
@@ -63,8 +63,7 @@ namespace Leaf.Tests.Web.Controllers.SubmitControllerTests
             var fakeNewSubmitVieModel = new NewSubmitViewModel();
 
             mockViewModelFactory.Setup(x => x.CreateNewSubmitViewModel(
-                    It.IsAny<IEnumerable<SelectListItem>>(),
-                    It.IsAny<string[]>()))
+                    It.IsAny<IEnumerable<SelectListItem>>()))
                 .Returns(fakeNewSubmitVieModel);
 
             var controller = new SubmitController(mockSubmitService.Object,
