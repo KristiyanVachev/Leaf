@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Leaf.Commom.Contracts;
 using Leaf.Data.Contracts;
 using Leaf.Factories;
@@ -18,7 +19,6 @@ namespace Leaf.Tests.Services.SubmitServiceTests
             //Arrange
             var mockSubmitFactory = new Mock<ISubmitFactory>();
             var mockSubmissionRepository = new Mock<IRepository<Submission>>();
-            var mockSubmissionAnswerRepository = new Mock<IRepository<SubmissionAnswer>>();
             var mockCategoryRepository = new Mock<IRepository<Category>>();
             var mockDateTimeProvider = new Mock<IDateTimeProvider>();
             var mockUnitOfWork = new Mock<IUnitOfWork>();
@@ -26,7 +26,6 @@ namespace Leaf.Tests.Services.SubmitServiceTests
 
             var service = new SubmitService(mockSubmitFactory.Object,
                 mockSubmissionRepository.Object,
-                mockSubmissionAnswerRepository.Object,
                 mockCategoryRepository.Object,
                 mockDateTimeProvider.Object,
                 mockUnitOfWork.Object
@@ -51,7 +50,6 @@ namespace Leaf.Tests.Services.SubmitServiceTests
             //Arrange
             var mockSubmitFactory = new Mock<ISubmitFactory>();
             var mockSubmissionRepository = new Mock<IRepository<Submission>>();
-            var mockSubmissionAnswerRepository = new Mock<IRepository<SubmissionAnswer>>();
             var mockCategoryRepository = new Mock<IRepository<Category>>();
             var mockDateTimeProvider = new Mock<IDateTimeProvider>();
             var mockUnitOfWork = new Mock<IUnitOfWork>();
@@ -59,7 +57,6 @@ namespace Leaf.Tests.Services.SubmitServiceTests
 
             var service = new SubmitService(mockSubmitFactory.Object,
                 mockSubmissionRepository.Object,
-                mockSubmissionAnswerRepository.Object,
                 mockCategoryRepository.Object,
                 mockDateTimeProvider.Object,
                 mockUnitOfWork.Object
@@ -78,91 +75,9 @@ namespace Leaf.Tests.Services.SubmitServiceTests
             mockSubmitFactory.Verify(x => x.CreateSubmission(It.IsAny<string>(),
                 It.IsAny<int>(),
                 It.IsAny<string>(),
-                It.IsAny<string>(),
+                It.IsAny<ICollection<SubmissionAnswer>>(),
                 It.IsAny<DateTime>()),
                 Times.Once);
-        }
-
-        [Test]
-        public void CreateSubmission_ShouldCallSubmitFactoryCreateSubmissionAnswer_WhenIncorrectAnswersIsNotEmpty()
-        {
-            //Arrange
-            var mockSubmitFactory = new Mock<ISubmitFactory>();
-            var mockSubmissionRepository = new Mock<IRepository<Submission>>();
-            var mockSubmissionAnswerRepository = new Mock<IRepository<SubmissionAnswer>>();
-            var mockCategoryRepository = new Mock<IRepository<Category>>();
-            var mockDateTimeProvider = new Mock<IDateTimeProvider>();
-            var mockUnitOfWork = new Mock<IUnitOfWork>();
-
-
-            var service = new SubmitService(mockSubmitFactory.Object,
-                mockSubmissionRepository.Object,
-                mockSubmissionAnswerRepository.Object,
-                mockCategoryRepository.Object,
-                mockDateTimeProvider.Object,
-                mockUnitOfWork.Object
-            );
-
-            var fakeSubmission = new Submission();
-
-            mockSubmitFactory.Setup(x => x.CreateSubmission(It.IsAny<string>(),
-                It.IsAny<int>(),
-                It.IsAny<string>(),
-                It.IsAny<string>(),
-                It.IsAny<DateTime>())).Returns(fakeSubmission);
-
-            var fakeIncorrectAnswers = new string[] { "FakeIncorrect" };
-
-            //Act
-            service.CreateSubmission(It.IsAny<string>(),
-                It.IsAny<int>(),
-                It.IsAny<string>(),
-                It.IsAny<string>(),
-                fakeIncorrectAnswers);
-
-            //Assert
-            mockSubmitFactory.Verify(x => x.CreateSubmissionAnswer(It.IsAny<string>()), Times.Once);
-        }
-
-        [Test]
-        public void CreateSubmission_ShouldCallSubmissionAnswerRepositoryAdd_WhenIncorrectAnswersIsNotEmpty()
-        {
-            //Arrange
-            var mockSubmitFactory = new Mock<ISubmitFactory>();
-            var mockSubmissionRepository = new Mock<IRepository<Submission>>();
-            var mockSubmissionAnswerRepository = new Mock<IRepository<SubmissionAnswer>>();
-            var mockCategoryRepository = new Mock<IRepository<Category>>();
-            var mockDateTimeProvider = new Mock<IDateTimeProvider>();
-            var mockUnitOfWork = new Mock<IUnitOfWork>();
-
-
-            var service = new SubmitService(mockSubmitFactory.Object,
-                mockSubmissionRepository.Object,
-                mockSubmissionAnswerRepository.Object,
-                mockCategoryRepository.Object,
-                mockDateTimeProvider.Object,
-                mockUnitOfWork.Object
-            );
-
-            var fakeSubmission = new Submission();
-
-            mockSubmitFactory.Setup(x => x.CreateSubmission(It.IsAny<string>(),
-                It.IsAny<int>(),
-                It.IsAny<string>(),
-                It.IsAny<string>(),
-                It.IsAny<DateTime>())).Returns(fakeSubmission);
-
-            var fakeIncorrectAnswers = new string[] { "FakeIncorrect" };
-
-            //Act
-            service.CreateSubmission(It.IsAny<string>(),
-                It.IsAny<int>(),
-                It.IsAny<string>(),
-                It.IsAny<string>(),
-                fakeIncorrectAnswers);
-
-            //Assert
-            mockSubmissionAnswerRepository.Verify(x => x.Add(It.IsAny<SubmissionAnswer>()), Times.Once);
         }
 
         [Test]
@@ -171,7 +86,6 @@ namespace Leaf.Tests.Services.SubmitServiceTests
             //Arrange
             var mockSubmitFactory = new Mock<ISubmitFactory>();
             var mockSubmissionRepository = new Mock<IRepository<Submission>>();
-            var mockSubmissionAnswerRepository = new Mock<IRepository<SubmissionAnswer>>();
             var mockCategoryRepository = new Mock<IRepository<Category>>();
             var mockDateTimeProvider = new Mock<IDateTimeProvider>();
             var mockUnitOfWork = new Mock<IUnitOfWork>();
@@ -179,7 +93,6 @@ namespace Leaf.Tests.Services.SubmitServiceTests
 
             var service = new SubmitService(mockSubmitFactory.Object,
                 mockSubmissionRepository.Object,
-                mockSubmissionAnswerRepository.Object,
                 mockCategoryRepository.Object,
                 mockDateTimeProvider.Object,
                 mockUnitOfWork.Object
@@ -204,7 +117,6 @@ namespace Leaf.Tests.Services.SubmitServiceTests
             //Arrange
             var mockSubmitFactory = new Mock<ISubmitFactory>();
             var mockSubmissionRepository = new Mock<IRepository<Submission>>();
-            var mockSubmissionAnswerRepository = new Mock<IRepository<SubmissionAnswer>>();
             var mockCategoryRepository = new Mock<IRepository<Category>>();
             var mockDateTimeProvider = new Mock<IDateTimeProvider>();
             var mockUnitOfWork = new Mock<IUnitOfWork>();
@@ -212,7 +124,6 @@ namespace Leaf.Tests.Services.SubmitServiceTests
 
             var service = new SubmitService(mockSubmitFactory.Object,
                 mockSubmissionRepository.Object,
-                mockSubmissionAnswerRepository.Object,
                 mockCategoryRepository.Object,
                 mockDateTimeProvider.Object,
                 mockUnitOfWork.Object
@@ -237,7 +148,6 @@ namespace Leaf.Tests.Services.SubmitServiceTests
             //Arrange
             var mockSubmitFactory = new Mock<ISubmitFactory>();
             var mockSubmissionRepository = new Mock<IRepository<Submission>>();
-            var mockSubmissionAnswerRepository = new Mock<IRepository<SubmissionAnswer>>();
             var mockCategoryRepository = new Mock<IRepository<Category>>();
             var mockDateTimeProvider = new Mock<IDateTimeProvider>();
             var mockUnitOfWork = new Mock<IUnitOfWork>();
@@ -245,7 +155,6 @@ namespace Leaf.Tests.Services.SubmitServiceTests
 
             var service = new SubmitService(mockSubmitFactory.Object,
                 mockSubmissionRepository.Object,
-                mockSubmissionAnswerRepository.Object,
                 mockCategoryRepository.Object,
                 mockDateTimeProvider.Object,
                 mockUnitOfWork.Object
@@ -256,7 +165,7 @@ namespace Leaf.Tests.Services.SubmitServiceTests
             mockSubmitFactory.Setup(x => x.CreateSubmission(It.IsAny<string>(),
                 It.IsAny<int>(),
                 It.IsAny<string>(),
-                It.IsAny<string>(),
+                It.IsAny<ICollection<SubmissionAnswer>>(),
                 It.IsAny<DateTime>())).Returns(fakeSubmission);
 
             var fakeIncorrectAnswers = new string[0];

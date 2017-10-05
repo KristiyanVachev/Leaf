@@ -59,24 +59,12 @@ namespace Leaf.Services.Utilities
         public Question CreateQuestion(Submission submission)
         {
             var newQuestion = this.questionFactory.CreateQuestion(submission.Condition);
-
-            //Category
-            //TODO change to submission hodling category id
-            //var category = categoryRepository.Entities.FirstOrDefault(x => x.Name == submission.Category);
-            //newQuestion.Category = category;
+            
             //TODO validate it exists
             newQuestion.CategoryId = submission.CategoryId;
 
             //Answers
-            //TODO add answers one by one to newQuestion with a new list
-            var answers = new List<Answer>();
-            answers.Add(this.questionFactory.CreateAnswer(submission.CorrectAnswer, true));
-
-            foreach (var incorrectAnswer in submission.IncorrectAnswers)
-            {
-                answers.Add(this.questionFactory.CreateAnswer(incorrectAnswer.Content, false));
-            }
-
+            var answers = submission.Answers.Select(submissionAnswer => this.questionFactory.CreateAnswer(submissionAnswer.Content, submissionAnswer.IsCorrect)).ToList();
             newQuestion.Answers = answers;
 
             this.questionRepository.Add(newQuestion);

@@ -7,19 +7,20 @@ namespace Leaf.Models
 {
     public class Submission
     {
-        private ICollection<SubmissionAnswer> incorrectAnswers;
+        private ICollection<SubmissionAnswer> answers;
 
         public Submission()
         {
-            this.incorrectAnswers = new HashSet<SubmissionAnswer>();
+            this.answers = new HashSet<SubmissionAnswer>();
         }
-
-        public Submission(string userId, int categoryId, string condition, string correctAnswer, DateTime sentOn) : this()
+            
+        public Submission(string userId, int categoryId, string condition, ICollection<SubmissionAnswer> answers, DateTime sentOn) : this()
         {
             this.SenderId = userId;
             this.CategoryId = categoryId;
             this.Condition = condition;
-            this.CorrectAnswer = correctAnswer;
+            //Virtual member call in construtor. May be a problem if the class gets inherited... which it won't.
+            this.Answers = answers;
             this.SentOn = sentOn;
             this.State = SubmissionState.Pending;
         }
@@ -38,17 +39,15 @@ namespace Leaf.Models
 
         public string Condition { get; set; }
 
-        public string CorrectAnswer { get; set; }
-
         public string SenderId { get; set; }
 
         [ForeignKey("SenderId")]
         public virtual User Sender { get; set; }
 
-        public virtual ICollection<SubmissionAnswer> IncorrectAnswers
+        public virtual ICollection<SubmissionAnswer> Answers
         {
-            get { return this.incorrectAnswers; }
-            set { this.incorrectAnswers = value; }
+            get { return this.answers; }
+            set { this.answers = value; }
         }
     }
 }

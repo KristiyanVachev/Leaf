@@ -19,8 +19,7 @@ namespace Leaf.Web.Models
 
         NewSubmitViewModel CreateNewSubmitViewModel(IEnumerable<SelectListItem> categories);
 
-        SubmissionViewModel CreateSubmissionViewModel(string categoryName, string condtion, string correctAnswer,
-            IEnumerable<string> incorrectAnswers);
+        SubmissionViewModel CreateSubmissionViewModel(string categoryName, string condtion, IEnumerable<string> answers);
 
         ShortSubmission CreateShortSubmission(int id, string condition, string sender, DateTime sentOn);
     }

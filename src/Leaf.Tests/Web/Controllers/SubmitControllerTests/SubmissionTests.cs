@@ -30,8 +30,7 @@ namespace Leaf.Tests.Web.Controllers.SubmitControllerTests
             {
                 CategoryId = 0,
                 Condition = "",
-                CorrectAnswer = "",
-                IncorrectAnswers = new List<SubmissionAnswer>()
+                Answers = new List<SubmissionAnswer>()
             };
 
             mockSubmitService.Setup(x => x.GetSubmissionById(id)).Returns(fakeSubmission);
@@ -60,8 +59,7 @@ namespace Leaf.Tests.Web.Controllers.SubmitControllerTests
             {
                 CategoryId = 0,
                 Condition = "",
-                CorrectAnswer = "",
-                IncorrectAnswers = new List<SubmissionAnswer>()
+                Answers = new List<SubmissionAnswer>()
             };
 
             mockSubmitService.Setup(x => x.GetSubmissionById(id)).Returns(fakeSubmission);

@@ -4,13 +4,11 @@ namespace Leaf.Web.Models.Submit
 {
     public class SubmissionViewModel
     {
-        public SubmissionViewModel(string categoryName, string condtion, string correctAnswer,
-            IEnumerable<string> incorrectAnswers)
+        public SubmissionViewModel(string categoryName, string condtion,IEnumerable<string> answers)
         {
             this.CategoryName = categoryName;
             this.Condition = condtion;
-            this.CorrectAnswer = correctAnswer;
-            this.IncorrectAnswers = incorrectAnswers;
+            this.Answers = answers;
         }
 
         public string CategoryName { get; set; }
@@ -19,6 +17,6 @@ namespace Leaf.Web.Models.Submit
 
         public string CorrectAnswer { get; set; }
 
-        public IEnumerable<string> IncorrectAnswers { get; set; }
+        public IEnumerable<string> Answers { get; set; }
     }
 }

@@ -1,12 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
 using Leaf.Models;
 
 namespace Leaf.Factories
 {
     public interface ISubmitFactory
     {
-        Submission CreateSubmission(string userId, int categoryId, string condition, string correctAnswer, DateTime sentOn);
+        Submission CreateSubmission(string userId, int categoryId, string condition, ICollection<SubmissionAnswer> answers, DateTime sentOn);
 
-        SubmissionAnswer CreateSubmissionAnswer(string content);
+        SubmissionAnswer CreateSubmissionAnswer(bool isCorrect, string content);
     }
 }

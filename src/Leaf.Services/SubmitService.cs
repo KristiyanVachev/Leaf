@@ -14,28 +14,24 @@ namespace Leaf.Services
     {
         private ISubmitFactory submitFactory;
         private IRepository<Submission> submissionRepository;
-        private IRepository<SubmissionAnswer> submissionAnswerRepository;
         private IRepository<Category> categoryRepository;
         private IDateTimeProvider dateTimeProvider;
         private IUnitOfWork unitOfWork;
 
         public SubmitService(ISubmitFactory submitFactory,
              IRepository<Submission> submissionRepository,
-             IRepository<SubmissionAnswer> submissionAnswerRepository,
              IRepository<Category> categoryRepository,
              IDateTimeProvider dateTimeProvider,
              IUnitOfWork unitOfWork)
         {
             Guard.WhenArgument(submitFactory, "submitFactory cannot be null").IsNull().Throw();
             Guard.WhenArgument(submissionRepository, "submissionRepository cannot be null").IsNull().Throw();
-            Guard.WhenArgument(submissionAnswerRepository, "submissionAnswerRepository cannot be null").IsNull().Throw();
             Guard.WhenArgument(categoryRepository, "categoryRepository cannot be null").IsNull().Throw();
             Guard.WhenArgument(dateTimeProvider, "dateTimeProvider cannot be null").IsNull().Throw();
             Guard.WhenArgument(unitOfWork, "unitOfWork cannot be null").IsNull().Throw();
 
             this.submitFactory = submitFactory;
             this.submissionRepository = submissionRepository;
-            this.submissionAnswerRepository = submissionAnswerRepository;
             this.categoryRepository = categoryRepository;
             this.dateTimeProvider = dateTimeProvider;
             this.unitOfWork = unitOfWork;
@@ -44,19 +40,12 @@ namespace Leaf.Services
         public Submission CreateSubmission(string userId, int categoryId, string condition, string correctAnswer, ICollection<string> incorrectAnswers)
         {
             var currentTime = dateTimeProvider.GetCurrenTime();
-            var newSubmission = this.submitFactory.CreateSubmission(userId, categoryId, condition, correctAnswer, currentTime);
 
-            //I don't like how I put the answers after the submission is created. 
-            //I tried creating a collection of answers first, and then sending them in the constructor. 
-            //But that resulted in the answers being created in the database with correct submissionId, but when
-            //retrieving the submission, the answers are not in the collection
-            //Few months later - that's lazy loading
-            foreach (var incorrectAnswer in incorrectAnswers)
-            {
-                var newSubmissionAnswer = this.submitFactory.CreateSubmissionAnswer(incorrectAnswer);
-                newSubmission.IncorrectAnswers.Add(newSubmissionAnswer);
-                submissionAnswerRepository.Add(newSubmissionAnswer);
-            }
+            var submissionAnswers = new List<SubmissionAnswer>();
+            submissionAnswers.Add(this.submitFactory.CreateSubmissionAnswer(true, correctAnswer));
+            submissionAnswers.AddRange(incorrectAnswers.Select(incorrectAnswer => this.submitFactory.CreateSubmissionAnswer(false, incorrectAnswer)));
+
+            var newSubmission = this.submitFactory.CreateSubmission(userId, categoryId, condition, submissionAnswers, currentTime);
 
             this.submissionRepository.Add(newSubmission);
             this.unitOfWork.Commit();

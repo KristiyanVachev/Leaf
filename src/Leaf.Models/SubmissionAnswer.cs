@@ -9,14 +9,17 @@ namespace Leaf.Models
             
         }
 
-        public SubmissionAnswer(string content)
+        public SubmissionAnswer(bool isCorrect, string content)
         {
+            this.IsCorrect = isCorrect;
             this.Content = content;
         }
 
         public int Id { get; set; }
 
         public string Content { get; set; }
+
+        public bool IsCorrect { get; set; }
 
         public int SubmissionId { get; set; }
 

@@ -67,8 +67,7 @@ namespace Leaf.Web.Controllers
             var submission = this.submitService.GetSubmissionById(id);
 
             //TODO change info
-            var viewModel = this.viewModelFactory.CreateSubmissionViewModel(submission.CategoryId.ToString(), submission.Condition,
-                submission.CorrectAnswer, submission.IncorrectAnswers.Select(x => x.Content));
+            var viewModel = this.viewModelFactory.CreateSubmissionViewModel(submission.CategoryId.ToString(), submission.Condition, submission.Answers.Select(x => x.Content));
 
             return this.View(viewModel);
         }
