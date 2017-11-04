@@ -9,3 +9,6 @@
 <h3>@Model.Condition</h3>
 
 @Html.ActionLink("Approve", "Approve", "Moderation", new { submissionId = this.Model.Id }, null)
+
+@*TODO link to reject view*@
+@Html.ActionLink("Reject", "Reject", "Moderation", new { submissionId = this.Model.Id}, null)

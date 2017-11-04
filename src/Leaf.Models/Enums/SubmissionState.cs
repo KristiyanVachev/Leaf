@@ -3,7 +3,8 @@
     public enum SubmissionState
     {
         Pending = 0,
-        Approved = 1,
-        Rejected = 2
+        Edited = 1,
+        Approved = 2,
+        Rejected = 3
     }
 }

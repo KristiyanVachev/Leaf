@@ -68,5 +68,20 @@ namespace Leaf.Services
 
             return question;
         }
+
+        public void Reject(int id, string message)
+        {
+            var submission = this.submissionRepository.GetById(id);
+
+            submission.State = SubmissionState.Rejected;
+            submission.Message = message;
+            //TODO change to id
+            //TODO change ApprovedBy to viewed by.. or something
+            submission.ApprovedByName = authenticationProvider.CurrentUserName;
+            submission.ApprovedOn = dateTimeProvider.GetCurrenTime();
+
+            submissionRepository.Update(submission);
+            this.unitOfWork.Commit();
+        }
     }
 }

@@ -1,8 +1,10 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
 using Leaf.Commom;
+using Leaf.Models;
 using Leaf.Services.Contracts;
 using Leaf.Services.Utilities.Contracts;
+using Leaf.Web.Areas.Moderation.Models;
 using Leaf.Web.Models;
 using PagedList;
 
@@ -52,6 +54,23 @@ namespace Leaf.Web.Areas.Moderation.Controllers
             var question = this.moderationService.Approve(submissionId);
 
             return this.RedirectToAction("Question", new { id = question.Id });
+        }
+
+        [HttpGet]
+        public ActionResult Reject(int submissionId)
+        {
+            var viewModel = new RejectViewModel(submissionId);
+
+            return View(viewModel);
+        }
+
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public RedirectToRouteResult Reject(RejectViewModel viewModel)
+        {
+            this.moderationService.Reject(viewModel.Id, viewModel.Message);
+
+            return this.RedirectToAction("Submission", new { id = viewModel.Id });
         }
 
         public ActionResult Question(int id)

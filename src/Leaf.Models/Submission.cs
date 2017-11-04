@@ -29,6 +29,8 @@ namespace Leaf.Models
 
         public SubmissionState State { get; set; }
 
+        public string Message { get; set; }
+
         public string ApprovedByName { get; set; }
 
         public DateTime? SentOn { get; set; }

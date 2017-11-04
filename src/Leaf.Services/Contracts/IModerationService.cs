@@ -10,5 +10,7 @@ namespace Leaf.Services.Contracts
         Submission GetSubmissionById(int id);
 
         Question Approve(int id);
+
+        void Reject(int id, string message);
     }
 }
